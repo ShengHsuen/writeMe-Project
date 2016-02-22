@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="writeMe">
+		<class>writeMe.Binnacle</class>
+		<class>writeMe.Category</class>
+		<class>writeMe.Chapter</class>
+		<class>writeMe.City</class>
+		<class>writeMe.Comment</class>
+		<class>writeMe.Country</class>
+		<class>writeMe.LegalEstablishment</class>
+		<class>writeMe.Message</class>
+		<class>writeMe.Mylibrary</class>
+		<class>writeMe.Notification</class>
+		<class>writeMe.Notificationtype</class>
+		<class>writeMe.Payaccount</class>
+		<class>writeMe.Record</class>
+		<class>writeMe.Report</class>
+		<class>writeMe.Restriction</class>
+		<class>writeMe.State</class>
+		<class>writeMe.Subcategory</class>
+		<class>writeMe.Typereport</class>
+		<class>writeMe.Typeuser</class>
+		<class>writeMe.Typewritting</class>
+		<class>writeMe.User</class>
+		<class>writeMe.UserHasWritting</class>
+		<class>writeMe.Writting</class>
+	</persistence-unit>
+</persistence>
