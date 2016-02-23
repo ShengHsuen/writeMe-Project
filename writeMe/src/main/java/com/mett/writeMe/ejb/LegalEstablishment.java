@@ -52,7 +52,7 @@ public class LegalEstablishment implements Serializable {
 	}
 
 
-	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to User Mildred
 	@ManyToOne
 	public User getUser() {
 		return this.user;
