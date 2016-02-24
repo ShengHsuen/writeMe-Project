@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.signip', ['ngRoute'])
+angular.module('myApp.signin', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/signin', {
-    templateUrl: 'signin/signin.html'
-    controller: 'SignInCtrl'
+    templateUrl: 'resources/signin/signin.html'
+    //controller: 'SignInCtrl'
   });
 }])
 

@@ -18,13 +18,13 @@
   <!-- <link rel="stylesheet" href="resources/appLogin.css"> -->
   <script src="resources/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     
-  <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
+  <link rel="stylesheet" href="resources/libs/assets/animate.css/animate.css" type="text/css" />
+  <link rel="stylesheet" href="resources/libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="resources/libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+  <link rel="stylesheet" href="resources/libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
 
-  <link rel="stylesheet" href="../html/css/font.css" type="text/css" />
-  <link rel="stylesheet" href="../html/css/app.css" type="text/css" />
+  <link rel="stylesheet" href="resources/html/css/font.css" type="text/css" />
+  <link rel="stylesheet" href="resources/html/css/app.css" type="text/css" />
   
 </head>
 <body>
@@ -48,13 +48,13 @@
   <script src="resources/signin/signin.html"></script>
   
   <!-- Del template -->
-  <script src="../libs/jquery/jquery/dist/jquery.js"></script>
-  <script src="../libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="../html/js/ui-load.js"></script>
-  <script src="../html/js/ui-jp.config.js"></script>
-  <script src="../html/js/ui-jp.js"></script>
-  <script src="../html/js/ui-nav.js"></script>
-  <script src="../html/js/ui-toggle.js"></script>
-  <script src="../html/js/ui-client.js"></script>
+  <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
+  <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="resources/html/js/ui-load.js"></script>
+  <script src="resources/html/js/ui-jp.config.js"></script>
+  <script src="resources/html/js/ui-jp.js"></script>
+  <script src="resources/html/js/ui-nav.js"></script>
+  <script src="resources/html/js/ui-toggle.js"></script>
+  <script src="resources/html/js/ui-client.js"></script>
 </body>
 </html>
