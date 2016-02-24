@@ -8,7 +8,5 @@ public class WriteMeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WriteMeApplication.class, args);
-		System.out.println("Holis mundo");
-		
 	}
 }
