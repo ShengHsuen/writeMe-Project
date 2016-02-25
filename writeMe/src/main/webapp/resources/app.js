@@ -6,5 +6,5 @@ angular.module('myApp', [
   'myApp.signup'
 ])
 .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {
-	$routeProvider.otherwise({redirectTo: '/signin'});
+	$routeProvider.otherwise({redirectTo: '/'});
 }]);

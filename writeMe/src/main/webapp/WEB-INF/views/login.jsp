@@ -46,6 +46,8 @@
   <script src="resources/appLogin.js"></script>
   <script src="resources/signin/signin.js"></script>
   <script src="resources/signin/signin.html"></script>
+  <script src="resources/signup/signup.js"></script>
+  <script src="resources/signup/signup.html"></script>
   
   <!-- Del template -->
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
