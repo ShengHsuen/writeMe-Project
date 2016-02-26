@@ -7,7 +7,7 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Write Me / Mett</title>
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
@@ -44,8 +44,8 @@
   <script src="resources/bower_components/angular/angular.js"></script>
   <script src="resources/bower_components/angular-route/angular-route.js"></script>
   <script src="resources/appLogin.js"></script>
-  <script src="resources/signup/signup.js"></script>
   <script src="resources/signin/signin.js"></script>
+   <script src="resources/signup/signup.js"></script>
   
   <!-- Del template -->
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
