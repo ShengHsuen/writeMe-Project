@@ -44,7 +44,6 @@
         <!-- brand -->
         <a href="#/" class="navbar-brand text-lt">
           <i class="fa fa-btc"></i>
-          <img src="img/logo.png" alt="." class="hide">
           <span class="hidden-folded m-l-xs">WriteMe</span>
         </a>
         <!-- / brand -->
@@ -117,7 +116,7 @@
           <li >
             <a href="#" >
               <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-              <span translate="header.navbar.new.NEW">Crear Obra</span> </span>
+              <span translate="header.navbar.new.NEW">Crear obra</span> </span>
             </a>
           </li>
         </ul>
@@ -154,7 +153,6 @@
                 <div class="list-group">
                   <a href class="list-group-item">
                     <span class="pull-left m-r thumb-sm">
-                      <img src="img/a0.jpg" alt="..." class="img-circle">
                     </span>
                     <span class="clear block m-b-none">
                       Use awesome animate.css<br>
@@ -179,7 +177,6 @@
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="img/a0.jpg" alt="...">
                 <i class="on md b-white bottom"></i>
               </span>
               <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
@@ -227,7 +224,6 @@
             <div class="dropdown wrapper">
               <a href="app.page.profile">
                 <span class="thumb-lg w-auto-folded avatar m-t-sm">
-                  <img src="img/a0.jpg" class="img-full" alt="...">
                 </span>
               </a>
               <a href="#" data-toggle="dropdown" class="dropdown-toggle hidden-folded">
@@ -280,7 +276,7 @@
                 <span></span>
               </li>
               <li>
-                <a href="page_post.html" class="auto">      
+                <a href="home.html" class="auto">      
                   <span class="pull-right text-muted">
                     <i class="fa fa-fw fa-angle-right text"></i>
                     <i class="fa fa-fw fa-angle-down text-active"></i>
@@ -387,7 +383,7 @@
   <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="resources/bower_components/angular/angular.js"></script>
   <script src="resources/bower_components/angular-route/angular-route.js"></script>
-  <script src="resources/appHome.js"></script>
+  <script src="resources/app.js"></script>
 <!--   <script src="resources/home/home.html"></script> -->
   
   
@@ -403,6 +399,7 @@
   <script src="resources/html/js/ui-toggle.js"></script>
   <script src="resources/html/js/ui-client.js"></script>
   
+  <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>
     
 </body>
