@@ -1,60 +1,105 @@
 <meta charset="utf-8">
-  <!-- content -->
-  <div id="content" class="app-content" role="main">
-    
-  	<div class="app-content-body ">
-	    
+<!-- content -->
+<div id="content" class="app-content" role="main">
 
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3">Terminos y condiciones</h1>
-</div>
-<div  class="wrapper-md" ng-controller="FormDemoCtrl">
-	<button class="btn btn-success btn-addon btn-sm" ><i class="fa fa-plus"></i>Agregar regla</button>
-  <div id="agregarReglas" class=" panel panel-default">
-    <div class="panel-heading font-bold">
-      Agregar regla
-    </div>
-    <div class="panel-body">
-      <form class="form-horizontal" method="get">
-       
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="input-id-1">Nombre</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="txtName">
-          </div>
-        </div>
-               
-        <div class="form-group">
-          <label class="col-sm-2 control-label" >Descripción</label>
-          <div class="col-sm-10">
-            <textarea class="form-control" id="txtDescription" rows="4" cols="50"> </textarea> 
-          </div>
-        </div>   
-                 
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-       <!--  <div class="form-group has-error">
+	<div class="app-content-body " ng-controller="legalEstablishmentCtrl">
+
+
+		<div class="bg-light lter b-b wrapper-md">
+			<h1 class="m-n font-thin h3">Terminos y condiciones</h1>
+		</div>
+		<!-- Agregar regla -->
+		<div class="wrapper-md">
+			<button class="btn btn-success btn-addon btn-sm" ng-click="toggle()">
+				<i class="fa fa-plus"></i>Agregar regla
+			</button>
+			<div id="agregarReglas" class=" panel panel-default" ng-show="myVar">
+				<div class="panel-heading font-bold">Agregar regla</div>
+				<div class="panel-body">
+					<form class="form-horizontal" method="get">
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-id-1">Nombre</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="txtName">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Descripción</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" id="txtDescription" rows="4"
+									cols="50"> </textarea>
+							</div>
+						</div>
+
+						<div class="line line-dashed b-b line-lg pull-in"></div>
+						<!--  <div class="form-group has-error">
           <label class="col-sm-2 control-label">Input with error</label>
           <div class="col-sm-10">
             <input type="text" class="form-control">
           </div>
         </div>
          <div class="line line-dashed b-b line-lg pull-in"></div> -->
-        <div class="form-group">
-          <div class="col-sm-4 col-sm-offset-2">
-            <button type="submit" class="btn btn-default">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Agregar</button>
-            
-          </div>
-          
-        </div>
-          </form>
-           </div>
-     
-    </div>
-  </div>
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								<button type="submit" ng-click="toggle()"
+									class="btn btn-default">Cancelar</button>
+								<button type="submit" class="btn btn-primary">Agregar</button>
+
+							</div>
+
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+		<div class="wrapper-md">
+			<div id="agregarReglas" class=" panel panel-default">
+				<div class="panel-heading font-bold">Reglas</div>
+				<div class="panel-body">
+					<div class="m-l-lg panel b-a">
+						<div class="panel-heading pos-rlt b-b b-light">
+							<label class="label bg-light m-l-xs">VIP</label> <span
+								class=" pull-right" style="width: 20px; display: inline-block;">
+								<button ng-click="person.selected = undefined">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</span>
+
+						</div>
+						<div class="panel-body">
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Integer posuere erat a ante.</p>
+
+						</div>
 </div>
+						<form name="step1"
+							class="form-validation ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"">
+							<label class="i-checks"> <input aria-invalid="true"
+								aria-required="false" aria-checked="false" tabindex="0"
+								class="ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"
+								ng-model="agree" required="" type="checkbox"><i></i>
+								Estoy de acuerdo con terminos y condiciones
+							</label>
+
+							<div class="m-t m-b">
+								<button disabled="disabled" aria-disabled="true" type="submit"
+									ng-disabled="step1.$invalid"
+									class="btn btn-default btn-rounded" ng-click="steps.step2=true">Next</button>
+							</div>
+						</form>
+					
+
+
+				</div>
+			</div>
+
+		</div>
 
 
 	</div>
 
-  <!-- /content -->
+	<!-- /content -->
