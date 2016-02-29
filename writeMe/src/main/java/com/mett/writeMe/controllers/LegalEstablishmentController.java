@@ -15,36 +15,59 @@ import com.mett.writeMe.services.LegalEstablishmentServiceInterface;
 import com.mett.writeMe.utils.Utils;
 
 @RestController
-@RequestMapping(value ="rest/protected/LegalEstablishment")
+@RequestMapping(value ="legal")
 public class LegalEstablishmentController {
 	@Autowired private ServletContext servletContext;
-	@Autowired private LegalEstablishmentServiceInterface LegalEstablishmentService;
+	@Autowired private LegalEstablishmentServiceInterface legalEstablishmentService;
 	@Autowired private HttpServletRequest request;
 	
+//	COMO TIPO ALQUILER
+	@RequestMapping(value ="/getAll", method = RequestMethod.GET)
+	public LegalEstablishmentResponse getAll(){	
+			
+		LegalEstablishmentResponse response = new LegalEstablishmentResponse();
+		response.setCode(200);
+		response.setCodeMessage("users fetch success");
+		response.setLegalEstablishmentList(legalEstablishmentService.getAll());
+		return response;		
+	}
+/*
 	@RequestMapping(value ="/getAll", method = RequestMethod.GET)
 	public LegalEstablishmentResponse getAll(){
 		LegalEstablishmentResponse response = new LegalEstablishmentResponse();
 		response.setLegalEstablishmentList(LegalEstablishmentService.getAll());
 		return response;		
    }
-	
+	*/
 	
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public LegalEstablishmentResponse create(
-			@RequestParam("idLegalEstablishment") int idLegalEstablishment,
-			@RequestParam("tipo") String tipo){	
+			@RequestParam("part") int part,
+			@RequestParam("name") String name,
+			@RequestParam("description") String description){	
 		
-		    LegalEstablishmentResponse us = new LegalEstablishmentResponse();
-			LegalEstablishment LegalEstablishment = new LegalEstablishment();
+		    LegalEstablishmentResponse legalEstRes = new LegalEstablishmentResponse();
+		  
+				
+				LegalEstablishment legalEst = new LegalEstablishment();
+				legalEst.setName(name);
+				legalEst.setDescription(description);
+				legalEst.setPart(part);
+				Boolean state = legalEstablishmentService.addLegalEstablishment(legalEst);
+				
+				if(state){
+					legalEstRes.setCode(200);
+					legalEstRes.setCodeMessage("La regla se creó satisfactoriamente");
+				}
 			
-		    return us;		
+		    return legalEstRes;		
 	}
 	
 	@RequestMapping(value ="/delete", method = RequestMethod.DELETE)
 	public void delete(
 			@RequestParam("idLegalEstablishment") int idLegalEstablishment){	
 		
-		    LegalEstablishmentService.deleteLegalEstablishment(idLegalEstablishment);
+		    legalEstablishmentService.deleteLegalEstablishment(idLegalEstablishment);
 			
 	}
 }

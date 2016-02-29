@@ -217,7 +217,7 @@
 
     <!-- aside -->
   <aside id="aside" class="app-aside hidden-xs bg-dark">
-      <div class="aside-wrap">
+      <div class="aside-wrap" style="height: 1000px;">
         <div class="navi-wrap">
           <!-- user -->
           <div class="clearfix hidden-xs text-center hide" id="aside-user">

@@ -29,17 +29,17 @@ public class LegalEstablishmentService implements LegalEstablishmentServiceInter
 		return dtos;
 	}
 	
-	@Override
-	public Boolean addLegalEstablishment(LegalEstablishment legalEstablishment) {
-		LegalEstablishment nlegalEstablishment = legalEstablishmentRepository.save(legalEstablishment);
-		return (nlegalEstablishment == null) ? false : true;
-	}
 	
 	@Override
 	public LegalEstablishment getLegalEstablishmentById(int idLegalEstablishment) {
 		return legalEstablishmentRepository.findOne(idLegalEstablishment);
 	}
-	
+
+	@Override
+	public Boolean addLegalEstablishment(LegalEstablishment legalEstablishment) {
+		LegalEstablishment nlegalEstablishment = legalEstablishmentRepository.save(legalEstablishment);
+		return (nlegalEstablishment == null) ? false : true;
+	}
 	@Override
 	public void deleteLegalEstablishment(int idLegalEstablishment){
 	   legalEstablishmentRepository.delete(idLegalEstablishment);

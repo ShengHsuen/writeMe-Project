@@ -12,17 +12,8 @@ public class LegalEstablishmentResponse extends BaseResponse {
 		super();
 	}
 
-	public List<LegalEstablishmentPOJO> getTipoUsuarioList() {
-		return legalEstList;
-	}
-
 	public void setLegalEstablishmentList(List<LegalEstablishmentPOJO> legalEstList) {
 		this.legalEstList = legalEstList;
-	}
-
-	public void setLegalEstablishmentList(Object all) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

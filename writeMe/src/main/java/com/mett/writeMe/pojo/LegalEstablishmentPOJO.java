@@ -11,8 +11,8 @@ import com.mett.writeMe.ejb.User;
 public class LegalEstablishmentPOJO {
 	private int legal_establishmentId;
 	private String description;
-	private String part;
-	private User user;
+	private int part;
+	private String name;
 
 	public LegalEstablishmentPOJO() {
 		super();
@@ -35,25 +35,23 @@ public class LegalEstablishmentPOJO {
 		this.description = description;
 	}
 
-
-	
-	public String getPart() {
+	public int getPart() {
 		return this.part;
 	}
 
-	public void setPart(String part) {
+	public void setPart(int part) {
 		this.part = part;
 	}
 
 
-	//bi-directional many-to-one association to User Mildred
-	@ManyToOne
-	public User getUser() {
-		return this.user;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setUser(User user) {
-		this.user = null;
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
 
 }

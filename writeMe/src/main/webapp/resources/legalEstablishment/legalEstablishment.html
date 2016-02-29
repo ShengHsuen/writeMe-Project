@@ -16,45 +16,52 @@
 			<div id="agregarReglas" class=" panel panel-default" ng-show="myVar">
 				<div class="panel-heading font-bold">Agregar regla</div>
 				<div class="panel-body">
-					<form class="form-horizontal" method="get">
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label" for="input-id-1">Nombre</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="txtName">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Descripción</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" id="txtDescription" rows="4"
-									cols="50"> </textarea>
-							</div>
-						</div>
-
-						<div class="line line-dashed b-b line-lg pull-in"></div>
-						<!--  <div class="form-group has-error">
-          <label class="col-sm-2 control-label">Input with error</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control">
-          </div>
-        </div>
-         <div class="line line-dashed b-b line-lg pull-in"></div> -->
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								<button type="submit" ng-click="toggle()"
-									class="btn btn-default">Cancelar</button>
-								<button type="submit" class="btn btn-primary">Agregar</button>
-
+					<form  id="createRuleForm" name="createRuleForm" class="form-horizontal" role="form">
+						<div>
+							<div class="form-group" ng-class="{error: onError && createRuleForm.name.$invalid}">
+								<label class="col-sm-2 control-label" for="input-id-1">Nombre</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="name"
+										name="name" required ng-model="requestObject.name">
+								
+					<span
+						ng-show="onError && createRuleForm.name.$error.required"
+						class="help-inline">Requerido
+					</span>
+								</div>
 							</div>
 
+							<div class="form-group" ng-class="{error: onError && createRuleForm.description.$invalid}">
+								<label class="col-sm-2 control-label">Descripción</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" id="description"
+										name="description" required
+										ng-model="requestObject.description" rows="4" cols="50"> </textarea>
+								
+					<span
+						ng-show="onError && createRentForm.description.$error.required"
+						class="help-inline">Required
+					</span>
+								</div>
+								<div class="line line-dashed b-b line-lg pull-in"></div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-2">
+									<button type="submit" ng-click="toggle()"
+										class="btn btn-default">Cancelar</button>
+									<button type="submit" class="btn btn-primary" ng-click="saveRule()">Agregar</button>
+
+								</div>
+
+							</div>
 						</div>
 					</form>
 				</div>
 
 			</div>
 		</div>
+		<!-- 		MOSTRAR REGLAS -->
 		<div class="wrapper-md">
 			<div id="agregarReglas" class=" panel panel-default">
 				<div class="panel-heading font-bold">Reglas</div>
@@ -75,23 +82,23 @@
 								Integer posuere erat a ante.</p>
 
 						</div>
-</div>
-						<form name="step1"
-							class="form-validation ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"">
-							<label class="i-checks"> <input aria-invalid="true"
-								aria-required="false" aria-checked="false" tabindex="0"
-								class="ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"
-								ng-model="agree" required="" type="checkbox"><i></i>
-								Estoy de acuerdo con terminos y condiciones
-							</label>
+					</div>
+					<form name="step1"
+						class="form-validation ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"">
+						<label class="i-checks"> <input aria-invalid="true"
+							aria-required="false" aria-checked="false" tabindex="0"
+							class="ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"
+							ng-model="agree" required="" type="checkbox"><i></i>
+							Estoy de acuerdo con terminos y condiciones
+						</label>
 
-							<div class="m-t m-b">
-								<button disabled="disabled" aria-disabled="true" type="submit"
-									ng-disabled="step1.$invalid"
-									class="btn btn-default btn-rounded" ng-click="steps.step2=true">Next</button>
-							</div>
-						</form>
-					
+						<div class="m-t m-b">
+							<button disabled="disabled" aria-disabled="true" type="submit"
+								ng-disabled="step1.$invalid" class="btn btn-default btn-rounded"
+								ng-click="steps.step2=true">Next</button>
+						</div>
+					</form>
+
 
 
 				</div>

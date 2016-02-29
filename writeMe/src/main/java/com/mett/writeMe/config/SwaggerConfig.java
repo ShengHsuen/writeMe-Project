@@ -17,32 +17,32 @@ import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 @Configuration
 @EnableSwagger
 public class SwaggerConfig implements ServletContextAware{
-	
-	private SpringSwaggerConfig springSwaggerConfig;
-	private ServletContext servletContext;
-	 
-	@Autowired
-	public void setSpringSwaggerConfig(SpringSwaggerConfig springSwaggerConfig) {
-		this.springSwaggerConfig = springSwaggerConfig;
-	}
-	@Bean
-	// Don't forget the @Bean annotation
-	public SwaggerSpringMvcPlugin customImplementation() {
-		RelativeSwaggerPathProvider relativeSwaggerPathProvider = new RelativeSwaggerPathProvider(servletContext);
+ 
+ private SpringSwaggerConfig springSwaggerConfig;
+ private ServletContext servletContext;
+  
+ @Autowired
+ public void setSpringSwaggerConfig(SpringSwaggerConfig springSwaggerConfig) {
+  this.springSwaggerConfig = springSwaggerConfig;
+ }
+ @Bean
+ // Don't forget the @Bean annotation
+ public SwaggerSpringMvcPlugin customImplementation() {
+  RelativeSwaggerPathProvider relativeSwaggerPathProvider = new RelativeSwaggerPathProvider(servletContext);
         relativeSwaggerPathProvider.setApiResourcePrefix("writeMe");
         return new SwaggerSpringMvcPlugin(this.springSwaggerConfig)
         .pathProvider(relativeSwaggerPathProvider);
         
-	}
-	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("WriteMe API", "API for WriteMe",
-				"WriteMe API terms of service", "WriteMe email",
-				"WriteMe API Licence Type", "WriteMe API License URL");
-		return apiInfo;
-	}
-	
-	@Override
-	 public void setServletContext(ServletContext servletContext) {
+ }
+ private ApiInfo apiInfo() {
+  ApiInfo apiInfo = new ApiInfo("writeMe API", "API for writeMe",
+    "writeMe API terms of service", "writeMe email",
+    "writeMe API Licence Type", "writeMe API License URL");
+  return apiInfo;
+ }
+ 
+ @Override
+  public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 }
