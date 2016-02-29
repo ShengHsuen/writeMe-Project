@@ -25,6 +25,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.mett.writeMe.services.GeneralService;
 
+// Cambiar a /rest/protected/* cuando tenga iniciar sesion
 @WebFilter(filterName="wsFilter",urlPatterns="/rest/protected/*")
 public class WSFilter implements Filter, ApplicationContextAware {
 
@@ -56,6 +57,7 @@ public class WSFilter implements Filter, ApplicationContextAware {
 	 		} else {
 	 			logger.debug("Rejected: " + servletRequest.toString());
 	 			servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+	 			System.out.println("prikipriki");
 	 		}
 	 		
 	    }

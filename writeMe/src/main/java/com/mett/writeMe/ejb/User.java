@@ -2,6 +2,9 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.mett.writeMe.ejb.User;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +18,8 @@ import java.util.List;
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int userId;
-	private byte accountType;
-	private byte admin;
+	private boolean accountType;
+	private boolean admin;
 	private String author;
 	private Date birthDay;
 	private String lastName;
@@ -50,20 +53,20 @@ public class User implements Serializable {
 	}
 
 
-	public byte getAccountType() {
+	public boolean getAccountType() {
 		return this.accountType;
 	}
 
-	public void setAccountType(byte accountType) {
+	public void setAccountType(boolean accountType) {
 		this.accountType = accountType;
 	}
 
 
-	public byte getAdmin() {
+	public boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(byte admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 

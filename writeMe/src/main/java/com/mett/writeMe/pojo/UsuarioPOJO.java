@@ -6,8 +6,8 @@ import java.util.List;
 public class UsuarioPOJO{
 	
 	private int userId;
-	private byte accountType;
-	private byte admin;
+	private boolean accountType;
+	private boolean admin;
 	private String author;
 	private Date birthDay;
 	private String lastName;
@@ -28,19 +28,19 @@ public class UsuarioPOJO{
 		this.userId = userId;
 	}
 
-	public byte accountType(){
+	public boolean accountType(){
 		return accountType;
 	}
 	
-	public void setAccountType(byte accountType){
+	public void setAccountType(boolean accountType){
 		this.accountType = accountType;
 	}
 	
-	public byte getAdmin(){
+	public boolean getAdmin(){
 		return admin;
 	}
 	
-	public void setAdmin(byte admin){
+	public void setAdmin(boolean admin){
 		this.admin = admin;
 	}
 	

@@ -26,7 +26,7 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "/cenfoteca/api-docs";
+        url = "/writeMe/api-docs";
       }
       
       window.swaggerUi = new SwaggerUi({
