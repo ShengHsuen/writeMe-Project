@@ -25,6 +25,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.mett.writeMe.services.GeneralService;
 
+// Cambiar a /rest/protected/* cuando tenga iniciar sesion
 @WebFilter(filterName="wsFilter",urlPatterns="/rest/protected/*")
 public class WSFilter implements Filter, ApplicationContextAware {
 
@@ -36,30 +37,32 @@ public class WSFilter implements Filter, ApplicationContextAware {
 	@Override
 	public void destroy() {
 	}
+
 	@Override
-	 public void doFilter(ServletRequest request, ServletResponse response,
-	   FilterChain chain) throws IOException, ServletException {
-	  
-	  HttpServletRequest servletRequest = (HttpServletRequest)request;
-	     HttpServletResponse servletResponse = (HttpServletResponse) response;
-	  
-	     HttpSession currentSession = servletRequest.getSession();
-	     
-	     if(generalService.isLocal()){
-	      chain.doFilter(servletRequest, servletResponse);
-	     }else{
-	      
-	       System.out.println("Session Object ------> " + currentSession.getAttribute("idUser"));
-	    if (currentSession.getAttribute("idUser") != null) {
-	     chain.doFilter(servletRequest, servletResponse);
-	    } else {
-	     logger.debug("Rejected: " + servletRequest.toString());
-	     servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		
+		HttpServletRequest servletRequest = (HttpServletRequest)request;
+	    HttpServletResponse servletResponse = (HttpServletResponse) response;
+		
+	    HttpSession currentSession = servletRequest.getSession();
+	    
+	    if(generalService.isLocal()){
+	    	chain.doFilter(servletRequest, servletResponse);
+	    }else{
+	    	
+	    	 System.out.println("Session Object ------> " + currentSession.getAttribute("idUser"));
+	 		if (currentSession.getAttribute("idUser") != null) {
+	 			chain.doFilter(servletRequest, servletResponse);
+	 		} else {
+	 			logger.debug("Rejected: " + servletRequest.toString());
+	 			servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+	 			System.out.println("prikipriki");
+	 		}
+	 		
 	    }
 	    
-	     }
-	     
-	 }
+	}
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
