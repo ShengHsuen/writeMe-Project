@@ -16,4 +16,8 @@ public class LegalEstablishmentResponse extends BaseResponse {
 		this.legalEstList = legalEstList;
 	}
 
+	public List<LegalEstablishmentPOJO> getlegalList() {
+		return legalEstList;
+	}
+
 }

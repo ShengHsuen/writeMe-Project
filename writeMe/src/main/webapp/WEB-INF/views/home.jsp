@@ -25,7 +25,7 @@
 
   <link rel="stylesheet" href="resources/html/css/font.css" type="text/css" />
   <link rel="stylesheet" href="resources/html/css/app.css" type="text/css" />
-  
+   <link rel="stylesheet" href="resources/bower_components/angular-ui-grid/ui-grid.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -389,6 +389,7 @@
   
   
   <!-- Del template -->
+    <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
   
@@ -400,6 +401,8 @@
   <script src="resources/html/js/ui-client.js"></script>
   
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
+  
+  <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>
     
 </body>

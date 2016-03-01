@@ -15,39 +15,41 @@ angular.module('myApp.legalEstablishment', ['ngRoute'])
 	        $scope.myVar = !$scope.myVar;
 	    };
 
-		$scope.legalEsta={};
 		$scope.onError = false;
-		$scope.legalEstaList = [];
-		$scope.requestObject = {};
 		
-		//OBTENER TODAS
-	    $scope.init = function() {
-	    	
-	    	$http.get('/getAll')
-			.success(function(response) {
-
-				$scope.legalEstaList = response.legalEstaList
-				$scope.requestObject.idLegalEstablishment = $scope.legalEstaList[0].idLegalEstablishment;
-				
-			});
-	    	
-	    };
-	    
+	
 	   //Guardar regla
+  $scope.saveRule = function(event) {
+		$scope.requestObject={
+				    		      "legal_establishmentId": 0,
+				    		      "description": $scope.description,
+				    		      "part": 6,
+				    		      "name": $scope.name
+				    		    }
+				    		
+
+  		console.log("$scope.requestObject",$scope.requestObject );
+		  $http.post('rest/protected/legal/create',$scope.requestObject).success(function(response) {
+		  		console.log($scope.requestObject );
+	  	  });
+	  };
+
 	    
-	    $scope.saveRule = function() {
-	    	  $http({
-	    	         method: 'post',
-	    	         url: 'legal/create',
-	    	         data: {
-	    	    	     "part": 1,	    	         
-	    	           "name": $scope.name,
-	    	     "description": $scope.description
-	    	     }
-	    }).success(function (data, status, headers, config) {
-	        console.log("sirve");
-	    }).error(function (data, status, headers, config) {
-	    	 console.log("No sirve");
-	    });
-	    }
-}]);
+	    //Mostarr
+		$scope.legalList = {};
+		 $scope.requestObject = []
+		$scope.requestObject = {"pageNumber": 0,"pageSize": 0,"direction": "","sortBy": [""],"searchColumn": "string","searchTerm": "","legalEstablishment": {}};
+		$http.post('rest/protected/legal/getAll',$scope.requestObject).success(function(response) {
+			$scope.legalList = response.legalList;
+		});
+		 $scope.gridOptions = {
+				   data:'legalList',
+				   showGroupPanel: true,
+				   enableSorting:true,
+				   enableFiltering:true,
+				   columnDefs:[
+				               {field:'part',displayName:'Parte #'},
+				               {field:'name',displayName:'Nombre'},
+				               {field:'description',displayName:'Descripción'}]
+				  };
+	    }]);

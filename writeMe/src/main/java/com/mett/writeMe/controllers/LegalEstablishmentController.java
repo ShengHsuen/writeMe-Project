@@ -2,32 +2,35 @@ package com.mett.writeMe.controllers;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.neo4j.cypher.internal.compiler.v2_1.perty.PrintNewLine;
+import org.neo4j.cypher.internal.compiler.v2_1.perty.PrintText;
+import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.outerJoin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mett.writeMe.contracts.LegalEstablishmentRequest;
 import com.mett.writeMe.contracts.LegalEstablishmentResponse;
 import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.services.LegalEstablishmentServiceInterface;
 import com.mett.writeMe.utils.Utils;
 
 @RestController
-@RequestMapping(value ="legal")
+@RequestMapping(value ="/rest/protected/legal")
 public class LegalEstablishmentController {
 	@Autowired private ServletContext servletContext;
 	@Autowired private LegalEstablishmentServiceInterface legalEstablishmentService;
 	@Autowired private HttpServletRequest request;
 	
-//	COMO TIPO ALQUILER
-	@RequestMapping(value ="/getAll", method = RequestMethod.GET)
+	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
 	public LegalEstablishmentResponse getAll(){	
-			
 		LegalEstablishmentResponse response = new LegalEstablishmentResponse();
 		response.setCode(200);
-		response.setCodeMessage("users fetch success");
+		response.setCodeMessage("Muestra reglas satisfactoriamente");
 		response.setLegalEstablishmentList(legalEstablishmentService.getAll());
 		return response;		
 	}
@@ -41,19 +44,11 @@ public class LegalEstablishmentController {
 	*/
 	
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
-	public LegalEstablishmentResponse create(
-			@RequestParam("part") int part,
-			@RequestParam("name") String name,
-			@RequestParam("description") String description){	
-		
+	public LegalEstablishmentResponse create(@RequestBody LegalEstablishment ler ){	
+			System.out.println("Entra a controller"+ ler);
 		    LegalEstablishmentResponse legalEstRes = new LegalEstablishmentResponse();
 		  
-				
-				LegalEstablishment legalEst = new LegalEstablishment();
-				legalEst.setName(name);
-				legalEst.setDescription(description);
-				legalEst.setPart(part);
-				Boolean state = legalEstablishmentService.addLegalEstablishment(legalEst);
+				Boolean state = legalEstablishmentService.saveLegalEstablishment(ler);
 				
 				if(state){
 					legalEstRes.setCode(200);
