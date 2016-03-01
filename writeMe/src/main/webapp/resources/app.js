@@ -10,5 +10,9 @@ angular.module('myApp', [
   'ui.grid'
 ])
 .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {
+<<<<<<< HEAD
+	$routeProvider.otherwise({redirectTo: '/'});
+=======
 	$routeProvider.otherwise({redirectTo: '/home'});
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 }]);

@@ -1,21 +1,43 @@
 package com.mett.writeMe.services;
 
+<<<<<<< HEAD
+=======
 import java.util.ArrayList;
 import java.util.List;
 
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
+import com.mett.writeMe.contracts.UsersRequest;
+import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.repositories.UsersRepository;
+=======
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.repositories.UserRepository;
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 
 @Service
 public class UsersService implements UsersServiceInterface{
 	@Autowired 
+<<<<<<< HEAD
+	private UsersRepository usersRepository;
+
+	@Override
+	@Transactional
+	public Boolean saveUser(UsersRequest ur) {
+		User user = new User();
+		BeanUtils.copyProperties(ur.getUser(), user);
+		
+		User nuser = usersRepository.save(user);
+		
+		return (nuser == null) ? false : true;	
+=======
 	private UserRepository userRepository;
 
 	@Override
@@ -53,5 +75,6 @@ public class UsersService implements UsersServiceInterface{
 		User nuser = userRepository.save(user);
 		
 		return (nuser == null) ? false : true;
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 	}
 }

@@ -2,6 +2,9 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.mett.writeMe.ejb.User;
+
 import java.util.Date;
 import java.util.List;
 
