@@ -34,11 +34,13 @@ public class SwaggerConfig implements ServletContextAware{
         
 	}
 	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("Cenfoteca API", "API for Cenfoteca",
-				"Cenfoteca API terms of service", "Cenfoteca email",
-				"Cenfoteca API Licence Type", "Cenfoteca API License URL");
+		ApiInfo apiInfo = new ApiInfo("writeMe API", "API for writeMe",
+				"writeMe API terms of service", "writeMe email",
+				"writeMe API Licence Type", "writeMe API License URL");
 		return apiInfo;
 	}
+	
+	
 	
 	@Override
 	 public void setServletContext(ServletContext servletContext) {
