@@ -10,8 +10,23 @@ angular.module('myApp.signin', ['ngRoute'])
 }])
 
 .controller('SignInCtrl', ['$scope','$http',function($scope,$http) {
+<<<<<<< HEAD
 	$scope.navSignup = function(){
 		var path = "/writeMe/#/signup";
 		window.location.href = path;
+=======
+	$scope.user = {email:"cheng2094@gmail.com",password:"12345"};
+	$scope.login = function(){
+		
+		$http.post('rest/signin/checkuser/',$scope.user).success(function (loginResponse) {
+    		if(loginResponse.code == 200){
+    			var usuario = {"userId":loginResponse.idUsuario,"name":loginResponse.firstName,"lastName":loginResponse.lastName};
+    			var path = "/writeMe/app#/home";
+    			window.location.href = path;
+    		}else{
+    			alert("invalido");
+    		}
+    	});
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 	}
 }]);

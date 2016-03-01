@@ -17,6 +17,8 @@ import java.util.List;
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	
 	private int userId;
 	private boolean accountType;
 	private boolean admin;
@@ -40,8 +42,7 @@ public class User implements Serializable {
 
 	public User() {
 	}
-
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getUserId() {
