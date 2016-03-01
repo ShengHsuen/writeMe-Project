@@ -13,41 +13,14 @@ import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.services.UsersServiceInterface;
 
 @RestController
-@RequestMapping(value ="rest/protected/users")
+@RequestMapping(value ="/")
 public class UserController {
 	@Autowired private UsersServiceInterface usersService;
-	@Autowired private HttpServletRequest request;
-	
-	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
-	public UsersResponse getAll(@RequestBody UsersRequest ur){	
-			
-		UsersResponse us = new UsersResponse();
-		us.setCode(200);
-		us.setCodeMessage("users fetch success");
-		us.setUsuarios(usersService.getAll(ur));
-		return us;		
-	}
-	
-	@RequestMapping(value ="/getAllByName", method = RequestMethod.POST)
-	public UsersResponse getAllByName(@RequestBody UsersRequest ur){	
-			
-		UsersResponse us = new UsersResponse();
-		us.setCode(200);
-		us.setCodeMessage("users fetch success");
-		us.setUsuarios(usersService.getAllByName(ur));
-		return us;		
-	}
 	
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public UsersResponse create(@RequestBody UsersRequest ur){	
-		
 		UsersResponse us = new UsersResponse();
 		Boolean state = usersService.saveUser(ur);
-	
-		if(state){
-			us.setCode(200);
-			us.setCodeMessage("user created succesfully");
-		}
 		return us;
 		
 	}

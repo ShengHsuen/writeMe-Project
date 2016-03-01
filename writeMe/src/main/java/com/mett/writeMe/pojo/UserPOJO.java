@@ -3,7 +3,7 @@ package com.mett.writeMe.pojo;
 import java.util.Date;
 import java.util.List;
 
-public class UsuarioPOJO{
+public class UserPOJO{
 	
 	private int userId;
 	private byte accountType;
@@ -15,7 +15,7 @@ public class UsuarioPOJO{
 	private String name;
 	private String password;
 
-	public UsuarioPOJO() {
+	public UserPOJO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
