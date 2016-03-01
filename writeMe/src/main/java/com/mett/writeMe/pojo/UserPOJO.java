@@ -6,8 +6,13 @@ import java.util.List;
 public class UserPOJO{
 	
 	private int userId;
+<<<<<<< HEAD
+	private boolean accountType;
+	private boolean admin;
+=======
 	private byte accountType;
 	private byte admin;
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 	private String author;
 	private Date birthDay;
 	private String lastName;
@@ -28,6 +33,21 @@ public class UserPOJO{
 		this.userId = userId;
 	}
 
+<<<<<<< HEAD
+	public boolean accountType(){
+		return accountType;
+	}
+	
+	public void setAccountType(boolean accountType){
+		this.accountType = accountType;
+	}
+	
+	public boolean getAdmin(){
+		return admin;
+	}
+	
+	public void setAdmin(boolean admin){
+=======
 	public byte accountType(){
 		return accountType;
 	}
@@ -41,6 +61,7 @@ public class UserPOJO{
 	}
 	
 	public void setAdmin(byte admin){
+>>>>>>> 8cadc2bcf83f59a201448c7f9e9797dc94aa3a2b
 		this.admin = admin;
 	}
 	
