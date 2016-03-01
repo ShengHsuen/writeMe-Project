@@ -1,21 +1,21 @@
 package com.mett.writeMe.contracts;
 
 import com.mett.writeMe.contracts.BaseRequest;
-import com.mett.writeMe.pojo.UsuarioPOJO;
+import com.mett.writeMe.pojo.UserPOJO;
 
 public class UsersRequest extends BaseRequest {
 	
-	private UsuarioPOJO user;
+	private UserPOJO user;
 	
 	public UsersRequest() {
 		super();
 	}
 	
-	public UsuarioPOJO getUser() {
+	public UserPOJO getUser() {
 		return user;
 	}
 	
-	public void setUser(UsuarioPOJO user) {
+	public void setUser(UserPOJO user) {
 		this.user = user;
 	}
 
