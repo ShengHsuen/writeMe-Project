@@ -399,10 +399,7 @@
   <script src="resources/html/js/ui-nav.js"></script>
   <script src="resources/html/js/ui-toggle.js"></script>
   <script src="resources/html/js/ui-client.js"></script>
-  
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
-  
-  <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>
     
 </body>

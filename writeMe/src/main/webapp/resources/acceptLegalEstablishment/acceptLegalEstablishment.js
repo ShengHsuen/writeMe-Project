@@ -19,10 +19,11 @@ angular.module('myApp.acceptLegalEstablishment', ['ngRoute'])
 	    //Mostarr
 		$scope.legalList = {};
 		 $scope.requestObject = []
-		$http.post('rest/protected/legal/getAll',$scope.requestObject).success(function(response) {
+		$http.post('acceptLegalEstablishment/getAll',$scope.requestObject).success(function(response) {
 			$scope.legalList = response.legalList;
 		});
-		 $scope.gridOptions = {
+		 console.log($scope.legalList )
+		 $scope.gridOptionss = {
 				   data:'legalList',
 				   columnDefs:[
 				               {field:'name',displayName:'Nombre'},

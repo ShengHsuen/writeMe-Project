@@ -4,7 +4,6 @@
 angular.module('myApp', [
      'myApp.home',
      'myApp.legalEstablishment',
-     'myApp.acceptLegalEstablishment',
      'ui.grid'
   ])
   .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {

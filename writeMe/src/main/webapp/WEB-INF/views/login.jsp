@@ -46,7 +46,7 @@
   <script src="resources/appLogin.js"></script>
   <script src="resources/signin/signin.js"></script>
    <script src="resources/signup/signup.js"></script>
-  
+   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <!-- Del template -->
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
@@ -56,5 +56,6 @@
   <script src="resources/html/js/ui-nav.js"></script>
   <script src="resources/html/js/ui-toggle.js"></script>
   <script src="resources/html/js/ui-client.js"></script>
+ 
 </body>
 </html>
