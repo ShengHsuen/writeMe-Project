@@ -18,7 +18,7 @@ angular.module('myApp.signin', ['ngRoute'])
 	$scope.user = {email:"cheng2094@gmail.com",password:"12345"};
 	$scope.login = function(){
 		
-		$http.post('rest/signin/checkuser/',$scope.user).success(function (loginResponse) {
+		$http.post('rest/signin/checkuser',$scope.user).success(function (loginResponse) {
     		if(loginResponse.code == 200){
     			var usuario = {"userId":loginResponse.idUsuario,"name":loginResponse.firstName,"lastName":loginResponse.lastName};
     			var path = "/writeMe/app#/home";
