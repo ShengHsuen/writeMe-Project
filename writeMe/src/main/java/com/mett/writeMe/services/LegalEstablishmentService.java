@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mett.writeMe.contracts.LegalEstablishmentRequest;
 import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
 import com.mett.writeMe.repositories.LegalEstablishmentRepository;

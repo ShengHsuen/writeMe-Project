@@ -1,7 +1,15 @@
 package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -52,15 +60,14 @@ public class LegalEstablishment implements Serializable {
 	}
 
 
-<<<<<<< HEAD
 	//bi-directional many-to-one association to User
-	@ManyToOne
+	/*@ManyToOne
 	public User getUser() {
 		return this.user;
-=======
+	}*/
+	
 	public String getName() {
 		return this.name;
->>>>>>> 9de0b37c53a680e34a86b0a6acc5243a3d1e6f37
 	}
 
 	public void setName(String name) {
