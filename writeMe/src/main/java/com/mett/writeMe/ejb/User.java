@@ -151,32 +151,6 @@ public class User implements Serializable {
 		return binnacle;
 	}
 
-
-	//bi-directional many-to-one association to LegalEstablishment
-	@OneToMany(mappedBy="user")
-	public List<LegalEstablishment> getLegalEstablishments() {
-		return this.legalEstablishments;
-	}
-
-	public void setLegalEstablishments(List<LegalEstablishment> legalEstablishments) {
-		this.legalEstablishments = legalEstablishments;
-	}
-
-	public LegalEstablishment addLegalEstablishment(LegalEstablishment legalEstablishment) {
-		getLegalEstablishments().add(legalEstablishment);
-		legalEstablishment.setUser(this);
-
-		return legalEstablishment;
-	}
-
-	public LegalEstablishment removeLegalEstablishment(LegalEstablishment legalEstablishment) {
-		getLegalEstablishments().remove(legalEstablishment);
-		legalEstablishment.setUser(null);
-
-		return legalEstablishment;
-	}
-
-
 	//bi-directional many-to-one association to Message
 	@OneToMany(mappedBy="user")
 	public List<Message> getMessages() {

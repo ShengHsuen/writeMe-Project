@@ -35,6 +35,10 @@ angular.module('myApp.signup', ['ngRoute'])
 		$scope.pConfirm();
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
+<<<<<<< HEAD
+=======
+				console.log($scope.requestObject );
+>>>>>>> 9de0b37c53a680e34a86b0a6acc5243a3d1e6f37
 			});
 		}else{
 			
@@ -50,4 +54,11 @@ angular.module('myApp.signup', ['ngRoute'])
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	$scope.navAcceptLegal= function(){
+		var path = "/writeMe/#/acceptLegalEstablishment";
+		window.location.href = path;
+	}
+>>>>>>> 9de0b37c53a680e34a86b0a6acc5243a3d1e6f37
 }]);

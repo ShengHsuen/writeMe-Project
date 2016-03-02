@@ -1,29 +1,23 @@
-package com.mett.writeMe.ejb;
+package com.mett.writeMe.pojo;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
+import com.mett.writeMe.ejb.User;
 
-/**
- * The persistent class for the legal_establishment database table.
- * 
- */
-@Entity
-@Table(name="legal_establishment")
-@NamedQuery(name="LegalEstablishment.findAll", query="SELECT l FROM LegalEstablishment l")
-public class LegalEstablishment implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class LegalEstablishmentPOJO {
 	private int legal_establishmentId;
 	private String description;
 	private int part;
 	private String name;
 
-	public LegalEstablishment() {
+	public LegalEstablishmentPOJO() {
+		super();
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getLegal_establishmentId() {
 		return this.legal_establishmentId;
 	}
@@ -32,7 +26,7 @@ public class LegalEstablishment implements Serializable {
 		this.legal_establishmentId = legal_establishmentId;
 	}
 
-	@Lob
+
 	public String getDescription() {
 		return this.description;
 	}
@@ -41,8 +35,6 @@ public class LegalEstablishment implements Serializable {
 		this.description = description;
 	}
 
-
-	
 	public int getPart() {
 		return this.part;
 	}
@@ -52,20 +44,14 @@ public class LegalEstablishment implements Serializable {
 	}
 
 
-<<<<<<< HEAD
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	public User getUser() {
-		return this.user;
-=======
 	public String getName() {
 		return this.name;
->>>>>>> 9de0b37c53a680e34a86b0a6acc5243a3d1e6f37
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 
 }
