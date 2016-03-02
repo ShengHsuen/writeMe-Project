@@ -2,6 +2,9 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.mett.writeMe.ejb.User;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +20,8 @@ public class User implements Serializable {
 	
 	
 	private int userId;
-	private byte accountType;
-	private byte admin;
+	private boolean accountType;
+	private boolean admin;
 	private String author;
 	private Date birthDay;
 	private String lastName;
@@ -51,20 +54,20 @@ public class User implements Serializable {
 	}
 
 
-	public byte getAccountType() {
+	public boolean getAccountType() {
 		return this.accountType;
 	}
 
-	public void setAccountType(byte accountType) {
+	public void setAccountType(boolean accountType) {
 		this.accountType = accountType;
 	}
 
 
-	public byte getAdmin() {
+	public boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(byte admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
@@ -147,32 +150,6 @@ public class User implements Serializable {
 
 		return binnacle;
 	}
-
-
-	//bi-directional many-to-one association to LegalEstablishment
-	@OneToMany(mappedBy="user")
-	public List<LegalEstablishment> getLegalEstablishments() {
-		return this.legalEstablishments;
-	}
-
-	public void setLegalEstablishments(List<LegalEstablishment> legalEstablishments) {
-		this.legalEstablishments = legalEstablishments;
-	}
-
-	public LegalEstablishment addLegalEstablishment(LegalEstablishment legalEstablishment) {
-		getLegalEstablishments().add(legalEstablishment);
-		legalEstablishment.setUser(this);
-
-		return legalEstablishment;
-	}
-
-	public LegalEstablishment removeLegalEstablishment(LegalEstablishment legalEstablishment) {
-		getLegalEstablishments().remove(legalEstablishment);
-		legalEstablishment.setUser(null);
-
-		return legalEstablishment;
-	}
-
 
 	//bi-directional many-to-one association to Message
 	@OneToMany(mappedBy="user")

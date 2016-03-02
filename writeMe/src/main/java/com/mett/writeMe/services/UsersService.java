@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.contracts.UsersRequest;
@@ -17,6 +18,18 @@ import com.mett.writeMe.repositories.UserRepository;
 public class UsersService implements UsersServiceInterface{
 	@Autowired 
 	private UserRepository userRepository;
+=======
+import com.mett.writeMe.contracts.UsersRequest;
+import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.pojo.UserPOJO;
+import com.mett.writeMe.repositories.UserRepository;
+
+
+@Service
+public class UsersService implements UsersServiceInterface{
+	@Autowired 
+	private UserRepository userRepository;	
+>>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
 
 	@Override
 	@Transactional
@@ -48,7 +61,11 @@ public class UsersService implements UsersServiceInterface{
 	public Boolean saveUser(UsersRequest ur) {
 		User user = new User();
 		BeanUtils.copyProperties(ur.getUser(), user);
+<<<<<<< HEAD
 		user.setPassword("set md5 password");
+=======
+		//user.setPassword("set md5 password");
+>>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
 		
 		User nuser = userRepository.save(user);
 		

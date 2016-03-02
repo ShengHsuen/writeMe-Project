@@ -50,4 +50,20 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+<<<<<<< HEAD
 </projectDescription>
+=======
+	<linkedResources>
+        <link>
+            <name>src/main/resources/dbmodel/modeloBDWriteMe.mwb</name>
+                <type>1</type>
+                <locationURI>PARENT-3-PROJECT_LOC/Downloads/modeloBDWriteMe.mwb</locationURI>
+        </link>
+        <link>
+            <name>src/main/resources/dbmodel/modeloBDWriteMe.mwb.bak</name>
+            <type>1</type>
+            <locationURI>PARENT-3-PROJECT_LOC/Downloads/modeloBDWriteMe.mwb.bak</locationURI>
+        </link>
+        </linkedResources>
+</projectDescription>
+>>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d

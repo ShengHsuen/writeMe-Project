@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
 /**
  * Handles requests for the application home page.
  */

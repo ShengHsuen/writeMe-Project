@@ -1,7 +1,15 @@
 package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -15,8 +23,8 @@ public class LegalEstablishment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int legal_establishmentId;
 	private String description;
-	private String part;
-	private User user;
+	private int part;
+	private String name;
 
 	public LegalEstablishment() {
 	}
@@ -32,7 +40,7 @@ public class LegalEstablishment implements Serializable {
 		this.legal_establishmentId = legal_establishmentId;
 	}
 
-
+	@Lob
 	public String getDescription() {
 		return this.description;
 	}
@@ -42,24 +50,29 @@ public class LegalEstablishment implements Serializable {
 	}
 
 
-	@Lob
-	public String getPart() {
+	
+	public int getPart() {
 		return this.part;
 	}
 
-	public void setPart(String part) {
+	public void setPart(int part) {
 		this.part = part;
 	}
 
 
 	//bi-directional many-to-one association to User
-	@ManyToOne
+	/*@ManyToOne
 	public User getUser() {
 		return this.user;
+	}*/
+	
+	public String getName() {
+		return this.name;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 
 }
