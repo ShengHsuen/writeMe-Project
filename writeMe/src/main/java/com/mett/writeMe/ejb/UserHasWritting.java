@@ -15,8 +15,8 @@ import java.util.List;
 public class UserHasWritting implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int user_has_writtingId;
-	private byte banned;
-	private byte statusColor;
+	private boolean banned;
+	private boolean statusColor;
 	private List<Comment> comments;
 	private List<Report> reports;
 	private List<Typeuser> typeusers;
@@ -38,20 +38,20 @@ public class UserHasWritting implements Serializable {
 	}
 
 
-	public byte getBanned() {
+	public boolean getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(byte banned) {
+	public void setBanned(boolean banned) {
 		this.banned = banned;
 	}
 
 
-	public byte getStatusColor() {
+	public boolean getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(byte statusColor) {
+	public void setStatusColor(boolean statusColor) {
 		this.statusColor = statusColor;
 	}
 

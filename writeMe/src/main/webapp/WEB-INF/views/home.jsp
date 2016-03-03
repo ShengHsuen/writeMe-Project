@@ -399,20 +399,11 @@
   <script src="resources/html/js/ui-nav.js"></script>
   <script src="resources/html/js/ui-toggle.js"></script>
   <script src="resources/html/js/ui-client.js"></script>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
   
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
-<<<<<<< HEAD
-=======
-=======
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
->>>>>>> 9de0b37c53a680e34a86b0a6acc5243a3d1e6f37
->>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
   <script src="resources/home/home.js"></script>
     
 </body>

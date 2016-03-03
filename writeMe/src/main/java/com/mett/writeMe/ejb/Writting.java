@@ -23,8 +23,8 @@ public class Writting implements Serializable {
 	private String name;
 	private String numMaxCharacters;
 	private String numMinCharacters;
-	private byte participation;
-	private byte published;
+	private boolean participation;
+	private boolean published;
 	private List<Chapter> chapters;
 	private List<UserHasWritting> userHasWrittings;
 	private Category category;
@@ -128,20 +128,20 @@ public class Writting implements Serializable {
 	}
 
 
-	public byte getParticipation() {
+	public boolean getParticipation() {
 		return this.participation;
 	}
 
-	public void setParticipation(byte participation) {
+	public void setParticipation(boolean participation) {
 		this.participation = participation;
 	}
 
 
-	public byte getPublished() {
+	public boolean getPublished() {
 		return this.published;
 	}
 
-	public void setPublished(byte published) {
+	public void setPublished(boolean published) {
 		this.published = published;
 	}
 

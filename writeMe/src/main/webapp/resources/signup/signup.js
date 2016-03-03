@@ -10,16 +10,13 @@ angular.module('myApp.signup', ['ngRoute'])
 }])
 
 .controller('SignUpCtrl', ['$scope','$http',function($scope,$http) {
-<<<<<<< HEAD
-=======
+
 	var canCreate = false; // Verificar si se puede crear
->>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
+
 	$scope.navSignin = function(){
 		var path = "/writeMe/#/signin";
 		window.location.href = path;
 	}
-<<<<<<< HEAD
-=======
 	$scope.createAccount = function(){
 		$scope.requestObject={
 				"pageNumber": 0,
@@ -59,5 +56,4 @@ angular.module('myApp.signup', ['ngRoute'])
 		var path = "/writeMe/#/acceptLegalEstablishment";
 		window.location.href = path;
 	}
->>>>>>> 5ea676e617fc95993412b4f433b21c4e1771e80d
 }]);
