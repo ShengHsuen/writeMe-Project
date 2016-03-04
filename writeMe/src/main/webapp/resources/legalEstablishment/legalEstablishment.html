@@ -50,7 +50,7 @@
 								<div class="col-sm-4 col-sm-offset-2">
 									<button type="submit" ng-click="toggle()"
 										class="btn btn-default">Cancelar</button>
-									<button type="submit" class="btn btn-primary" ng-click="saveRule($event)">Agregar</button>
+									<button type="submit" class="btn btn-primary" ng-click="saveRule($event)"  ng-disabled="createRuleForm.$invalid">Agregar</button>
 
 								</div>
 
@@ -66,9 +66,9 @@
 			<div id="MostrarReglas" class=" panel panel-default">
 				<div class="panel-heading font-bold">Reglas</div>
 				<div class="panel-body">
-		<!-- 			<div class="m-l-lg panel b-a">
+					<div class="m-l-lg panel b-a"  ng-repeat="pane in legalList | orderBy:'part'">
 						<div class="panel-heading pos-rlt b-b b-light">
-							<label class="label bg-light m-l-xs">VIP</label> <span
+						<h4 style="display: inline-block;">{{pane.name}}</h4> <span
 								class=" pull-right" style="width: 20px; display: inline-block;">
 								<button ng-click="person.selected = undefined">
 									<span class="glyphicon glyphicon-trash"></span>
@@ -78,11 +78,10 @@
 						</div>
 						<div class="panel-body">
 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
+							<p>{{pane.description}}</p>
 
 						</div>
-					</div> -->
+					</div>
 					<div ui-grid="gridOptions" ui-grid-move-columns class="myGrid"></div>
 			
 				</div>
@@ -90,7 +89,6 @@
 
 		</div>
 <!-- !mOSTRAR REGLAS -->
-
 
 	</div>
 

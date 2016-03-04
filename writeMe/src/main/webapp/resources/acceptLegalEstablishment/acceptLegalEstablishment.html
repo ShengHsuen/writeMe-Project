@@ -9,25 +9,14 @@
 		<div class="wrapper-md">
 			<div id="MostrarReglas" class=" panel panel-default">
 				<div class="panel-heading font-bold">Estamento Legal</div>
-				<div class="panel-body">
-					<!-- 			<div class="m-l-lg panel b-a">
-						<div class="panel-heading pos-rlt b-b b-light">
-							<label class="label bg-light m-l-xs">VIP</label> <span
-								class=" pull-right" style="width: 20px; display: inline-block;">
-								<button ng-click="person.selected = undefined">
-									<span class="glyphicon glyphicon-trash"></span>
-								</button>
-							</span>
+				<div class="m-l-lg" ng-repeat="pane in legalList | orderBy:'part'">
+					<h4>{{pane.name}}</h4>
+					<p>{{pane.description}}</p>
+				</div>
 
-						</div>
-						<div class="panel-body">
-
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
-
-						</div>
-					</div> -->
-					<div ui-grid="gridOptionss" ui-grid-move-columns class="myGrid"></div>
+					<!-- 
+					
+					<div ui-grid="gridOptions" ui-grid-move-columns class="myGrid"></div>
 					<form name="step1"
 						class="form-validation ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"">
 						<label class="i-checks"> <input aria-invalid="true"
@@ -42,9 +31,13 @@
 								ng-disabled="step1.$invalid" class="btn btn-default btn-rounded"
 								ng-click="steps.step2=true">Siguiente</button>
 						</div>
-					</form>
+					</form> -->
+					<div class=" col-lg-4"></div>
+					<div class=" col-lg-4">
+					<a ng-click="navSignup()" ui-sref="access.signup"
+						class="btn btn-lg btn-default btn-block" > Continuar creando cuenta</a>
 
-
+</div>
 
 				</div>
 			</div>

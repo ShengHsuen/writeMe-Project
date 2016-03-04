@@ -42,6 +42,7 @@ angular.module('myApp.legalEstablishment', ['ngRoute'])
 		$http.post('rest/protected/legal/getAll',$scope.requestObject).success(function(response) {
 			$scope.legalList = response.legalList;
 		});
+/*		console.log( $scope.requestObject )
 		 $scope.gridOptions = {
 				   data:'legalList',
 				   showGroupPanel: true,
@@ -51,5 +52,5 @@ angular.module('myApp.legalEstablishment', ['ngRoute'])
 				               {field:'part',displayName:'Parte #'},
 				               {field:'name',displayName:'Nombre'},
 				               {field:'description',displayName:'Descripción'}]
-				  };
+				  };*/
 	    }]);
