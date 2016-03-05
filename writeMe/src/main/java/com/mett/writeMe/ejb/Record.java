@@ -14,18 +14,27 @@ import java.util.List;
 @NamedQuery(name="Record.findAll", query="SELECT r FROM Record r")
 public class Record implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int recordId;
+
+	@Temporal(TemporalType.DATE)
 	private Date date;
+
 	private byte state;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="record")
 	private List<Writting> writtings;
 
 	public Record() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getRecordId() {
 		return this.recordId;
 	}
@@ -34,8 +43,6 @@ public class Record implements Serializable {
 		this.recordId = recordId;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getDate() {
 		return this.date;
 	}
@@ -43,7 +50,6 @@ public class Record implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 
 	public byte getState() {
 		return this.state;
@@ -53,9 +59,6 @@ public class Record implements Serializable {
 		this.state = state;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}
@@ -64,9 +67,6 @@ public class Record implements Serializable {
 		this.user = user;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="record")
 	public List<Writting> getWrittings() {
 		return this.writtings;
 	}

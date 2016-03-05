@@ -13,19 +13,27 @@ import java.util.Date;
 @NamedQuery(name="Payaccount.findAll", query="SELECT p FROM Payaccount p")
 public class Payaccount implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int payAccountId;
+
+	@Temporal(TemporalType.DATE)
 	private Date expirationDate;
+
 	private String nameCard;
+
 	private String numCard;
+
 	private String numSecurity;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
 
 	public Payaccount() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getPayAccountId() {
 		return this.payAccountId;
 	}
@@ -34,8 +42,6 @@ public class Payaccount implements Serializable {
 		this.payAccountId = payAccountId;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getExpirationDate() {
 		return this.expirationDate;
 	}
@@ -43,7 +49,6 @@ public class Payaccount implements Serializable {
 	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-
 
 	public String getNameCard() {
 		return this.nameCard;
@@ -53,7 +58,6 @@ public class Payaccount implements Serializable {
 		this.nameCard = nameCard;
 	}
 
-
 	public String getNumCard() {
 		return this.numCard;
 	}
@@ -61,7 +65,6 @@ public class Payaccount implements Serializable {
 	public void setNumCard(String numCard) {
 		this.numCard = numCard;
 	}
-
 
 	public String getNumSecurity() {
 		return this.numSecurity;
@@ -71,9 +74,6 @@ public class Payaccount implements Serializable {
 		this.numSecurity = numSecurity;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}

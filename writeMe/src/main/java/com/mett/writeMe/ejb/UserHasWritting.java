@@ -2,6 +2,7 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,21 +15,48 @@ import java.util.List;
 @NamedQuery(name="UserHasWritting.findAll", query="SELECT u FROM UserHasWritting u")
 public class UserHasWritting implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
-	private boolean banned;
-	private boolean statusColor;
+
+	private byte banned;
+
+	@Temporal(TemporalType.DATE)
+	private Date dateCreate;
+
+	@Temporal(TemporalType.DATE)
+	private Date dateModifie;
+
+	private byte invitationStatus;
+
+	private String linkInvitation;
+
+	private byte statusColor;
+
+	//bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy="userHasWritting")
 	private List<Comment> comments;
+
+	//bi-directional many-to-one association to Report
+	@OneToMany(mappedBy="userHasWritting")
 	private List<Report> reports;
-	private List<Typeuser> typeusers;
+
+	//bi-directional many-to-one association to Role
+	@OneToMany(mappedBy="userHasWritting")
+	private List<Role> roles;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
+
+	//bi-directional many-to-one association to Writting
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Writting writting;
 
 	public UserHasWritting() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getUser_has_writtingId() {
 		return this.user_has_writtingId;
 	}
@@ -37,27 +65,54 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-
-	public boolean getBanned() {
+	public byte getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(boolean banned) {
+	public void setBanned(byte banned) {
 		this.banned = banned;
 	}
 
+	public Date getDateCreate() {
+		return this.dateCreate;
+	}
 
-	public boolean getStatusColor() {
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
+	}
+
+	public Date getDateModifie() {
+		return this.dateModifie;
+	}
+
+	public void setDateModifie(Date dateModifie) {
+		this.dateModifie = dateModifie;
+	}
+
+	public byte getInvitationStatus() {
+		return this.invitationStatus;
+	}
+
+	public void setInvitationStatus(byte invitationStatus) {
+		this.invitationStatus = invitationStatus;
+	}
+
+	public String getLinkInvitation() {
+		return this.linkInvitation;
+	}
+
+	public void setLinkInvitation(String linkInvitation) {
+		this.linkInvitation = linkInvitation;
+	}
+
+	public byte getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(boolean statusColor) {
+	public void setStatusColor(byte statusColor) {
 		this.statusColor = statusColor;
 	}
 
-
-	//bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy="userHasWritting")
 	public List<Comment> getComments() {
 		return this.comments;
 	}
@@ -80,9 +135,6 @@ public class UserHasWritting implements Serializable {
 		return comment;
 	}
 
-
-	//bi-directional many-to-one association to Report
-	@OneToMany(mappedBy="userHasWritting")
 	public List<Report> getReports() {
 		return this.reports;
 	}
@@ -105,34 +157,28 @@ public class UserHasWritting implements Serializable {
 		return report;
 	}
 
-
-	//bi-directional many-to-one association to Typeuser
-	@OneToMany(mappedBy="userHasWritting")
-	public List<Typeuser> getTypeusers() {
-		return this.typeusers;
+	public List<Role> getRoles() {
+		return this.roles;
 	}
 
-	public void setTypeusers(List<Typeuser> typeusers) {
-		this.typeusers = typeusers;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
-	public Typeuser addTypeuser(Typeuser typeuser) {
-		getTypeusers().add(typeuser);
-		typeuser.setUserHasWritting(this);
+	public Role addRole(Role role) {
+		getRoles().add(role);
+		role.setUserHasWritting(this);
 
-		return typeuser;
+		return role;
 	}
 
-	public Typeuser removeTypeuser(Typeuser typeuser) {
-		getTypeusers().remove(typeuser);
-		typeuser.setUserHasWritting(null);
+	public Role removeRole(Role role) {
+		getRoles().remove(role);
+		role.setUserHasWritting(null);
 
-		return typeuser;
+		return role;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}
@@ -141,9 +187,6 @@ public class UserHasWritting implements Serializable {
 		this.user = user;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@ManyToOne
 	public Writting getWritting() {
 		return this.writting;
 	}

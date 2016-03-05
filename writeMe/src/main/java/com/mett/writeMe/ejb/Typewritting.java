@@ -13,17 +13,22 @@ import java.util.List;
 @NamedQuery(name="Typewritting.findAll", query="SELECT t FROM Typewritting t")
 public class Typewritting implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int typeWrittingId;
+
 	private String description;
+
 	private String name;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="typewritting")
 	private List<Writting> writtings;
 
 	public Typewritting() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getTypeWrittingId() {
 		return this.typeWrittingId;
 	}
@@ -31,7 +36,6 @@ public class Typewritting implements Serializable {
 	public void setTypeWrittingId(int typeWrittingId) {
 		this.typeWrittingId = typeWrittingId;
 	}
-
 
 	public String getDescription() {
 		return this.description;
@@ -41,7 +45,6 @@ public class Typewritting implements Serializable {
 		this.description = description;
 	}
 
-
 	public String getName() {
 		return this.name;
 	}
@@ -50,9 +53,6 @@ public class Typewritting implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="typewritting")
 	public List<Writting> getWrittings() {
 		return this.writtings;
 	}

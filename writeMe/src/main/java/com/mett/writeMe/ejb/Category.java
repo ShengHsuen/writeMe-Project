@@ -13,18 +13,26 @@ import java.util.List;
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int categoryId;
+
 	private String description;
+
 	private String name;
+
+	//bi-directional many-to-one association to Subcategory
+	@OneToMany(mappedBy="category")
 	private List<Subcategory> subcategories;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="category")
 	private List<Writting> writtings;
 
 	public Category() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getCategoryId() {
 		return this.categoryId;
 	}
@@ -32,7 +40,6 @@ public class Category implements Serializable {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-
 
 	public String getDescription() {
 		return this.description;
@@ -42,7 +49,6 @@ public class Category implements Serializable {
 		this.description = description;
 	}
 
-
 	public String getName() {
 		return this.name;
 	}
@@ -51,9 +57,6 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to Subcategory
-	@OneToMany(mappedBy="category")
 	public List<Subcategory> getSubcategories() {
 		return this.subcategories;
 	}
@@ -76,9 +79,6 @@ public class Category implements Serializable {
 		return subcategory;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="category")
 	public List<Writting> getWrittings() {
 		return this.writtings;
 	}
