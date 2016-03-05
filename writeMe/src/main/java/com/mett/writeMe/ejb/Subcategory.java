@@ -12,17 +12,22 @@ import javax.persistence.*;
 @NamedQuery(name="Subcategory.findAll", query="SELECT s FROM Subcategory s")
 public class Subcategory implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int subCategoryId;
+
 	private String description;
+
 	private String name;
+
+	//bi-directional many-to-one association to Category
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Category category;
 
 	public Subcategory() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getSubCategoryId() {
 		return this.subCategoryId;
 	}
@@ -30,7 +35,6 @@ public class Subcategory implements Serializable {
 	public void setSubCategoryId(int subCategoryId) {
 		this.subCategoryId = subCategoryId;
 	}
-
 
 	public String getDescription() {
 		return this.description;
@@ -40,7 +44,6 @@ public class Subcategory implements Serializable {
 		this.description = description;
 	}
 
-
 	public String getName() {
 		return this.name;
 	}
@@ -49,9 +52,6 @@ public class Subcategory implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne
 	public Category getCategory() {
 		return this.category;
 	}

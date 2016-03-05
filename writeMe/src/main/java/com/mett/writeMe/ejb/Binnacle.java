@@ -13,18 +13,25 @@ import java.util.Date;
 @NamedQuery(name="Binnacle.findAll", query="SELECT b FROM Binnacle b")
 public class Binnacle implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int binnacleId;
+
 	private String action;
+
+	@Temporal(TemporalType.DATE)
 	private Date date;
+
 	private String name;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
 
 	public Binnacle() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getBinnacleId() {
 		return this.binnacleId;
 	}
@@ -32,7 +39,6 @@ public class Binnacle implements Serializable {
 	public void setBinnacleId(int binnacleId) {
 		this.binnacleId = binnacleId;
 	}
-
 
 	public String getAction() {
 		return this.action;
@@ -42,8 +48,6 @@ public class Binnacle implements Serializable {
 		this.action = action;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getDate() {
 		return this.date;
 	}
@@ -51,7 +55,6 @@ public class Binnacle implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -61,9 +64,6 @@ public class Binnacle implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}

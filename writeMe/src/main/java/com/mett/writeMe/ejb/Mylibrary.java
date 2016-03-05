@@ -13,18 +13,26 @@ import java.util.List;
 @NamedQuery(name="Mylibrary.findAll", query="SELECT m FROM Mylibrary m")
 public class Mylibrary implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int myLibraryId;
+
 	private String description;
+
 	private String title;
-	private List<User> users;
+
+	//bi-directional many-to-many association to Writting
+	@ManyToMany(mappedBy="mylibraries")
 	private List<Writting> writtings;
+
+	//bi-directional many-to-one association to User
+	@OneToMany(mappedBy="mylibrary")
+	private List<User> users;
 
 	public Mylibrary() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getMyLibraryId() {
 		return this.myLibraryId;
 	}
@@ -32,7 +40,6 @@ public class Mylibrary implements Serializable {
 	public void setMyLibraryId(int myLibraryId) {
 		this.myLibraryId = myLibraryId;
 	}
-
 
 	public String getDescription() {
 		return this.description;
@@ -42,7 +49,6 @@ public class Mylibrary implements Serializable {
 		this.description = description;
 	}
 
-
 	public String getTitle() {
 		return this.title;
 	}
@@ -51,9 +57,14 @@ public class Mylibrary implements Serializable {
 		this.title = title;
 	}
 
+	public List<Writting> getWrittings() {
+		return this.writtings;
+	}
 
-	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="mylibrary")
+	public void setWrittings(List<Writting> writtings) {
+		this.writtings = writtings;
+	}
+
 	public List<User> getUsers() {
 		return this.users;
 	}
@@ -74,17 +85,6 @@ public class Mylibrary implements Serializable {
 		user.setMylibrary(null);
 
 		return user;
-	}
-
-
-	//bi-directional many-to-many association to Writting
-	@ManyToMany(mappedBy="mylibraries")
-	public List<Writting> getWrittings() {
-		return this.writtings;
-	}
-
-	public void setWrittings(List<Writting> writtings) {
-		this.writtings = writtings;
 	}
 
 }

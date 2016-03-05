@@ -28,13 +28,12 @@ public class LoginController {
 	
 	@RequestMapping(value = "/checkuser", method = RequestMethod.POST)
 	@Transactional
-	public BaseResponse checkuser(@RequestBody LoginRequest lr,HttpServletRequest servletRequest,HttpServletResponse servletResponse){	
 		
+	public BaseResponse checkuser(@RequestBody LoginRequest lr,HttpServletRequest servletRequest,HttpServletResponse servletResponse){		
 		LoginResponse response = new LoginResponse();
 		HttpSession currentSession = servletRequest.getSession();
 		loginService.checkUser(lr,response,currentSession);
-		return response;
-		
+		return response;	
 	}
 }
 

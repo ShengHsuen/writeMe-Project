@@ -1,0 +1,55 @@
+<meta charset="utf-8">
+<!-- content -->
+<div id="content" class="app-content" role="main">
+
+	<div class="app-content-body " ng-controller="acceptLegalCtrl">
+
+
+		<!-- 		MOSTRAR REGLAS -->
+		<div class="wrapper-md">
+			<div id="MostrarReglas" class=" panel panel-default">
+				<div class="panel-heading font-bold">Estamento Legal</div>
+				<div class="panel-body">
+					<!-- 			<div class="m-l-lg panel b-a">
+						<div class="panel-heading pos-rlt b-b b-light">
+							<label class="label bg-light m-l-xs">VIP</label> <span
+								class=" pull-right" style="width: 20px; display: inline-block;">
+								<button ng-click="person.selected = undefined">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</span>
+
+						</div>
+						<div class="panel-body">
+
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Integer posuere erat a ante.</p>
+
+						</div>
+					</div> -->
+					<div ui-grid="gridOptionss" ui-grid-move-columns class="myGrid"></div>
+					<form name="step1"
+						class="form-validation ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"">
+						<label class="i-checks"> <input aria-invalid="true"
+							aria-required="false" aria-checked="false" tabindex="0"
+							class="ng-dirty ng-valid-parse form-control ng-valid ng-valid-required ng-touched"
+							ng-model="agree" required="" type="checkbox"><i></i>
+							Estoy de acuerdo con terminos y condiciones
+						</label>
+
+						<div class="m-t m-b">
+							<button disabled="disabled" aria-disabled="true" type="submit"
+								ng-disabled="step1.$invalid" class="btn btn-default btn-rounded"
+								ng-click="steps.step2=true">Siguiente</button>
+						</div>
+					</form>
+
+
+
+				</div>
+			</div>
+
+		</div>
+		<!-- !mOSTRAR REGLAS -->
+	</div>
+</div>
