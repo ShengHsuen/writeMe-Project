@@ -14,6 +14,7 @@ public class WrittingPOJO {
 	private String numMinCharacters;
 	private boolean participation;
 	private boolean published;
+	private String content; 
 	
 	public WrittingPOJO() {
 		super();
@@ -106,6 +107,14 @@ public class WrittingPOJO {
 
 	public void setPublished(boolean published) {
 		this.published = published;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	
