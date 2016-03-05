@@ -13,16 +13,20 @@ import java.util.List;
 @NamedQuery(name="Country.findAll", query="SELECT c FROM Country c")
 public class Country implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int countryId;
+
 	private String name;
+
+	//bi-directional many-to-one association to State
+	@OneToMany(mappedBy="country")
 	private List<State> states;
 
 	public Country() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getCountryId() {
 		return this.countryId;
 	}
@@ -30,7 +34,6 @@ public class Country implements Serializable {
 	public void setCountryId(int countryId) {
 		this.countryId = countryId;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -40,9 +43,6 @@ public class Country implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to State
-	@OneToMany(mappedBy="country")
 	public List<State> getStates() {
 		return this.states;
 	}

@@ -12,16 +12,20 @@ import javax.persistence.*;
 @NamedQuery(name="Notificationtype.findAll", query="SELECT n FROM Notificationtype n")
 public class Notificationtype implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int notificationTypeId;
+
 	private String name;
+
+	//bi-directional many-to-one association to Notification
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Notification notification;
 
 	public Notificationtype() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getNotificationTypeId() {
 		return this.notificationTypeId;
 	}
@@ -29,7 +33,6 @@ public class Notificationtype implements Serializable {
 	public void setNotificationTypeId(int notificationTypeId) {
 		this.notificationTypeId = notificationTypeId;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -39,9 +42,6 @@ public class Notificationtype implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to Notification
-	@ManyToOne
 	public Notification getNotification() {
 		return this.notification;
 	}
