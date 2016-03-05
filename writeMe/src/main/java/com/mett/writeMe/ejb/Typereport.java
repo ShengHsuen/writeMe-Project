@@ -13,16 +13,20 @@ import java.util.List;
 @NamedQuery(name="Typereport.findAll", query="SELECT t FROM Typereport t")
 public class Typereport implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int typeReportId;
+
 	private String name;
+
+	//bi-directional many-to-one association to Report
+	@OneToMany(mappedBy="typereport")
 	private List<Report> reports;
 
 	public Typereport() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getTypeReportId() {
 		return this.typeReportId;
 	}
@@ -30,7 +34,6 @@ public class Typereport implements Serializable {
 	public void setTypeReportId(int typeReportId) {
 		this.typeReportId = typeReportId;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -40,9 +43,6 @@ public class Typereport implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to Report
-	@OneToMany(mappedBy="typereport")
 	public List<Report> getReports() {
 		return this.reports;
 	}

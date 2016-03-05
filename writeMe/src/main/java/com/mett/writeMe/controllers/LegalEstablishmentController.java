@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mett.writeMe.contracts.LegalEstablishmentRequest;
 import com.mett.writeMe.contracts.LegalEstablishmentResponse;
 import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.services.LegalEstablishmentServiceInterface;

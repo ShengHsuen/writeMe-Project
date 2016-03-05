@@ -13,16 +13,20 @@ import java.util.List;
 @NamedQuery(name="Restriction.findAll", query="SELECT r FROM Restriction r")
 public class Restriction implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int restrictionId;
+
 	private String description;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="restriction")
 	private List<Writting> writtings;
 
 	public Restriction() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getRestrictionId() {
 		return this.restrictionId;
 	}
@@ -30,7 +34,6 @@ public class Restriction implements Serializable {
 	public void setRestrictionId(int restrictionId) {
 		this.restrictionId = restrictionId;
 	}
-
 
 	public String getDescription() {
 		return this.description;
@@ -40,9 +43,6 @@ public class Restriction implements Serializable {
 		this.description = description;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="restriction")
 	public List<Writting> getWrittings() {
 		return this.writtings;
 	}

@@ -59,6 +59,6 @@
   <script src="resources/html/js/ui-nav.js"></script>
   <script src="resources/html/js/ui-toggle.js"></script>
   <script src="resources/html/js/ui-client.js"></script>
- 
+
 </body>
 </html>

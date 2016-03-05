@@ -12,18 +12,27 @@ import javax.persistence.*;
 @NamedQuery(name="Report.findAll", query="SELECT r FROM Report r")
 public class Report implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int reportId;
+
 	private String comment;
+
 	private String penalty;
+
+	//bi-directional many-to-one association to Typereport
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Typereport typereport;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user_has_writting_user_has_writtingId")
 	private UserHasWritting userHasWritting;
 
 	public Report() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getReportId() {
 		return this.reportId;
 	}
@@ -31,7 +40,6 @@ public class Report implements Serializable {
 	public void setReportId(int reportId) {
 		this.reportId = reportId;
 	}
-
 
 	public String getComment() {
 		return this.comment;
@@ -41,7 +49,6 @@ public class Report implements Serializable {
 		this.comment = comment;
 	}
 
-
 	public String getPenalty() {
 		return this.penalty;
 	}
@@ -50,9 +57,6 @@ public class Report implements Serializable {
 		this.penalty = penalty;
 	}
 
-
-	//bi-directional many-to-one association to Typereport
-	@ManyToOne
 	public Typereport getTypereport() {
 		return this.typereport;
 	}
@@ -61,10 +65,6 @@ public class Report implements Serializable {
 		this.typereport = typereport;
 	}
 
-
-	//bi-directional many-to-one association to UserHasWritting
-	@ManyToOne
-	@JoinColumn(name="user_has_writting_user_has_writtingId")
 	public UserHasWritting getUserHasWritting() {
 		return this.userHasWritting;
 	}

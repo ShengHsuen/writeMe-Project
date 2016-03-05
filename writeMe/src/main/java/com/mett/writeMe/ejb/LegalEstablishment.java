@@ -13,17 +13,21 @@ import javax.persistence.*;
 @NamedQuery(name="LegalEstablishment.findAll", query="SELECT l FROM LegalEstablishment l")
 public class LegalEstablishment implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int legal_establishmentId;
+
+	@Lob
 	private String description;
-	private int part;
+
 	private String name;
+
+	private int part;
 
 	public LegalEstablishment() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getLegal_establishmentId() {
 		return this.legal_establishmentId;
 	}
@@ -32,7 +36,6 @@ public class LegalEstablishment implements Serializable {
 		this.legal_establishmentId = legal_establishmentId;
 	}
 
-	@Lob
 	public String getDescription() {
 		return this.description;
 	}
@@ -40,17 +43,6 @@ public class LegalEstablishment implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
-	
-	public int getPart() {
-		return this.part;
-	}
-
-	public void setPart(int part) {
-		this.part = part;
-	}
-
 
 	public String getName() {
 		return this.name;
@@ -60,5 +52,12 @@ public class LegalEstablishment implements Serializable {
 		this.name = name;
 	}
 
+	public int getPart() {
+		return this.part;
+	}
+
+	public void setPart(int part) {
+		this.part = part;
+	}
 
 }
