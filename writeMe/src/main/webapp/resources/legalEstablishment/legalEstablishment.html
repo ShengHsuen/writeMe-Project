@@ -6,7 +6,7 @@
 
 
 		<div class="bg-light lter b-b wrapper-md">
-			<h1 class="m-n font-thin h3">Terminos y condiciones</h1>
+			<h1 class="m-n font-thin h3">Términos y condiciones</h1>
 		</div>
 		<!-- Agregar regla -->
 		<div class="wrapper-md">
@@ -16,32 +16,31 @@
 			<div id="agregarReglas" class=" panel panel-default" ng-show="myVar">
 				<div class="panel-heading font-bold">Agregar regla</div>
 				<div class="panel-body">
-					<form  id="createRuleForm" name="createRuleForm" class="form-horizontal" role="form">
+					<form id="createRuleForm" name="createRuleForm"
+						class="form-horizontal" role="form">
 						<div>
-							<div class="form-group" ng-class="{error: onError && createRuleForm.name.$invalid}">
+							<div class="form-group"
+								ng-class="{error: onError && createRuleForm.name.$invalid}">
 								<label class="col-sm-2 control-label" for="input-id-1">Nombre</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="name"
-										name="name" required ng-model="name">
-								
-					<span
-						ng-show="onError && createRuleForm.name.$error.required"
-						class="help-inline">Requerido
-					</span>
+									<input type="text" class="form-control" id="name" name="name"
+										required ng-model="name"> <span
+										ng-show="onError && createRuleForm.name.$error.required"
+										class="help-inline">Requerido </span>
 								</div>
 							</div>
 
-							<div class="form-group" ng-class="{error: onError && createRuleForm.description.$invalid}">
+							<div class="form-group"
+								ng-class="{error: onError && createRuleForm.description.$invalid}">
 								<label class="col-sm-2 control-label">Descripción</label>
 								<div class="col-sm-10">
 									<textarea class="form-control" id="description"
-										name="description" required
-										ng-model="description" rows="4" cols="50"> </textarea>
-								
-					<span
-						ng-show="onError && createRentForm.description.$error.required"
-						class="help-inline">Requerido
-					</span>
+										name="description" required ng-model="description" rows="4"
+										cols="50"> </textarea>
+
+									<span
+										ng-show="onError && createRuleForm.description.$error.required"
+										class="help-inline">Requerido </span>
 								</div>
 								<div class="line line-dashed b-b line-lg pull-in"></div>
 							</div>
@@ -50,7 +49,9 @@
 								<div class="col-sm-4 col-sm-offset-2">
 									<button type="submit" ng-click="toggle()"
 										class="btn btn-default">Cancelar</button>
-									<button type="submit" class="btn btn-primary" ng-click="saveRule($event)">Agregar</button>
+									<button type="submit" class="btn btn-primary"
+										ng-click="saveRule($event)"
+										ng-disabled="createRuleForm.$invalid">Agregar</button>
 
 								</div>
 
@@ -66,10 +67,12 @@
 			<div id="MostrarReglas" class=" panel panel-default">
 				<div class="panel-heading font-bold">Reglas</div>
 				<div class="panel-body">
-		<!-- 			<div class="m-l-lg panel b-a">
+					<div class="m-l-lg panel b-a"
+						ng-repeat="pane in legalList | orderBy:'part'">
 						<div class="panel-heading pos-rlt b-b b-light">
-							<label class="label bg-light m-l-xs">VIP</label> <span
-								class=" pull-right" style="width: 20px; display: inline-block;">
+							<h4 style="display: inline-block;">{{pane.name}}</h4>
+							<span class=" pull-right"
+								style="width: 20px; display: inline-block;">
 								<button ng-click="person.selected = undefined">
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
@@ -78,19 +81,16 @@
 						</div>
 						<div class="panel-body">
 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
+							<p>{{pane.description}}</p>
 
 						</div>
-					</div> -->
-					<div ui-grid="gridOptions" ui-grid-move-columns class="myGrid"></div>
-			
+					</div>
+					
 				</div>
 			</div>
 
 		</div>
-<!-- !mOSTRAR REGLAS -->
-
+		<!-- !mOSTRAR REGLAS -->
 
 	</div>
 

@@ -12,7 +12,10 @@ angular.module('myApp.signup', ['ngRoute'])
 .controller('SignUpCtrl', ['$scope','$http',function($scope,$http) {
 
 	var canCreate = false; // Verificar si se puede crear
-
+	$scope.navAcceptLegal = function(){
+		var path = "/writeMe/#/acceptLegalEstablishment";
+		window.location.href = path;
+	}
 	$scope.navSignin = function(){
 		var path = "/writeMe/#/signin";
 		window.location.href = path;

@@ -176,9 +176,6 @@
           </li>
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown">
-              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <i class="on md b-white bottom"></i>
-              </span>
               <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
             </a>
             <!-- dropdown -->
@@ -222,10 +219,6 @@
           <!-- user -->
           <div class="clearfix hidden-xs text-center hide" id="aside-user">
             <div class="dropdown wrapper">
-              <a href="app.page.profile">
-                <span class="thumb-lg w-auto-folded avatar m-t-sm">
-                </span>
-              </a>
               <a href="#" data-toggle="dropdown" class="dropdown-toggle hidden-folded">
                 <span class="clear">
                   <span class="block m-t-sm">
@@ -354,6 +347,17 @@
                 </a>
               </li>
 
+              <li class="line dk"></li>
+                <li >
+                    <a href="" class="auto">      
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <i class="glyphicon glyphicon-briefcase icon"></i>
+                      <span>Estamento legal</span>
+                    </a>
+                  </li>
             </ul>
           </nav>
           <!-- nav -->
@@ -384,8 +388,6 @@
   <script src="resources/bower_components/angular/angular.js"></script>
   <script src="resources/bower_components/angular-route/angular-route.js"></script>
   <script src="resources/app.js"></script>
-<!--   <script src="resources/home/home.html"></script> -->
-  
   
   
   <!-- Del template -->
