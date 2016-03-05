@@ -48,8 +48,6 @@ public class WrittingService implements WrittingServiceInterface{
 		Writting Writting = new Writting();
 		BeanUtils.copyProperties(ur.getWritting(), Writting);
 
-
-		
 		Writting nWritting = writtingRepository.save(Writting);
 		
 		return (nWritting == null) ? false : true;
