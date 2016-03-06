@@ -25,7 +25,6 @@
 
   <link rel="stylesheet" href="resources/html/css/font.css" type="text/css" />
   <link rel="stylesheet" href="resources/html/css/app.css" type="text/css" />
-   <link rel="stylesheet" href="resources/bower_components/angular-ui-grid/ui-grid.min.css">
   
 </head>
 <body>
@@ -47,9 +46,8 @@
   <script src="resources/appLogin.js"></script>
   <script src="resources/signin/signin.js"></script>
    <script src="resources/signup/signup.js"></script>
-    <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+
    <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
-   <script src="resources/resetPassword/resetPassword.js"></script>
   <!-- Del template -->
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>

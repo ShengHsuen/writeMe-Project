@@ -19,9 +19,12 @@ public class AcceptLegalController {
 		@RequestMapping(value ="/getAll", method = RequestMethod.POST)
 		public LegalEstablishmentResponse getAll(){	
 			LegalEstablishmentResponse response = new LegalEstablishmentResponse();
-			response.setLegalEstablishmentList(legalEstablishmentService.getAll());
 			response.setCode(200);
 			response.setCodeMessage("Muestra reglas satisfactoriamente");
+			
+			response.setLegalEstablishmentList(legalEstablishmentService.getAll());
+
+			System.out.println("ENTRA AL CONTROLLER2" +response.getlegalList());
 			return response;		
 		}
 	}
