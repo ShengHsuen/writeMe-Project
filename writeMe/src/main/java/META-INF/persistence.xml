@@ -19,7 +19,6 @@
 		<class>com.mett.writeMe.ejb.State</class>
 		<class>com.mett.writeMe.ejb.Subcategory</class>
 		<class>com.mett.writeMe.ejb.Typereport</class>
-		<class>com.mett.writeMe.ejb.Typeuser</class>
 		<class>com.mett.writeMe.ejb.Typewritting</class>
 		<class>com.mett.writeMe.ejb.User</class>
 		<class>com.mett.writeMe.ejb.UserHasWritting</class>
