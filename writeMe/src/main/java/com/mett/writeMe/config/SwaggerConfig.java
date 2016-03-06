@@ -37,6 +37,7 @@ public class SwaggerConfig implements ServletContextAware{
 		ApiInfo apiInfo = new ApiInfo("writeMe API", "API for writeMe",
 				"writeMe API terms of service", "writeMe email",
 				"writeMe API Licence Type", "writeMe API License URL");
+
 		return apiInfo;
 	}
 	

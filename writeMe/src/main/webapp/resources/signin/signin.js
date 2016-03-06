@@ -12,9 +12,10 @@ angular.module('myApp.signin', ['ngRoute'])
 .controller('SignInCtrl', ['$scope','$http',function($scope,$http) {
 
 	$scope.navSignup = function(){
-		var path = "/writeMe/#/signup";
-		window.location.href = path;
-	}
+		  var path = "/writeMe/#/signup";
+		  window.location.href = path;
+		 }
+	
 	$scope.user = {email:"cheng2094@gmail.com",password:"12345"};
 	$scope.login = function(){
 		
@@ -27,6 +28,5 @@ angular.module('myApp.signin', ['ngRoute'])
     			alert("invalido");
     		}
     	});
-
 	}
 }]);
