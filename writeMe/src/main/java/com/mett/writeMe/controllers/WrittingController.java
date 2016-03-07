@@ -35,8 +35,8 @@ private Writting wr = new Writting();
 		WrittingResponse us = new WrittingResponse();
 		Boolean state = WrittingService.saveWritting(ur);
 		
-		WrittingPOJO w = WrittingService.getIdByName(ur);
-		u = LoginService.getUserId();
+		WrittingPOJO w = WrittingService.getUserByName(ur);
+		u = LoginService.getUser();
 		
 		BeanUtils.copyProperties(w,wr);
 		
@@ -64,6 +64,18 @@ private Writting wr = new Writting();
 			}
 			return us;
 	}
+	
+	/*@RequestMapping(value="/getWrittingContent", method = RequestMethod.POST)
+	public String getWrittingContent(@RequestBody WrittingRequest ur){
+		
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("getting content success");
+		String content = WrittingService.getWrittingContent(ur);
+		System.out.println("the content is:  "+content);
+		return content;
+		
+	}*/
 	
 	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
 	public WrittingResponse getAll(@RequestBody WrittingRequest ur){	

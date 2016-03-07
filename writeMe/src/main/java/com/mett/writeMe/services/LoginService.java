@@ -42,7 +42,7 @@ public class LoginService implements LoginServiceInterface{
 	
 	@Override
 	@Transactional
-	public User getUserId(){
+	public User getUser(){
 		return user;
 	}
 	

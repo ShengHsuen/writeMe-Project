@@ -36,11 +36,18 @@ public class WrittingService implements WrittingServiceInterface{
 	
 	@Override
 	@Transactional
-	public WrittingPOJO getIdByName(WrittingRequest ur) {
+	public WrittingPOJO getUserByName(WrittingRequest ur) {
 		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
 		  System.out.println("La obra: "+ Writtings.get(0));
 		  return generateWrittingDtos(Writtings).get(0);
 	}
+	
+	/*@Override
+	@Transactional
+	public String getWrittingContent(WrittingRequest ur) {
+		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
+		  return generateWrittingDtos(Writtings).get(0).getContent();
+	}*/
 	
 	private List<WrittingPOJO> generateWrittingDtos(List<Writting> Writtings){
 		List<WrittingPOJO> uiWrittings = new ArrayList<WrittingPOJO>();

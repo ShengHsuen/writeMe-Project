@@ -405,9 +405,5 @@
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>
-  
-  <script src="resources/writting/writting/directives/tbio.js"></script>
-  <script src="resources/writting/writting/factories/tbioConfigFactory.js"></script>
-  <script src="resources/writting/writting/factories/tbioValidationsFactory.js"></script>
 </body>
 </html>

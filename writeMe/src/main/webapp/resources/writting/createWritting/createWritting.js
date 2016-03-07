@@ -11,12 +11,12 @@ angular.module('myApp.createWritting', ['ngRoute'])
 
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
 		$scope.navWritting = function(){
-			/*var path = "/writeMe/app#/writting";
-			window.location.href = path;*/
+			var path = "/writeMe/app#/writting";
+			window.location.href = path;
 			createWritting();
 		}
 		var createWritting = function(){
-			$scope.requestObject={
+			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
 					"direction": "",
@@ -56,7 +56,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						}
 						
 			};
-			$http.post('writting/create',$scope.requestObject).success(function(response) {
+			$http.post('writting/create',$scope.writting).success(function(response) {
 				console.log("1");
 			});
 			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
