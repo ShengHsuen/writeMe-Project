@@ -9,5 +9,6 @@ import com.mett.writeMe.ejb.User;
 public interface LoginServiceInterface {
 
 	public void checkUser(LoginRequest lr, LoginResponse response, HttpSession currentSession);
+	public User getUser();
 
 }

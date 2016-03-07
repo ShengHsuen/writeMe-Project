@@ -57,9 +57,7 @@ public class WSFilter implements Filter, ApplicationContextAware {
 	 			chain.doFilter(servletRequest, servletResponse);
 	 		} else {
 	 			logger.debug("Rejected: " + servletRequest.toString());
-	 			servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-
-	 			System.out.println("prikipriki");
+	 			servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);;
 	 		}
 	 		
 	    }

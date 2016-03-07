@@ -7,7 +7,7 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Write Me / Mett</title>
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="resources/html/css/font.css" type="text/css" />
   <link rel="stylesheet" href="resources/html/css/app.css" type="text/css" />
    <link rel="stylesheet" href="resources/bower_components/angular-ui-grid/ui-grid.min.css">
+   
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -113,8 +114,8 @@
               </div>
             </div>
           </li>
-          <li >
-            <a href="#" >
+          <li>
+            <a ng-click="navCreate_Writting()" >
               <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
               <span translate="header.navbar.new.NEW">Crear obra</span> </span>
             </a>
@@ -384,12 +385,9 @@
   <script src="resources/bower_components/angular/angular.js"></script>
   <script src="resources/bower_components/angular-route/angular-route.js"></script>
   <script src="resources/app.js"></script>
-<!--   <script src="resources/home/home.html"></script> -->
-  
-  
   
   <!-- Del template -->
-    <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+  <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
   
@@ -401,10 +399,11 @@
   <script src="resources/html/js/ui-client.js"></script>
   
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
+  <script src="resources/writting/createWritting/createWritting.js"></script>
+  <script src="resources/writting/writting/writting.js"></script>
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>
-    
 </body>
 </html>
