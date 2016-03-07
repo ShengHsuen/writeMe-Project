@@ -12,19 +12,32 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * @author Mildred Guerra
+ *
+ */
 public class EmailSenderService {
     private String from;
     private String to;
     private String subject;
     private String text;
  
+    /**
+     * @param from
+     * @param to
+     * @param subject
+     * @param text
+     */
     public EmailSenderService(String from, String to, String subject, String text){
         this.from = from;
         this.to = to;
         this.subject = subject;
         this.text = text;
     }
-	   public void send(){
+	   /**
+	 * 
+	 */
+	public void send(){
 		Properties props = new Properties();
         props.put("mail.smtp.host" , "smtp.gmail.com");
         props.setProperty("mail.user" , "writeme.mett@gmail.com");

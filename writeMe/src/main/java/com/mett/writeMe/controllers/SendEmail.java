@@ -21,6 +21,10 @@ import com.mett.writeMe.services.LoginServiceInterface;
 /**
  * Handles requests for the application home page.
  */
+/**
+ * @author johan
+ *
+ */
 @RestController
 @RequestMapping(value = "rest/resetPassword")
 public class SendEmail {
@@ -28,6 +32,9 @@ public class SendEmail {
 	@Autowired private LoginServiceInterface loginService;
 
 	String from = "writeme.mett@gmail.com";
+	/**
+	 * @param lr
+	 */
 	@RequestMapping(value = "/email", method = RequestMethod.POST)
 	@Transactional
 		
@@ -43,6 +50,9 @@ public class SendEmail {
 			
 	}
 
+	/**
+	 * @param lr
+	 */
 	@RequestMapping(value = "/confCuenta", method = RequestMethod.POST)
 	@Transactional
 		
