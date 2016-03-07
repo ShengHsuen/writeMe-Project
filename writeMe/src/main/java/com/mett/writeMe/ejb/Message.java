@@ -13,17 +13,23 @@ import java.util.Date;
 @NamedQuery(name="Message.findAll", query="SELECT m FROM Message m")
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int messageId;
+
 	private String content;
+
+	@Temporal(TemporalType.DATE)
 	private Date date;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
 
 	public Message() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getMessageId() {
 		return this.messageId;
 	}
@@ -31,7 +37,6 @@ public class Message implements Serializable {
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
-
 
 	public String getContent() {
 		return this.content;
@@ -41,8 +46,6 @@ public class Message implements Serializable {
 		this.content = content;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getDate() {
 		return this.date;
 	}
@@ -51,9 +54,6 @@ public class Message implements Serializable {
 		this.date = date;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}

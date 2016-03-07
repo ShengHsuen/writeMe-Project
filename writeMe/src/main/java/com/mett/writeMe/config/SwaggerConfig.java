@@ -13,7 +13,6 @@ import com.mangofactory.swagger.paths.RelativeSwaggerPathProvider;
 import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 
-
 @Configuration
 @EnableSwagger
 public class SwaggerConfig implements ServletContextAware{
@@ -35,9 +34,10 @@ public class SwaggerConfig implements ServletContextAware{
         
 	}
 	private ApiInfo apiInfo() {
-		ApiInfo apiInfo = new ApiInfo("WriteMe API", "API for WriteMe",
-				"WriteMe API terms of service", "WriteMe email",
-				"WriteMe API Licence Type", "WriteMe API License URL");
+		ApiInfo apiInfo = new ApiInfo("writeMe API", "API for writeMe",
+				"writeMe API terms of service", "writeMe email",
+				"writeMe API Licence Type", "writeMe API License URL");
+
 		return apiInfo;
 	}
 	

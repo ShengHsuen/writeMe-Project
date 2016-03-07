@@ -14,33 +14,89 @@ import java.util.List;
 @NamedQuery(name="Writting.findAll", query="SELECT w FROM Writting w")
 public class Writting implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int writtingId;
-	private Long cantUsers;
+
+	@Lob
+	private String cantUsers;
+
+	@Lob
+	private String content;
+
+	@Temporal(TemporalType.DATE)
 	private Date date;
+
 	private String description;
-	private Long likes;
+
+	@Lob
+	private String likes;
+
+	@Temporal(TemporalType.DATE)
 	private Date limitTime;
+
 	private String name;
-	private Long numMaxCharacters;
-	private Long numMinCharacters;
-	private boolean participation;
-	private boolean published;
+
+	@Lob
+	private String numMaxCharacters;
+
+	@Lob
+	private String numMinCharacters;
+
+	private byte participation;
+
+	private byte published;
+
+	//bi-directional many-to-one association to Chapter
+	@OneToMany(mappedBy="writting")
 	private List<Chapter> chapters;
-	private List<UserHasWritting> userHasWrittings;
-	private Category category;
+
+	//bi-directional many-to-many association to Mylibrary
+	@ManyToMany
+	@JoinTable(
+		name="mylibrary_has_writting"
+		, joinColumns={
+			@JoinColumn(name="writting_writtingId")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="myLibrary_myLibraryId")
+			}
+		)
 	private List<Mylibrary> mylibraries;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
+
+	//bi-directional many-to-one association to Category
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Category category;
+
+	//bi-directional many-to-one association to Record
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Record record;
+
+	//bi-directional many-to-one association to Restriction
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Restriction restriction;
+
+	//bi-directional many-to-one association to Typewritting
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Typewritting typewritting;
+
+	//bi-directional many-to-one association to Writting
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="writting_father")
 	private Writting writting;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="writting")
 	private List<Writting> writtings;
 
 	public Writting() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getWrittingId() {
 		return this.writtingId;
 	}
@@ -49,17 +105,22 @@ public class Writting implements Serializable {
 		this.writtingId = writtingId;
 	}
 
-
-	public Long getCantUsers() {
+	public String getCantUsers() {
 		return this.cantUsers;
 	}
 
-	public void setCantUsers(Long cantUsers) {
+	public void setCantUsers(String cantUsers) {
 		this.cantUsers = cantUsers;
 	}
 
+	public String getContent() {
+		return this.content;
+	}
 
-	@Temporal(TemporalType.DATE)
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public Date getDate() {
 		return this.date;
 	}
@@ -67,7 +128,6 @@ public class Writting implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 
 	public String getDescription() {
 		return this.description;
@@ -77,17 +137,14 @@ public class Writting implements Serializable {
 		this.description = description;
 	}
 
-
-	public Long getLikes() {
+	public String getLikes() {
 		return this.likes;
 	}
 
-	public void setLikes(Long likes) {
+	public void setLikes(String likes) {
 		this.likes = likes;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getLimitTime() {
 		return this.limitTime;
 	}
@@ -95,7 +152,6 @@ public class Writting implements Serializable {
 	public void setLimitTime(Date limitTime) {
 		this.limitTime = limitTime;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -105,45 +161,38 @@ public class Writting implements Serializable {
 		this.name = name;
 	}
 
-
-	public Object getNumMaxCharacters() {
+	public String getNumMaxCharacters() {
 		return this.numMaxCharacters;
 	}
 
-	public void setNumMaxCharacters(Long numMaxCharacters) {
+	public void setNumMaxCharacters(String numMaxCharacters) {
 		this.numMaxCharacters = numMaxCharacters;
 	}
 
-
-	public Long getNumMinCharacters() {
+	public String getNumMinCharacters() {
 		return this.numMinCharacters;
 	}
 
-	public void setNumMinCharacters(Long numMinCharacters) {
+	public void setNumMinCharacters(String numMinCharacters) {
 		this.numMinCharacters = numMinCharacters;
 	}
 
-
-	public boolean getParticipation() {
+	public byte getParticipation() {
 		return this.participation;
 	}
 
-	public void setParticipation(boolean participation) {
+	public void setParticipation(byte participation) {
 		this.participation = participation;
 	}
 
-
-	public boolean getPublished() {
+	public byte getPublished() {
 		return this.published;
 	}
 
-	public void setPublished(boolean published) {
+	public void setPublished(byte published) {
 		this.published = published;
 	}
 
-
-	//bi-directional many-to-one association to Chapter
-	@OneToMany(mappedBy="writting")
 	public List<Chapter> getChapters() {
 		return this.chapters;
 	}
@@ -166,9 +215,14 @@ public class Writting implements Serializable {
 		return chapter;
 	}
 
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
 
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="writting")
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
+	}
+
 	public List<UserHasWritting> getUserHasWrittings() {
 		return this.userHasWrittings;
 	}
@@ -191,9 +245,6 @@ public class Writting implements Serializable {
 		return userHasWritting;
 	}
 
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne
 	public Category getCategory() {
 		return this.category;
 	}
@@ -202,29 +253,6 @@ public class Writting implements Serializable {
 		this.category = category;
 	}
 
-
-	//bi-directional many-to-many association to Mylibrary
-	@ManyToMany
-	@JoinTable(
-		name="mylibrary_has_writting"
-		, joinColumns={
-			@JoinColumn(name="writting_writtingId")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="myLibrary_myLibraryId")
-			}
-		)
-	public List<Mylibrary> getMylibraries() {
-		return this.mylibraries;
-	}
-
-	public void setMylibraries(List<Mylibrary> mylibraries) {
-		this.mylibraries = mylibraries;
-	}
-
-
-	//bi-directional many-to-one association to Record
-	@ManyToOne
 	public Record getRecord() {
 		return this.record;
 	}
@@ -233,9 +261,6 @@ public class Writting implements Serializable {
 		this.record = record;
 	}
 
-
-	//bi-directional many-to-one association to Restriction
-	@ManyToOne
 	public Restriction getRestriction() {
 		return this.restriction;
 	}
@@ -244,9 +269,6 @@ public class Writting implements Serializable {
 		this.restriction = restriction;
 	}
 
-
-	//bi-directional many-to-one association to Typewritting
-	@ManyToOne
 	public Typewritting getTypewritting() {
 		return this.typewritting;
 	}
@@ -255,10 +277,6 @@ public class Writting implements Serializable {
 		this.typewritting = typewritting;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@ManyToOne
-	@JoinColumn(name="writting_father")
 	public Writting getWritting() {
 		return this.writting;
 	}
@@ -267,9 +285,6 @@ public class Writting implements Serializable {
 		this.writting = writting;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="writting")
 	public List<Writting> getWrittings() {
 		return this.writtings;
 	}

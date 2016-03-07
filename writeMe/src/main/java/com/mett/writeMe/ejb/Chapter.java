@@ -12,16 +12,20 @@ import javax.persistence.*;
 @NamedQuery(name="Chapter.findAll", query="SELECT c FROM Chapter c")
 public class Chapter implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int chaperId;
+
 	private String name;
+
+	//bi-directional many-to-one association to Writting
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Writting writting;
 
 	public Chapter() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getChaperId() {
 		return this.chaperId;
 	}
@@ -29,7 +33,6 @@ public class Chapter implements Serializable {
 	public void setChaperId(int chaperId) {
 		this.chaperId = chaperId;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -39,9 +42,6 @@ public class Chapter implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@ManyToOne
 	public Writting getWritting() {
 		return this.writting;
 	}

@@ -13,17 +13,24 @@ import java.util.List;
 @NamedQuery(name="State.findAll", query="SELECT s FROM State s")
 public class State implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int stateId;
+
 	private String name;
+
+	//bi-directional many-to-one association to City
+	@OneToMany(mappedBy="state")
 	private List<City> cities;
+
+	//bi-directional many-to-one association to Country
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Country country;
 
 	public State() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getStateId() {
 		return this.stateId;
 	}
@@ -31,7 +38,6 @@ public class State implements Serializable {
 	public void setStateId(int stateId) {
 		this.stateId = stateId;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -41,9 +47,6 @@ public class State implements Serializable {
 		this.name = name;
 	}
 
-
-	//bi-directional many-to-one association to City
-	@OneToMany(mappedBy="state")
 	public List<City> getCities() {
 		return this.cities;
 	}
@@ -66,9 +69,6 @@ public class State implements Serializable {
 		return city;
 	}
 
-
-	//bi-directional many-to-one association to Country
-	@ManyToOne
 	public Country getCountry() {
 		return this.country;
 	}

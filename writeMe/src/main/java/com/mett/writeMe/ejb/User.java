@@ -14,33 +14,80 @@ import java.util.List;
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
-	private Object accountType;
-	private Object admin;
+
+	private byte accountType;
+
+	private byte admin;
+
 	private String author;
+
+	@Temporal(TemporalType.DATE)
 	private Date birthDay;
+
 	private String lastName;
+
 	private String mail;
+
 	private String name;
+
 	private String password;
+
+	//bi-directional many-to-one association to Binnacle
+	@OneToMany(mappedBy="user")
 	private List<Binnacle> binnacles;
-	private List<LegalEstablishment> legalEstablishments;
+
+	//bi-directional many-to-one association to Message
+	@OneToMany(mappedBy="user")
 	private List<Message> messages;
+
+	//bi-directional many-to-one association to Notification
+	@OneToMany(mappedBy="user")
 	private List<Notification> notifications;
+
+	//bi-directional many-to-one association to Payaccount
+	@OneToMany(mappedBy="user")
 	private List<Payaccount> payaccounts;
+
+	//bi-directional many-to-one association to Record
+	@OneToMany(mappedBy="user")
 	private List<Record> records;
-	private City city;
-	private Mylibrary mylibrary;
+
+	//bi-directional many-to-many association to User
+	@ManyToMany
+	@JoinTable(
+		name="subscription"
+		, joinColumns={
+			@JoinColumn(name="subcriberId")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="publisherId")
+			}
+		)
 	private List<User> users1;
+
+	//bi-directional many-to-many association to User
+	@ManyToMany(mappedBy="users1")
 	private List<User> users2;
+
+	//bi-directional many-to-one association to City
+	@ManyToOne(fetch=FetchType.LAZY)
+	private City city;
+
+	//bi-directional many-to-one association to Mylibrary
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Mylibrary mylibrary;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="user")
 	private List<UserHasWritting> userHasWrittings;
 
 	public User() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getUserId() {
 		return this.userId;
 	}
@@ -49,24 +96,21 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-
-	public Object getAccountType() {
+	public byte getAccountType() {
 		return this.accountType;
 	}
 
-	public void setAccountType(Object accountType) {
+	public void setAccountType(byte accountType) {
 		this.accountType = accountType;
 	}
 
-
-	public Object getAdmin() {
+	public byte getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(Object admin) {
+	public void setAdmin(byte admin) {
 		this.admin = admin;
 	}
-
 
 	public String getAuthor() {
 		return this.author;
@@ -76,8 +120,6 @@ public class User implements Serializable {
 		this.author = author;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getBirthDay() {
 		return this.birthDay;
 	}
@@ -85,7 +127,6 @@ public class User implements Serializable {
 	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
 	}
-
 
 	public String getLastName() {
 		return this.lastName;
@@ -95,7 +136,6 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-
 	public String getMail() {
 		return this.mail;
 	}
@@ -103,7 +143,6 @@ public class User implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
 
 	public String getName() {
 		return this.name;
@@ -113,7 +152,6 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-
 	public String getPassword() {
 		return this.password;
 	}
@@ -122,9 +160,6 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-
-	//bi-directional many-to-one association to Binnacle
-	@OneToMany(mappedBy="user")
 	public List<Binnacle> getBinnacles() {
 		return this.binnacles;
 	}
@@ -147,34 +182,6 @@ public class User implements Serializable {
 		return binnacle;
 	}
 
-
-	//bi-directional many-to-one association to LegalEstablishment
-	@OneToMany(mappedBy="user")
-	public List<LegalEstablishment> getLegalEstablishments() {
-		return this.legalEstablishments;
-	}
-
-	public void setLegalEstablishments(List<LegalEstablishment> legalEstablishments) {
-		this.legalEstablishments = legalEstablishments;
-	}
-
-	public LegalEstablishment addLegalEstablishment(LegalEstablishment legalEstablishment) {
-		getLegalEstablishments().add(legalEstablishment);
-		legalEstablishment.setUser(this);
-
-		return legalEstablishment;
-	}
-
-	public LegalEstablishment removeLegalEstablishment(LegalEstablishment legalEstablishment) {
-		getLegalEstablishments().remove(legalEstablishment);
-		legalEstablishment.setUser(null);
-
-		return legalEstablishment;
-	}
-
-
-	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="user")
 	public List<Message> getMessages() {
 		return this.messages;
 	}
@@ -197,9 +204,6 @@ public class User implements Serializable {
 		return message;
 	}
 
-
-	//bi-directional many-to-one association to Notification
-	@OneToMany(mappedBy="user")
 	public List<Notification> getNotifications() {
 		return this.notifications;
 	}
@@ -222,9 +226,6 @@ public class User implements Serializable {
 		return notification;
 	}
 
-
-	//bi-directional many-to-one association to Payaccount
-	@OneToMany(mappedBy="user")
 	public List<Payaccount> getPayaccounts() {
 		return this.payaccounts;
 	}
@@ -247,9 +248,6 @@ public class User implements Serializable {
 		return payaccount;
 	}
 
-
-	//bi-directional many-to-one association to Record
-	@OneToMany(mappedBy="user")
 	public List<Record> getRecords() {
 		return this.records;
 	}
@@ -272,40 +270,6 @@ public class User implements Serializable {
 		return record;
 	}
 
-
-	//bi-directional many-to-one association to City
-	@ManyToOne
-	public City getCity() {
-		return this.city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-
-
-	//bi-directional many-to-one association to Mylibrary
-	@ManyToOne
-	public Mylibrary getMylibrary() {
-		return this.mylibrary;
-	}
-
-	public void setMylibrary(Mylibrary mylibrary) {
-		this.mylibrary = mylibrary;
-	}
-
-
-	//bi-directional many-to-many association to User
-	@ManyToMany
-	@JoinTable(
-		name="subscription"
-		, joinColumns={
-			@JoinColumn(name="subcriberId")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="publisherId")
-			}
-		)
 	public List<User> getUsers1() {
 		return this.users1;
 	}
@@ -314,9 +278,6 @@ public class User implements Serializable {
 		this.users1 = users1;
 	}
 
-
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="users1")
 	public List<User> getUsers2() {
 		return this.users2;
 	}
@@ -325,9 +286,22 @@ public class User implements Serializable {
 		this.users2 = users2;
 	}
 
+	public City getCity() {
+		return this.city;
+	}
 
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="user")
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Mylibrary getMylibrary() {
+		return this.mylibrary;
+	}
+
+	public void setMylibrary(Mylibrary mylibrary) {
+		this.mylibrary = mylibrary;
+	}
+
 	public List<UserHasWritting> getUserHasWrittings() {
 		return this.userHasWrittings;
 	}

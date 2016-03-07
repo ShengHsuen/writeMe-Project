@@ -15,25 +15,48 @@ import java.util.List;
 @NamedQuery(name="UserHasWritting.findAll", query="SELECT u FROM UserHasWritting u")
 public class UserHasWritting implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
-	private Object banned;
+
+	private byte banned;
+
+	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
+
+	@Temporal(TemporalType.DATE)
 	private Date dateModifie;
-	private Object invitationStatus;
+
+	private byte invitationStatus;
+
 	private String linkInvitation;
-	private Object statusColor;
+
+	private byte statusColor;
+
+	//bi-directional many-to-one association to Comment
+	@OneToMany(mappedBy="userHasWritting")
 	private List<Comment> comments;
+
+	//bi-directional many-to-one association to Report
+	@OneToMany(mappedBy="userHasWritting")
 	private List<Report> reports;
+
+	//bi-directional many-to-one association to Role
+	@OneToMany(mappedBy="userHasWritting")
 	private List<Role> roles;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
+
+	//bi-directional many-to-one association to Writting
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Writting writting;
 
 	public UserHasWritting() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getUser_has_writtingId() {
 		return this.user_has_writtingId;
 	}
@@ -42,17 +65,14 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-
-	public Object getBanned() {
+	public byte getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(Object banned) {
+	public void setBanned(byte banned) {
 		this.banned = banned;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getDateCreate() {
 		return this.dateCreate;
 	}
@@ -61,8 +81,6 @@ public class UserHasWritting implements Serializable {
 		this.dateCreate = dateCreate;
 	}
 
-
-	@Temporal(TemporalType.DATE)
 	public Date getDateModifie() {
 		return this.dateModifie;
 	}
@@ -71,15 +89,13 @@ public class UserHasWritting implements Serializable {
 		this.dateModifie = dateModifie;
 	}
 
-
-	public Object getInvitationStatus() {
+	public byte getInvitationStatus() {
 		return this.invitationStatus;
 	}
 
-	public void setInvitationStatus(Object invitationStatus) {
+	public void setInvitationStatus(byte invitationStatus) {
 		this.invitationStatus = invitationStatus;
 	}
-
 
 	public String getLinkInvitation() {
 		return this.linkInvitation;
@@ -89,18 +105,14 @@ public class UserHasWritting implements Serializable {
 		this.linkInvitation = linkInvitation;
 	}
 
-
-	public Object getStatusColor() {
+	public byte getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(Object statusColor) {
+	public void setStatusColor(byte statusColor) {
 		this.statusColor = statusColor;
 	}
 
-
-	//bi-directional many-to-one association to Comment
-	@OneToMany(mappedBy="userHasWritting")
 	public List<Comment> getComments() {
 		return this.comments;
 	}
@@ -123,9 +135,6 @@ public class UserHasWritting implements Serializable {
 		return comment;
 	}
 
-
-	//bi-directional many-to-one association to Report
-	@OneToMany(mappedBy="userHasWritting")
 	public List<Report> getReports() {
 		return this.reports;
 	}
@@ -148,9 +157,6 @@ public class UserHasWritting implements Serializable {
 		return report;
 	}
 
-
-	//bi-directional many-to-one association to Role
-	@OneToMany(mappedBy="userHasWritting")
 	public List<Role> getRoles() {
 		return this.roles;
 	}
@@ -173,9 +179,6 @@ public class UserHasWritting implements Serializable {
 		return role;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}
@@ -184,9 +187,6 @@ public class UserHasWritting implements Serializable {
 		this.user = user;
 	}
 
-
-	//bi-directional many-to-one association to Writting
-	@ManyToOne
 	public Writting getWritting() {
 		return this.writting;
 	}
