@@ -15,16 +15,16 @@ import java.util.List;
 public class Writting implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int writtingId;
-	private String cantUsers;
+	private Long cantUsers;
 	private Date date;
 	private String description;
-	private String likes;
+	private Long likes;
 	private Date limitTime;
 	private String name;
-	private String numMaxCharacters;
-	private String numMinCharacters;
-	private byte participation;
-	private byte published;
+	private Long numMaxCharacters;
+	private Long numMinCharacters;
+	private boolean participation;
+	private boolean published;
 	private List<Chapter> chapters;
 	private List<UserHasWritting> userHasWrittings;
 	private Category category;
@@ -50,12 +50,11 @@ public class Writting implements Serializable {
 	}
 
 
-	@Lob
-	public String getCantUsers() {
+	public Long getCantUsers() {
 		return this.cantUsers;
 	}
 
-	public void setCantUsers(String cantUsers) {
+	public void setCantUsers(Long cantUsers) {
 		this.cantUsers = cantUsers;
 	}
 
@@ -79,12 +78,11 @@ public class Writting implements Serializable {
 	}
 
 
-	@Lob
-	public String getLikes() {
+	public Long getLikes() {
 		return this.likes;
 	}
 
-	public void setLikes(String likes) {
+	public void setLikes(Long likes) {
 		this.likes = likes;
 	}
 
@@ -108,40 +106,38 @@ public class Writting implements Serializable {
 	}
 
 
-	@Lob
-	public String getNumMaxCharacters() {
+	public Object getNumMaxCharacters() {
 		return this.numMaxCharacters;
 	}
 
-	public void setNumMaxCharacters(String numMaxCharacters) {
+	public void setNumMaxCharacters(Long numMaxCharacters) {
 		this.numMaxCharacters = numMaxCharacters;
 	}
 
 
-	@Lob
-	public String getNumMinCharacters() {
+	public Long getNumMinCharacters() {
 		return this.numMinCharacters;
 	}
 
-	public void setNumMinCharacters(String numMinCharacters) {
+	public void setNumMinCharacters(Long numMinCharacters) {
 		this.numMinCharacters = numMinCharacters;
 	}
 
 
-	public byte getParticipation() {
+	public boolean getParticipation() {
 		return this.participation;
 	}
 
-	public void setParticipation(byte participation) {
+	public void setParticipation(boolean participation) {
 		this.participation = participation;
 	}
 
 
-	public byte getPublished() {
+	public boolean getPublished() {
 		return this.published;
 	}
 
-	public void setPublished(byte published) {
+	public void setPublished(boolean published) {
 		this.published = published;
 	}
 

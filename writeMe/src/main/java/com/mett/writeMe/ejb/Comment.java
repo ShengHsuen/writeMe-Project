@@ -16,7 +16,7 @@ public class Comment implements Serializable {
 	private int commentId;
 	private String comment;
 	private Date date;
-	private String likes;
+	private Object likes;
 	private UserHasWritting userHasWritting;
 
 	public Comment() {
@@ -53,12 +53,11 @@ public class Comment implements Serializable {
 	}
 
 
-	@Lob
-	public String getLikes() {
+	public Object getLikes() {
 		return this.likes;
 	}
 
-	public void setLikes(String likes) {
+	public void setLikes(Object likes) {
 		this.likes = likes;
 	}
 

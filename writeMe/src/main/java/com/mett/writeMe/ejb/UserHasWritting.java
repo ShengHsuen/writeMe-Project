@@ -2,6 +2,7 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,11 +16,15 @@ import java.util.List;
 public class UserHasWritting implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int user_has_writtingId;
-	private byte banned;
-	private byte statusColor;
+	private Object banned;
+	private Date dateCreate;
+	private Date dateModifie;
+	private Object invitationStatus;
+	private String linkInvitation;
+	private Object statusColor;
 	private List<Comment> comments;
 	private List<Report> reports;
-	private List<Typeuser> typeusers;
+	private List<Role> roles;
 	private User user;
 	private Writting writting;
 
@@ -38,20 +43,58 @@ public class UserHasWritting implements Serializable {
 	}
 
 
-	public byte getBanned() {
+	public Object getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(byte banned) {
+	public void setBanned(Object banned) {
 		this.banned = banned;
 	}
 
 
-	public byte getStatusColor() {
+	@Temporal(TemporalType.DATE)
+	public Date getDateCreate() {
+		return this.dateCreate;
+	}
+
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
+	}
+
+
+	@Temporal(TemporalType.DATE)
+	public Date getDateModifie() {
+		return this.dateModifie;
+	}
+
+	public void setDateModifie(Date dateModifie) {
+		this.dateModifie = dateModifie;
+	}
+
+
+	public Object getInvitationStatus() {
+		return this.invitationStatus;
+	}
+
+	public void setInvitationStatus(Object invitationStatus) {
+		this.invitationStatus = invitationStatus;
+	}
+
+
+	public String getLinkInvitation() {
+		return this.linkInvitation;
+	}
+
+	public void setLinkInvitation(String linkInvitation) {
+		this.linkInvitation = linkInvitation;
+	}
+
+
+	public Object getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(byte statusColor) {
+	public void setStatusColor(Object statusColor) {
 		this.statusColor = statusColor;
 	}
 
@@ -106,28 +149,28 @@ public class UserHasWritting implements Serializable {
 	}
 
 
-	//bi-directional many-to-one association to Typeuser
+	//bi-directional many-to-one association to Role
 	@OneToMany(mappedBy="userHasWritting")
-	public List<Typeuser> getTypeusers() {
-		return this.typeusers;
+	public List<Role> getRoles() {
+		return this.roles;
 	}
 
-	public void setTypeusers(List<Typeuser> typeusers) {
-		this.typeusers = typeusers;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
-	public Typeuser addTypeuser(Typeuser typeuser) {
-		getTypeusers().add(typeuser);
-		typeuser.setUserHasWritting(this);
+	public Role addRole(Role role) {
+		getRoles().add(role);
+		role.setUserHasWritting(this);
 
-		return typeuser;
+		return role;
 	}
 
-	public Typeuser removeTypeuser(Typeuser typeuser) {
-		getTypeusers().remove(typeuser);
-		typeuser.setUserHasWritting(null);
+	public Role removeRole(Role role) {
+		getRoles().remove(role);
+		role.setUserHasWritting(null);
 
-		return typeuser;
+		return role;
 	}
 
 

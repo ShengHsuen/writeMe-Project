@@ -15,7 +15,7 @@ public class LegalEstablishment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int legal_establishmentId;
 	private String description;
-	private String part;
+	private Object part;
 	private User user;
 
 	public LegalEstablishment() {
@@ -42,12 +42,11 @@ public class LegalEstablishment implements Serializable {
 	}
 
 
-	@Lob
-	public String getPart() {
+	public Object getPart() {
 		return this.part;
 	}
 
-	public void setPart(String part) {
+	public void setPart(Object part) {
 		this.part = part;
 	}
 

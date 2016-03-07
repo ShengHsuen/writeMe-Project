@@ -16,7 +16,7 @@ public class Record implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int recordId;
 	private Date date;
-	private byte state;
+	private Object state;
 	private User user;
 	private List<Writting> writtings;
 
@@ -45,11 +45,11 @@ public class Record implements Serializable {
 	}
 
 
-	public byte getState() {
+	public Object getState() {
 		return this.state;
 	}
 
-	public void setState(byte state) {
+	public void setState(Object state) {
 		this.state = state;
 	}
 
