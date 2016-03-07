@@ -23,14 +23,4 @@ angular
 			function(response) {
 				$scope.legalList = response.legalList;
 			});
-/*	$scope.gridOptions = {
-		data : 'legalList',
-		columnDefs : [ {
-			field : 'name',
-			displayName : 'Nombre'
-		}, {
-			field : 'description',
-			displayName : 'Descripción'
-		} ]
-	};*/
 } ])

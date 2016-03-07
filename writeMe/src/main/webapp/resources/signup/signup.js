@@ -41,6 +41,10 @@ angular.module('myApp.signup', ['ngRoute'])
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
 				console.log($scope.requestObject );
+				$http.post('rest/resetPassword/email',$scope.requestObject).success(function () {
+
+    	    		
+    	    	});
 			});
 		}else{
 			

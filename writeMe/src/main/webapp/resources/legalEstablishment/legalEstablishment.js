@@ -8,14 +8,35 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 		controller : 'legalEstablishmentCtrl'
 	});
 } ]).controller('legalEstablishmentCtrl',['$scope','$http',function($scope, $http) {
-		// Mostrar menu crear regla
+		
+	$scope.legalList = {};
+	$scope.requestObject = []
+	$scope.requestObject = {
+		"pageNumber" : 0,
+		"pageSize" : 0,
+		"direction" : "",
+		"sortBy" : [ "" ],
+		"searchColumn" : "string",
+		"searchTerm" : "",
+		"legalEstablishment" : {}
+	};
+
+	// Mostarr
+	$scope.init = function() {
+	$http.post('rest/protected/legal/getAll',
+			$scope.requestObject).success(function(response) {
+		$scope.legalList = response.legalList;
+	});
+	}
+
+	$scope.init();
+	// Mostrar menu crear regla
 		$scope.myVar = false;
 		$scope.toggle = function() {
 			$scope.myVar = !$scope.myVar;
 		};
 
 		$scope.onError = false;
-
 		// Guardar regla
 		$scope.saveRule = function(event) {
 			$scope.requestObject = {
@@ -25,36 +46,12 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 				"name" : $scope.name
 			}
 
-			console.log("$scope.requestObject",
-					$scope.requestObject);
 			$http.post('rest/protected/legal/create',
 					$scope.requestObject).success(
 					function(response) {
-						console.log($scope.requestObject);
+						$scope.toggle();
+						$scope.init();
 					});
 		};
-		// Mostarr
-		$scope.legalList = {};
-		$scope.requestObject = []
-		$scope.requestObject = {
-			"pageNumber" : 0,
-			"pageSize" : 0,
-			"direction" : "",
-			"sortBy" : [ "" ],
-			"searchColumn" : "string",
-			"searchTerm" : "",
-			"legalEstablishment" : {}
-		};
-		$http.post('rest/protected/legal/getAll',
-				$scope.requestObject).success(function(response) {
-			$scope.legalList = response.legalList;
-		});
-		/*
-		 * console.log( $scope.requestObject ) $scope.gridOptions = {
-		 * data:'legalList', showGroupPanel: true,
-		 * enableSorting:true, enableFiltering:true, columnDefs:[
-		 * {field:'part',displayName:'Parte #'},
-		 * {field:'name',displayName:'Nombre'},
-		 * {field:'description',displayName:'Descripción'}] };
-		 */
+		
 	} ]);

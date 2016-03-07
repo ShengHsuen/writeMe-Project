@@ -23,7 +23,7 @@
         </form>
       </div>
       <button type="submit" ng-disabled="form.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="login()">Ingresar</button>
-      <div class="text-center m-t m-b"><a ui-sref="access.forgotpwd">Olvidaste la contraseña?</a></div>
+      <div class="text-center m-t m-b"><a ui-sref="access.forgotpwd"  ng-click="navResetPass()" > Olvidaste la contraseña?</a></div>
       <div class="line line-dashed"></div>
       <p class="text-center"><small>No tenés una cuenta?</small></p>
       <a ng-click="navSignup()" ui-sref="access.signup" class="btn btn-lg btn-default btn-block">Registrar una cuenta</a>
