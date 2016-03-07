@@ -387,7 +387,7 @@
   <script src="resources/app.js"></script>
   
   <!-- Del template -->
-    <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+  <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
   

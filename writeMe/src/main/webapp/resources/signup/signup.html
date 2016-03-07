@@ -40,13 +40,9 @@
               <input type="checkbox" ng-model="agree" required><i></i> Agree the <a href>terms and policy</a>
             </label>
           </div>
-<<<<<<< HEAD
           <p ng-show="pconfirm" class="text-center text-danger"><small>Las contraseñas deben coincidir</small></p>
           <button ng-disabled="form.$invalid" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="createAccount()">Sign up</button>
-=======
-          <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="signup()" ng-disabled='form.$invalid'>Sign up</button>
 
->>>>>>> d4826a6b013102cd75ab02efe1bd7f8c1852bd30
           <div class="line line-dashed"></div>
           <p class="text-center"><small>Already have an account?</small></p>
           <a ng-click="navSignin()" ui-sref="access.signin" class="btn btn-lg btn-default btn-block">Sign in</a>

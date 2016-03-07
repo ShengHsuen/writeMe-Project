@@ -15,6 +15,7 @@ import com.mett.writeMe.repositories.LoginRepository;
 public class LoginService implements LoginServiceInterface{
 
 	@Autowired private LoginRepository loginRepository;
+	private User user;
 	
 	@Override
 	@Transactional
@@ -33,6 +34,16 @@ public class LoginService implements LoginServiceInterface{
 			response.setLastName(loggedUser.getLastName());
 			//
 			currentSession.setAttribute("idUser", loggedUser.getUserId());
+			
+			//Setea el id del usuario loggeado
+			user = loggedUser;
 		}
-	}		
+	}
+	
+	@Override
+	@Transactional
+	public User getUserId(){
+		return user;
+	}
+	
 }

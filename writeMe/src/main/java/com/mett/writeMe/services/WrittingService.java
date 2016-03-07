@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.ejb.UserHasWritting;
+//
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.WrittingRepository;
@@ -28,8 +30,16 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getAllByName(WrittingRequest ur) {
-		List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		return generateWrittingDtos(Writtings);
+		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
+		  return generateWrittingDtos(Writtings);
+	}
+	
+	@Override
+	@Transactional
+	public WrittingPOJO getIdByName(WrittingRequest ur) {
+		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
+		  System.out.println("La obra: "+ Writtings.get(0));
+		  return generateWrittingDtos(Writtings).get(0);
 	}
 	
 	private List<WrittingPOJO> generateWrittingDtos(List<Writting> Writtings){
@@ -45,10 +55,12 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean saveWritting(WrittingRequest ur) {
-		Writting Writting = new Writting();
-		BeanUtils.copyProperties(ur.getWritting(), Writting);
+		Writting writting = new Writting();
+		UserHasWritting UHW = new UserHasWritting();
+		
+		BeanUtils.copyProperties(ur.getWritting(), writting);
 
-		Writting nWritting = writtingRepository.save(Writting);
+		Writting nWritting = writtingRepository.save(writting);
 		
 		return (nWritting == null) ? false : true;
 	}

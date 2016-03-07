@@ -1,3 +1,4 @@
+ <meta charset="utf-8">
  
 <div class="bg-light lter b-b wrapper-md">
   <h1 class="m-n font-thin h3">Obra</h1>
@@ -11,29 +12,29 @@
           <form role="form">
             <div class="form-group">
               <label>Nombre</label>
-              <input type="text" class="form-control" placeholder="Nombre de obra">
+              <input type="text" ng-model="name" class="form-control" placeholder="Nombre de obra">
             </div>
             <div class="form-group">
-              <label>Descripción</label>
-              <textarea type="text" class="form-control" rows="4" placeholder="La obra consiste en..."></textarea>
+              <label>DescripciÃ³n</label>
+              <textarea type="text" ng-model="description" class="form-control" rows="4" placeholder="La obra consiste en..."></textarea>
             </div>
           		<label class="col-sm-2 control-label">Tipo</label>
          		<div class="col-sm-10">
-           	 		<select name="account" class="form-control m-b">
+           	 		<select name="account" ng-model="type" class="form-control m-b">
               			<option>Personal</option>
-              			<option>Por invitación</option>
-              			<option>Pública</option>
+              			<option>Por invitaciÃ³n</option>
+              			<option>PÃºblica</option>
             		</select>
           	    </div>
           	    <label class="col-sm-2 control-label">Categoria</label>
          		<div class="col-sm-10">
-           	 		<select name="account" class="form-control m-b">
+           	 		<select name="account" ng-model="category" class="form-control m-b">
               			<option>A</option>
               			<option>B</option>
               			<option>C</option>
             		</select>
           	    </div>
-          	    <label class="col-sm-2 control-label">Subcategoria</label>
+          	    <label class="col-sm-2 control-label" ng-model="subCategory">Subcategoria</label>
          		<div class="col-sm-10">
            	 		<select name="account" class="form-control m-b">
               			<option>A</option>
@@ -43,14 +44,9 @@
           	    </div>
           	    <label class="col-sm-2 control-label">Usuarios</label>
           		<div class="col-sm-10">
-		            <input id="slider" ui-jq="slider" ui-options="{
-		              min: 0,
-		              max: 20,
-		              step: 1,
-		              value: 5
-		            }" class="slider slider-horizontal form-control" type="text"> 20
+		            <input type="number" ng-model="cantUsers"></input>
           		</div>
-            <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+            <button type="submit" ng-click="navWritting()" ng-click="createWritting()"class="btn btn-sm btn-primary">Aceptar</button>
           </form>
         </div>
       </div>

@@ -9,7 +9,6 @@ angular.module('myApp', [
   'myApp.writting',
   'ui.grid'
 ])
-<<<<<<< HEAD
  .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {
   	$routeProvider.otherwise({redirectTo: '/home'});
 	/*$scope.navCreate_Writting = function(){
@@ -18,8 +17,6 @@ angular.module('myApp', [
   	}*/
   }])
 
-=======
 .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});
 }]);
->>>>>>> d4826a6b013102cd75ab02efe1bd7f8c1852bd30

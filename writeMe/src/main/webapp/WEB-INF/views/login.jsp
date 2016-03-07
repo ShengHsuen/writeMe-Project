@@ -46,10 +46,6 @@
   <script src="resources/appLogin.js"></script>
   <script src="resources/signin/signin.js"></script>
    <script src="resources/signup/signup.js"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> d4826a6b013102cd75ab02efe1bd7f8c1852bd30
    <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <!-- Del template -->
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
