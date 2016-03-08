@@ -10,6 +10,8 @@ public interface WrittingServiceInterface {
 	List<WrittingPOJO> getAll(WrittingRequest ur);
 	List<WrittingPOJO> getAllByName(WrittingRequest ur);
 	Boolean saveWritting(WrittingRequest ur);
-	WrittingPOJO getUserByName(WrittingRequest ur);
+	WrittingPOJO getWrittingByName(WrittingRequest ur);
 	//String getWrittingContent(WrittingRequest ur);
+	Boolean editWritting(Writting writting);
+	
 }
