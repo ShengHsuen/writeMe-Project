@@ -14,22 +14,17 @@
 		$scope.enviar = function(){
 			$scope.content = $('#edit').val();
 			console.log($scope.content);
+			update();
 		}
-		
-		
-		$scope.name = "poi";
-		$scope.sh = function(){
-			console.log("I'm getting in"+$scope.written);
-			$scope.getContent();
-		}
-		var getContent = function(){
+
+		var update = function(){
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
 					"direction": "",
 					"sortBy": [""],
 					"searchColumn": "string",
-					"searchTerm": $scope.name,
+					"searchTerm": "hola",
 					"writting": {
 						"name" : "e",
 						"description" : " a ",
