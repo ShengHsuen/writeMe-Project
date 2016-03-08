@@ -4,12 +4,19 @@
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
-	    templateUrl: 'resources/writting/writting/writting.html',
+	    templateUrl: 'resources/writting/writting/textarea.html',
 	    controller: 'WrittingCtrl'
 	  });
 	}])
 	
 	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
+		
+		$scope.enviar = function(){
+			$scope.content = $('#edit').val();
+			console.log($scope.content);
+		}
+		
+		
 		$scope.name = "poi";
 		$scope.sh = function(){
 			console.log("I'm getting in"+$scope.written);
@@ -33,10 +40,10 @@
 						"numMaxCharacters": 10000,
 						"numMinCharacters": 30,
 						"published": false,
-						"content": ""
+						"content": $scope.content
 					}
 			};
-			$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
+			$http.post('writting/create',$scope.writting).success(function(response) {
 				console.log("3 : "+response);
 			});
 		}
