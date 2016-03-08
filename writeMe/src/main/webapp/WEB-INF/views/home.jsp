@@ -68,10 +68,12 @@
         <!-- link and dropdown -->
         <ul class="nav navbar-nav hidden-sm">
           <li class="dropdown pos-stc">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+          
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
               <span>Categorías</span> 
               <span class="caret"></span>
             </a>
+            
             <div class="dropdown-menu wrapper w-full bg-white">
               <div class="row">
                 <div class="col-sm-4">

@@ -9,13 +9,25 @@ angular.module('myApp.createWritting', ['ngRoute'])
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
+.controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http,$upload) {
 		$scope.navWritting = function(){
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
+			add();
 		}
+		
+	    $scope.onFileSelect = function($files) {
+	    	$scope.files = $files;
+	    };
+	    
 		var createWritting = function(){
+			for ( var i = 0; i < $scope.files.length; i++){
+				var file = $scope.files[i];
+				$scope.upload = $upload.upload({
+					url : 'rest/protected/createWritting/create',
+				})
+			}
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -34,8 +46,12 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						"numMinCharacters": 30,
 						"published": false,
 						"content": ""
+						
+					
 					}
 			};
+			
+			
 			$scope.userHasWritting={
 						  "pageNumber": 0,
 						  "pageSize": 0,
@@ -64,5 +80,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 			});
 			
 		}
+		
+
 	
 }]);

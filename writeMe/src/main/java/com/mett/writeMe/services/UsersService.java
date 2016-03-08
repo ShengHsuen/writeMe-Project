@@ -49,9 +49,7 @@ public class UsersService implements UsersServiceInterface{
 	public Boolean saveUser(UsersRequest ur) {
 		User user = new User();
 		BeanUtils.copyProperties(ur.getUser(), user);
-		user.setPassword("set md5 password");
-
-
+		//user.setPassword("set md5 password");
 		
 		User nuser = userRepository.save(user);
 		
