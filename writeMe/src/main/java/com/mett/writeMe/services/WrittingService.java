@@ -36,7 +36,7 @@ public class WrittingService implements WrittingServiceInterface{
 	
 	@Override
 	@Transactional
-	public WrittingPOJO getUserByName(WrittingRequest ur) {
+	public WrittingPOJO getWrittingByName(WrittingRequest ur) {
 		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
 		  System.out.println("La obra: "+ Writtings.get(0));
 		  return generateWrittingDtos(Writtings).get(0);
@@ -70,5 +70,12 @@ public class WrittingService implements WrittingServiceInterface{
 		Writting nWritting = writtingRepository.save(writting);
 		
 		return (nWritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean editWritting(Writting writting){
+		Writting nwritting = writtingRepository.save(writting);
+		return (nwritting == null) ? false : true;
 	}
 }

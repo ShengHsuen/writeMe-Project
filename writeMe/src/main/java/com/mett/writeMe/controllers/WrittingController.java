@@ -33,15 +33,24 @@ private Writting wr = new Writting();
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public WrittingResponse create(@RequestBody WrittingRequest ur){	
 		WrittingResponse us = new WrittingResponse();
-		Boolean state = WrittingService.saveWritting(ur);
 		
-		WrittingPOJO w = WrittingService.getUserByName(ur);
-		u = LoginService.getUser();
+		Boolean state = false;
 		
-		BeanUtils.copyProperties(w,wr);
-		
-		System.out.println("Writting: "+wr.getWrittingId());
-		System.out.println("User"+u.getName());
+		if(wr.getWrittingId() == wr.getWrittingId()){
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			BeanUtils.copyProperties(w,wr);
+			wr.setContent(ur.getWritting().getContent());
+		    state = WrittingService.editWritting(wr);
+		}else{
+		    WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			u = LoginService.getUser();
+			BeanUtils.copyProperties(w,wr);
+			state = WrittingService.saveWritting(ur);
+			
+			System.out.println("Writting: "+wr.getWrittingId());
+			System.out.println("User"+u.getName());
+			
+		}
 		
 			if(state){
 				us.setCode(200);
