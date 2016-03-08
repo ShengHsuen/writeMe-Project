@@ -13,16 +13,22 @@ import java.util.List;
 @NamedQuery(name="Notification.findAll", query="SELECT n FROM Notification n")
 public class Notification implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int notificationId;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne(fetch=FetchType.LAZY)
 	private User user;
+
+	//bi-directional many-to-one association to Notificationtype
+	@OneToMany(mappedBy="notification")
 	private List<Notificationtype> notificationtypes;
 
 	public Notification() {
 	}
 
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getNotificationId() {
 		return this.notificationId;
 	}
@@ -31,9 +37,6 @@ public class Notification implements Serializable {
 		this.notificationId = notificationId;
 	}
 
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
 	public User getUser() {
 		return this.user;
 	}
@@ -42,9 +45,6 @@ public class Notification implements Serializable {
 		this.user = user;
 	}
 
-
-	//bi-directional many-to-one association to Notificationtype
-	@OneToMany(mappedBy="notification")
 	public List<Notificationtype> getNotificationtypes() {
 		return this.notificationtypes;
 	}

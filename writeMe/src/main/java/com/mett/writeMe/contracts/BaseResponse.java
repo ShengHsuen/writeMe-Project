@@ -1,7 +1,7 @@
 package com.mett.writeMe.contracts;
 
 public class BaseResponse {
-
+	
 	private Integer code;
 	private String codeMessage;
 	private String errorMessage;
@@ -55,3 +55,4 @@ public class BaseResponse {
 	
 	
 }
+

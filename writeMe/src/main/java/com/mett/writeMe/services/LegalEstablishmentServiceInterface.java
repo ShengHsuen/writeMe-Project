@@ -10,5 +10,5 @@ public interface LegalEstablishmentServiceInterface {
 	void deleteLegalEstablishment(int idLegalEstablishment);
 	List<LegalEstablishmentPOJO> getAll();
 	LegalEstablishment getLegalEstablishmentById(int idLegalEstablishment);
-	Boolean addLegalEstablishment(LegalEstablishment LegalEstablishment);
+	Boolean saveLegalEstablishment(LegalEstablishment legalEstablishmentRequest);
 }
