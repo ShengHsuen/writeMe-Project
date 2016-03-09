@@ -30,34 +30,45 @@ public class WrittingController{
 private User u = new User();
 private Writting wr = new Writting();
 	
-	@RequestMapping(value ="/create", method = RequestMethod.POST)
-	public WrittingResponse create(@RequestBody WrittingRequest ur){	
-		WrittingResponse us = new WrittingResponse();
-		
-		Boolean state = false;
-		
-		if(wr.getWrittingId() == wr.getWrittingId()){
-			WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			BeanUtils.copyProperties(w,wr);
-			wr.setContent(ur.getWritting().getContent());
-		    state = WrittingService.editWritting(wr);
-		}else{
-		    WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			u = LoginService.getUser();
-			BeanUtils.copyProperties(w,wr);
-			state = WrittingService.saveWritting(ur);
-			
-			System.out.println("Writting: "+wr.getWrittingId());
-			System.out.println("User"+u.getName());
-			
+@RequestMapping(value ="/create", method = RequestMethod.POST)
+public WrittingResponse create(@RequestBody WrittingRequest ur){	
+	WrittingResponse us = new WrittingResponse();
+	Boolean state = WrittingService.saveWritting(ur);		
+		if(state){
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
 		}
-		
-			if(state){
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-			return us;
-	}
+		return us;
+}
+
+//	@RequestMapping(value ="/create", method = RequestMethod.POST)
+//	public WrittingResponse create(@RequestBody WrittingRequest ur){	
+//		WrittingResponse us = new WrittingResponse();
+//		
+//		Boolean state = false;
+//		
+//		if(wr.getWrittingId() == wr.getWrittingId()){
+//			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+//			BeanUtils.copyProperties(w,wr);
+//			wr.setContent(ur.getWritting().getContent());
+//		    state = WrittingService.editWritting(wr);
+//		}else{
+//		    WrittingPOJO w = WrittingService.getWrittingByName(ur);
+//			u = LoginService.getUser();
+//			BeanUtils.copyProperties(w,wr);
+//			state = WrittingService.saveWritting(ur);
+//			
+//			System.out.println("Writting: "+wr.getWrittingId());
+//			System.out.println("User"+u.getName());
+//			
+//		}
+//		
+//			if(state){
+//				us.setCode(200);
+//				us.setCodeMessage("write created succesfully");
+//			}
+//			return us;
+//	}
 	
 	@RequestMapping(value ="/createUserHasWritting", method = RequestMethod.POST)
 	public UserHasWrittingResponse create(@RequestBody UserHasWrittingRequest ur){	

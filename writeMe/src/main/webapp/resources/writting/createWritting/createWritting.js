@@ -10,7 +10,14 @@ angular.module('myApp.createWritting', ['ngRoute'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
-		$scope.navWritting = function(){
+	$scope.date = new Date();
+	var anno = $scope.date.getFullYear();
+	var mes = $scope.date.getMonth() + 1;
+	var dia = $scope.date.getDate() + 1;
+	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
+	
+	
+	$scope.navWritting = function(){
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
@@ -27,7 +34,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						"name" : $scope.name,
 						"description" : $scope.description,
 						"cantUsers": $scope.cantUsers,
-						"date": "2016-02-02",
+						"date": fecha,
 						"likes": 0,
 						"limit time": "2100-01-01",
 						"numMaxCharacters": 10000,
@@ -36,32 +43,32 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						"content": ""
 					}
 			};
-			$scope.userHasWritting={
-						  "pageNumber": 0,
-						  "pageSize": 0,
-						  "direction": "string",
-						  "sortBy": [
-						    "string"
-						  ],
-						  "searchColumn": "string",
-						  "searchTerm": "string",
-						  "userHasWritting": {
-							  "dateModifie": "2016-02-02",
-						      "statusColor": false,
-						      "user_has_writtingId": 0,
-						      "linkInvitation": "string",
-						      "banned": false,
-						      "dateCreate": "2016-02-02",
-						      "invitationStatus": false
-						}
-						
-			};
+//			$scope.userHasWritting={
+//						  "pageNumber": 0,
+//						  "pageSize": 0,
+//						  "direction": "string",
+//						  "sortBy": [
+//						    "string"
+//						  ],
+//						  "searchColumn": "string",
+//						  "searchTerm": "string",
+//						  "userHasWritting": {
+//							  "dateModifie": "2016-02-02",
+//						      "statusColor": false,
+//						      "user_has_writtingId": 0,
+//						      "linkInvitation": "string",
+//						      "banned": false,
+//						      "dateCreate": "2016-02-02",
+//						      "invitationStatus": false
+//						}
+//						
+//			};
 			$http.post('writting/create',$scope.writting).success(function(response) {
-				console.log("1");
+				console.log(fecha);
 			});
-			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
-				console.log("2");
-			});
+//			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+//				console.log("2");
+//			});
 			
 		}
 	
