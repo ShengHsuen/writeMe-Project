@@ -10,11 +10,32 @@ angular.module('myApp.createWritting', ['ngRoute'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
+		$scope.showCantUsers = false;
+		$scope.chkIfPersonal = function(){
+			if($scope.type != "Personal"){
+				$scope.showCantUsers = true;
+			}else{
+				$scope.showCantUsers = false;
+			}
+		}
 		$scope.navWritting = function(){
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
 		}
+		$scope.category =[ "","Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
+		                   "Calendarios","Casa y Hogar", "Ciencia","Ciencias Políticas","Ciencias Sociales","Cocina, Comida y Vinos",
+		                   "Colecciones Literarias","Comics y Novelas Gráficas","Computación e Internet","Crímenes Verdaderos",
+		                   "Crítica Literaria","Cuerpo, Mente y Espíritu","Deportes y Recreación","Drama","Educación",
+		                   "Estudio de Lenguas Extranjeras","Familia y Relaciones","Ficción","Ficción para Niños","Filosofía","Fotografía",
+		                   "Guías de Ayuda","History & Geography","Humor","Jardinería","Juegos","Lengua y Literatura","Leyes",
+		                   "Manualidades y Hobbies","Mascotas y Animales","Matemáticas","Medicina","Música","Naturaleza y Aire libre",
+		                   "Negocios y Economia","Niños y Jóvenes","Novelties","Papeleria","Poesía","Psicología","Referencia",
+		                   "Religión y Espiritualidad","Salud y Bienestar","Tecnología","Transporte","Tweens Fiction","Tweens Nonfiction",
+		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction"
+		                  ];
+		$scope.types =["Personal","Por invitacion","Publica"];
+		
 		var createWritting = function(){
 			$scope.writting={
 					"pageNumber": 0,

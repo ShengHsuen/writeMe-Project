@@ -19,91 +19,114 @@ import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.WrittingServiceInterface;
 
+/**
+ * @author Dani
+ * @author Sheng
+ */
 @RestController
 
-@RequestMapping(value ="/writting")
+@RequestMapping(value = "/writting")
 
-public class WrittingController{
-@Autowired private WrittingServiceInterface WrittingService;
-@Autowired private UserHasWrittingServiceInterface UserHasWrittingService;
-@Autowired private LoginServiceInterface LoginService;
-private User u = new User();
-private Writting wr = new Writting();
-	
-	@RequestMapping(value ="/create", method = RequestMethod.POST)
-	public WrittingResponse create(@RequestBody WrittingRequest ur){	
+public class WrittingController {
+	@Autowired
+	private WrittingServiceInterface WrittingService;
+	@Autowired
+	private UserHasWrittingServiceInterface UserHasWrittingService;
+	@Autowired
+	private LoginServiceInterface LoginService;
+	private User u = new User();
+	private Writting wr = new Writting();
+
+	/**
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public WrittingResponse create(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
-		
+
 		Boolean state = false;
-		
-		if(wr.getWrittingId() == wr.getWrittingId()){
+
+		if (wr.getWrittingId() == wr.getWrittingId()) {
 			WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			BeanUtils.copyProperties(w,wr);
+			BeanUtils.copyProperties(w, wr);
 			wr.setContent(ur.getWritting().getContent());
-		    state = WrittingService.editWritting(wr);
-		}else{
-		    WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			state = WrittingService.editWritting(wr);
+		} else {
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
 			u = LoginService.getUser();
-			BeanUtils.copyProperties(w,wr);
+			BeanUtils.copyProperties(w, wr);
 			state = WrittingService.saveWritting(ur);
-			
-			System.out.println("Writting: "+wr.getWrittingId());
-			System.out.println("User"+u.getName());
-			
+
+			System.out.println("Writting: " + wr.getWrittingId());
+			System.out.println("User" + u.getName());
+
 		}
-		
-			if(state){
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-			return us;
+
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
+		}
+		return us;
 	}
-	
-	@RequestMapping(value ="/createUserHasWritting", method = RequestMethod.POST)
-	public UserHasWrittingResponse create(@RequestBody UserHasWrittingRequest ur){	
+
+	/**
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/createUserHasWritting", method = RequestMethod.POST)
+	public UserHasWrittingResponse create(@RequestBody UserHasWrittingRequest ur) {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 		ur.getUserHasWritting().setUser(u);
 		ur.getUserHasWritting().setWritting(wr);
-		System.out.println("Obra a la que estoy seteando: "+ur.getUserHasWritting().getWritting().getName());
+		System.out.println("Obra a la que estoy seteando: " + ur.getUserHasWritting().getWritting().getName());
 		Boolean state = UserHasWrittingService.save(ur);
-		
-			if(state){
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-			return us;
+
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
+		}
+		return us;
 	}
-	
-	/*@RequestMapping(value="/getWrittingContent", method = RequestMethod.POST)
-	public String getWrittingContent(@RequestBody WrittingRequest ur){
-		
-		WrittingResponse us = new WrittingResponse();
-		us.setCode(200);
-		us.setCodeMessage("getting content success");
-		String content = WrittingService.getWrittingContent(ur);
-		System.out.println("the content is:  "+content);
-		return content;
-		
-	}*/
-	
-	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
-	public WrittingResponse getAll(@RequestBody WrittingRequest ur){	
-			
+
+	/*
+	 * @RequestMapping(value="/getWrittingContent", method = RequestMethod.POST)
+	 * public String getWrittingContent(@RequestBody WrittingRequest ur){
+	 * 
+	 * WrittingResponse us = new WrittingResponse(); us.setCode(200);
+	 * us.setCodeMessage("getting content success"); String content =
+	 * WrittingService.getWrittingContent(ur); System.out.println(
+	 * "the content is:  "+content); return content;
+	 * 
+	 * }
+	 */
+
+	/**
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
+	public WrittingResponse getAll(@RequestBody WrittingRequest ur) {
+
 		WrittingResponse us = new WrittingResponse();
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		us.setWritting(WrittingService.getAll(ur));
-		return us;		
+		return us;
 	}
-	
-	@RequestMapping(value ="/getAllByName", method = RequestMethod.POST)
-	public WrittingResponse getAllByName(@RequestBody WrittingRequest ur){	
-			
+
+	/**
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getAllByName", method = RequestMethod.POST)
+	public WrittingResponse getAllByName(@RequestBody WrittingRequest ur) {
+
 		WrittingResponse us = new WrittingResponse();
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		us.setWritting(WrittingService.getAllByName(ur));
-		return us;		
+		return us;
 	}
-	
+
 }
