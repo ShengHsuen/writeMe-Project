@@ -27,11 +27,11 @@ public class LoginController {
 	@Autowired private LoginServiceInterface loginService;
 	
 	@RequestMapping(value = "/checkuser", method = RequestMethod.POST)
-	@Transactional
-		
+	@Transactional	
 	public BaseResponse checkuser(@RequestBody LoginRequest lr,HttpServletRequest servletRequest,HttpServletResponse servletResponse){		
 		LoginResponse response = new LoginResponse();
 		HttpSession currentSession = servletRequest.getSession();
+		System.out.println("This is: "+currentSession);
 		loginService.checkUser(lr,response,currentSession);
 		return response;	
 	}

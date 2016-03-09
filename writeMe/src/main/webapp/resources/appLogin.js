@@ -5,7 +5,6 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.signin',
   'myApp.signup',
-  'ui.grid',
   'myApp.acceptLegalEstablishment',
   'myApp.resetPassword'
 ])

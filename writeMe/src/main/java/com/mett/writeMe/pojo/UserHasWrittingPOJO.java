@@ -1,0 +1,99 @@
+package com.mett.writeMe.pojo;
+
+import java.util.Date;
+
+import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.ejb.Writting;
+
+public class UserHasWrittingPOJO {
+	
+	private int user_has_writtingId;
+
+	private boolean banned;
+
+	private Date dateCreate;
+
+	private Date dateModifie;
+
+	private boolean invitationStatus;
+
+	private String linkInvitation;
+
+	private boolean statusColor;
+	
+	private User user;
+	
+	private Writting writting;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Writting getWritting() {
+		return writting;
+	}
+
+	public void setWritting(Writting writting) {
+		this.writting = writting;
+	}
+
+	public int getUser_has_writtingId() {
+		return user_has_writtingId;
+	}
+
+	public void setUser_has_writtingId(int user_has_writtingId) {
+		this.user_has_writtingId = user_has_writtingId;
+	}
+
+	public boolean isBanned() {
+		return banned;
+	}
+
+	public void setBanned(boolean banned) {
+		this.banned = banned;
+	}
+
+	public Date getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
+	}
+
+	public Date getDateModifie() {
+		return dateModifie;
+	}
+
+	public void setDateModifie(Date dateModifie) {
+		this.dateModifie = dateModifie;
+	}
+
+	public boolean isInvitationStatus() {
+		return invitationStatus;
+	}
+
+	public void setInvitationStatus(boolean invitationStatus) {
+		this.invitationStatus = invitationStatus;
+	}
+
+	public String getLinkInvitation() {
+		return linkInvitation;
+	}
+
+	public void setLinkInvitation(String linkInvitation) {
+		this.linkInvitation = linkInvitation;
+	}
+
+	public boolean isStatusColor() {
+		return statusColor;
+	}
+
+	public void setStatusColor(boolean statusColor) {
+		this.statusColor = statusColor;
+	}
+}

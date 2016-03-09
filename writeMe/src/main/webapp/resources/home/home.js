@@ -4,8 +4,8 @@ angular.module('myApp.home', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/home', {
-    templateUrl: 'resources/home/home.html'
-    //controller: 'SignInCtrl'
+    templateUrl: 'resources/home/home.html',
+    controller: 'HomeCtrl'
   });
 }])
 

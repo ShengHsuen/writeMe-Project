@@ -12,10 +12,7 @@ angular.module('myApp.signup', ['ngRoute'])
 .controller('SignUpCtrl', ['$scope','$http',function($scope,$http) {
 
 	var canCreate = false; // Verificar si se puede crear
-	$scope.navAcceptLegal = function(){
-		var path = "/writeMe/#/acceptLegalEstablishment";
-		window.location.href = path;
-	}
+
 	$scope.navSignin = function(){
 		var path = "/writeMe/#/signin";
 		window.location.href = path;
@@ -41,10 +38,11 @@ angular.module('myApp.signup', ['ngRoute'])
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
 				console.log($scope.requestObject );
-				$http.post('rest/resetPassword/email',$scope.requestObject).success(function () {
+				$http.post('rest/email/confCuenta',$scope.requestObject).success(function () {
 
     	    		
     	    	});
+				console.log($scope.requestObject);
 			});
 		}else{
 			

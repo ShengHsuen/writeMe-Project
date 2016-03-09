@@ -55,7 +55,6 @@
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-
 	<!-- Del bower y signin -->
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 	<script

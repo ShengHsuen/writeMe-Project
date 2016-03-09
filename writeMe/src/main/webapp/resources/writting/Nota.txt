@@ -1,1 +1,0 @@
-Quitarle las partes del menu al create_writting.html, dejar solo el form para agregar

@@ -26,7 +26,7 @@ import com.mett.writeMe.services.LoginServiceInterface;
  *
  */
 @RestController
-@RequestMapping(value = "rest/resetPassword")
+@RequestMapping(value = "rest/email")
 public class SendEmail {
 	
 	@Autowired private LoginServiceInterface loginService;
@@ -35,7 +35,7 @@ public class SendEmail {
 	/**
 	 * @param lr
 	 */
-	@RequestMapping(value = "/email", method = RequestMethod.POST)
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 	@Transactional
 		
 	public void email(@RequestBody LoginRequest lr){		

@@ -1,7 +1,6 @@
 'use strict';
 var i = 1;
-angular
-.module('myApp.acceptLegalEstablishment', [ 'ngRoute' ])
+angular.module('myApp.acceptLegalEstablishment', ['ngRoute'])
 
 .config(['$routeProvider',function($routeProvider) {
 	$routeProvider.when('/acceptLegalEstablishment',{
