@@ -26,9 +26,9 @@
 					"searchColumn": "string",
 					"searchTerm": "hola",
 					"writting": {
-						"name" : "e",
+						"name" : "hola",
 						"description" : " a ",
-						"cantUsers": $scope.cantUsers,
+						"cantUsers": 0,
 						"date": "2016-02-02",
 						"likes": 0,
 						"limit time": "2100-01-01",
@@ -39,8 +39,9 @@
 					}
 			};
 			$http.post('writting/create',$scope.writting).success(function(response) {
+			/*$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
 				console.log("3 : "+response);
-			});
+			});*/
 		}
 		
 	}]);
