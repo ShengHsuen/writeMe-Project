@@ -1,12 +1,17 @@
 package com.mett.writeMe.controllers;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mett.writeMe.utils.Utils;
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
@@ -23,17 +28,20 @@ import com.mett.writeMe.services.WrittingServiceInterface;
 
 @RequestMapping(value ="/writting")
 
-public class WrittingController{
+public class WrittingController {
+	
 @Autowired private WrittingServiceInterface WrittingService;
+@Autowired private ServletContext servletContext;
 @Autowired private UserHasWrittingServiceInterface UserHasWrittingService;
 @Autowired private LoginServiceInterface LoginService;
 private User u = new User();
 private Writting wr = new Writting();
 	
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
-	public WrittingResponse create(@RequestBody WrittingRequest ur){	
+	public WrittingResponse create(@RequestBody WrittingRequest ur, 
+			                       @RequestParam("file") MultipartFile file){	
 		WrittingResponse us = new WrittingResponse();
-		
+		String resultFileName = Utils.writeToFile(file,servletContext);
 		Boolean state = false;
 		
 		if(wr.getWrittingId() == wr.getWrittingId()){

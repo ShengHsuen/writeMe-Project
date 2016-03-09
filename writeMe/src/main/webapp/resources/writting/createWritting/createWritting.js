@@ -9,25 +9,20 @@ angular.module('myApp.createWritting', ['ngRoute'])
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http,$upload) {
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload',function($scope,$http,$location,$upload) {
+	$scope.files = {};
+
+	
 		$scope.navWritting = function(){
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
-			add();
-		}
-		
+		};
 	    $scope.onFileSelect = function($files) {
 	    	$scope.files = $files;
 	    };
-	    
-		var createWritting = function(){
-			for ( var i = 0; i < $scope.files.length; i++){
-				var file = $scope.files[i];
-				$scope.upload = $upload.upload({
-					url : 'rest/protected/createWritting/create',
-				})
-			}
+		    
+		/*var createWritting = function(){
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -49,8 +44,38 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						
 					
 					}
-			};
-			
+			};*/
+		
+		    var createWritting = function(event){
+	    		for ( var i = 0; i < $scope.files.length; i++) {
+	    			var file = $scope.files[i];
+	    			$scope.upload = $upload.upload({
+	    				url : '/writting/create',
+	    				data : {
+	    					"pageNumber": 0,
+	    					"pageSize": 0,
+	    					"direction": "",
+	    					"sortBy": [""],
+	    					"searchColumn": "string",
+	    					"searchTerm": $scope.name,
+	    					"writting": {
+	    						"name" : $scope.name,
+	    						"description" : $scope.description,
+	    						"cantUsers": $scope.cantUsers,
+	    						"date": "2016-02-02",
+	    						"likes": 0,
+	    						"limit time": "2100-01-01",
+	    						"numMaxCharacters": 10000,
+	    						"numMinCharacters": 30,
+	    						"published": false,
+	    						"content": ""
+	    					}
+	    				},
+	    				"image" : file,
+	    			})
+	    		}
+	    
+	    };
 			
 			$scope.userHasWritting={
 						  "pageNumber": 0,
@@ -78,9 +103,5 @@ angular.module('myApp.createWritting', ['ngRoute'])
 			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});
-			
-		}
-		
-
 	
 }]);
