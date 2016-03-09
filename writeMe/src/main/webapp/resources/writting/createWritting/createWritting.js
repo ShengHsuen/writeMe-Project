@@ -10,19 +10,8 @@ angular.module('myApp.createWritting', ['ngRoute'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
+		//Variables
 		$scope.showCantUsers = false;
-		$scope.chkIfPersonal = function(){
-			if($scope.type != "Personal"){
-				$scope.showCantUsers = true;
-			}else{
-				$scope.showCantUsers = false;
-			}
-		}
-		$scope.navWritting = function(){
-			var path = "/writeMe/app#/writting";
-			window.location.href = path;
-			createWritting();
-		}
 		$scope.category =[ "","Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
 		                   "Calendarios","Casa y Hogar", "Ciencia","Ciencias Políticas","Ciencias Sociales","Cocina, Comida y Vinos",
 		                   "Colecciones Literarias","Comics y Novelas Gráficas","Computación e Internet","Crímenes Verdaderos",
@@ -35,6 +24,24 @@ angular.module('myApp.createWritting', ['ngRoute'])
 		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction"
 		                  ];
 		$scope.types =["Personal","Por invitacion","Publica"];
+		
+		//Funciones
+		$scope.chkIfPersonal = function(){
+			if($scope.type != "Personal"){
+				$scope.showCantUsers = true;
+			}else{
+				$scope.showCantUsers = false;
+			}
+		}
+		$scope.navWritting = function(){
+			var path = "/writeMe/app#/writting";
+			window.location.href = path;
+			createWritting();
+		}
+		
+    	/*$scope.passName = function(){
+    		$scope.$emit("passName_channel",$scope.name);
+    	}*/
 		
 		var createWritting = function(){
 			$scope.writting={
@@ -58,24 +65,24 @@ angular.module('myApp.createWritting', ['ngRoute'])
 					}
 			};
 			$scope.userHasWritting={
-						  "pageNumber": 0,
-						  "pageSize": 0,
-						  "direction": "string",
-						  "sortBy": [
-						    "string"
-						  ],
-						  "searchColumn": "string",
-						  "searchTerm": "string",
-						  "userHasWritting": {
-							  "dateModifie": "2016-02-02",
-						      "statusColor": false,
-						      "user_has_writtingId": 0,
-						      "linkInvitation": "string",
-						      "banned": false,
-						      "dateCreate": "2016-02-02",
-						      "invitationStatus": false
-						}
-						
+					  "pageNumber": 0,
+					  "pageSize": 0,
+					  "direction": "string",
+					  "sortBy": [
+					    "string"
+					  ],
+					  "searchColumn": "string",
+					  "searchTerm": "string",
+					  "userHasWritting": {
+						  "dateModifie": "2016-02-02",
+					      "statusColor": false,
+					      "user_has_writtingId": 0,
+					      "linkInvitation": "string",
+					      "banned": false,
+					      "dateCreate": "2016-02-02",
+					      "invitationStatus": false
+					}
+					
 			};
 			$http.post('writting/create',$scope.writting).success(function(response) {
 				console.log("1");
