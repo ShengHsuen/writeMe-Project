@@ -37,7 +37,17 @@ public class WrittingController {
 private User u = new User();
 private Writting wr = new Writting();
 	
-	@RequestMapping(value ="/create", method = RequestMethod.POST)
+@RequestMapping(value ="/create", method = RequestMethod.POST)
+   public WrittingResponse create(@RequestBody WrittingRequest ur){ 
+   WrittingResponse us = new WrittingResponse();
+   Boolean state = WrittingService.saveWritting(ur);  
+  if(state){
+   us.setCode(200);
+   us.setCodeMessage("write created succesfully");
+  }
+  return us;
+}
+	/*@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public WrittingResponse create(@RequestBody WrittingRequest ur, 
 			                       @RequestParam("file") MultipartFile file){	
 		WrittingResponse us = new WrittingResponse();
@@ -65,7 +75,7 @@ private Writting wr = new Writting();
 				us.setCodeMessage("write created succesfully");
 			}
 			return us;
-	}
+	}*/
 	
 	@RequestMapping(value ="/createUserHasWritting", method = RequestMethod.POST)
 	public UserHasWrittingResponse create(@RequestBody UserHasWrittingRequest ur){	
