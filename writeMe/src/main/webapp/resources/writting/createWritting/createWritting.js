@@ -10,8 +10,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope', '$http','$upload',function($scope, $http,$upload)  {
-	  $scope.files = {};
-		$scope.navWritting = function(){
+	   
+	/*
+	
+	/* metodos*/
+	$scope.files = {};
+	
+    $scope.navWritting = function(){
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
@@ -22,7 +27,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		    	$scope.files = $files;
 		    };
 	  
-	/*	var createWritting = function(){
+		var createWritting = function(){
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -44,11 +49,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 						
 					
 					}
-			};*/
+			};
 		
-	    var createWritting = function(event){
+		    
+		    /*metodo para agregar imagen-no funciona */
+/*	    var createWritting = function(event){
 	    		for ( var i = 0; i < $scope.files.length; i++) {
-	    			var file = $scope.files[i];
+	    			var image = $scope.files[i];
 	    			$scope.upload = $upload.upload({
 	    				url : '/writting/create',
 	    				data : {
@@ -70,12 +77,12 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 	    						"published": false,
 	    						"content": ""
 	    					},
+	    					"image" : image
 	    				},
-	    				"image" : file,
+	    				
 	    			})
 	    		}
-	    
-	    };
+	    };*/
 			
 	/*		$scope.userHasWritting={
 						  "pageNumber": 0,
@@ -103,5 +110,5 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		/*	$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});*/
-		
+		}
 }]);
