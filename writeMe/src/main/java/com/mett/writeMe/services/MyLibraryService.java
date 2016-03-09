@@ -13,11 +13,18 @@ import com.mett.writeMe.ejb.Mylibrary;
 import com.mett.writeMe.pojo.MyLibraryPOJO;
 import com.mett.writeMe.repositories.MyLibraryRepository;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 @Service
 public class MyLibraryService implements MyLibraryServiceInterface{
 	@Autowired 
 	private MyLibraryRepository myLibraryRepository;	
 
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.MyLibraryServiceInterface#getAll(com.mett.writeMe.contracts.MyLibraryRequest)
+	 */
 	@Override
 	@Transactional
 	public List<MyLibraryPOJO> getAll(MyLibraryRequest ur) {
@@ -25,6 +32,9 @@ public class MyLibraryService implements MyLibraryServiceInterface{
 		return generateLibraryDtos(MyLibraries);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.MyLibraryServiceInterface#getAllByTitle(com.mett.writeMe.contracts.MyLibraryRequest)
+	 */
 	@Override
 	@Transactional
 	public List<MyLibraryPOJO> getAllByTitle(MyLibraryRequest ur) {
@@ -32,6 +42,10 @@ public class MyLibraryService implements MyLibraryServiceInterface{
 		return generateLibraryDtos(MyLibraries);
 	}
 	
+	/**
+	 * @param MyLibraries
+	 * @return
+	 */
 	private List<MyLibraryPOJO> generateLibraryDtos(List<Mylibrary> MyLibraries){
 		List<MyLibraryPOJO> uiMyLibraries = new ArrayList<MyLibraryPOJO>();
 		MyLibraries.stream().forEach(u -> {
@@ -42,6 +56,9 @@ public class MyLibraryService implements MyLibraryServiceInterface{
 		return uiMyLibraries;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.MyLibraryServiceInterface#saveLibrary(com.mett.writeMe.contracts.MyLibraryRequest)
+	 */
 	@Override
 	@Transactional
 	public Boolean saveLibrary(MyLibraryRequest ur) {

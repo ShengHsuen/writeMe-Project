@@ -43,32 +43,32 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						"content": ""
 					}
 			};
-//			$scope.userHasWritting={
-//						  "pageNumber": 0,
-//						  "pageSize": 0,
-//						  "direction": "string",
-//						  "sortBy": [
-//						    "string"
-//						  ],
-//						  "searchColumn": "string",
-//						  "searchTerm": "string",
-//						  "userHasWritting": {
-//							  "dateModifie": "2016-02-02",
-//						      "statusColor": false,
-//						      "user_has_writtingId": 0,
-//						      "linkInvitation": "string",
-//						      "banned": false,
-//						      "dateCreate": "2016-02-02",
-//						      "invitationStatus": false
-//						}
-//						
-//			};
+			$scope.userHasWritting={
+						  "pageNumber": 0,
+						  "pageSize": 0,
+						  "direction": "string",
+						  "sortBy": [
+						    "string"
+						  ],
+						  "searchColumn": "string",
+						  "searchTerm": "string",
+						  "userHasWritting": {
+							  "dateModifie": "2016-02-02",
+						      "statusColor": false,
+						      "user_has_writtingId": 0,
+						      "linkInvitation": "string",
+						      "banned": false,
+						      "dateCreate": "2016-02-02",
+						      "invitationStatus": false
+						}
+						
+			};
 			$http.post('writting/create',$scope.writting).success(function(response) {
 				console.log(fecha);
 			});
-//			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
-//				console.log("2");
-//			});
+			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+				console.log("2");
+			});
 			
 		}
 	

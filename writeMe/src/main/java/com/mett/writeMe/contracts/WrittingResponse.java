@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.mett.writeMe.pojo.WrittingPOJO;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 public class WrittingResponse extends BaseResponse{
 	private List<WrittingPOJO> writting;
 	private int idWritting;
