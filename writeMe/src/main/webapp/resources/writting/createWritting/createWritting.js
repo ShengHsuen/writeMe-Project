@@ -12,7 +12,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
 		//Variables
 		$scope.showCantUsers = false;
-		$scope.category =[ "","Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
+		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
 		                   "Calendarios","Casa y Hogar", "Ciencia","Ciencias Políticas","Ciencias Sociales","Cocina, Comida y Vinos",
 		                   "Colecciones Literarias","Comics y Novelas Gráficas","Computación e Internet","Crímenes Verdaderos",
 		                   "Crítica Literaria","Cuerpo, Mente y Espíritu","Deportes y Recreación","Drama","Educación",
