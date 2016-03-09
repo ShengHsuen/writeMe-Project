@@ -10,6 +10,12 @@ angular.module('myApp.createWritting', ['ngRoute'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
+	$scope.date = new Date();
+	var anno = $scope.date.getFullYear();
+	var mes = $scope.date.getMonth() + 1;
+	var dia = $scope.date.getDate() + 1;
+	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
+	
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -55,7 +61,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						"name" : $scope.name,
 						"description" : $scope.description,
 						"cantUsers": $scope.cantUsers,
-						"date": "2016-02-02",
+						"date": fecha,
 						"likes": 0,
 						"limit time": "2100-01-01",
 						"numMaxCharacters": 10000,
@@ -85,7 +91,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 					
 			};
 			$http.post('writting/create',$scope.writting).success(function(response) {
-				console.log("1");
+				console.log(fecha);
 			});
 			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");

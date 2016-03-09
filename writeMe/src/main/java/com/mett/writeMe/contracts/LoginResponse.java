@@ -2,6 +2,10 @@ package com.mett.writeMe.contracts;
 
 import com.mett.writeMe.contracts.BaseResponse;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 public class LoginResponse extends BaseResponse {
 	
 	private int idUser;

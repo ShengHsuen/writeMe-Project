@@ -4,31 +4,29 @@
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
-	    templateUrl: 'resources/writting/writting/writting.html',
+	    templateUrl: 'resources/writting/writting/textarea.html',
 	    controller: 'WrittingCtrl'
 	  });
 	}])
 	
 	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
-		$scope.name = "poi";
 		
-		/*$scope.$on("passName_channel",function(name){
-			console.log("name: "+ $scope.name);
-		});*/
-		$scope.sh = function(){
-			console.log("I'm getting in"+$scope.written);
-			$scope.getContent();
+		$scope.enviar = function(){
+			$scope.content = $('#edit').val();
+			console.log($scope.content);
+			update();
 		}
-		var getContent = function(){
+
+		var update = function(){
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
 					"direction": "",
 					"sortBy": [""],
 					"searchColumn": "string",
-					"searchTerm": "poi",
+					"searchTerm": "hola",
 					"writting": {
-						"name" : "poi",
+						"name" : "hola",
 						"description" : " a ",
 						"cantUsers": 0,
 						"date": "2016-02-02",
@@ -37,9 +35,10 @@
 						"numMaxCharacters": 10000,
 						"numMinCharacters": 30,
 						"published": false,
-						"content": ""
+						"content": $scope.content
 					}
 			};
+			$http.post('writting/create',$scope.writting).success(function(response) {
 			/*$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
 				console.log("3 : "+response);
 			});*/
