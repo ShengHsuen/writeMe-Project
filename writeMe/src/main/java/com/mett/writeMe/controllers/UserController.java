@@ -16,6 +16,9 @@ import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.services.UsersServiceInterface;
 
+/**
+ * @author Dani
+ */
 @RestController
 
 @RequestMapping(value ="/users")
@@ -23,6 +26,10 @@ import com.mett.writeMe.services.UsersServiceInterface;
 public class UserController {
 	@Autowired private UsersServiceInterface usersService;
 	
+	/**
+	 * @param ur
+	 * @return
+	 */
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public UsersResponse create(@RequestBody UsersRequest ur){	
 		UsersResponse us = new UsersResponse();

@@ -1,5 +1,9 @@
 package com.mett.writeMe.contracts;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 public class LoginRequest {
 
 	private String mail;
