@@ -16,14 +16,12 @@ angular.module('myApp.resetPassword', ['ngRoute'])
 	}
 
 	$scope.sendEmail = function(){
-		$scope.user = {email: $scope.email,password:"128845"};
-		$http.post('rest/signin/checkuser',$scope.user).success(function (loginResponse) {
-			if(loginResponse.code == 200){
-				$http.post('rest/email/resetPassword',$scope.user).success(function () {
-
-
-				});
-				$scope.navSignin();
+		$scope.user = {email: $scope.email};
+		
+		$http.post('rest/email/resetPassword',$scope.user).success(function (userResponse) {
+			if(userResponse.code == 200){
+				alert("valido");
+				
 			}else{
 				alert("invalido");
 			}

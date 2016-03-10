@@ -35,7 +35,7 @@ public class EmailSenderService {
         this.text = text;
     }
 	   /**
-	 * 
+	 * Send an email
 	 */
 	public void send(){
 		Properties props = new Properties();
