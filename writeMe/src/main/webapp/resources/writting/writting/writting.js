@@ -42,6 +42,7 @@
 			/*$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
 				console.log("3 : "+response);
 			});*/
+			});
 		}
 		
 	}]);

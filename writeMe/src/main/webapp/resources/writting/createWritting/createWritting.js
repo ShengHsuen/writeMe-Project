@@ -43,6 +43,14 @@ angular.module('myApp.createWritting', ['ngRoute'])
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
+			valInvitados();
+		}
+		
+		
+		$scope.valInvitados = function(){
+			if($scope.cantUsers > 10){
+				$scope.cantUsers = 10;
+			}
 		}
 		
     	/*$scope.passName = function(){
