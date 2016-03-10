@@ -11,11 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
 import com.mett.writeMe.repositories.LegalEstablishmentRepository;
+
+
+/**
+ * @author  Mildred Guerra
+ *
+ */
 @Service
 public class LegalEstablishmentService implements LegalEstablishmentServiceInterface {
-	
-	@Autowired private LegalEstablishmentRepository legalEstablishmentRepository;
-	
+
+	@Autowired
+	private LegalEstablishmentRepository legalEstablishmentRepository;
+
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.LegalEstablishmentServiceInterface#getAll()
+	 */
 	@Override
 	@Transactional
 	public List<LegalEstablishmentPOJO> getAll() {
@@ -28,13 +38,18 @@ public class LegalEstablishmentService implements LegalEstablishmentServiceInter
 		});
 		return dtos;
 	}
-	
-	
+
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.LegalEstablishmentServiceInterface#getLegalEstablishmentById(int)
+	 */
 	@Override
 	public LegalEstablishment getLegalEstablishmentById(int idLegalEstablishment) {
 		return legalEstablishmentRepository.findOne(idLegalEstablishment);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.LegalEstablishmentServiceInterface#saveLegalEstablishment(com.mett.writeMe.ejb.LegalEstablishment)
+	 */
 	@Override
 	public Boolean saveLegalEstablishment(LegalEstablishment ler) {
 		//LegalEstablishment legal= new LegalEstablishment();
@@ -43,7 +58,9 @@ public class LegalEstablishmentService implements LegalEstablishmentServiceInter
 		LegalEstablishment nlegal= legalEstablishmentRepository.save(ler);
 		return (nlegal == null) ? false : true;
 	}
-	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.LegalEstablishmentServiceInterface#deleteLegalEstablishment(int)
+	 */
 	@Override
 	public void deleteLegalEstablishment(int idLegalEstablishment){
 	   legalEstablishmentRepository.delete(idLegalEstablishment);

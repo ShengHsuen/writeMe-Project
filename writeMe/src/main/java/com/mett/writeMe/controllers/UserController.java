@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.contracts.UsersResponse;
+import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.services.UsersServiceInterface;
 
 /**

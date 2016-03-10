@@ -37,7 +37,9 @@ angular.module('myApp.signup', ['ngRoute'])
 		$scope.pConfirm();
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
-				console.log($scope.requestObject);
+				$scope.user = {email: $scope.mail};
+				
+				
 			});
 		}else{
 			

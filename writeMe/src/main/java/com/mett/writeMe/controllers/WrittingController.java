@@ -76,25 +76,32 @@ public class WrittingController {
 	/*@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public WrittingResponse create(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> e610dda77bd4a02dd99bcd9a7c5f8e876cd2b605
 		Boolean state = false;
+		state = WrittingService.saveWritting(ur);
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		u = LoginService.getUser();
+		BeanUtils.copyProperties(w, wr);
+		
 
-		if (wr.getWrittingId() == wr.getWrittingId()) {
-			WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			BeanUtils.copyProperties(w, wr);
-			wr.setContent(ur.getWritting().getContent());
-			state = WrittingService.editWritting(wr);
-		} else {
-			WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			u = LoginService.getUser();
-			BeanUtils.copyProperties(w, wr);
-			state = WrittingService.saveWritting(ur);
-
-			System.out.println("Writting: " + wr.getWrittingId());
-			System.out.println("User" + u.getName());
-
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
 		}
+		return us;
+	}
+
+	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
+	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		BeanUtils.copyProperties(w, wr);
+		wr.setContent(ur.getWritting().getContent());
+		Boolean state = WrittingService.editWritting(wr);
 
 			if(state){
 				us.setCode(200);
@@ -114,7 +121,7 @@ public class WrittingController {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 		ur.getUserHasWritting().setUser(u);
 		ur.getUserHasWritting().setWritting(wr);
-		System.out.println("Obra a la que estoy seteando: " + ur.getUserHasWritting().getWritting().getName());
+		System.out.println("Obra a la que estoy seteando: " + ur.getUserHasWritting().getWritting().getWrittingId());
 		Boolean state = UserHasWrittingService.save(ur);
 
 		if (state) {
