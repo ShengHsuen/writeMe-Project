@@ -2,6 +2,10 @@ package com.mett.writeMe.contracts;
 
 import com.mett.writeMe.pojo.WrittingPOJO;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 public class WrittingRequest extends BaseRequest {
 	
 	private WrittingPOJO writting;

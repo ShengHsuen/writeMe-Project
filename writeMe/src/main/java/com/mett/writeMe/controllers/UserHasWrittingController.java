@@ -10,6 +10,10 @@ import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 
+/**
+ * @author Dani
+ * @author Sheng
+ */
 @RestController
 @RequestMapping(value ="/userHasWritting")
 
@@ -17,6 +21,10 @@ public class UserHasWrittingController{
 	
 @Autowired private UserHasWrittingServiceInterface userHasWrittingService;
 	
+	/**
+	 * @param ur
+	 * @return us
+	 */
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public UserHasWrittingResponse create(@RequestBody UserHasWrittingRequest ur){	
 		UserHasWrittingResponse us = new UserHasWrittingResponse();

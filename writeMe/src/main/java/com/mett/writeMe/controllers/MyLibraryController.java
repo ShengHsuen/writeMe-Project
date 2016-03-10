@@ -10,6 +10,10 @@ import com.mett.writeMe.contracts.MyLibraryRequest;
 import com.mett.writeMe.contracts.MyLibraryResponse;
 import com.mett.writeMe.services.MyLibraryServiceInterface;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 @RestController
 
 @RequestMapping(value ="/myLibraries")
@@ -17,6 +21,10 @@ import com.mett.writeMe.services.MyLibraryServiceInterface;
 public class MyLibraryController {
 @Autowired private MyLibraryServiceInterface usersService;
 	
+	/**
+	 * @param ur
+	 * @return
+	 */
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public MyLibraryResponse create(@RequestBody MyLibraryRequest ur){	
 		MyLibraryResponse us = new MyLibraryResponse();

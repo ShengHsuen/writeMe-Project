@@ -25,7 +25,18 @@
 
   <link rel="stylesheet" href="resources/html/css/font.css" type="text/css" />
   <link rel="stylesheet" href="resources/html/css/app.css" type="text/css" />
-   <link rel="stylesheet" href="resources/bower_components/angular-ui-grid/ui-grid.min.css">
+  <link rel="stylesheet" href="resources/bower_components/angular-ui-grid/ui-grid.min.css">
+  
+  <!-- CSS PARA EL WYSWYG(TEXTAREA) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/froala_editor.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/froala_style.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/plugins/code_view.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/plugins/image_manager.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/plugins/image.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/plugins/table.css">
+  <link rel="stylesheet" href="resources/writting/writting/css/plugins/video.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
    
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -411,5 +422,25 @@
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>
+  
+  <!-- DEL WYSWYG(TEXTAREA) -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/froala_editor.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/align.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/code_beautifier.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/code_view.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/draggable.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/image.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/image_manager.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/link.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/lists.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/paragraph_format.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/paragraph_style.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/table.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/video.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/url.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
 </body>
 </html>
