@@ -1,12 +1,17 @@
 package com.mett.writeMe.controllers;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mett.writeMe.utils.Utils;
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
@@ -25,6 +30,33 @@ import com.mett.writeMe.services.WrittingServiceInterface;
  */
 @RestController
 
+@RequestMapping(value ="/writting")
+
+public class WrittingController {
+	
+@Autowired private WrittingServiceInterface WrittingService;
+@Autowired private ServletContext servletContext;
+@Autowired private UserHasWrittingServiceInterface UserHasWrittingService;
+@Autowired private LoginServiceInterface LoginService;
+private User u = new User();
+private Writting wr = new Writting();
+	
+@RequestMapping(value ="/create", method = RequestMethod.POST)
+   public WrittingResponse create(@RequestBody WrittingRequest ur){ 
+   WrittingResponse us = new WrittingResponse();
+   Boolean state = WrittingService.saveWritting(ur);  
+  if(state){
+   us.setCode(200);
+   us.setCodeMessage("write created succesfully");
+  }
+  return us;
+}
+	/*@RequestMapping(value ="/create", method = RequestMethod.POST)
+	public WrittingResponse create(@RequestBody WrittingRequest ur, 
+			                       @RequestParam("file") MultipartFile file){	
+		WrittingResponse us = new WrittingResponse();
+		String resultFileName = Utils.writeToFile(file,servletContext);
+=======
 @RequestMapping(value = "/writting")
 
 public class WrittingController {
@@ -41,9 +73,14 @@ public class WrittingController {
 	 * @param ur
 	 * @return
 	 */
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public WrittingResponse create(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> e610dda77bd4a02dd99bcd9a7c5f8e876cd2b605
 		Boolean state = false;
 		state = WrittingService.saveWritting(ur);
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
@@ -66,12 +103,13 @@ public class WrittingController {
 		wr.setContent(ur.getWritting().getContent());
 		Boolean state = WrittingService.editWritting(wr);
 
-		if (state) {
-			us.setCode(200);
-			us.setCodeMessage("write created succesfully");
-		}
-		return us;
-	}
+			if(state){
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
+			return us;
+	}*/
+	
 
 	/**
 	 * @param ur
@@ -79,6 +117,7 @@ public class WrittingController {
 	 */
 	@RequestMapping(value = "/createUserHasWritting", method = RequestMethod.POST)
 	public UserHasWrittingResponse create(@RequestBody UserHasWrittingRequest ur) {
+
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 		ur.getUserHasWritting().setUser(u);
 		ur.getUserHasWritting().setWritting(wr);
