@@ -43,7 +43,7 @@ angular.module('myApp.createWritting', ['ngRoute'])
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
-			valInvitados();
+			$scope.valInvitados();
 		}
 		
 		
@@ -78,6 +78,13 @@ angular.module('myApp.createWritting', ['ngRoute'])
 						"content": ""
 					}
 			};
+			
+			$http.post('writting/create',$scope.writting).success(function(response) {
+				createUserHasWritting();
+			});
+
+		}
+		var createUserHasWritting = function(){
 			$scope.userHasWritting={
 					  "pageNumber": 0,
 					  "pageSize": 0,
@@ -98,13 +105,11 @@ angular.module('myApp.createWritting', ['ngRoute'])
 					}
 					
 			};
-			$http.post('writting/create',$scope.writting).success(function(response) {
-				console.log(fecha);
-			});
+			
 			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});
-			
 		}
+		
 	
 }]);
