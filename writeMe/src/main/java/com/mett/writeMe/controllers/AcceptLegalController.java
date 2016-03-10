@@ -9,22 +9,26 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mett.writeMe.contracts.LegalEstablishmentResponse;
 import com.mett.writeMe.services.LegalEstablishmentServiceInterface;
 
+/**
+ * @author Mildred Guerra
+ *
+ */
 @RestController
 @RequestMapping(value ="acceptLegalEstablishment")
 public class AcceptLegalController {
-	
-		@Autowired private LegalEstablishmentServiceInterface legalEstablishmentService;
 
-		
-		@RequestMapping(value ="/getAll", method = RequestMethod.POST)
-		public LegalEstablishmentResponse getAll(){	
-			LegalEstablishmentResponse response = new LegalEstablishmentResponse();
-			response.setCode(200);
-			response.setCodeMessage("Muestra reglas satisfactoriamente");
-			
-			response.setLegalEstablishmentList(legalEstablishmentService.getAll());
+	@Autowired private LegalEstablishmentServiceInterface legalEstablishmentService;
 
-			System.out.println("ENTRA AL CONTROLLER2" +response.getlegalList());
-			return response;		
-		}
+
+	/**
+	 * @return
+	 */
+	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
+	public LegalEstablishmentResponse getAll(){	
+		LegalEstablishmentResponse response = new LegalEstablishmentResponse();
+		response.setLegalEstablishmentList(legalEstablishmentService.getAll());
+		response.setCode(200);
+		response.setCodeMessage("Muestra reglas satisfactoriamente");
+		return response;		
 	}
+}

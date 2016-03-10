@@ -8,17 +8,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.pojo.UserPOJO;
+import com.mett.writeMe.contracts.LoginRequest;
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.repositories.UserRepository;
 
 
+/**
+ * @author Dani
+ * @author Sheng
+ */
 @Service
 public class UsersService implements UsersServiceInterface{
 	@Autowired 
 	private UserRepository userRepository;	
 
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getAll(com.mett.writeMe.contracts.UsersRequest)
+	 */
 	@Override
 	@Transactional
 	public List<UserPOJO> getAll(UsersRequest ur) {
@@ -26,6 +35,9 @@ public class UsersService implements UsersServiceInterface{
 		return generateUserDtos(users);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getAllByName(com.mett.writeMe.contracts.UsersRequest)
+	 */
 	@Override
 	@Transactional
 	public List<UserPOJO> getAllByName(UsersRequest ur) {
@@ -33,6 +45,10 @@ public class UsersService implements UsersServiceInterface{
 		return generateUserDtos(users);
 	}
 	
+	/**
+	 * @param users
+	 * @return
+	 */
 	private List<UserPOJO> generateUserDtos(List<User> users){
 		List<UserPOJO> uiUsers = new ArrayList<UserPOJO>();
 		users.stream().forEach(u -> {
@@ -44,6 +60,9 @@ public class UsersService implements UsersServiceInterface{
 		return uiUsers;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#saveUser(com.mett.writeMe.contracts.UsersRequest)
+	 */
 	@Override
 	@Transactional
 	public Boolean saveUser(UsersRequest ur) {
@@ -54,5 +73,18 @@ public class UsersService implements UsersServiceInterface{
 		User nuser = userRepository.save(user);
 		
 		return (nuser == null) ? false : true;
+	}
+
+	
+	@Override
+	public void deleteUser(int idUser){
+	   userRepository.delete(idUser);
+	}
+	@Override
+	@Transactional
+	public User getUserByMail(UsersRequest ur) {
+		User user = new User();
+		user= userRepository.findByMail(ur.getEmail());
+		return  user;
 	}
 }

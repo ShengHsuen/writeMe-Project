@@ -4,7 +4,7 @@
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
-	    templateUrl: 'resources/writting/writting/textarea.html',
+	    templateUrl: 'resources/writting/writting/writting.html',
 	    controller: 'WrittingCtrl'
 	  });
 	}])
@@ -24,11 +24,11 @@
 					"direction": "",
 					"sortBy": [""],
 					"searchColumn": "string",
-					"searchTerm": "hola",
+					"searchTerm": "Prueba2",
 					"writting": {
-						"name" : "e",
+						"name" : "Prueba2",
 						"description" : " a ",
-						"cantUsers": $scope.cantUsers,
+						"cantUsers": 0,
 						"date": "2016-02-02",
 						"likes": 0,
 						"limit time": "2100-01-01",
@@ -38,8 +38,10 @@
 						"content": $scope.content
 					}
 			};
-			$http.post('writting/create',$scope.writting).success(function(response) {
+			$http.post('writting/editContent',$scope.writting).success(function(response) {
+			/*$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
 				console.log("3 : "+response);
+			});*/
 			});
 		}
 		

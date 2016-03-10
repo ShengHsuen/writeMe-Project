@@ -16,9 +16,9 @@ import com.mett.writeMe.contracts.LoginRequest;
 import com.mett.writeMe.contracts.LoginResponse;
 import com.mett.writeMe.services.LoginServiceInterface;
 
-
 /**
- * Handles requests for the application home page.
+ * @author Sheng hsuen
+ *
  */
 @RestController
 @RequestMapping(value = "rest/signin")
@@ -26,6 +26,12 @@ public class LoginController {
 	
 	@Autowired private LoginServiceInterface loginService;
 	
+	/**
+	 * @param lr
+	 * @param servletRequest
+	 * @param servletResponse
+	 * @return
+	 */
 	@RequestMapping(value = "/checkuser", method = RequestMethod.POST)
 	@Transactional	
 	public BaseResponse checkuser(@RequestBody LoginRequest lr,HttpServletRequest servletRequest,HttpServletResponse servletResponse){		

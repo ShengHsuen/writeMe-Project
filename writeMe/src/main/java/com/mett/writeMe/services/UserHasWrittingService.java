@@ -9,11 +9,18 @@ import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 
+/**
+ * @author Dani
+ * @author Sheng
+ */
 @Service
 public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Autowired 
 	private UserHasWrittingRepository userHasWrittingRepository;
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UserHasWrittingServiceInterface#save(com.mett.writeMe.contracts.UserHasWrittingRequest)
+	 */
 	@Override
 	@Transactional
 	public Boolean save(UserHasWrittingRequest ur) {

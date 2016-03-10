@@ -15,11 +15,18 @@ import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.WrittingRepository;
 
+/**
+ * @author Sheng hsuen
+ *
+ */
 @Service
 public class WrittingService implements WrittingServiceInterface{
 	@Autowired 
 	private WrittingRepository writtingRepository;	
 
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getAll(WrittingRequest ur) {
@@ -27,6 +34,9 @@ public class WrittingService implements WrittingServiceInterface{
 		return generateWrittingDtos(Writtings);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAllByName(com.mett.writeMe.contracts.WrittingRequest)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getAllByName(WrittingRequest ur) {
@@ -34,6 +44,9 @@ public class WrittingService implements WrittingServiceInterface{
 		  return generateWrittingDtos(Writtings);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getWrittingByName(com.mett.writeMe.contracts.WrittingRequest)
+	 */
 	@Override
 	@Transactional
 	public WrittingPOJO getWrittingByName(WrittingRequest ur) {
@@ -49,6 +62,10 @@ public class WrittingService implements WrittingServiceInterface{
 		  return generateWrittingDtos(Writtings).get(0).getContent();
 	}*/
 	
+	/**
+	 * @param Writtings
+	 * @return
+	 */
 	private List<WrittingPOJO> generateWrittingDtos(List<Writting> Writtings){
 		List<WrittingPOJO> uiWrittings = new ArrayList<WrittingPOJO>();
 		Writtings.stream().forEach(u -> {
@@ -59,6 +76,9 @@ public class WrittingService implements WrittingServiceInterface{
 		return uiWrittings;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#saveWritting(com.mett.writeMe.contracts.WrittingRequest)
+	 */
 	@Override
 	@Transactional
 	public Boolean saveWritting(WrittingRequest ur) {
@@ -72,6 +92,9 @@ public class WrittingService implements WrittingServiceInterface{
 		return (nWritting == null) ? false : true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.writeMe.ejb.Writting)
+	 */
 	@Override
 	@Transactional
 	public Boolean editWritting(Writting writting){

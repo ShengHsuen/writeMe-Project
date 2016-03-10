@@ -30,6 +30,8 @@ public class Writting implements Serializable {
 
 	private String description;
 
+	private String image;
+
 	@Lob
 	private String likes;
 
@@ -68,10 +70,6 @@ public class Writting implements Serializable {
 	//bi-directional many-to-one association to UserHasWritting
 	@OneToMany(mappedBy="writting")
 	private List<UserHasWritting> userHasWrittings;
-
-	//bi-directional many-to-one association to Category
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Category category;
 
 	//bi-directional many-to-one association to Record
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -135,6 +133,14 @@ public class Writting implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getLikes() {
@@ -243,14 +249,6 @@ public class Writting implements Serializable {
 		userHasWritting.setWritting(null);
 
 		return userHasWritting;
-	}
-
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 	public Record getRecord() {
