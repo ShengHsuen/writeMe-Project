@@ -18,6 +18,10 @@ import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.services.LegalEstablishmentServiceInterface;
 import com.mett.writeMe.utils.Utils;
 
+/**
+ * @author Mildred Guerra
+ *
+ */
 @RestController
 @RequestMapping(value ="/rest/protected/legal")
 public class LegalEstablishmentController {
@@ -25,6 +29,9 @@ public class LegalEstablishmentController {
 	@Autowired private LegalEstablishmentServiceInterface legalEstablishmentService;
 	@Autowired private HttpServletRequest request;
 	
+	/**
+	 * @return
+	 */
 	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
 	public LegalEstablishmentResponse getAll(){	
 		LegalEstablishmentResponse response = new LegalEstablishmentResponse();
@@ -33,15 +40,11 @@ public class LegalEstablishmentController {
 		response.setLegalEstablishmentList(legalEstablishmentService.getAll());
 		return response;		
 	}
-/*
-	@RequestMapping(value ="/getAll", method = RequestMethod.GET)
-	public LegalEstablishmentResponse getAll(){
-		LegalEstablishmentResponse response = new LegalEstablishmentResponse();
-		response.setLegalEstablishmentList(LegalEstablishmentService.getAll());
-		return response;		
-   }
-	*/
 	
+	/**
+	 * @param ler
+	 * @return
+	 */
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public LegalEstablishmentResponse create(@RequestBody LegalEstablishment ler ){	
 			System.out.println("Entra a controller"+ ler);
@@ -57,6 +60,9 @@ public class LegalEstablishmentController {
 		    return legalEstRes;		
 	}
 	
+	/**
+	 * @param idLegalEstablishment
+	 */
 	@RequestMapping(value ="/delete", method = RequestMethod.DELETE)
 	public void delete(
 			@RequestParam("idLegalEstablishment") int idLegalEstablishment){	
