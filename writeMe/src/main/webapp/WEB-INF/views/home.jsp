@@ -80,7 +80,7 @@
         <ul class="nav navbar-nav hidden-sm">
           <li class="dropdown pos-stc">
           
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
+            <a href="" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
               <span>Categorías</span> 
               <span class="caret"></span>
             </a>
@@ -128,10 +128,8 @@
             </div>
           </li>
           <li>
-            <a ng-click="navCreate_Writting()" >
               <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-              <span translate="header.navbar.new.NEW">Crear obra</span> </span>
-            </a>
+                <a href="app#/createWritting"> <span translate="header.navbar.new.NEW" >Crear obra</span></a> </span>
           </li>
         </ul>
         <!-- / link and dropdown -->
@@ -348,6 +346,7 @@
                   </span>
                   <i class="glyphicon glyphicon-gift icon"></i>
                       <span>Donaciones</span>
+                    
                     </a>
                   </li>
               <li>
