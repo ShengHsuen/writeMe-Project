@@ -79,10 +79,12 @@
         <!-- link and dropdown -->
         <ul class="nav navbar-nav hidden-sm">
           <li class="dropdown pos-stc">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+          
+            <a href="" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
               <span>Categorías</span> 
               <span class="caret"></span>
             </a>
+            
             <div class="dropdown-menu wrapper w-full bg-white">
               <div class="row">
                 <div class="col-sm-4">
@@ -126,10 +128,8 @@
             </div>
           </li>
           <li>
-            <a ng-click="navCreate_Writting()" >
               <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-              <span translate="header.navbar.new.NEW">Crear obra</span> </span>
-            </a>
+                <a href="app#/createWritting"> <span translate="header.navbar.new.NEW" >Crear obra</span></a> </span>
           </li>
         </ul>
         <!-- / link and dropdown -->
@@ -346,6 +346,7 @@
                   </span>
                   <i class="glyphicon glyphicon-gift icon"></i>
                       <span>Donaciones</span>
+                    
                     </a>
                   </li>
               <li>
@@ -395,6 +396,10 @@
   <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="resources/bower_components/angular/angular.js"></script>
   <script src="resources/bower_components/angular-route/angular-route.js"></script>
+  
+  <script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+  <script src="resources/non_bower_components/angular-file-upload.min.js"></script>
+  
   <script src="resources/app.js"></script>
   
   <!-- Del template -->
