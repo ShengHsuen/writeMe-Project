@@ -80,7 +80,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					
 					}
 			};
-<<<<<<< HEAD
 
 		    
 		    /*metodo para agregar imagen-no funciona */
@@ -136,7 +135,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 						
 			};*/
 
-=======
 			
 			$http.post('writting/create',$scope.writting).success(function(response) {
 				createUserHasWritting();
@@ -144,7 +142,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 
 		}
 		var createUserHasWritting = function(){
->>>>>>> e610dda77bd4a02dd99bcd9a7c5f8e876cd2b605
 			$scope.userHasWritting={
 					  "pageNumber": 0,
 					  "pageSize": 0,
@@ -165,22 +162,10 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					}
 					
 			};
-<<<<<<< HEAD
 
-			$http.post('writting/create',$scope.writting).success(function(response) {
-				console.log(fecha);
-			});
-		/*	$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
-				console.log("2");
-			});*/
-		}
-=======
 			
 			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});
 		}
-		
-	
->>>>>>> e610dda77bd4a02dd99bcd9a7c5f8e876cd2b605
 }]);
