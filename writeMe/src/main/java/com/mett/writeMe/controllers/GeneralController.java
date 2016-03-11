@@ -37,4 +37,12 @@ public class GeneralController {
 		mav.setViewName("home");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/appAdmin", method = RequestMethod.GET)
+	public ModelAndView homeAdmin(Locale locale, Model model,HttpServletRequest request,HttpServletResponse response) {				
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("homeAdmin");
+		return mav;
+	}
 }

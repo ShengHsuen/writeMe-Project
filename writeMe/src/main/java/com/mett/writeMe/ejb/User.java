@@ -19,9 +19,9 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 
-	private byte accountType;
+	private boolean accountType;
 
-	private byte admin;
+	private boolean admin;
 
 	private String author;
 
@@ -96,19 +96,19 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public byte getAccountType() {
+	public boolean getAccountType() {
 		return this.accountType;
 	}
 
-	public void setAccountType(byte accountType) {
+	public void setAccountType(boolean accountType) {
 		this.accountType = accountType;
 	}
 
-	public byte getAdmin() {
+	public boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(byte admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
