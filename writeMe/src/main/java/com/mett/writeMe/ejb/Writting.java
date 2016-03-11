@@ -22,13 +22,8 @@ public class Writting implements Serializable {
 	@Lob
 	private String cantUsers;
 
-<<<<<<< HEAD
 	private String category;
 
-	private int category_categoryId;
-
-=======
->>>>>>> b9babb36d280293a006c8c4fcd6b43c3419d94cd
 	@Lob
 	private String content;
 
@@ -118,7 +113,6 @@ public class Writting implements Serializable {
 		this.cantUsers = cantUsers;
 	}
 
-<<<<<<< HEAD
 	public String getCategory() {
 		return this.category;
 	}
@@ -127,16 +121,6 @@ public class Writting implements Serializable {
 		this.category = category;
 	}
 
-	public int getCategory_categoryId() {
-		return this.category_categoryId;
-	}
-
-	public void setCategory_categoryId(int category_categoryId) {
-		this.category_categoryId = category_categoryId;
-	}
-
-=======
->>>>>>> b9babb36d280293a006c8c4fcd6b43c3419d94cd
 	public String getContent() {
 		return this.content;
 	}
