@@ -40,5 +40,24 @@ public class UserController {
 			}
 			return us;
 	}
+	
+	@RequestMapping(value ="/edit", method = RequestMethod.POST)
+	public UsersResponse edit(@RequestBody UsersRequest ur){	
+		UsersResponse us = new UsersResponse();
+		Boolean state = usersService.saveUser(ur);		
+			if(state){
+				us.setCode(200);
+				us.setCodeMessage("user created succesfully");
+			}
+			return us;
+	}
+	
+	@RequestMapping(value ="/delete", method = RequestMethod.DELETE)
+	public void delete(
+			@RequestParam("idUser") int idUser){	
+		    usersService.deleteUser(idUser);
+			
+	}
+	
 }
 

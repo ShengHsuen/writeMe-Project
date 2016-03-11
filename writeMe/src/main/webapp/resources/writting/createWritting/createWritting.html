@@ -36,9 +36,16 @@
 		            	<input type="number" min="1" max="10" ng-model="cantUsers"></input>
           			</div>
           		</div>
+
+          		<label class="col-sm-2 control-label">Portada</label>
+          		<div class="col-sm-10">
+		     	   <input type="file" name="inputfile" required ng-file-select="onFileSelect($files)" >
+          		</div>
+
           	<div class="col-sm-15">	
             	<button type="submit" ng-disabled="form.$invalid" ng-click="navWritting()" class="btn btn-sm btn-primary">Aceptar</button>
           	</div>
+
           </form>
         </div>
       </div>

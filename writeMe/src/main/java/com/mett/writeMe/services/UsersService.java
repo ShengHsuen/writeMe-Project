@@ -75,6 +75,11 @@ public class UsersService implements UsersServiceInterface{
 		return (nuser == null) ? false : true;
 	}
 
+	
+	@Override
+	public void deleteUser(int idUser){
+	   userRepository.delete(idUser);
+	}
 	@Override
 	@Transactional
 	public User getUserByMail(UsersRequest ur) {
