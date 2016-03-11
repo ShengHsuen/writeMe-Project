@@ -66,18 +66,20 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					"searchColumn": "string",
 					"searchTerm": $scope.name,
 					"writting": {
-						"name" : $scope.name,
-						"description" : $scope.description,
-						"cantUsers": $scope.cantUsers,
-						"date": fecha,
-						"likes": 0,
-						"limit time": "2100-01-01",
-						"numMaxCharacters": 10000,
-						"numMinCharacters": 30,
-						"published": false,
-						"content": ""
-						
-					
+					      "date": fecha,
+					      "participation": true,
+					      "image": "",
+					      "cantUsers": $scope.cantUsers,
+					      "description": $scope.description,
+					      "published": true,
+					      "numMinCharacters": 10,
+					      "content": "",
+					      "category": $scope.category,
+					      "limitTime": "2016-05-05",
+					      "numMaxCharacters": 10000,
+					      "writtingId": 0,
+					      "name": $scope.name,
+					      "likes": 0
 					}
 			};
 
