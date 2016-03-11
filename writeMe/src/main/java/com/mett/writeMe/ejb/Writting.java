@@ -1,0 +1,308 @@
+package com.mett.writeMe.ejb;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the writting database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Writting.findAll", query="SELECT w FROM Writting w")
+public class Writting implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int writtingId;
+
+	@Lob
+	private String cantUsers;
+
+	@Lob
+	private String content;
+
+	@Temporal(TemporalType.DATE)
+	private Date date;
+
+	private String description;
+
+	private String image;
+
+	@Lob
+	private String likes;
+
+	@Temporal(TemporalType.DATE)
+	private Date limitTime;
+
+	private String name;
+
+	@Lob
+	private String numMaxCharacters;
+
+	@Lob
+	private String numMinCharacters;
+
+	private byte participation;
+
+	private byte published;
+
+	//bi-directional many-to-one association to Chapter
+	@OneToMany(mappedBy="writting")
+	private List<Chapter> chapters;
+
+	//bi-directional many-to-many association to Mylibrary
+	@ManyToMany
+	@JoinTable(
+		name="mylibrary_has_writting"
+		, joinColumns={
+			@JoinColumn(name="writting_writtingId")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="myLibrary_myLibraryId")
+			}
+		)
+	private List<Mylibrary> mylibraries;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
+
+	//bi-directional many-to-one association to Record
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Record record;
+
+	//bi-directional many-to-one association to Restriction
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Restriction restriction;
+
+	//bi-directional many-to-one association to Typewritting
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Typewritting typewritting;
+
+	//bi-directional many-to-one association to Writting
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="writting_father")
+	private Writting writting;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="writting")
+	private List<Writting> writtings;
+
+	public Writting() {
+	}
+
+	public int getWrittingId() {
+		return this.writtingId;
+	}
+
+	public void setWrittingId(int writtingId) {
+		this.writtingId = writtingId;
+	}
+
+	public String getCantUsers() {
+		return this.cantUsers;
+	}
+
+	public void setCantUsers(String cantUsers) {
+		this.cantUsers = cantUsers;
+	}
+
+	public String getContent() {
+		return this.content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getLikes() {
+		return this.likes;
+	}
+
+	public void setLikes(String likes) {
+		this.likes = likes;
+	}
+
+	public Date getLimitTime() {
+		return this.limitTime;
+	}
+
+	public void setLimitTime(Date limitTime) {
+		this.limitTime = limitTime;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNumMaxCharacters() {
+		return this.numMaxCharacters;
+	}
+
+	public void setNumMaxCharacters(String numMaxCharacters) {
+		this.numMaxCharacters = numMaxCharacters;
+	}
+
+	public String getNumMinCharacters() {
+		return this.numMinCharacters;
+	}
+
+	public void setNumMinCharacters(String numMinCharacters) {
+		this.numMinCharacters = numMinCharacters;
+	}
+
+	public byte getParticipation() {
+		return this.participation;
+	}
+
+	public void setParticipation(byte participation) {
+		this.participation = participation;
+	}
+
+	public byte getPublished() {
+		return this.published;
+	}
+
+	public void setPublished(byte published) {
+		this.published = published;
+	}
+
+	public List<Chapter> getChapters() {
+		return this.chapters;
+	}
+
+	public void setChapters(List<Chapter> chapters) {
+		this.chapters = chapters;
+	}
+
+	public Chapter addChapter(Chapter chapter) {
+		getChapters().add(chapter);
+		chapter.setWritting(this);
+
+		return chapter;
+	}
+
+	public Chapter removeChapter(Chapter chapter) {
+		getChapters().remove(chapter);
+		chapter.setWritting(null);
+
+		return chapter;
+	}
+
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
+
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
+	}
+
+	public List<UserHasWritting> getUserHasWrittings() {
+		return this.userHasWrittings;
+	}
+
+	public void setUserHasWrittings(List<UserHasWritting> userHasWrittings) {
+		this.userHasWrittings = userHasWrittings;
+	}
+
+	public UserHasWritting addUserHasWritting(UserHasWritting userHasWritting) {
+		getUserHasWrittings().add(userHasWritting);
+		userHasWritting.setWritting(this);
+
+		return userHasWritting;
+	}
+
+	public UserHasWritting removeUserHasWritting(UserHasWritting userHasWritting) {
+		getUserHasWrittings().remove(userHasWritting);
+		userHasWritting.setWritting(null);
+
+		return userHasWritting;
+	}
+
+	public Record getRecord() {
+		return this.record;
+	}
+
+	public void setRecord(Record record) {
+		this.record = record;
+	}
+
+	public Restriction getRestriction() {
+		return this.restriction;
+	}
+
+	public void setRestriction(Restriction restriction) {
+		this.restriction = restriction;
+	}
+
+	public Typewritting getTypewritting() {
+		return this.typewritting;
+	}
+
+	public void setTypewritting(Typewritting typewritting) {
+		this.typewritting = typewritting;
+	}
+
+	public Writting getWritting() {
+		return this.writting;
+	}
+
+	public void setWritting(Writting writting) {
+		this.writting = writting;
+	}
+
+	public List<Writting> getWrittings() {
+		return this.writtings;
+	}
+
+	public void setWrittings(List<Writting> writtings) {
+		this.writtings = writtings;
+	}
+
+	public Writting addWritting(Writting writting) {
+		getWrittings().add(writting);
+		writting.setWritting(this);
+
+		return writting;
+	}
+
+	public Writting removeWritting(Writting writting) {
+		getWrittings().remove(writting);
+		writting.setWritting(null);
+
+		return writting;
+	}
+
+}

@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<!-- content -->
+<div id="content" class="app-content" role="main">
+
+	<div class="app-content-body " ng-controller="acceptLegalCtrl">
+
+
+		<!-- 		MOSTRAR REGLAS -->
+		<div class="wrapper-md">
+			<div id="MostrarReglas" class=" panel panel-default">
+				<div class="panel-heading font-bold">Términos y condiciones</div>
+				<div class="m-l-lg" ng-repeat="pane in legalList | orderBy:'part'">
+					<h4>{{pane.name}}</h4>
+					<p>{{pane.description}}</p>
+				</div>
+
+				<div class=" col-lg-4"></div>
+				<div class=" col-lg-4">
+					<a ng-click="navSignup()" ui-sref="access.signup"
+						class="btn btn-lg btn-default btn-block"> Continuar creando
+						cuenta</a>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<!-- !mOSTRAR REGLAS -->
+</div>
+</div>
