@@ -356,6 +356,17 @@
                   <span class="font-bold">Mensajes</span>
                 </a>
               </li>
+                <li class="line dk"></li>
+                <li>
+                <a href="app#/legalEstablishment" class="auto">      
+                  <span class="pull-right text-muted">
+                    <i class="fa fa-fw fa-angle-right text"></i>
+                    <i class="fa fa-fw fa-angle-down text-active"></i>
+                  </span>
+                  <i class="glyphicon glyphicon-briefcase"></i>
+                  <span>Términos y condiciones</span>
+                </a>
+              </li>
                 <li>
                 <a href="ui_chart.html" class="auto">      
                   <span class="pull-right text-muted">

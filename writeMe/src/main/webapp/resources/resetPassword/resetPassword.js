@@ -20,8 +20,7 @@ angular.module('myApp.resetPassword', ['ngRoute'])
 		
 		$http.post('rest/email/resetPassword',$scope.user).success(function (userResponse) {
 			if(userResponse.code == 200){
-				alert("valido");
-				
+				$scope.navSignin();
 			}else{
 				alert("invalido");
 			}
