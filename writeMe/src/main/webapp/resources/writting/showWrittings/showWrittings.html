@@ -1,0 +1,44 @@
+<meta charset="utf-8">
+<!-- content -->
+<div id="content" class="app-content" role="main">
+
+	<div class="app-content-body " ng-controller="showWrittingsCtrl">
+
+
+		<div class="bg-light lter b-b wrapper-md">
+			<h1 class="m-n font-thin h3">Obras</h1>
+		</div>
+	
+		<!-- 		MOSTRAR Obras -->
+		<div class="wrapper-md">
+			<div id="MostrarReglas" class=" panel panel-default">
+				<div class="panel-heading font-bold">Obras</div>
+				<div class="panel-body">
+					<div class="m-l-lg panel b-a"
+						ng-repeat="pane in legalList | orderBy:'part'">
+						<div class="panel-heading pos-rlt b-b b-light">
+							<h4 style="display: inline-block;">{{pane.name}}</h4>
+							<span class=" pull-right"
+								style="width: 20px; display: inline-block;">
+								<button ng-click="person.selected = undefined">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</span>
+
+						</div>
+						<div class="panel-body">
+
+							<p>{{pane.description}}</p>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+
+	<!-- /content -->

@@ -49,7 +49,7 @@ public class UserHasWrittingController{
 
 			us.setCode(200);
 			us.setCodeMessage("users fetch success");
-			us.setUserHasWritting(userHasWrittingService.getAll(ur));
+			us.setUserHasWritting(userHasWrittingService.getAllByUser(idUser));
 
 		return us;
 	}
