@@ -22,26 +22,5 @@
 		<class>com.mett.writeMe.ejb.User</class>
 		<class>com.mett.writeMe.ejb.UserHasWritting</class>
 		<class>com.mett.writeMe.ejb.Writting</class>
-		<class>model.Binnacle</class>
-		<class>model.Chapter</class>
-		<class>model.City</class>
-		<class>model.Comment</class>
-		<class>model.Country</class>
-		<class>model.LegalEstablishment</class>
-		<class>model.Message</class>
-		<class>model.Mylibrary</class>
-		<class>model.Notification</class>
-		<class>model.Notificationtype</class>
-		<class>model.Payaccount</class>
-		<class>model.Record</class>
-		<class>model.Report</class>
-		<class>model.Restriction</class>
-		<class>model.Role</class>
-		<class>model.State</class>
-		<class>model.Typereport</class>
-		<class>model.Typewritting</class>
-		<class>model.User</class>
-		<class>model.UserHasWritting</class>
-		<class>model.Writting</class>
 	</persistence-unit>
 </persistence>
