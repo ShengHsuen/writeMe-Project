@@ -12,7 +12,6 @@ import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
-import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.LoginServiceInterface;
@@ -45,10 +44,16 @@ public class WrittingController {
 	public WrittingResponse create(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		Boolean state = false;
-		state = WrittingService.saveWritting(ur);
-		WrittingPOJO w = WrittingService.getWrittingByName(ur);
-		u = LoginService.getUser();
-		BeanUtils.copyProperties(w, wr);
+		if(wr.getWrittingId() != wr.getWrittingId()){
+			state = WrittingService.saveWritting(ur);
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			BeanUtils.copyProperties(w, wr);
+			u = LoginService.getUser();
+			System.out.println("If");
+		}else{
+			System.out.println("Else");
+			state = true;
+		}
 		
 
 		if (state) {
