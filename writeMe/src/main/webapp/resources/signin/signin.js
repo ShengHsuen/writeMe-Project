@@ -24,9 +24,16 @@ angular.module('myApp.signin', ['ngRoute'])
 		
 		$http.post('rest/signin/checkuser',$scope.user).success(function (loginResponse) {
     		if(loginResponse.code == 200){
-    			var usuario = {"userId":loginResponse.idUsuario,"name":loginResponse.firstName,"lastName":loginResponse.lastName};
-    			var path = "/writeMe/app#/home";
-    			window.location.href = path;
+    			var user = {"userId":loginResponse.idUser,"name":loginResponse.name,"lastName":loginResponse.lastName, "admin":loginResponse.admin};
+    			console.log(user);
+    			if(loginResponse.admin == false){
+    				var path = "/writeMe/app#/home";
+        			window.location.href = path;
+    			}else{
+    				var path = "/writeMe/appAdmin#/homeAdmin";
+        			window.location.href = path;
+    			}
+    			
     		}else{
     			alert("invalido");
     		}

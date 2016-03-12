@@ -32,6 +32,7 @@ public class LoginService implements LoginServiceInterface{
 			response.setIdUser(loggedUser.getUserId());
 			response.setName(loggedUser.getName());
 			response.setLastName(loggedUser.getLastName());
+			response.setAdmin(loggedUser.getAdmin());
 			//
 			currentSession.setAttribute("idUser", loggedUser.getUserId());
 			
