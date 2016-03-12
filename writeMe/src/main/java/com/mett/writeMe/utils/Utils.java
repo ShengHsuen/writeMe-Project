@@ -11,7 +11,7 @@ import javax.servlet.ServletContext;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Utils {
-	
+	private static String RESOURCES_PATH = "resources/writtingImages/";
 	private static String HOST_PATH = "http://localhost:8080";
 	
 	// save uploaded file to new location
@@ -19,8 +19,8 @@ public class Utils {
 		String extension = getExtension(file.getOriginalFilename(),".").toLowerCase();
 		String consecutiveName = ""+new Date().getTime();
 		
-		String uploadedFileLocation = servletContext.getRealPath("") +  consecutiveName + extension;
-		String databaseFileName = HOST_PATH + servletContext.getContextPath() + "/" + consecutiveName + extension;
+		String uploadedFileLocation =  servletContext.getRealPath("") + RESOURCES_PATH + consecutiveName + extension;
+		String databaseFileName = HOST_PATH + servletContext.getContextPath() + "/" + RESOURCES_PATH + consecutiveName + extension;
 		
 		byte[] bytes;
 		try {
