@@ -31,31 +31,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		                  ];
 		$scope.types =["Personal","Por invitacion","Publica"];
 		
-		$scope.writting={
-				"pageNumber": 0,
-				"pageSize": 0,
-				"direction": "",
-				"sortBy": [""],
-				"searchColumn": "string",
-				"searchTerm": $scope.name,
-				"writting": {
-				      "date": fecha,
-				      "participation": true,
-				      "image": "",
-				      "cantUsers": $scope.cantUsers,
-				      "description": $scope.description,
-				      "published": true,
-				      "numMinCharacters": 10,
-				      "content": "",
-				      "category": $scope.cateSelected,
-				      "typeWritting": $scope.typeSelected,
-				      "limitTime": "2016-05-05",
-				      "numMaxCharacters": 10000,
-				      "writtingId": 0,
-				      "name": $scope.name,
-				      "likes": 0
-				}
-		};
+		
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
@@ -84,7 +60,31 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
-			
+			$scope.writting={
+					"pageNumber": 0,
+					"pageSize": 0,
+					"direction": "",
+					"sortBy": [""],
+					"searchColumn": "string",
+					"searchTerm": $scope.name,
+					"writting": {
+					      "date": fecha,
+					      "participation": true,
+					      "image": "",
+					      "cantUsers": $scope.cantUsers,
+					      "description": $scope.description,
+					      "published": true,
+					      "numMinCharacters": 10,
+					      "content": "",
+					      "category": $scope.cateSelected,
+					      "typeWritting": $scope.typeSelected,
+					      "limitTime": "2016-05-05",
+					      "numMaxCharacters": 10000,
+					      "writtingId": 0,
+					      "name": $scope.name,
+					      "likes": 0
+					}
+			};
 
 		    
 		    /*metodo para agregar imagen-no funciona */
