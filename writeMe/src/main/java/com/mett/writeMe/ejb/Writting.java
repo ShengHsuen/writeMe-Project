@@ -48,9 +48,9 @@ public class Writting implements Serializable {
 	@Lob
 	private String numMinCharacters;
 
-	private byte participation;
+	private boolean participation;
 
-	private byte published;
+	private boolean published;
 
 	private String typeWritting;
 
@@ -195,19 +195,19 @@ public class Writting implements Serializable {
 		this.numMinCharacters = numMinCharacters;
 	}
 
-	public byte getParticipation() {
+	public boolean getParticipation() {
 		return this.participation;
 	}
 
-	public void setParticipation(byte participation) {
+	public void setParticipation(boolean participation) {
 		this.participation = participation;
 	}
 
-	public byte getPublished() {
+	public boolean getPublished() {
 		return this.published;
 	}
 
-	public void setPublished(byte published) {
+	public void setPublished(boolean published) {
 		this.published = published;
 	}
 
