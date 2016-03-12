@@ -74,7 +74,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					      "published": true,
 					      "numMinCharacters": 10,
 					      "content": "",
-					      "category": $scope.category,
+					      //"category": $scope.category,
 					      "limitTime": "2016-05-05",
 					      "numMaxCharacters": 10000,
 					      "writtingId": 0,
