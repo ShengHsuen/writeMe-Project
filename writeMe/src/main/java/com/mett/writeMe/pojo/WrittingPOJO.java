@@ -14,7 +14,9 @@ public class WrittingPOJO {
 	private String numMinCharacters;
 	private boolean participation;
 	private boolean published;
-	private String content; 
+	private String content;
+	private String typeWritting;
+	private String category;
 	private String image; 
 	
 	public WrittingPOJO() {
@@ -124,6 +126,22 @@ public class WrittingPOJO {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getTypeWritting() {
+		return typeWritting;
+	}
+
+	public void setTypeWritting(String typeWritting) {
+		this.typeWritting = typeWritting;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

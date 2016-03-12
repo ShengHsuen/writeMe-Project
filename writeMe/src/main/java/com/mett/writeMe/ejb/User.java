@@ -19,9 +19,9 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 
-	private byte accountType;
+	private boolean accountType;
 
-	private byte admin;
+	private boolean admin;
 
 	private String author;
 
@@ -56,6 +56,14 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private List<Record> records;
 
+	//bi-directional many-to-one association to City
+	@ManyToOne(fetch=FetchType.LAZY)
+	private City city;
+
+	//bi-directional many-to-one association to Mylibrary
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Mylibrary mylibrary;
+
 	//bi-directional many-to-many association to User
 	@ManyToMany
 	@JoinTable(
@@ -73,14 +81,6 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy="users1")
 	private List<User> users2;
 
-	//bi-directional many-to-one association to City
-	@ManyToOne(fetch=FetchType.LAZY)
-	private City city;
-
-	//bi-directional many-to-one association to Mylibrary
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Mylibrary mylibrary;
-
 	//bi-directional many-to-one association to UserHasWritting
 	@OneToMany(mappedBy="user")
 	private List<UserHasWritting> userHasWrittings;
@@ -96,19 +96,19 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public byte getAccountType() {
+	public boolean getAccountType() {
 		return this.accountType;
 	}
 
-	public void setAccountType(byte accountType) {
+	public void setAccountType(boolean accountType) {
 		this.accountType = accountType;
 	}
 
-	public byte getAdmin() {
+	public boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(byte admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 
@@ -270,22 +270,6 @@ public class User implements Serializable {
 		return record;
 	}
 
-	public List<User> getUsers1() {
-		return this.users1;
-	}
-
-	public void setUsers1(List<User> users1) {
-		this.users1 = users1;
-	}
-
-	public List<User> getUsers2() {
-		return this.users2;
-	}
-
-	public void setUsers2(List<User> users2) {
-		this.users2 = users2;
-	}
-
 	public City getCity() {
 		return this.city;
 	}
@@ -300,6 +284,22 @@ public class User implements Serializable {
 
 	public void setMylibrary(Mylibrary mylibrary) {
 		this.mylibrary = mylibrary;
+	}
+
+	public List<User> getUsers1() {
+		return this.users1;
+	}
+
+	public void setUsers1(List<User> users1) {
+		this.users1 = users1;
+	}
+
+	public List<User> getUsers2() {
+		return this.users2;
+	}
+
+	public void setUsers2(List<User> users2) {
+		this.users2 = users2;
 	}
 
 	public List<UserHasWritting> getUserHasWrittings() {

@@ -10,7 +10,8 @@ public class LoginResponse extends BaseResponse {
 	
 	private int idUser;
 	private String name;
-	private String lastName; 
+	private String lastName;
+	private boolean admin;
 
 	public LoginResponse() {
 		super();
@@ -38,6 +39,14 @@ public class LoginResponse extends BaseResponse {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public boolean getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	

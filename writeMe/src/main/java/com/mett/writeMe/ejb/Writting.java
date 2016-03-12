@@ -24,8 +24,6 @@ public class Writting implements Serializable {
 
 	private String category;
 
-	private int category_categoryId;
-
 	@Lob
 	private String content;
 
@@ -54,9 +52,15 @@ public class Writting implements Serializable {
 
 	private byte published;
 
+	private String typeWritting;
+
 	//bi-directional many-to-one association to Chapter
 	@OneToMany(mappedBy="writting")
 	private List<Chapter> chapters;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
 
 	//bi-directional many-to-many association to Mylibrary
 	@ManyToMany
@@ -70,10 +74,6 @@ public class Writting implements Serializable {
 			}
 		)
 	private List<Mylibrary> mylibraries;
-
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="writting")
-	private List<UserHasWritting> userHasWrittings;
 
 	//bi-directional many-to-one association to Record
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -121,14 +121,6 @@ public class Writting implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public int getCategory_categoryId() {
-		return this.category_categoryId;
-	}
-
-	public void setCategory_categoryId(int category_categoryId) {
-		this.category_categoryId = category_categoryId;
 	}
 
 	public String getContent() {
@@ -219,6 +211,14 @@ public class Writting implements Serializable {
 		this.published = published;
 	}
 
+	public String getTypeWritting() {
+		return this.typeWritting;
+	}
+
+	public void setTypeWritting(String typeWritting) {
+		this.typeWritting = typeWritting;
+	}
+
 	public List<Chapter> getChapters() {
 		return this.chapters;
 	}
@@ -241,14 +241,6 @@ public class Writting implements Serializable {
 		return chapter;
 	}
 
-	public List<Mylibrary> getMylibraries() {
-		return this.mylibraries;
-	}
-
-	public void setMylibraries(List<Mylibrary> mylibraries) {
-		this.mylibraries = mylibraries;
-	}
-
 	public List<UserHasWritting> getUserHasWrittings() {
 		return this.userHasWrittings;
 	}
@@ -269,6 +261,14 @@ public class Writting implements Serializable {
 		userHasWritting.setWritting(null);
 
 		return userHasWritting;
+	}
+
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
+
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
 	}
 
 	public Record getRecord() {
