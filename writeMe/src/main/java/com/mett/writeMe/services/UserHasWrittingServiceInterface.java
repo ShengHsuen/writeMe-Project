@@ -9,7 +9,6 @@ import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 public interface UserHasWrittingServiceInterface {
 	Boolean save(UserHasWrittingRequest ur);
 	List<UserHasWrittingPOJO> getAll();
-	List<UserHasWrittingPOJO> getAllByUser(int idUser);
 
 
 	

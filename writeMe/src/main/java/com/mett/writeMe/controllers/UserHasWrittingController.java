@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.ejb.UserHasWritting;
+import com.mett.writeMe.services.UserHasWrittingService;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 
 /**
@@ -43,13 +45,13 @@ public class UserHasWrittingController{
 	 * @return
 	 */
 	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
-	public UserHasWrittingResponse getAll(@RequestBody UserHasWrittingRequest ur){
+	public UserHasWrittingResponse getAll(){
 		
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 
-			us.setCode(200);
-			us.setCodeMessage("users fetch success");
-			us.setUserHasWritting(userHasWrittingService.getAllByUser(idUser));
+		us.setCode(200);
+		us.setCodeMessage("Muestra los user has writting satisfactoriamente");
+		us.setUserHasWritting(userHasWrittingService.getAll());
 
 		return us;
 	}

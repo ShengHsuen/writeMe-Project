@@ -21,6 +21,10 @@ import com.mett.writeMe.repositories.UserHasWrittingRepository;
  * @author Dani
  * @author Sheng
  */
+/**
+ * @author Mario
+ *
+ */
 @Service
 public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Autowired 
@@ -43,26 +47,30 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	
 	@Override
 	@Transactional
-	public List<UserHasWrittingPOJO> getAllByUser(int idUser) {
+	public List<UserHasWrittingPOJO> getAll() {
 		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
 		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
-		UserHasWrittings.stream().filter(tu -> tu.getUser().getUserId() == idUser).forEach(tu ->{
+		UserHasWrittings.stream().forEach(uw ->{
 			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
-			BeanUtils.copyProperties(tu, dto);
+			BeanUtils.copyProperties(uw, dto);
 			dtos.add(dto);
 		});
 		return dtos;
 	}
 
-	@Override
-	public List<UserHasWrittingPOJO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-
 	
 	
+/*	@Override
+	@Transactional
+	public List<UserHasWrittingPOJO> getAllByUser(int idUser) {
+		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
+		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
+		UserHasWrittings.stream().filter(uw -> uw.getUser().getUserId() == idUser).forEach(uw ->{
+			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(uw, dto);
+			dtos.add(dto);
+		});
+		return dtos;
+	}*/
 	
 }
