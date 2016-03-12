@@ -25,10 +25,10 @@
 				"direction": "",
 				"sortBy": [""],
 				"searchColumn": "string",
-				"searchTerm": "Prueba2",
+				"searchTerm": "fff",
 				"writting": {
-					"name" : "Prueba2",
-					"description" : " a ",
+					"name" : "fff",
+					"description" : "a",
 					"cantUsers": 0,
 					"date": fecha,
 					"likes": 0,
@@ -56,9 +56,9 @@
 		
 		$scope.publish = function(){
 			console.log("Published: " + $scope.published + "Fecha: " + fecha);
-			/*$http.post('writting/publish',$scope.writting).success(function(response) {
+			$http.post('writting/publish',$scope.writting).success(function(response) {
 
-			});*/
+			});
 		}
 		
 	}]);
