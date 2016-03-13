@@ -2,22 +2,20 @@ package com.mett.writeMe.contracts;
 
 import java.util.List;
 
-import com.mett.writeMe.pojo.UserHasWrittingPOJO;
+import com.mett.writeMe.pojo.UserPOJO;
 
 public class UsersResponse extends BaseResponse{
-	
-	private List<UserHasWrittingPOJO> userHasWritting;
+	private List<UserPOJO> users;
 
 	public UsersResponse() {
 		super();
 	}
-	
-	public List<UserHasWrittingPOJO> getUserHasWritting() {
-		return userHasWritting;
+	public List<UserPOJO> getUsers() {
+		return users;
 	}
 
-	public void setUsuarios(List<UserHasWrittingPOJO> userHasWritting) {
-		this.userHasWritting = userHasWritting;
+	public void setUsers(List<UserPOJO> users) {
+		this.users = users;
 	}
 
 }

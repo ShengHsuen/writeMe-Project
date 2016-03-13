@@ -23,7 +23,7 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 
 	// Mostarr
 	$scope.init = function() {
-		$http.post('rest/protected/legal/getAll',
+		$http.post('/rest/protected/legal/getAll',
 				$scope.requestObject).success(function(response) {
 					$scope.legalList = response.legalList;
 				});

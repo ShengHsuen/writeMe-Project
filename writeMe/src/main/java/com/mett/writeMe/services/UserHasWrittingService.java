@@ -60,17 +60,4 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 
 	
 	
-/*	@Override
-	@Transactional
-	public List<UserHasWrittingPOJO> getAllByUser(int idUser) {
-		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
-		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
-		UserHasWrittings.stream().filter(uw -> uw.getUser().getUserId() == idUser).forEach(uw ->{
-			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
-			BeanUtils.copyProperties(uw, dto);
-			dtos.add(dto);
-		});
-		return dtos;
-	}*/
-	
 }

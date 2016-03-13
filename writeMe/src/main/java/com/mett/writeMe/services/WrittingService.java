@@ -101,4 +101,6 @@ public class WrittingService implements WrittingServiceInterface{
 		Writting nwritting = writtingRepository.save(writting);
 		return (nwritting == null) ? false : true;
 	}
+	
+	
 }
