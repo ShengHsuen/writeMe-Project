@@ -34,6 +34,8 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 	$scope.myVar = false;
 	$scope.toggle = function() {
 		$scope.myVar = !$scope.myVar;
+
+		$scope.clean();
 	};
 
 	$scope.onError = false;
@@ -51,7 +53,12 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 						function(response) {
 							$scope.toggle();
 							$scope.init();
+							$scope.clean();
 						});
 	};
+	$scope.clean = function() {
+		$scope.description="";
+		$scope.name="";
+	}
 
 } ]);
