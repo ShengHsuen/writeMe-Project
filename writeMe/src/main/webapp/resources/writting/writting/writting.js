@@ -17,7 +17,7 @@
 		var dia = $scope.date.getDate();
 		var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 		
-		$scope.published = false;
+		var publish = false;
 		
 		$scope.writting={
 				"pageNumber": 0,
@@ -35,7 +35,7 @@
 					"limit time": "2100-01-01",
 					"numMaxCharacters": 10000,
 					"numMinCharacters": 30,
-					"published": $scope.published,
+					"published": publish,
 					"content": $scope.content
 				}
 		};
@@ -48,14 +48,12 @@
 
 		var update = function(){
 			$http.post('writting/editContent',$scope.writting).success(function(response) {
-			/*$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
-				console.log("3 : "+response);
-			});*/
 			});
 		}
 		
 		$scope.publish = function(){
-			console.log("Published: " + $scope.published + "Fecha: " + fecha);
+			publish = true;
+			console.log("Published: " + publish + "Fecha: " + fecha);
 			$http.post('writting/publish',$scope.writting).success(function(response) {
 
 			});

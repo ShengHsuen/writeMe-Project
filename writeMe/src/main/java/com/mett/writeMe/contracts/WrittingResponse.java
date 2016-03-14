@@ -2,6 +2,8 @@ package com.mett.writeMe.contracts;
 
 import java.util.List;
 
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 
 /**
@@ -10,6 +12,16 @@ import com.mett.writeMe.pojo.WrittingPOJO;
  */
 public class WrittingResponse extends BaseResponse{
 	private List<WrittingPOJO> writting;
+	private List<UserPOJO> user;
+	public List<UserPOJO> getUser() {
+		return user;
+	}
+
+	public void setUser(List<UserPOJO> user) {
+		this.user = user;
+	}
+
+	private List<UserHasWrittingPOJO> userHasWritting;
 	private int idWritting;
 	private String name;
 	
@@ -39,5 +51,13 @@ public class WrittingResponse extends BaseResponse{
 
 	public void setWritting(List<WrittingPOJO> writting) {
 		this.writting = writting;
+	}
+	
+	public List<UserHasWrittingPOJO> getUserHasWritting() {
+		return userHasWritting;
+	}
+
+	public void setUsuarios(List<UserHasWrittingPOJO> userHasWritting) {
+		this.userHasWritting = userHasWritting;
 	}
 }

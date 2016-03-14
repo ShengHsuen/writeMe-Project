@@ -19,6 +19,8 @@ import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.WrittingServiceInterface;
 
+import antlr.collections.List;
+
 /**
  * @author Dani
  * @author Sheng
@@ -56,12 +58,35 @@ public class WrittingController {
 		}
 		return us;
 	}
+	
+	@RequestMapping(value ="/getPublished", method = RequestMethod.POST)
+	public WrittingResponse getPublished(@RequestBody WrittingRequest ur){	
+		System.out.println("Controller /getPublished");
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		us.setWritting(WrittingService.getPublished(ur));
+		us.setUser(WrittingService.getUsersPublished());
+		return us;		
+	}
+	
+	/*@RequestMapping(value ="/getUserPublished", method = RequestMethod.POST)
+	public WrittingResponse getUserPublished(@RequestBody WrittingRequest ur){	
+		System.out.println("Controller /getPublished");
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		us.setWritting(WrittingService.getPublished(ur));
+		return us;		
+	}*/
+	
 
 	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
 	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
+		System.out.println("contenido de UR: " + ur.getWritting().getContent());
 		wr.setContent(ur.getWritting().getContent());
 		Boolean state = WrittingService.editWritting(wr);
 
@@ -107,4 +132,12 @@ public class WrittingController {
 		}
 		return us;
 	}
+	
+	/*public UserHasWrittingResponse getAll(@RequestBody UserHasWrittingRequest ur){	
+		UserHasWrittingResponse us = new UserHasWrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		us.setUsuarios(UserHasWrittingService.getAll(ur));
+		return us;		
+	}*/
 }
