@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.contracts.WrittingResponse;
+import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.ejb.UserHasWritting;
 //
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.WrittingRepository;
 
@@ -33,7 +36,27 @@ public class WrittingService implements WrittingServiceInterface{
 		List<Writting> Writtings =  writtingRepository.findAll();
 		return generateWrittingDtos(Writtings);
 	}
-	
+
+	/* @author Mildred Guerra
+	 * Get the list of all writtings
+	 * Return a List<WrittingPOJO>  dtos 
+	 */
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getAll() {
+		List<Writting> wirttings = writtingRepository.findAll();
+		List<WrittingPOJO> dtos = new ArrayList<WrittingPOJO>();
+		wirttings.stream().forEach(tu ->{
+			WrittingPOJO dto = new WrittingPOJO();
+			BeanUtils.copyProperties(tu, dto);
+			if( tu.getWritting()!= null){
+
+				dto.setWrittingFather(tu.getWritting().getWrittingId());
+			}
+			dtos.add(dto);
+		});
+		return dtos;
+	}
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAllByName(com.mett.writeMe.contracts.WrittingRequest)
 	 */
@@ -100,5 +123,16 @@ public class WrittingService implements WrittingServiceInterface{
 	public Boolean editWritting(Writting writting){
 		Writting nwritting = writtingRepository.save(writting);
 		return (nwritting == null) ? false : true;
+	}
+
+	
+	/* @author Mildred Guerra
+	 * Delete a writting
+	 * @param int writtingId
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.writeMe.ejb.Writting)
+	 */
+	@Override
+	public void deletewritting(int writtingId) {
+		writtingRepository.delete(writtingId);
 	}
 }

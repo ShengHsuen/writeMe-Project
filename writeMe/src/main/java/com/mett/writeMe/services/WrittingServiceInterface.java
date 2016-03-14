@@ -3,6 +3,7 @@ package com.mett.writeMe.services;
 import java.util.List;
 
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.WrittingPOJO;
 
@@ -17,5 +18,7 @@ public interface WrittingServiceInterface {
 	WrittingPOJO getWrittingByName(WrittingRequest ur);
 	//String getWrittingContent(WrittingRequest ur);
 	Boolean editWritting(Writting writting);
+	List<WrittingPOJO> getAll();
+	void deletewritting(int writtingId);
 	
 }

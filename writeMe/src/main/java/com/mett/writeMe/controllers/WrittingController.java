@@ -1,5 +1,8 @@
 package com.mett.writeMe.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.BeanUtils;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mett.writeMe.utils.Utils;
+import com.mett.writeMe.contracts.LegalEstablishmentResponse;
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
@@ -19,6 +23,7 @@ import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
@@ -44,6 +49,22 @@ public class WrittingController {
 	private User u = new User();
 	private Writting wr = new Writting();
 	private String resultFileName;
+
+
+	/**
+	 * @author Mildred Guerra
+	 * This method get all the writtings 
+	 * 
+	 * @return WrittingResponse response
+	 */
+	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
+	public WrittingResponse getAll() {
+		WrittingResponse response = new WrittingResponse();
+		response.setCode(200);
+		response.setCodeMessage("Muestra reglas satisfactoriamente");
+		response.setWritting(WrittingService.getAll());
+		return response;
+	}
 	/**
 	 * @param ur
 	 * @return
@@ -109,7 +130,13 @@ public class WrittingController {
 
 		return us;
 	}
-		
+
+	/**
+	 * @author Mildred Guerra
+	 * Add files to util
+	 * 
+	 * @param MultipartFile file
+	 */
 		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
 		public void create(
 				@RequestParam("file") MultipartFile file){	
@@ -117,4 +144,36 @@ public class WrittingController {
 			 resultFileName = Utils.writeToFile(file,servletContext);
 			 System.out.println("Entra a agregar files");
 		}
+		
+	/**
+	 * @author Mildred Guerra
+	 * Delete writting
+	 * @param  int idwritting
+	 * @return WrittingResponse wr
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public  WrittingResponse delete(@RequestParam("writtingId") int writtingId) {
+		WrittingResponse wr= new WrittingResponse(); 
+		List<WrittingPOJO> listaUserHasWritting  =new ArrayList<WrittingPOJO>();
+		//buscar todos los userHasWritting
+
+		//botener todas para comparar con el padre
+		List<WrittingPOJO> allWrittings = getAll().getWritting();
+		wr=getAll();
+		//comparar los que tienen de padre writtingId
+		allWrittings.stream().forEach(wt ->{
+			if(wt.getWrittingFather()==writtingId){
+				//listaHijos.add(wt);
+				
+				//eliminar userhasWritting
+				//eliminar hijos
+			//	WrittingService.deletewritting(wt.getWrittingId());
+			}
+		});
+		
+		//eliminar el ultimo
+		// WrittingService.deletewritting(writtingId);
+		return wr;
+	}
+		
 }
