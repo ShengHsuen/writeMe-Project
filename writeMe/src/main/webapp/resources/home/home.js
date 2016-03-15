@@ -26,17 +26,6 @@ angular.module('myApp.home', ['ngRoute'])
 			console.log("home.js");
 			$scope.writting = response.writting;
 			$scope.user = response.user;
-			//console.log("recibe usuario: " + $scope.user.author);
-			//getUserPublished();
 		});
-		
-		/*var getUserPublished = function(){
-			$http.post('writting/getUserPublished',$scope.writting).success(function(response){
-				console.log("user home.js");
-				
-				$scope.us = response.writting;
-				getUserPublished();
-			});
-		}*/
 	}
 }]);
