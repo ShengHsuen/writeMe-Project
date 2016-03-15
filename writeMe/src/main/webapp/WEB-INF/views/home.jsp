@@ -356,6 +356,58 @@
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+  
+  <!-- Del bower y home -->
+  <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="resources/bower_components/angular/angular.js"></script>
+  <script src="resources/bower_components/angular-route/angular-route.js"></script>
+  
+  <script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+  <script src="resources/non_bower_components/angular-file-upload.min.js"></script>
+  
+  <script src="resources/app.js"></script>
+  
+  <!-- Del template -->
+  <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+  <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
+  <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  
+  <script src="resources/html/js/ui-load.js"></script>
+  <script src="resources/html/js/ui-jp.config.js"></script>
+  <script src="resources/html/js/ui-jp.js"></script>
+  <script src="resources/html/js/ui-nav.js"></script>
+  <script src="resources/html/js/ui-toggle.js"></script>
+  <script src="resources/html/js/ui-client.js"></script>
+  
+  <script src="resources/legalEstablishment/legalEstablishment.js"></script>
+  <script src="resources/writting/createWritting/createWritting.js"></script>
+  <script src="resources/writting/writting/writting.js"></script>
+  <script src="resources/writting/showWrittings/showWrittings.js"></script>
+  
+  <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
+  <script src="resources/legalEstablishment/legalEstablishment.js"></script>
+  <script src="resources/home/home.js"></script>
+  
+  <!-- DEL WYSWYG(TEXTAREA) -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/froala_editor.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/align.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/code_beautifier.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/code_view.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/draggable.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/image.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/image_manager.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/link.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/lists.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/paragraph_format.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/paragraph_style.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/table.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/video.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/url.min.js"></script>
+  <script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
 
 	<!-- Del bower y home -->
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
