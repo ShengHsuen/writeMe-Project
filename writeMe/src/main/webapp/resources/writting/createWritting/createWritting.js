@@ -86,7 +86,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					      "image": "",
 					      "cantUsers": $scope.cantUsers,
 					      "description": $scope.description,
-					      "published": true,
+					      "published": false,
 					      "numMinCharacters": 10,
 					      "content": "",
 					      "category": $scope.cateSelected,

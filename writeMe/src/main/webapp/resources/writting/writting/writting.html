@@ -3,9 +3,10 @@
 		<div id="editor">
 			<form>
 				<textarea id='edit' style="margin-top: 30px;" placeholder="Type some text" ng-model="content"></textarea>
-				<input type="submit" ng-click="enviar()">
+				<input type="submit" ng-click="send()">
 			</form>
 		</div>
+		<button class="btn btn-lg btn-default btn-block" class="btn btn-default" data-toggle="confirmation" ng-click="publish()">Publicar</button>
 
 		<script>
 			$(function() {
