@@ -83,7 +83,6 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public Boolean saveWritting(WrittingRequest ur) {
 		Writting writting = new Writting();
-		UserHasWritting UHW = new UserHasWritting();
 		
 		BeanUtils.copyProperties(ur.getWritting(), writting);
 
@@ -98,7 +97,22 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean editWritting(Writting writting){
+		
 		Writting nwritting = writtingRepository.save(writting);
 		return (nwritting == null) ? false : true;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#saveWritting(com.mett.writeMe.contracts.WrittingRequest)
+	 */
+	@Override
+	@Transactional
+	public Boolean editWrittingInvitation(WrittingRequest ur) {
+		Writting writting = new Writting();
+		BeanUtils.copyProperties(ur.getWritting(), writting);
+		Writting nWritting = writtingRepository.save(writting);
+		
+		return (nWritting == null) ? false : true;
+	}
+	
 }

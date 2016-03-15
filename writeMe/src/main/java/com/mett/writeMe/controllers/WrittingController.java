@@ -68,7 +68,7 @@ public class WrittingController {
 
   if (state) {
    us.setCode(200);
-   us.setCodeMessage("write created succesfully");
+   us.setCodeMessage("edit created succesfully");
   }
   return us;
  }

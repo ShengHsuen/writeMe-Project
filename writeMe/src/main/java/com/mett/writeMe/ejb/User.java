@@ -2,6 +2,9 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -56,14 +59,6 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	private List<Record> records;
 
-	//bi-directional many-to-one association to City
-	@ManyToOne(fetch=FetchType.LAZY)
-	private City city;
-
-	//bi-directional many-to-one association to Mylibrary
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Mylibrary mylibrary;
-
 	//bi-directional many-to-many association to User
 	@ManyToMany
 	@JoinTable(
@@ -80,6 +75,14 @@ public class User implements Serializable {
 	//bi-directional many-to-many association to User
 	@ManyToMany(mappedBy="users1")
 	private List<User> users2;
+
+	//bi-directional many-to-one association to City
+	@ManyToOne(fetch=FetchType.LAZY)
+	private City city;
+
+	//bi-directional many-to-one association to Mylibrary
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Mylibrary mylibrary;
 
 	//bi-directional many-to-one association to UserHasWritting
 	@OneToMany(mappedBy="user")
@@ -270,22 +273,6 @@ public class User implements Serializable {
 		return record;
 	}
 
-	public City getCity() {
-		return this.city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-
-	public Mylibrary getMylibrary() {
-		return this.mylibrary;
-	}
-
-	public void setMylibrary(Mylibrary mylibrary) {
-		this.mylibrary = mylibrary;
-	}
-
 	public List<User> getUsers1() {
 		return this.users1;
 	}
@@ -300,6 +287,22 @@ public class User implements Serializable {
 
 	public void setUsers2(List<User> users2) {
 		this.users2 = users2;
+	}
+
+	public City getCity() {
+		return this.city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Mylibrary getMylibrary() {
+		return this.mylibrary;
+	}
+
+	public void setMylibrary(Mylibrary mylibrary) {
+		this.mylibrary = mylibrary;
 	}
 
 	public List<UserHasWritting> getUserHasWrittings() {

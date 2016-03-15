@@ -9,9 +9,16 @@
 	  });
 	}])
 	
+	
+	
 	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
 		
+//		$scope.$on("NAME_CHANNEL",function(event,name){
+//			$scope.name = name;
+//		});
+		
 		$scope.enviar = function(){
+			console.log($scope.name);
 			$scope.content = $('#edit').val();
 			console.log($scope.content);
 			update();
@@ -24,9 +31,9 @@
 					"direction": "",
 					"sortBy": [""],
 					"searchColumn": "string",
-					"searchTerm": "Prueba2",
+					"searchTerm": "aaa",
 					"writting": {
-						"name" : "Prueba2",
+						"name" : "aaa",
 						"description" : " a ",
 						"cantUsers": 0,
 						"date": "2016-02-02",
@@ -42,7 +49,35 @@
 			/*$http.post('writting/getWrittingContent',$scope.writting).success(function(response) {
 				console.log("3 : "+response);
 			});*/
+				createUserHasWritting();
 			});
+			
+			
+			var createUserHasWritting = function(){
+				$scope.userHasWritting={
+						  "pageNumber": 0,
+						  "pageSize": 0,
+						  "direction": "string",
+						  "sortBy": [
+						    "string"
+						  ],
+						  "searchColumn": "string",
+						  "searchTerm": "string",
+						  "userHasWritting": {
+							  "dateModifie": "2016-02-02",
+						      "statusColor": false,
+						      "user_has_writtingId": 0,
+						      "linkInvitation": "string",
+						      "banned": false,
+						      "dateCreate": "2016-02-02",
+						      "invitationStatus": false
+						}
+						
+				};
+				$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+					
+				});
+			}
 		}
 		
 	}]);

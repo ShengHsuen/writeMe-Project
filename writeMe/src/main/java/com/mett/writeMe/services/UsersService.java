@@ -8,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mett.writeMe.ejb.LegalEstablishment;
 import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
-import com.mett.writeMe.contracts.LoginRequest;
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.repositories.UserRepository;
 
@@ -74,17 +73,38 @@ public class UsersService implements UsersServiceInterface{
 		
 		return (nuser == null) ? false : true;
 	}
-
 	
 	@Override
 	public void deleteUser(int idUser){
 	   userRepository.delete(idUser);
 	}
+	
 	@Override
 	@Transactional
 	public User getUserByMail(UsersRequest ur) {
 		User user = new User();
 		user= userRepository.findByMail(ur.getEmail());
 		return  user;
+	}
+	
+	@Override
+	@Transactional
+	public List<UserPOJO> getWrittings(UsersRequest us){
+		User user = userRepository.findOne(1); // por el momento quemado
+		List<UserPOJO> dtos = new ArrayList<UserPOJO>();
+		UserPOJO dto = new UserPOJO();
+		
+		BeanUtils.copyProperties(user,dto);
+		
+		List<UserHasWrittingPOJO> userHasWrittings = new ArrayList<UserHasWrittingPOJO>();
+		user.getUserHasWrittings().stream().forEach(uhw ->{
+			UserHasWrittingPOJO uhwDto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(uhw,uhwDto);
+			userHasWrittings.add(uhwDto);
+		});
+		dto.setUserHasWrittings(userHasWrittings);
+		dtos.add(dto);
+		return dtos;
+		
 	}
 }

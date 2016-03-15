@@ -5,9 +5,10 @@ import javax.persistence.*;
 import java.util.List;
 
 
+
 /**
- * The persistent class for the mylibrary database table.
- * 
+ * @author Sheng hsuen
+ *
  */
 @Entity
 @NamedQuery(name="Mylibrary.findAll", query="SELECT m FROM Mylibrary m")
@@ -22,13 +23,13 @@ public class Mylibrary implements Serializable {
 
 	private String title;
 
-	//bi-directional many-to-one association to User
-	@OneToMany(mappedBy="mylibrary")
-	private List<User> users;
-
 	//bi-directional many-to-many association to Writting
 	@ManyToMany(mappedBy="mylibraries")
 	private List<Writting> writtings;
+
+	//bi-directional many-to-one association to User
+	@OneToMany(mappedBy="mylibrary")
+	private List<User> users;
 
 	public Mylibrary() {
 	}
@@ -57,6 +58,14 @@ public class Mylibrary implements Serializable {
 		this.title = title;
 	}
 
+	public List<Writting> getWrittings() {
+		return this.writtings;
+	}
+
+	public void setWrittings(List<Writting> writtings) {
+		this.writtings = writtings;
+	}
+
 	public List<User> getUsers() {
 		return this.users;
 	}
@@ -77,14 +86,6 @@ public class Mylibrary implements Serializable {
 		user.setMylibrary(null);
 
 		return user;
-	}
-
-	public List<Writting> getWrittings() {
-		return this.writtings;
-	}
-
-	public void setWrittings(List<Writting> writtings) {
-		this.writtings = writtings;
 	}
 
 }

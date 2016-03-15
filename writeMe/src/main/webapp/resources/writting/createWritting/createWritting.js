@@ -2,6 +2,7 @@
 
 angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 
+
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/createWritting', {
     templateUrl: 'resources/writting/createWritting/createWritting.html',
@@ -9,12 +10,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
   });
 }])
 
+
 .controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
+	
 	
 		//Variables
 		$scope.showCantUsers = false;

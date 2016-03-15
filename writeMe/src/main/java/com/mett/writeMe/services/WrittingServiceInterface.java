@@ -17,5 +17,6 @@ public interface WrittingServiceInterface {
 	WrittingPOJO getWrittingByName(WrittingRequest ur);
 	//String getWrittingContent(WrittingRequest ur);
 	Boolean editWritting(Writting writting);
+	Boolean editWrittingInvitation(WrittingRequest ur);
 	
 }
