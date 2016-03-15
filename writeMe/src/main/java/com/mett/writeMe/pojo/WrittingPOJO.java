@@ -104,7 +104,7 @@ public class WrittingPOJO {
 		this.participation = participation;
 	}
 
-	public boolean isPublished() {
+	public boolean getPublished() {
 		return published;
 	}
 

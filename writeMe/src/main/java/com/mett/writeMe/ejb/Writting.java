@@ -48,19 +48,15 @@ public class Writting implements Serializable {
 	@Lob
 	private String numMinCharacters;
 
-	private byte participation;
+	private boolean participation;
 
-	private byte published;
+	private boolean published;
 
 	private String typeWritting;
 
 	//bi-directional many-to-one association to Chapter
 	@OneToMany(mappedBy="writting")
 	private List<Chapter> chapters;
-
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="writting")
-	private List<UserHasWritting> userHasWrittings;
 
 	//bi-directional many-to-many association to Mylibrary
 	@ManyToMany
@@ -75,6 +71,14 @@ public class Writting implements Serializable {
 		)
 	private List<Mylibrary> mylibraries;
 
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
+
+	//bi-directional many-to-one association to Typewritting
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Typewritting typewritting;
+
 	//bi-directional many-to-one association to Record
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Record record;
@@ -82,10 +86,6 @@ public class Writting implements Serializable {
 	//bi-directional many-to-one association to Restriction
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Restriction restriction;
-
-	//bi-directional many-to-one association to Typewritting
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Typewritting typewritting;
 
 	//bi-directional many-to-one association to Writting
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -195,19 +195,19 @@ public class Writting implements Serializable {
 		this.numMinCharacters = numMinCharacters;
 	}
 
-	public byte getParticipation() {
+	public boolean getParticipation() {
 		return this.participation;
 	}
 
-	public void setParticipation(byte participation) {
+	public void setParticipation(boolean participation) {
 		this.participation = participation;
 	}
 
-	public byte getPublished() {
+	public boolean getPublished() {
 		return this.published;
 	}
 
-	public void setPublished(byte published) {
+	public void setPublished(boolean published) {
 		this.published = published;
 	}
 
@@ -241,6 +241,14 @@ public class Writting implements Serializable {
 		return chapter;
 	}
 
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
+
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
+	}
+
 	public List<UserHasWritting> getUserHasWrittings() {
 		return this.userHasWrittings;
 	}
@@ -263,12 +271,12 @@ public class Writting implements Serializable {
 		return userHasWritting;
 	}
 
-	public List<Mylibrary> getMylibraries() {
-		return this.mylibraries;
+	public Typewritting getTypewritting() {
+		return this.typewritting;
 	}
 
-	public void setMylibraries(List<Mylibrary> mylibraries) {
-		this.mylibraries = mylibraries;
+	public void setTypewritting(Typewritting typewritting) {
+		this.typewritting = typewritting;
 	}
 
 	public Record getRecord() {
@@ -285,14 +293,6 @@ public class Writting implements Serializable {
 
 	public void setRestriction(Restriction restriction) {
 		this.restriction = restriction;
-	}
-
-	public Typewritting getTypewritting() {
-		return this.typewritting;
-	}
-
-	public void setTypewritting(Typewritting typewritting) {
-		this.typewritting = typewritting;
 	}
 
 	public Writting getWritting() {
