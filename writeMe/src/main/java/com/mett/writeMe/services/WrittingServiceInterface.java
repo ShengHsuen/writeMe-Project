@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 
 /**
@@ -18,5 +19,7 @@ public interface WrittingServiceInterface {
 	//String getWrittingContent(WrittingRequest ur);
 	Boolean editWritting(Writting writting);
 	Boolean editWrittingInvitation(WrittingRequest ur);
+	List<WrittingPOJO> getPublished(WrittingRequest ur);
+	List<UserPOJO> getUsersPublished();
 	
 }

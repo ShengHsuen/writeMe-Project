@@ -4,10 +4,9 @@ package com.mett.writeMe.controllers;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +36,8 @@ public class UserController {
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public UsersResponse create(@RequestBody UsersRequest ur){	
 		UsersResponse us = new UsersResponse();
-		Boolean state = usersService.saveUser(ur);		
+		Boolean state = usersService.saveUser(ur);
+		//System.out.println("user has w: "+us.getUserHasWritting().get(0).getUser().getName());
 			if(state){
 				us.setCode(200);
 				us.setCodeMessage("user created succesfully");
@@ -64,12 +64,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="/getWrittings", method = RequestMethod.POST)
-	public UsersResponse getWrittings(@RequestBody UsersRequest ur) throws IOException, HttpMessageNotWritableException{	
+	public UsersResponse getWrittings(HttpServletRequest servletRequest){	
 
 		UsersResponse response = new UsersResponse();
+		HttpSession currentSession = servletRequest.getSession();
 		response.setCode(200);
 		response.setCodeMessage("obtiene bien los writtings");
-		response.setUsers(usersService.getWrittings(ur));
+		response.setWrittings(usersService.getWrittingsByUser(currentSession));
 		return response;		
 	}
 	

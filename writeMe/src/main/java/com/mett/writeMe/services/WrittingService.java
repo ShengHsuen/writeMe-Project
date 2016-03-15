@@ -12,7 +12,9 @@ import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.UserHasWritting;
 //
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
+import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.WrittingRepository;
 
 /**
@@ -20,90 +22,147 @@ import com.mett.writeMe.repositories.WrittingRepository;
  *
  */
 @Service
-public class WrittingService implements WrittingServiceInterface{
-	@Autowired 
-	private WrittingRepository writtingRepository;	
+public class WrittingService implements WrittingServiceInterface {
 
-	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
+	@Autowired
+	private WrittingRepository writtingRepository;
+	@Autowired
+	private UserHasWrittingRepository userHasWrittingRepository;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.
+	 * writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getAll(WrittingRequest ur) {
-		List<Writting> Writtings =  writtingRepository.findAll();
+		List<Writting> Writtings = writtingRepository.findAll();
 		return generateWrittingDtos(Writtings);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAllByName(com.mett.writeMe.contracts.WrittingRequest)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mett.writeMe.services.WrittingServiceInterface#getAllByName(com.mett.
+	 * writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getAllByName(WrittingRequest ur) {
-		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		  return generateWrittingDtos(Writtings);
+		List<Writting> Writtings = writtingRepository.findByNameContaining(ur.getSearchTerm());
+		return generateWrittingDtos(Writtings);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.WrittingServiceInterface#getWrittingByName(com.mett.writeMe.contracts.WrittingRequest)
+
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getPublished(WrittingRequest ur) {
+		System.out.println("Service /getPublished");
+		List<Writting> Writtings = writtingRepository.findByPublishedTrue();
+		// System.out.println("Service /getPublished : " +
+		// Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
+		return generateWrittingDtos(Writtings);
+	}
+
+	@Override
+	@Transactional
+	public List<UserPOJO> getUsersPublished() {
+		List<UserPOJO> Users = new ArrayList<UserPOJO>();
+		List<Writting> Writtings = writtingRepository.findByPublishedTrue();
+		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
+		System.out.println(Writtings.size());
+		int j = 0;
+		for (int i = 0; i <= UserHasWrittings.size() - 1; i++) {
+			if (Writtings.get(j).getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()) {
+				j++;
+				System.out.println("j " + j);
+				UserPOJO dto = new UserPOJO();
+				BeanUtils.copyProperties(UserHasWrittings.get(i).getUser(), dto);
+				Users.add(dto);
+			} else {
+
+			}
+		}
+		return Users;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mett.writeMe.services.WrittingServiceInterface#getWrittingByName(com.
+	 * mett.writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
 	public WrittingPOJO getWrittingByName(WrittingRequest ur) {
-		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		  System.out.println("La obra: "+ Writtings.get(0));
-		  return generateWrittingDtos(Writtings).get(0);
+		List<Writting> Writtings = writtingRepository.findByNameContaining(ur.getSearchTerm());
+		System.out.println("La obra: " + Writtings.get(0));
+		return generateWrittingDtos(Writtings).get(0);
 	}
-	
-	/*@Override
-	@Transactional
-	public String getWrittingContent(WrittingRequest ur) {
-		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		  return generateWrittingDtos(Writtings).get(0).getContent();
-	}*/
-	
+
+	/*
+	 * @Override
+	 * 
+	 * @Transactional public String getWrittingContent(WrittingRequest ur) {
+	 * List<Writting> Writtings =
+	 * writtingRepository.findByNameContaining(ur.getSearchTerm()); return
+	 * generateWrittingDtos(Writtings).get(0).getContent(); }
+	 */
+
 	/**
 	 * @param Writtings
 	 * @return
 	 */
-	private List<WrittingPOJO> generateWrittingDtos(List<Writting> Writtings){
+	private List<WrittingPOJO> generateWrittingDtos(List<Writting> Writtings) {
 		List<WrittingPOJO> uiWrittings = new ArrayList<WrittingPOJO>();
 		Writtings.stream().forEach(u -> {
 			WrittingPOJO dto = new WrittingPOJO();
-			BeanUtils.copyProperties(u,dto);
+			BeanUtils.copyProperties(u, dto);
 			uiWrittings.add(dto);
-		});	
+		});
 		return uiWrittings;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.WrittingServiceInterface#saveWritting(com.mett.writeMe.contracts.WrittingRequest)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mett.writeMe.services.WrittingServiceInterface#saveWritting(com.mett.
+	 * writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
 	public Boolean saveWritting(WrittingRequest ur) {
 		Writting writting = new Writting();
-		
+
 		BeanUtils.copyProperties(ur.getWritting(), writting);
 
 		Writting nWritting = writtingRepository.save(writting);
-		
+
 		return (nWritting == null) ? false : true;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.writeMe.ejb.Writting)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.
+	 * writeMe.ejb.Writting)
 	 */
 	@Override
 	@Transactional
-	public Boolean editWritting(Writting writting){
-		
+	public Boolean editWritting(Writting writting) {
+
 		Writting nwritting = writtingRepository.save(writting);
 		return (nwritting == null) ? false : true;
 	}
+
 	
 	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.WrittingServiceInterface#saveWritting(com.mett.writeMe.contracts.WrittingRequest)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWrittingInvitation(com.mett.writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
@@ -111,8 +170,8 @@ public class WrittingService implements WrittingServiceInterface{
 		Writting writting = new Writting();
 		BeanUtils.copyProperties(ur.getWritting(), writting);
 		Writting nWritting = writtingRepository.save(writting);
-		
+
 		return (nWritting == null) ? false : true;
 	}
-	
+
 }

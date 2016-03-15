@@ -76,7 +76,7 @@ public class SendEmail {
 		   user =usersService.getUserByMail(userRequest);
 		   String to = user.getMail();
 	        String subject = "Confirmación de cuenta en Write Me";
-	        String message = "Bienvenid@ a la familia Write Me! Gracias por preferir los servicios de Write Me "+user.getName()+ "! Su información de cuenta es: Correo"+ user.getMail()+" y contraseña "+ user.getPassword();
+	        String message = "Bienvenid@ a la familia Write Me! Gracias por preferir los servicios de Write Me "+user.getName()+ "! La información de su cuenta es: Correo "+ user.getMail()+" y Contraseña "+ user.getPassword();
 		    EmailSenderService sendMail = new EmailSenderService(from, to, subject, message);
 	        sendMail.send();
 			if(user != null){

@@ -1,4 +1,5 @@
 'use strict';
+//@author Mildred Guerra
 
 angular.module('myApp.resetPassword', ['ngRoute'])
 
@@ -15,13 +16,12 @@ angular.module('myApp.resetPassword', ['ngRoute'])
 		window.location.href = path;
 	}
 
+	//Send the email with a password
 	$scope.sendEmail = function(){
 		$scope.user = {email: $scope.email};
-		
 		$http.post('rest/email/resetPassword',$scope.user).success(function (userResponse) {
 			if(userResponse.code == 200){
-				alert("valido");
-				
+				$scope.navSignin();
 			}else{
 				alert("invalido");
 			}

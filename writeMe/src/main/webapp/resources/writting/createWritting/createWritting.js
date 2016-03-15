@@ -10,15 +10,16 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
   });
 }])
 
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', function($scope,$http,$location,$upload) {
 
-.controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-	
-	
+
+	$scope.files = {};
+
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -63,6 +64,21 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
+			for ( var i = 0; i < $scope.files.length; i++) {
+    			var file = $scope.files[i];
+    			$scope.upload = $upload.upload({
+    				url : 'writting/addFiles',
+    				file : file,
+    			}).progress(
+    					function(evt) {
+    						console.log('percent: '+ parseInt(100.0 * evt.loaded / evt.total));
+    					}).success(function(data, status, headers, config) {
+    						// Rent is uploaded successfully
+    						console.log(data);
+    					});
+    	    			//.error(...)
+    	    			//.then(success, error, progress); 
+        		}
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -76,7 +92,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					      "image": "",
 					      "cantUsers": $scope.cantUsers,
 					      "description": $scope.description,
-					      "published": true,
+					      "published": false,
 					      "numMinCharacters": 10,
 					      "content": "",
 					      "category": $scope.cateSelected,
@@ -90,8 +106,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			};
 
 		    
-		    /*metodo para agregar imagen-no funciona */
-/*	    var createWritting = function(event){
+/*		    metodo para agregar imagen-no funciona 
+	    var createWritting = function(event){
 	    		for ( var i = 0; i < $scope.files.length; i++) {
 	    			var image = $scope.files[i];
 	    			$scope.upload = $upload.upload({
@@ -176,4 +192,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 				console.log("2");
 			});
 		}
+		 $scope.onFileSelect = function($files) {
+		    	$scope.files = $files;
+		    };
+		    
 }]);

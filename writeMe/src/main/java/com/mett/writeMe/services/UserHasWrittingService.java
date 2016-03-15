@@ -13,6 +13,7 @@ import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
+
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
@@ -58,6 +59,19 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		return dtos;
 	}
 
+	public List<UserHasWrittingPOJO> getAll(UserHasWrittingRequest ur) {
+		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
+		return generateUserHasWrittingDtos(UserHasWrittings);
+	}
 	
-	
+	private List<UserHasWrittingPOJO> generateUserHasWrittingDtos(List<UserHasWritting> UserHasWrittings){
+		List<UserHasWrittingPOJO> uiWrittings = new ArrayList<UserHasWrittingPOJO>();
+		UserHasWrittings.stream().forEach(u -> {
+			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(u,dto);
+			uiWrittings.add(dto);
+		});	
+		return uiWrittings;
+	}
+
 }

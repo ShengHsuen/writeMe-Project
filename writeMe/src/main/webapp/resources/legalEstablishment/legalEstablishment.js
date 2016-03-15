@@ -1,5 +1,7 @@
 'use strict';
 var i = 1;
+//@author Mildred Guerra
+
 angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 
 .config([ '$routeProvider', function($routeProvider) {
@@ -21,7 +23,7 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 			"legalEstablishment" : {}
 	};
 
-	// Mostarr
+	//Get all the rules of legal establishment
 	$scope.init = function() {
 		$http.post('rest/protected/legal/getAll',
 				$scope.requestObject).success(function(response) {
@@ -30,14 +32,16 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 	}
 
 	$scope.init();
-	// Mostrar menu crear regla
+	// Show and hide create rule form
 	$scope.myVar = false;
 	$scope.toggle = function() {
 		$scope.myVar = !$scope.myVar;
+
+		$scope.clean();
 	};
 
 	$scope.onError = false;
-	// Guardar regla
+	// Save rule
 	$scope.saveRule = function(event) {
 		$scope.requestObject = {
 				"legal_establishmentId" : 0,
@@ -51,7 +55,20 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 						function(response) {
 							$scope.toggle();
 							$scope.init();
+							$scope.clean();
 						});
 	};
+	$scope.clean = function() {
+		$scope.description="";
+		$scope.name="";
+	}
+    // callback for ng-click 'deleteLegal':
+    $scope.deleteLegal = function (legalId) {
+    			  $http({ url: 'rest/protected/legal/delete', 
+    	                method: 'DELETE', 
+    	                params: {legal_establishmentId: legalId}
+    			  });
+					$scope.init();
+    	        }
 
 } ]);
