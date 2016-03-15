@@ -17,37 +17,29 @@
 				<div class="panel-heading font-bold">Agregar regla</div>
 				<div class="panel-body">
 					<form id="createRuleForm" name="createRuleForm"
-						class="form-horizontal" role="form">
+						class="form-horizontal form-validation" role="form">
 						<div>
-							<div class="form-group"
-								ng-class="{error: onError && createRuleForm.name.$invalid}">
+							<div class="form-group">
 								<label class="col-sm-2 control-label" for="input-id-1">Nombre</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="name" name="name"
-										required ng-model="name"> <span
-										ng-show="onError && createRuleForm.name.$error.required"
-										class="help-inline">Requerido </span>
+										required ng-model="name">
 								</div>
 							</div>
 
-							<div class="form-group"
-								ng-class="{error: onError && createRuleForm.description.$invalid}">
+							<div class="form-group">
 								<label class="col-sm-2 control-label">Descripción</label>
 								<div class="col-sm-10">
 									<textarea class="form-control" id="description"
 										name="description" required ng-model="description" rows="4"
 										cols="50"> </textarea>
-
-									<span
-										ng-show="onError && createRuleForm.description.$error.required"
-										class="help-inline">Requerido </span>
 								</div>
 								<div class="line line-dashed b-b line-lg pull-in"></div>
 							</div>
 
 							<div class="form-group">
 								<div class="col-sm-4 col-sm-offset-2">
-									<button type="submit" ng-click="toggle()"
+									<button type="reset" ng-click="toggle()"
 										class="btn btn-default">Cancelar</button>
 									<button type="submit" class="btn btn-primary"
 										ng-click="saveRule($event)"
@@ -73,7 +65,7 @@
 							<h4 style="display: inline-block;">{{pane.name}}</h4>
 							<span class=" pull-right"
 								style="width: 20px; display: inline-block;">
-								<button ng-click="person.selected = undefined">
+								<button ng-click="deleteLegal(pane.legal_establishmentId)"  >
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</span>

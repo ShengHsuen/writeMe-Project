@@ -45,13 +45,13 @@ public class UserHasWrittingController{
 	 * @return
 	 */
 	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
-	public UserHasWrittingResponse getAll(){
+	public UserHasWrittingResponse getAll(@RequestBody UserHasWrittingRequest ur){
 		
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 
 		us.setCode(200);
 		us.setCodeMessage("Muestra los user has writting satisfactoriamente");
-		us.setUserHasWritting(userHasWrittingService.getAll());
+		us.setUserHasWritting(userHasWrittingService.getAll(ur));
 
 		return us;
 	}

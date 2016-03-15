@@ -6,7 +6,7 @@ import com.mett.writeMe.contracts.BaseRequest;
 public class UserHasWrittingRequest extends BaseRequest{
 	
 	private UserHasWrittingPOJO userHasWritting;
-	
+	private String resultFileName;
 	public UserHasWrittingRequest() {
 		super();
 	}
@@ -23,4 +23,5 @@ public class UserHasWrittingRequest extends BaseRequest{
 	public String toString() {
 		return "UserHasWrittingRequest [userHasWritting=" + userHasWritting + "]";
 	}
+
 }

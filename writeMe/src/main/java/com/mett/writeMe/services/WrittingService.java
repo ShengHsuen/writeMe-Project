@@ -12,7 +12,9 @@ import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.UserHasWritting;
 //
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
+import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.WrittingRepository;
 
 /**
@@ -21,8 +23,11 @@ import com.mett.writeMe.repositories.WrittingRepository;
  */
 @Service
 public class WrittingService implements WrittingServiceInterface{
+	
 	@Autowired 
-	private WrittingRepository writtingRepository;	
+	private WrittingRepository writtingRepository;
+	@Autowired 
+	private UserHasWrittingRepository userHasWrittingRepository;	
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
@@ -42,6 +47,37 @@ public class WrittingService implements WrittingServiceInterface{
 	public List<WrittingPOJO> getAllByName(WrittingRequest ur) {
 		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
 		  return generateWrittingDtos(Writtings);
+	}
+
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getPublished(WrittingRequest ur){
+		  System.out.println("Service /getPublished");
+		  List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
+		  //System.out.println("Service /getPublished : " + Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
+		  return generateWrittingDtos(Writtings);
+	}
+	
+	@Override
+	@Transactional
+	public List<UserPOJO> getUsersPublished(){
+		List<UserPOJO> Users = new ArrayList<UserPOJO>();
+		List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
+		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
+		System.out.println(Writtings.size());
+		int j = 0;
+		for(int i=0;i<=UserHasWrittings.size()-1;i++){
+			if(Writtings.get(j).getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
+				j++;
+				System.out.println("j "+j);
+				UserPOJO dto = new UserPOJO();
+				BeanUtils.copyProperties(UserHasWrittings.get(i).getUser(),dto);
+				Users.add(dto);
+			}else{
+				
+			}
+		}
+		  return Users;
 	}
 	
 	/* (non-Javadoc)

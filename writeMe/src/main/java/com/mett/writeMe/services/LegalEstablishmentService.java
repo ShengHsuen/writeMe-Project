@@ -62,8 +62,8 @@ public class LegalEstablishmentService implements LegalEstablishmentServiceInter
 	 * @see com.mett.writeMe.services.LegalEstablishmentServiceInterface#deleteLegalEstablishment(int)
 	 */
 	@Override
-	public void deleteLegalEstablishment(int idLegalEstablishment){
-	   legalEstablishmentRepository.delete(idLegalEstablishment);
+	public void deleteLegalEstablishment(int legal_establishmentId){
+	   legalEstablishmentRepository.delete(legal_establishmentId);
 	}
 	
 }

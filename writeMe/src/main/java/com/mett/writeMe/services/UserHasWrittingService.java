@@ -13,6 +13,7 @@ import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
+
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
@@ -47,17 +48,20 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	
 	@Override
 	@Transactional
-	public List<UserHasWrittingPOJO> getAll() {
+	public List<UserHasWrittingPOJO> getAll(UserHasWrittingRequest ur) {
 		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
-		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
-		UserHasWrittings.stream().forEach(uw ->{
+		return generateUserHasWrittingDtos(UserHasWrittings);
+	}
+	
+	private List<UserHasWrittingPOJO> generateUserHasWrittingDtos(List<UserHasWritting> UserHasWrittings){
+		List<UserHasWrittingPOJO> uiWrittings = new ArrayList<UserHasWrittingPOJO>();
+		UserHasWrittings.stream().forEach(u -> {
 			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
-			BeanUtils.copyProperties(uw, dto);
-			dtos.add(dto);
-		});
-		return dtos;
+			BeanUtils.copyProperties(u,dto);
+			uiWrittings.add(dto);
+		});	
+		return uiWrittings;
 	}
 
-	
 	
 }
