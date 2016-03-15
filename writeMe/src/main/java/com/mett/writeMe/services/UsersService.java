@@ -3,6 +3,8 @@ package com.mett.writeMe.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,11 +28,13 @@ import com.mett.writeMe.repositories.WrittingRepository;
  */
 @Service
 public class UsersService implements UsersServiceInterface{
+	private User u = new User();
+	private LoginServiceInterface LoginService;
 	@Autowired 
 	private UserRepository userRepository;	
 	@Autowired 
 	private UserHasWrittingRepository userHasWrittingRepository;
-private LoginService lg;
+
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UsersServiceInterface#getAll(com.mett.writeMe.contracts.UsersRequest)
@@ -97,9 +101,9 @@ private LoginService lg;
 	
 	@Override
 	@Transactional
-	public List<WrittingPOJO> getWrittingsByUser(UsersRequest ur){
-		//User user = userRepository.findOne(lg.getUser().getUserId()); 
-		User user = userRepository.findOne(1);// por el momento quemado
+	public List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession){
+		int idUser = (int)currentSession.getAttribute("idUser");
+		User user = userRepository.findOne(idUser);
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
 		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
 	

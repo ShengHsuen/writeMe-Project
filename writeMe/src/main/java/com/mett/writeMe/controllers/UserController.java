@@ -4,7 +4,7 @@ package com.mett.writeMe.controllers;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -65,12 +65,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="/getWrittings", method = RequestMethod.POST)
-	public UsersResponse getWrittings(@RequestBody UsersRequest ur){	
+	public UsersResponse getWrittings(HttpServletRequest servletRequest){	
 
 		UsersResponse response = new UsersResponse();
+		HttpSession currentSession = servletRequest.getSession();
 		response.setCode(200);
 		response.setCodeMessage("obtiene bien los writtings");
-		response.setWritting(usersService.getWrittingsByUser(ur));
+		response.setWritting(usersService.getWrittingsByUser(currentSession));
 		return response;		
 	}
 	
