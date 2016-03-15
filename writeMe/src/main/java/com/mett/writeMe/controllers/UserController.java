@@ -33,7 +33,8 @@ public class UserController {
 	@RequestMapping(value ="/create", method = RequestMethod.POST)
 	public UsersResponse create(@RequestBody UsersRequest ur){	
 		UsersResponse us = new UsersResponse();
-		Boolean state = usersService.saveUser(ur);		
+		Boolean state = usersService.saveUser(ur);
+		//System.out.println("user has w: "+us.getUserHasWritting().get(0).getUser().getName());
 			if(state){
 				us.setCode(200);
 				us.setCodeMessage("user created succesfully");

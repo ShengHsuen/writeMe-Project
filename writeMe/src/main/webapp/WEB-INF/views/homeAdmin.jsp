@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Write Me / Mett</title>
+<title>Write Me / Mett ADMI</title>
 <meta name="description"
 	content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
 <meta name="viewport"
@@ -107,10 +107,9 @@
 				<!-- link and dropdown -->
 				<ul class="nav navbar-nav hidden-sm">
 					<li class="dropdown pos-stc"><a href="" data-toggle="dropdown"
-						class="dropdown-toggle" aria-expanded="true"> <span>Categorías</span>
-							<span class="caret"></span>
+						class="dropdown-toggle"> <span>Categorías</span> <span
+							class="caret"></span>
 					</a>
-
 						<div class="dropdown-menu wrapper w-full bg-white">
 							<div class="row">
 								<div class="col-sm-4">
@@ -152,16 +151,17 @@
 								</div>
 							</div>
 						</div></li>
-					<li><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> <a
-						href="app#/createWritting"> <span
-							translate="header.navbar.new.NEW">Crear obra</span></a> </span></li>
+					<li><a ng-click="navCreate_Writting()"> <i
+							class="fa fa-fw fa-plus visible-xs-inline-block"></i> <span
+							translate="header.navbar.new.NEW">Crear obra</span> </span>
+					</a></li>
 				</ul>
 				<!-- / link and dropdown -->
 
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
 					ui-shift="prependTo" data-target=".navbar-collapse" role="search"
-					ng-controller="HomeCtrl">
+					ng-controller="HomeAdminCtrl">
 
 					<div class="form-group">
 						<div class="input-group">
@@ -239,7 +239,7 @@
 
 		<!-- aside -->
 		<aside id="aside" class="app-aside hidden-xs bg-dark">
-			<div class="aside-wrap" >
+			<div class="aside-wrap">
 				<div class="navi-wrap">
 					<!-- user -->
 					<div class="clearfix hidden-xs text-center hide" id="aside-user">
@@ -293,8 +293,13 @@
 							</li>
 							<li class="line dk"></li>
 							<li><a href="page_profile.html"> <i
-									class="icon-user icon text-success-lter"></i> <b
-									class="badge bg-success pull-right">30%</b> <span>Perfil</span>
+									class="icon-user icon text-success-lter"></i>  <span>Perfil</span>
+							</a></li>
+							<li><a href="page_profile.html"> <i
+									class="icon-user icon text-success-lter"></i> <span>Usuarios</span>
+							</a></li>
+							<li><a href="page_profile.html"> <i
+									class="icon-user icon text-success-lter"></i>  <span>Obras</span>
 							</a></li>
 							<li><a href class="auto"> <span
 									class="pull-right text-muted"> <i
@@ -320,7 +325,6 @@
 										class="fa fa-fw fa-angle-right text"></i> <i
 										class="fa fa-fw fa-angle-down text-active"></i>
 								</span> <i class="glyphicon glyphicon-gift icon"></i> <span>Donaciones</span>
-
 							</a></li>
 							<li><a href="mail.html"> <b
 									class="badge bg-info pull-right">9</b> <i
@@ -328,6 +332,10 @@
 									class="font-bold">Mensajes</span>
 							</a></li>
 							<li class="line dk"></li>
+							<li><a href="appAdmin#/legalEstablishment" class="auto">
+									 <i class="glyphicon glyphicon-briefcase"></i> <span>Términos
+										y condiciones</span>
+							</a></li>
 							<li><a href="ui_chart.html" class="auto"> <span
 									class="pull-right text-muted"> <i
 										class="fa fa-fw fa-angle-right text"></i> <i
@@ -350,8 +358,8 @@
 		<!-- footer -->
 		<footer id="footer" class="app-footer" role="footer"> </footer>
 		<!-- / footer -->
-
 	</div>
+
 
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -363,12 +371,7 @@
 		src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="resources/bower_components/angular/angular.js"></script>
 	<script src="resources/bower_components/angular-route/angular-route.js"></script>
-
-	<script
-		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
-	<script src="resources/non_bower_components/angular-file-upload.min.js"></script>
-
-	<script src="resources/app.js"></script>
+	<script src="resources/appAdmin.js"></script>
 
 	<!-- Del template -->
 	<script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
@@ -389,7 +392,8 @@
 	<script
 		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
 	<script src="resources/legalEstablishment/legalEstablishment.js"></script>
-	<script src="resources/home/home.js"></script>
+	<script src="resources/homeAdmin/homeAdmin.js"></script>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script

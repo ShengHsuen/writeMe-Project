@@ -20,13 +20,13 @@
             </div>
           		<label class="col-sm-2 control-label">Tipo</label>
          		<div class="col-sm-10">
-           	 		<select ng-click="chkIfPersonal()" name="account" class="form-control m-b" required>
+           	 		<select ng-click="chkIfPersonal()" name="account" class="form-control m-b"  ng-model="typeSelected" required>
               			<option ng-repeat="type in types">{{type}}</option>
             		</select>
           	    </div>
           	    <label class="col-sm-2 control-label">Categoría</label>
          		<div class="col-sm-10">
-           	 		<select ng-click="chkIfPersonal()" name="account" class="form-control m-b" required>
+           	 		<select ng-click="chkIfPersonal()" name="account" class="form-control m-b" ng-model="cateSelected" required>
               			<option ng-repeat="cate in category">{{cate}}</option>
             		</select>
           	    </div>
@@ -39,7 +39,7 @@
 
           		<label class="col-sm-2 control-label">Portada</label>
           		<div class="col-sm-10">
-		     	   <input type="file" name="inputfile" required ng-file-select="onFileSelect($files)" >
+		     	   <input type="file" name="inputfile" required accept=".png , .jpg, .jpeg" ng-file-select="onFileSelect($files)" >
           		</div>
 
           	<div class="col-sm-15">	

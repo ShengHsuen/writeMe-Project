@@ -9,13 +9,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http',function($scope,$http) {
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', function($scope,$http,$location,$upload) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-	
+	$scope.files = {};
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -58,6 +58,21 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
+			for ( var i = 0; i < $scope.files.length; i++) {
+    			var file = $scope.files[i];
+    			$scope.upload = $upload.upload({
+    				url : 'writting/addFiles',
+    				file : file,
+    			}).progress(
+    					function(evt) {
+    						console.log('percent: '+ parseInt(100.0 * evt.loaded / evt.total));
+    					}).success(function(data, status, headers, config) {
+    						// Rent is uploaded successfully
+    						console.log(data);
+    					});
+    	    			//.error(...)
+    	    			//.then(success, error, progress); 
+        		}
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -66,25 +81,27 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					"searchColumn": "string",
 					"searchTerm": $scope.name,
 					"writting": {
-						"name" : $scope.name,
-						"description" : $scope.description,
-						"cantUsers": $scope.cantUsers,
-						"date": fecha,
-						"likes": 0,
-						"limit time": "2100-01-01",
-						"numMaxCharacters": 10000,
-						"numMinCharacters": 30,
-						"published": false,
-						"content": ""
-						
-					
+					      "date": fecha,
+					      "participation": true,
+					      "image": "",
+					      "cantUsers": $scope.cantUsers,
+					      "description": $scope.description,
+					      "published": false,
+					      "numMinCharacters": 10,
+					      "content": "",
+					      "category": $scope.cateSelected,
+					      "typeWritting": $scope.typeSelected,
+					      "limitTime": "2016-05-05",
+					      "numMaxCharacters": 10000,
+					      "writtingId": 0,
+					      "name": $scope.name,
+					      "likes": 0
 					}
 			};
-<<<<<<< HEAD
 
 		    
-		    /*metodo para agregar imagen-no funciona */
-/*	    var createWritting = function(event){
+/*		    metodo para agregar imagen-no funciona 
+	    var createWritting = function(event){
 	    		for ( var i = 0; i < $scope.files.length; i++) {
 	    			var image = $scope.files[i];
 	    			$scope.upload = $upload.upload({
@@ -136,7 +153,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 						
 			};*/
 
-=======
 			
 			$http.post('writting/create',$scope.writting).success(function(response) {
 				createUserHasWritting();
@@ -144,7 +160,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 
 		}
 		var createUserHasWritting = function(){
->>>>>>> e610dda77bd4a02dd99bcd9a7c5f8e876cd2b605
 			$scope.userHasWritting={
 					  "pageNumber": 0,
 					  "pageSize": 0,
@@ -165,22 +180,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					}
 					
 			};
-<<<<<<< HEAD
 
-			$http.post('writting/create',$scope.writting).success(function(response) {
-				console.log(fecha);
-			});
-		/*	$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
-				console.log("2");
-			});*/
-		}
-=======
 			
 			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});
 		}
-		
-	
->>>>>>> e610dda77bd4a02dd99bcd9a7c5f8e876cd2b605
+		 $scope.onFileSelect = function($files) {
+		    	$scope.files = $files;
+		    };
+		    
 }]);
