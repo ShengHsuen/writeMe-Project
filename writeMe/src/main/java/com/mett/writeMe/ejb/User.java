@@ -2,9 +2,6 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.Date;
 import java.util.List;
 

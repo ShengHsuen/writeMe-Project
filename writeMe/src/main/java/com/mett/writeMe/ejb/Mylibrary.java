@@ -5,10 +5,9 @@ import javax.persistence.*;
 import java.util.List;
 
 
-
 /**
- * @author Sheng hsuen
- *
+ * The persistent class for the mylibrary database table.
+ * 
  */
 @Entity
 @NamedQuery(name="Mylibrary.findAll", query="SELECT m FROM Mylibrary m")
