@@ -1,5 +1,4 @@
 'use strict';
-var i = 1;
 angular.module('myApp.showWrittings', [ 'ngRoute' ])
 
 .config([ '$routeProvider', function($routeProvider) {
@@ -8,26 +7,24 @@ angular.module('myApp.showWrittings', [ 'ngRoute' ])
 		controller : 'showWrittingsCtrl'
 	});
 } ]).controller('showWrittingsCtrl',['$scope','$http',function($scope, $http) {
-	$scope.writtingList = {};
-	$scope.requestObject = []
-	$scope.requestObject = {
+	
+	$scope.writting = [];
+	$scope.writting = {
 			"pageNumber" : 0,
 			"pageSize" : 0,
 			"direction" : "",
 			"sortBy" : [ "" ],
 			"searchColumn" : "string",
 			"searchTerm" : "",
-			"showWrittings" : {}
+			"writting" : {}
 	};
-	
 	
 	// Mostrar
 	$scope.init = function() {
-		$http.post('rest/protected/userHasWritting/getAll',
-				$scope.requestObject).success(function(response) {
-					$scope.writtingList = response.writtingList;
+		$http.post('users/getWrittings',$scope.writting).success(function(response) {
+					$scope.writting = response.writtings;
+					console.log("aqui entra");
 				});
 	}
 	$scope.init();
-
 } ]);

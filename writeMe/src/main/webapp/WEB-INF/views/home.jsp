@@ -419,8 +419,6 @@
   <script src="resources/writting/writting/writting.js"></script>
   <script src="resources/writting/showWrittings/showWrittings.js"></script>
   
-  
-  
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   <script src="resources/home/home.js"></script>

@@ -64,12 +64,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="/getWrittings", method = RequestMethod.POST)
-	public UsersResponse getWrittings(@RequestBody UsersRequest ur) throws IOException, HttpMessageNotWritableException{	
+	public UsersResponse getWrittings(@RequestBody UsersRequest ur){	
 
 		UsersResponse response = new UsersResponse();
 		response.setCode(200);
 		response.setCodeMessage("obtiene bien los writtings");
-		response.setUsers(usersService.getWrittings(ur));
+		response.setWritting(usersService.getWrittingsByUser(ur));
 		return response;		
 	}
 	
