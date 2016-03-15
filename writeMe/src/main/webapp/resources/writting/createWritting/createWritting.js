@@ -2,6 +2,7 @@
 
 angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 
+
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/createWritting', {
     templateUrl: 'resources/writting/createWritting/createWritting.html',
@@ -10,12 +11,15 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', function($scope,$http,$location,$upload) {
+
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
+
 	$scope.files = {};
+
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -30,6 +34,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction"
 		                  ];
 		$scope.types =["Personal","Por invitacion","Publica"];
+		
+		
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
