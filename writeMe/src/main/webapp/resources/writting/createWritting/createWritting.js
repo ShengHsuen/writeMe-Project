@@ -46,7 +46,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			}
 		}
 		$scope.navWritting = function(){
-			$scope.uploadFiles();
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
@@ -65,7 +64,10 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
-		
+			if( $scope.files.length>0){
+
+				$scope.uploadFiles();
+			}
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -181,6 +183,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		}
 		 $scope.onFileSelect = function($files) {
 		    	$scope.files = $files;
+		    	 $scope.uploadFiles();
 		    };
 		    $scope.uploadFiles = function() {
 			for ( var i = 0; i < $scope.files.length; i++) {
