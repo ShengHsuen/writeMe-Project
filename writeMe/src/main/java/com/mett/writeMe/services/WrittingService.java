@@ -56,6 +56,9 @@ public class WrittingService implements WrittingServiceInterface {
 		return generateWrittingDtos(Writtings);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getPublished(com.mett.writeMe.contracts.WrittingRequest)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getPublished(WrittingRequest ur) {
@@ -66,6 +69,9 @@ public class WrittingService implements WrittingServiceInterface {
 		return generateWrittingDtos(Writtings);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getUsersPublished()
+	 */
 	@Override
 	@Transactional
 	public List<UserPOJO> getUsersPublished() {
@@ -87,13 +93,33 @@ public class WrittingService implements WrittingServiceInterface {
 		}
 		return Users;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getUsersByWritting(com.mett.writeMe.contracts.WrittingRequest)
+	 */
+	@Override
+	@Transactional
+	public List<UserPOJO> getUsersByWritting(WrittingRequest ur){
+		List<UserPOJO> Users = new ArrayList<UserPOJO>();
+		List<Writting> Writting = writtingRepository.findByMainWritting(ur.getWritting().getMainWritting());
+		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
+		int j = 0;
+		for (int i = 0; i <= UserHasWrittings.size() - 1; i++) {
+			if(Writting.get(j).getWrittingId()== UserHasWrittings.get(i).getWritting().getWrittingId()){
+				j++;
+				UserPOJO dto = new UserPOJO();
+				BeanUtils.copyProperties(UserHasWrittings.get(i).getUser(), dto);
+				Users.add(dto);
+			}else{
+				
+			}
+		}
+		return Users;
+	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.mett.writeMe.services.WrittingServiceInterface#getWrittingByName(com.
-	 * mett.writeMe.contracts.WrittingRequest)
+	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getWrittingByName(com.mett.writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
@@ -170,7 +196,6 @@ public class WrittingService implements WrittingServiceInterface {
 		Writting writting = new Writting();
 		BeanUtils.copyProperties(ur.getWritting(), writting);
 		Writting nWritting = writtingRepository.save(writting);
-
 		return (nWritting == null) ? false : true;
 	}
 
