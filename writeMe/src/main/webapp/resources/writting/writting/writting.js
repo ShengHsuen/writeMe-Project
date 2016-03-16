@@ -48,6 +48,7 @@
 
 		var update = function(){
 			$http.post('writting/editContent',$scope.writting).success(function(response) {
+				console.log('writting/editContent');
 			});
 		}
 		
@@ -55,7 +56,7 @@
 			publish = true;
 			console.log("Published: " + publish + "Fecha: " + fecha);
 			$http.post('writting/publish',$scope.writting).success(function(response) {
-
+				console.log('writting/publish');
 			});
 		}
 		

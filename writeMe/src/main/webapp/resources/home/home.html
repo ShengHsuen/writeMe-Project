@@ -12,7 +12,7 @@
 	  <div style="  display: block;margin-left: auto; margin-right: auto;" 
 	   class="hbox hbox-auto-xs hbox-auto-sm">
 	  		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
-	  			<il ng-repeat="wr in writting.concat(user)" class="list-group-item clearfix b-l-3x b-l-info"><p>Título:{{wr.name}}</p><p>Categoría:{{wr.category}}</p><p>Descripción:{{wr.description}}</p>
+	  			<il ng-repeat="wr in writting" class="list-group-item clearfix b-l-3x b-l-info"><p>Título:{{wr.name}}</p><p>Categoría:{{wr.category}}</p><p>Descripción:{{wr.description}}</p>
 	  			<p>Autor:{{user[$index].author}}</p>
 	  			<img ng-src="{{wr.image}}" width="270" height="200"></img></il>
 	 		</ul>
