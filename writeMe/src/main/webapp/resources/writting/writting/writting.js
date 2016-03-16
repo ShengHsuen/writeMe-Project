@@ -54,13 +54,9 @@
 		}
 
 		var update = function(){
-
 			$http.post('writting/editContent',$scope.writting).success(function(response) {
-<<<<<<< HEAD
 				console.log('writting/editContent');
-=======
 				createUserHasWritting();
->>>>>>> 210298eff1e4124e541a95963734fccdf9122795
 			});
 		}
 		
