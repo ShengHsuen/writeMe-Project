@@ -14,6 +14,14 @@ public class UserPOJO{
 	private String mail;
 	private String name;
 	private String password;
+	
+	private List<UserHasWrittingPOJO> UserHasWrittings;
+
+
+
+	public boolean isAccountType() {
+		return accountType;
+	}
 
 	public UserPOJO() {
 		super();
@@ -90,5 +98,13 @@ public class UserPOJO{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<UserHasWrittingPOJO> getUserHasWrittings() {
+		return UserHasWrittings;
+	}
+
+	public void setUserHasWrittings(List<UserHasWrittingPOJO> userHasWrittings) {
+		UserHasWrittings = userHasWrittings;
 	}
 }

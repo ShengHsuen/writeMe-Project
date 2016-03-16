@@ -3,9 +3,6 @@ package com.mett.writeMe.controllers;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.neo4j.cypher.internal.compiler.v2_1.perty.PrintNewLine;
-import org.neo4j.cypher.internal.compiler.v2_1.perty.PrintText;
-import org.neo4j.cypher.internal.compiler.v2_1.planner.logical.steps.outerJoin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,8 +47,8 @@ public class LegalEstablishmentController {
 	/**
 	 * Create the legalEstablishment
 	 * 
-	 * @param ler
-	 * @return LegalEstablishmentResponse
+	 * @param @RequestBody LegalEstablishment ler
+	 * @return LegalEstablishmentResponse legalEstRes
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public LegalEstablishmentResponse create(@RequestBody LegalEstablishment ler) {
@@ -71,7 +68,7 @@ public class LegalEstablishmentController {
 	/**
 	 * Delete legal establishent
 	 * 
-	 * @param idLegalEstablishment
+	 * @param  int idLegalEstablishment
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public void delete(@RequestParam("legal_establishmentId") int legal_establishmentId) {

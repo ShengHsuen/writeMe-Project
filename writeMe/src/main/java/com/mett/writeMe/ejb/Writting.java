@@ -58,10 +58,6 @@ public class Writting implements Serializable {
 	@OneToMany(mappedBy="writting")
 	private List<Chapter> chapters;
 
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="writting")
-	private List<UserHasWritting> userHasWrittings;
-
 	//bi-directional many-to-many association to Mylibrary
 	@ManyToMany
 	@JoinTable(
@@ -75,6 +71,15 @@ public class Writting implements Serializable {
 		)
 	private List<Mylibrary> mylibraries;
 
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
+
+	//bi-directional many-to-one association to Pagination
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="paginationId")
+	private Pagination pagination;
+
 	//bi-directional many-to-one association to Record
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Record record;
@@ -83,18 +88,23 @@ public class Writting implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Restriction restriction;
 
-	//bi-directional many-to-one association to Typewritting
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Typewritting typewritting;
-
 	//bi-directional many-to-one association to Writting
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="writting_father")
-	private Writting writting;
+	private Writting writting1;
 
 	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="writting")
-	private List<Writting> writtings;
+	@OneToMany(mappedBy="writting1")
+	private List<Writting> writtings1;
+
+	//bi-directional many-to-one association to Writting
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="mainWritting")
+	private Writting writting2;
+
+	//bi-directional many-to-one association to Writting
+	@OneToMany(mappedBy="writting2")
+	private List<Writting> writtings2;
 
 	public Writting() {
 	}
@@ -241,6 +251,14 @@ public class Writting implements Serializable {
 		return chapter;
 	}
 
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
+
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
+	}
+
 	public List<UserHasWritting> getUserHasWrittings() {
 		return this.userHasWrittings;
 	}
@@ -263,12 +281,12 @@ public class Writting implements Serializable {
 		return userHasWritting;
 	}
 
-	public List<Mylibrary> getMylibraries() {
-		return this.mylibraries;
+	public Pagination getPagination() {
+		return this.pagination;
 	}
 
-	public void setMylibraries(List<Mylibrary> mylibraries) {
-		this.mylibraries = mylibraries;
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 
 	public Record getRecord() {
@@ -287,42 +305,64 @@ public class Writting implements Serializable {
 		this.restriction = restriction;
 	}
 
-	public Typewritting getTypewritting() {
-		return this.typewritting;
+	public Writting getWritting1() {
+		return this.writting1;
 	}
 
-	public void setTypewritting(Typewritting typewritting) {
-		this.typewritting = typewritting;
+	public void setWritting1(Writting writting1) {
+		this.writting1 = writting1;
 	}
 
-	public Writting getWritting() {
-		return this.writting;
+	public List<Writting> getWrittings1() {
+		return this.writtings1;
 	}
 
-	public void setWritting(Writting writting) {
-		this.writting = writting;
+	public void setWrittings1(List<Writting> writtings1) {
+		this.writtings1 = writtings1;
 	}
 
-	public List<Writting> getWrittings() {
-		return this.writtings;
+	public Writting addWrittings1(Writting writtings1) {
+		getWrittings1().add(writtings1);
+		writtings1.setWritting1(this);
+
+		return writtings1;
 	}
 
-	public void setWrittings(List<Writting> writtings) {
-		this.writtings = writtings;
+	public Writting removeWrittings1(Writting writtings1) {
+		getWrittings1().remove(writtings1);
+		writtings1.setWritting1(null);
+
+		return writtings1;
 	}
 
-	public Writting addWritting(Writting writting) {
-		getWrittings().add(writting);
-		writting.setWritting(this);
-
-		return writting;
+	public Writting getWritting2() {
+		return this.writting2;
 	}
 
-	public Writting removeWritting(Writting writting) {
-		getWrittings().remove(writting);
-		writting.setWritting(null);
+	public void setWritting2(Writting writting2) {
+		this.writting2 = writting2;
+	}
 
-		return writting;
+	public List<Writting> getWrittings2() {
+		return this.writtings2;
+	}
+
+	public void setWrittings2(List<Writting> writtings2) {
+		this.writtings2 = writtings2;
+	}
+
+	public Writting addWrittings2(Writting writtings2) {
+		getWrittings2().add(writtings2);
+		writtings2.setWritting2(this);
+
+		return writtings2;
+	}
+
+	public Writting removeWrittings2(Writting writtings2) {
+		getWrittings2().remove(writtings2);
+		writtings2.setWritting2(null);
+
+		return writtings2;
 	}
 
 }

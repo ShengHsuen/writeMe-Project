@@ -9,7 +9,14 @@
 	  });
 	}])
 	
+	
+	
 	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
+
+		
+//		$scope.$on("NAME_CHANNEL",function(event,name){
+//			$scope.name = name;
+//		});
 		
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -47,8 +54,13 @@
 		}
 
 		var update = function(){
+
 			$http.post('writting/editContent',$scope.writting).success(function(response) {
+<<<<<<< HEAD
 				console.log('writting/editContent');
+=======
+				createUserHasWritting();
+>>>>>>> 210298eff1e4124e541a95963734fccdf9122795
 			});
 		}
 		
@@ -58,6 +70,33 @@
 			$http.post('writting/publish',$scope.writting).success(function(response) {
 				console.log('writting/publish');
 			});
+			
+			
+			var createUserHasWritting = function(){
+				$scope.userHasWritting={
+						  "pageNumber": 0,
+						  "pageSize": 0,
+						  "direction": "string",
+						  "sortBy": [
+						    "string"
+						  ],
+						  "searchColumn": "string",
+						  "searchTerm": "string",
+						  "userHasWritting": {
+							  "dateModifie": "2016-02-02",
+						      "statusColor": false,
+						      "user_has_writtingId": 0,
+						      "linkInvitation": "string",
+						      "banned": false,
+						      "dateCreate": "2016-02-02",
+						      "invitationStatus": false
+						}
+						
+				};
+				$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+					
+				});
+			}
 		}
 		
 	}]);
