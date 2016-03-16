@@ -13,14 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mett.writeMe.ejb.User;
 
 import com.mett.writeMe.ejb.UserHasWritting;
-import com.mett.writeMe.ejb.Writting;
-import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.UserRepository;
-import com.mett.writeMe.repositories.WrittingRepository;
 
 
 /**
@@ -29,8 +26,6 @@ import com.mett.writeMe.repositories.WrittingRepository;
  */
 @Service
 public class UsersService implements UsersServiceInterface{
-	private User u = new User();
-	private LoginServiceInterface LoginService;
 	@Autowired 
 	private UserRepository userRepository;	
 	@Autowired 
@@ -87,11 +82,17 @@ public class UsersService implements UsersServiceInterface{
 		return (nuser == null) ? false : true;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#deleteUser(int)
+	 */
 	@Override
 	public void deleteUser(int idUser){
 	   userRepository.delete(idUser);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getUserByMail(com.mett.writeMe.contracts.UsersRequest)
+	 */
 	@Override
 	@Transactional
 	public User getUserByMail(UsersRequest ur) {
@@ -100,6 +101,9 @@ public class UsersService implements UsersServiceInterface{
 		return  user;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUser(javax.servlet.http.HttpSession)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession){

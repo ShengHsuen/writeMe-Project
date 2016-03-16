@@ -173,5 +173,4 @@ public class WrittingService implements WrittingServiceInterface {
 
 		return (nWritting == null) ? false : true;
 	}
-
 }

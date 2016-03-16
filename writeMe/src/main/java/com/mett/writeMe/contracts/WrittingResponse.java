@@ -60,4 +60,5 @@ public class WrittingResponse extends BaseResponse{
 	public void setUsuarios(List<UserHasWrittingPOJO> userHasWritting) {
 		this.userHasWritting = userHasWritting;
 	}
+
 }
