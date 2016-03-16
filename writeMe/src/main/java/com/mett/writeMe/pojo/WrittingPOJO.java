@@ -17,7 +17,7 @@ public class WrittingPOJO {
 	private String content;
 	private String typeWritting;
 	private String category;
-	private String image; 
+	private String image;
 	private int writtingFather;
 	public WrittingPOJO() {
 		super();
