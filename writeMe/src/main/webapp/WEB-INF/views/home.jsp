@@ -89,6 +89,7 @@
 			</div>
 			<!-- / navbar header -->
 
+
 			<!-- navbar collapse -->
 			<div
 				class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
@@ -228,6 +229,7 @@
 							<li><a ui-sref="app.docs"> Ayuda </a></li>
 							<li class="divider"></li>
 							<li><a ui-sref="access.signin">Cerrar sesión</a></li>
+							<li><a href="/writeMe/#/signin"> <span>Cerrar sesión</span></a></li>
 						</ul> <!-- / dropdown --></li>
 				</ul>
 				<!-- / navbar right -->
@@ -408,6 +410,7 @@
   <script type="text/javascript" src="resources/writting/writting/js/plugins/video.min.js"></script>
   <script type="text/javascript" src="resources/writting/writting/js/plugins/url.min.js"></script>
   <script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
+
 
 	<!-- Del bower y home -->
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>

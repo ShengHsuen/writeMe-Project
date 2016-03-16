@@ -2,6 +2,7 @@
 
 angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 
+
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/createWritting', {
     templateUrl: 'resources/writting/createWritting/createWritting.html',
@@ -10,12 +11,15 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 }])
 
 .controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', function($scope,$http,$location,$upload) {
+
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
+
 	$scope.files = {};
+
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -31,6 +35,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		                  ];
 		$scope.types =["Personal","Por invitacion","Publica"];
 		
+		
+		
 		//Funciones
 		$scope.chkIfPersonal = function(){
 			if($scope.type != "Personal"){
@@ -40,6 +46,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			}
 		}
 		$scope.navWritting = function(){
+			$scope.uploadFiles();
 			var path = "/writeMe/app#/writting";
 			window.location.href = path;
 			createWritting();
@@ -58,21 +65,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
-			for ( var i = 0; i < $scope.files.length; i++) {
-    			var file = $scope.files[i];
-    			$scope.upload = $upload.upload({
-    				url : 'writting/addFiles',
-    				file : file,
-    			}).progress(
-    					function(evt) {
-    						console.log('percent: '+ parseInt(100.0 * evt.loaded / evt.total));
-    					}).success(function(data, status, headers, config) {
-    						// Rent is uploaded successfully
-    						console.log(data);
-    					});
-    	    			//.error(...)
-    	    			//.then(success, error, progress); 
-        		}
+		
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -189,5 +182,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		 $scope.onFileSelect = function($files) {
 		    	$scope.files = $files;
 		    };
+		    $scope.uploadFiles = function() {
+			for ( var i = 0; i < $scope.files.length; i++) {
+    			var file = $scope.files[i];
+    			$scope.upload = $upload.upload({
+    				url : 'writting/addFiles',
+    				file : file,
+    			})
+        		}
+		    }
 		    
 }]);
