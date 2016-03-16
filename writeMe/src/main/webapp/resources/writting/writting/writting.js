@@ -26,26 +26,6 @@
 		
 		var publish = false;
 		
-		$scope.writting={
-				"pageNumber": 0,
-				"pageSize": 0,
-				"direction": "",
-				"sortBy": [""],
-				"searchColumn": "string",
-				"searchTerm": "fff",
-				"writting": {
-					"name" : "fff",
-					"description" : "a",
-					"cantUsers": 0,
-					"date": fecha,
-					"likes": 0,
-					"limit time": "2100-01-01",
-					"numMaxCharacters": 10000,
-					"numMinCharacters": 30,
-					"published": publish,
-					"content": $scope.content
-				}
-		};
 		
 		$scope.send = function(){
 			$scope.content = $('#edit').val();
@@ -54,9 +34,55 @@
 		}
 
 		var update = function(){
+			$scope.writting={
+					"pageNumber": 0,
+					"pageSize": 0,
+					"direction": "",
+					"sortBy": [""],
+					"searchColumn": "string",
+					"searchTerm": "prueba4",
+					"writting": {
+						"name" : "prueba4",
+						"description" : "a",
+						"cantUsers": 0,
+						"date": fecha,
+						"likes": 0,
+						"limit time": "2100-01-01",
+						"numMaxCharacters": 10000,
+						"numMinCharacters": 30,
+						"published": publish,
+						"content": $scope.content
+					}
+			};
 			$http.post('writting/editContent',$scope.writting).success(function(response) {
 				console.log('writting/editContent');
 				createUserHasWritting();
+			});
+		}
+		
+		var createUserHasWritting = function(){
+			$scope.userHasWritting={
+					  "pageNumber": 0,
+					  "pageSize": 0,
+					  "direction": "string",
+					  "sortBy": [
+					    "string"
+					  ],
+					  "searchColumn": "string",
+					  "searchTerm": "string",
+					  "userHasWritting": {
+						  "dateModifie": "2016-02-02",
+					      "statusColor": false,
+					      "user_has_writtingId": 0,
+					      "linkInvitation": "string",
+					      "banned": false,
+					      "dateCreate": "2016-02-02",
+					      "invitationStatus": false
+					}
+					
+			};
+			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+				
 			});
 		}
 		
@@ -66,33 +92,7 @@
 			$http.post('writting/publish',$scope.writting).success(function(response) {
 				console.log('writting/publish');
 			});
-			
-			
-			var createUserHasWritting = function(){
-				$scope.userHasWritting={
-						  "pageNumber": 0,
-						  "pageSize": 0,
-						  "direction": "string",
-						  "sortBy": [
-						    "string"
-						  ],
-						  "searchColumn": "string",
-						  "searchTerm": "string",
-						  "userHasWritting": {
-							  "dateModifie": "2016-02-02",
-						      "statusColor": false,
-						      "user_has_writtingId": 0,
-						      "linkInvitation": "string",
-						      "banned": false,
-						      "dateCreate": "2016-02-02",
-						      "invitationStatus": false
-						}
-						
-				};
-				$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
-					
-				});
-			}
+			createUserHasWritting();
 		}
 		
 	}]);

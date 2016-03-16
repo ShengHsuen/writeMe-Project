@@ -24,5 +24,6 @@ public interface WrittingServiceInterface {
 	Boolean editWrittingInvitation(WrittingRequest ur);
 	List<WrittingPOJO> getPublished(WrittingRequest ur);
 	List<UserPOJO> getUsersPublished();
+	List<UserPOJO> getUsersByWritting(WrittingRequest ur);
 	
 }

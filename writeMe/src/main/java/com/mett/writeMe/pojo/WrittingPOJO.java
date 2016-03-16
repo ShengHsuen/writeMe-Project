@@ -18,6 +18,7 @@ public class WrittingPOJO {
 	private String typeWritting;
 	private String category;
 	private String image;
+	private int mainWritting;
 	private int writtingFather;
 	public WrittingPOJO() {
 		super();
@@ -144,6 +145,14 @@ public class WrittingPOJO {
 		this.category = category;
 	}
 
+	public int getMainWritting() {
+		return mainWritting;
+	}
+
+	public void setMainWritting(int mainWritting) {
+		this.mainWritting = mainWritting;
+	}
+	
 	public int getWrittingFather() {
 		return writtingFather;
 	}
