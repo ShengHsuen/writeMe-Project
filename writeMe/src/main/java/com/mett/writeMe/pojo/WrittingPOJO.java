@@ -19,7 +19,7 @@ public class WrittingPOJO {
 	private String category;
 	private String image;
 	private int mainWritting;
-	
+	private int writtingFather;
 	public WrittingPOJO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -153,5 +153,12 @@ public class WrittingPOJO {
 		this.mainWritting = mainWritting;
 	}
 	
+	public int getWrittingFather() {
+		return writtingFather;
+	}
+
+	public void setWrittingFather(int writtingFather) {
+		this.writtingFather = writtingFather;
+	}
 	
 }
