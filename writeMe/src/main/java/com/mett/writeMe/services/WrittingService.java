@@ -123,14 +123,25 @@ public class WrittingService implements WrittingServiceInterface {
 		return generateWrittingDtos(Writtings).get(0);
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public String getWrittingContent(WrittingRequest ur) {
-	 * List<Writting> Writtings =
-	 * writtingRepository.findByNameContaining(ur.getSearchTerm()); return
-	 * generateWrittingDtos(Writtings).get(0).getContent(); }
-	 */
+	
+	  @Override
+	  @Transactional 
+	  public String getWrittingContent(WrittingRequest ur) {
+      String content ="";
+	  List <Writting> writting = writtingRepository.findByNameContaining(ur.getSearchTerm());
+	  List<Writting> wri = writtingRepository.findAll();
+      int j=0;
+      for (int i=0; i<= wri.size() -1; i++){
+    	  if(writting.get(j).getWrittingId() == wri.get(i).getWrittingId()){
+    		  j++;
+    		  content = content + wri.get(i).getContent() ;
+    		  System.out.println("Aqui la obra" + content);
+    	  }else{
+    		  
+    	  }
+      }
+      return content;
+     }
 
 	/**
 	 * @param Writtings
