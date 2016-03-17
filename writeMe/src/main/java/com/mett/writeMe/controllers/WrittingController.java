@@ -119,8 +119,6 @@ public class WrittingController {
 				us.setCodeMessage("write created succesfully");
 			}
 		}else{
-			wr.setWrittingId(0);
-			wr.setName(null);
 			wr.setContent(ur.getWritting().getContent());
 			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
 			Boolean state = WrittingService.editWrittingInvitation(wr);

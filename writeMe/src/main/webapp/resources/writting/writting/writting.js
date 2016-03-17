@@ -40,9 +40,9 @@
 					"direction": "",
 					"sortBy": [""],
 					"searchColumn": "string",
-					"searchTerm": "prueba7",
+					"searchTerm": "prueba2",
 					"writting": {
-						"name" : "prueba7",
+						"name" : "prueba2",
 						"description" : "a",
 						"cantUsers": 0,
 						"date": fecha,

@@ -223,8 +223,15 @@ public class WrittingService implements WrittingServiceInterface {
 	@Override
 	@Transactional
 	public Boolean editWrittingInvitation(Writting wr) {
-		
-		
+		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
+		for(int i=0;i<=UserHasWrittings.size()-1;i++){
+			if(wr.getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
+				wr.setWrittingId(0);
+				wr.setName(null);
+				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
+				System.out.print("ID PARA EL MAINWRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
+			}
+		}
 		Writting nWritting = writtingRepository.save(wr);
 		return (nWritting == null) ? false : true;
 	}
