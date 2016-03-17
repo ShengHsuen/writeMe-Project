@@ -55,10 +55,10 @@ public class WrittingService implements WrittingServiceInterface {
 		wirttings.stream().forEach(tu ->{
 			WrittingPOJO dto = new WrittingPOJO();
 			BeanUtils.copyProperties(tu, dto);
-			/*if( tu.getWritting()!= null){
+			if( tu.getWritting()!= null){
 
 				dto.setWrittingFather(tu.getWritting().getWrittingId());
-			}*/
+			}
 			dtos.add(dto);
 		});
 		return dtos;
