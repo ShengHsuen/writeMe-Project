@@ -63,5 +63,16 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		return uiWrittings;
 	}
 
-	
+	@Override
+	@Transactional
+	public List<UserHasWrittingPOJO> getAll() {
+		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
+		return generateUserHasWrittingDtos(UserHasWrittings);
+	}
+
+	@Override
+	public void deleteUserHaswritting(int uHwrittingId) {
+		// TODO Auto-generated method stub
+		userHasWrittingRepository.delete(uHwrittingId);
+	}
 }

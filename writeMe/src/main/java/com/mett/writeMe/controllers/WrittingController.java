@@ -21,6 +21,7 @@ import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
@@ -174,7 +175,7 @@ public class WrittingController {
 	 * @return WrittingResponse wr
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public  WrittingResponse delete(@RequestParam("writtingId") int writtingId) {
+	public  WrittingResponse delete(@RequestParam("writtingId") int writtingMainId) {
 		WrittingResponse wr= new WrittingResponse(); 
 		List<WrittingPOJO> listaUserHasWritting  =new ArrayList<WrittingPOJO>();
 		//buscar todos los userHasWritting
@@ -184,17 +185,37 @@ public class WrittingController {
 		wr=getAll();
 		//comparar los que tienen de padre writtingId
 		allWrittings.stream().forEach(wt ->{
-			if(wt.getWrittingFather()==writtingId){
+			if(wt.getWrittingFather()==writtingMainId){
 				//listaHijos.add(wt);
 				
-				//eliminar userhasWritting
-				//eliminar hijos
-			//	WrittingService.deletewritting(wt.getWrittingId());
+				//obtiene los userHasWritting de los hijos
+				List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
+				
+				allUserHasWritting.stream().forEach(uhw ->{
+					//comparar los que tienen de writtingId del hijo
+					if(uhw.getWritting().getWrittingId()==wt.getWrittingId()){
+						System.out.println("entra al userHasWritting");
+						//eliminar userhasWritting de los hijos
+						UserHasWrittingService.deleteUserHaswritting(wt.getWrittingId());
+					}
+					
+					//eliminar hijos
+					WrittingService.deletewritting(wt.getWrittingId());
+					
+					//comparar los que tienen de writtingId del main
+					if(uhw.getWritting().getWrittingId()==writtingMainId){
+						System.out.println("entra al userHasWritting main");
+						
+						//eliminar userhasWritting del main
+						//UserHasWrittingService.deleteUserHaswritting(writtingMainId);
+						
+					}
+				});
 			}
 		});
 		
-		//eliminar el ultimo
-		// WrittingService.deletewritting(writtingId);
+		//eliminar el main
+		// WrittingService.deletewritting(writtingMainId);
 		return wr;
 	}
 }
