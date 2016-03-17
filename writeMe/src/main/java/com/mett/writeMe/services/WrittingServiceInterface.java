@@ -25,5 +25,6 @@ public interface WrittingServiceInterface {
 	List<WrittingPOJO> getPublished(WrittingRequest ur);
 	List<UserPOJO> getUsersPublished();
 	String getWrittingContent(WrittingRequest ur);
+	List<UserPOJO> getUsersByWritting(WrittingRequest ur);
 	
 }
