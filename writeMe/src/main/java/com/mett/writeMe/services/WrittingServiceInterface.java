@@ -18,13 +18,13 @@ public interface WrittingServiceInterface {
 	List<WrittingPOJO> getAll();
 	List<WrittingPOJO> getPublished(WrittingRequest ur);
 	List<UserPOJO> getUsersPublished();
-	List<UserPOJO> getUsersByWritting(WrittingRequest ur);
+	List<WrittingPOJO> getWrittingsByMainWritting(Writting wr);
 	WrittingPOJO getWrittingByName(WrittingRequest ur);
 	//String getWrittingContent(WrittingRequest ur);
 	void deletewritting(int writtingId);
 	Boolean saveWritting(WrittingRequest ur);
-	Boolean editWritting(Writting writting);
-	Boolean editWrittingInvitation(Writting writting);
+	Boolean editWritting(Writting wr);
+	Boolean editWrittingInvitation(Writting wr);
 	
 	
 	
