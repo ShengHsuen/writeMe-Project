@@ -222,10 +222,10 @@ public class WrittingService implements WrittingServiceInterface {
 	 */
 	@Override
 	@Transactional
-	public Boolean editWrittingInvitation(WrittingRequest ur) {
-		Writting writting = new Writting();
-		BeanUtils.copyProperties(ur.getWritting(), writting);
-		Writting nWritting = writtingRepository.save(writting);
+	public Boolean editWrittingInvitation(Writting wr) {
+		
+		
+		Writting nWritting = writtingRepository.save(wr);
 		return (nWritting == null) ? false : true;
 	}
 

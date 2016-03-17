@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
@@ -76,6 +75,7 @@ public class WrittingController {
 		ur.getWritting().setImage(resultFileName);
 		Boolean state = false;
 		state = WrittingService.saveWritting(ur);
+		
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		u = LoginService.getUser();
 		BeanUtils.copyProperties(w, wr);
@@ -109,6 +109,7 @@ public class WrittingController {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
+		System.out.print("EDIT CONTENT IMPRIMIR EL POJO" + w.getName());
 		
 		if(wr.getTypeWritting().equals("Personal")){
 			wr.setContent(ur.getWritting().getContent());
@@ -118,8 +119,11 @@ public class WrittingController {
 				us.setCodeMessage("write created succesfully");
 			}
 		}else{
+			wr.setWrittingId(0);
+			wr.setName(null);
 			wr.setContent(ur.getWritting().getContent());
-			Boolean state = WrittingService.editWrittingInvitation(ur);
+			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
+			Boolean state = WrittingService.editWrittingInvitation(wr);
 			
 			if (state) {
 				us.setCode(200);
