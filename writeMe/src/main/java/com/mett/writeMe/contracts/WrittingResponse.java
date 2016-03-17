@@ -13,6 +13,10 @@ import com.mett.writeMe.pojo.WrittingPOJO;
 public class WrittingResponse extends BaseResponse{
 	private List<WrittingPOJO> writting;
 	private List<UserPOJO> user;
+	private List<UserHasWrittingPOJO> userHasWritting;
+	private int idWritting;
+	private String name;
+	
 	public List<UserPOJO> getUser() {
 		return user;
 	}
@@ -20,10 +24,6 @@ public class WrittingResponse extends BaseResponse{
 	public void setUser(List<UserPOJO> user) {
 		this.user = user;
 	}
-
-	private List<UserHasWrittingPOJO> userHasWritting;
-	private int idWritting;
-	private String name;
 	
 	public int getIdWritting() {
 		return idWritting;

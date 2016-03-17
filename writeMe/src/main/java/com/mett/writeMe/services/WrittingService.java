@@ -100,7 +100,7 @@ public class WrittingService implements WrittingServiceInterface {
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
 		System.out.println(Writtings.size());
 		int j = 0;
-		for (int i = 0; i <= UserHasWrittings.size() - 1; i++) {
+		for (int i = 0; i <= UserHasWrittings.size() -1; i++) {
 			if (Writtings.get(j).getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()) {
 				j++;
 				System.out.println("j " + j);
@@ -108,7 +108,7 @@ public class WrittingService implements WrittingServiceInterface {
 				BeanUtils.copyProperties(UserHasWrittings.get(i).getUser(), dto);
 				Users.add(dto);
 			} else {
-
+				
 			}
 		}
 		return Users;
