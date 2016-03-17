@@ -20,6 +20,7 @@ import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
@@ -71,7 +72,7 @@ public class WrittingController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public WrittingResponse create(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
-
+		
 		if(!resultFileName.equals("")){
 		ur.getWritting().setImage(resultFileName);
 		Boolean state = false;
@@ -105,16 +106,26 @@ public class WrittingController {
 
 	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
 	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
+		
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
-		System.out.println("contenido de UR: " + ur.getWritting().getContent());
-		wr.setContent(ur.getWritting().getContent());
-		Boolean state = WrittingService.editWritting(wr);
-
-		if (state) {
-			us.setCode(200);
-			us.setCodeMessage("write created succesfully");
+		
+		if(wr.getTypeWritting().equals("Personal")){
+			wr.setContent(ur.getWritting().getContent());
+			Boolean state = WrittingService.editWritting(wr);
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
+		}else{
+			wr.setContent(ur.getWritting().getContent());
+			Boolean state = WrittingService.editWrittingInvitation(ur);
+			
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
 		}
 		return us;
 	}
@@ -135,6 +146,8 @@ public class WrittingController {
 		}
 		return us;
 	}
+	
+	
 	
 	/**
 	 * @param ur
@@ -162,7 +175,7 @@ public class WrittingController {
 	 * @param MultipartFile file
 	 */
 		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-		public void create(@RequestParam("file") MultipartFile file){	
+		public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur){	
 			
 			 resultFileName = Utils.writeToFile(file,servletContext);
 			 System.out.println("Entra a agregar files");

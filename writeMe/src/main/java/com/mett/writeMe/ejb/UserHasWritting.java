@@ -2,9 +2,6 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class UserHasWritting implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
 
-	private boolean banned;
+	private byte banned;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
@@ -31,11 +28,11 @@ public class UserHasWritting implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateModifie;
 
-	private boolean invitationStatus;
+	private byte invitationStatus;
 
 	private String linkInvitation;
 
-	private boolean statusColor;
+	private byte statusColor;
 
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="userHasWritting")
@@ -51,7 +48,6 @@ public class UserHasWritting implements Serializable {
 
 	//bi-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
-	
 	private User user;
 
 	//bi-directional many-to-one association to Writting
@@ -69,11 +65,11 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-	public boolean getBanned() {
+	public byte getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(boolean banned) {
+	public void setBanned(byte banned) {
 		this.banned = banned;
 	}
 
@@ -93,11 +89,11 @@ public class UserHasWritting implements Serializable {
 		this.dateModifie = dateModifie;
 	}
 
-	public boolean getInvitationStatus() {
+	public byte getInvitationStatus() {
 		return this.invitationStatus;
 	}
 
-	public void setInvitationStatus(boolean invitationStatus) {
+	public void setInvitationStatus(byte invitationStatus) {
 		this.invitationStatus = invitationStatus;
 	}
 
@@ -109,11 +105,11 @@ public class UserHasWritting implements Serializable {
 		this.linkInvitation = linkInvitation;
 	}
 
-	public boolean getStatusColor() {
+	public byte getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(boolean statusColor) {
+	public void setStatusColor(byte statusColor) {
 		this.statusColor = statusColor;
 	}
 

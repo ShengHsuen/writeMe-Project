@@ -48,6 +48,17 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	
 	@Override
 	@Transactional
+	public List<UserHasWrittingPOJO> getAll() {
+		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
+		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
+		UserHasWrittings.stream().forEach(uw ->{
+			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(uw, dto);
+			dtos.add(dto);
+		});
+		return dtos;
+	}
+
 	public List<UserHasWrittingPOJO> getAll(UserHasWrittingRequest ur) {
 		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
 		return generateUserHasWrittingDtos(UserHasWrittings);
@@ -61,13 +72,6 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 			uiWrittings.add(dto);
 		});	
 		return uiWrittings;
-	}
-
-	@Override
-	@Transactional
-	public List<UserHasWrittingPOJO> getAll() {
-		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
-		return generateUserHasWrittingDtos(UserHasWrittings);
 	}
 
 	@Override
