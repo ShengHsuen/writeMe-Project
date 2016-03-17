@@ -47,8 +47,8 @@ public class LegalEstablishmentController {
 	/**
 	 * Create the legalEstablishment
 	 * 
-	 * @param @RequestBody LegalEstablishment ler
-	 * @return LegalEstablishmentResponse legalEstRes
+	 * @param ler
+	 * @return LegalEstablishmentResponse
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public LegalEstablishmentResponse create(@RequestBody LegalEstablishment ler) {
@@ -68,7 +68,7 @@ public class LegalEstablishmentController {
 	/**
 	 * Delete legal establishent
 	 * 
-	 * @param  int idLegalEstablishment
+	 * @param idLegalEstablishment
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public void delete(@RequestParam("legal_establishmentId") int legal_establishmentId) {

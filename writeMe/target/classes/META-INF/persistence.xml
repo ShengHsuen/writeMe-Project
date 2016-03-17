@@ -11,7 +11,6 @@
 		<class>com.mett.writeMe.ejb.Mylibrary</class>
 		<class>com.mett.writeMe.ejb.Notification</class>
 		<class>com.mett.writeMe.ejb.Notificationtype</class>
-		<class>com.mett.writeMe.ejb.Pagination</class>
 		<class>com.mett.writeMe.ejb.Payaccount</class>
 		<class>com.mett.writeMe.ejb.Record</class>
 		<class>com.mett.writeMe.ejb.Report</class>
@@ -19,6 +18,7 @@
 		<class>com.mett.writeMe.ejb.Role</class>
 		<class>com.mett.writeMe.ejb.State</class>
 		<class>com.mett.writeMe.ejb.Typereport</class>
+		<class>com.mett.writeMe.ejb.Typewritting</class>
 		<class>com.mett.writeMe.ejb.User</class>
 		<class>com.mett.writeMe.ejb.UserHasWritting</class>
 		<class>com.mett.writeMe.ejb.Writting</class>

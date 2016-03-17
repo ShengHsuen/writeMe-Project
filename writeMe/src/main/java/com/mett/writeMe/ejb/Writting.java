@@ -40,8 +40,6 @@ public class Writting implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date limitTime;
 
-	private int mainWritting;
-
 	private String name;
 
 	@Lob
@@ -85,6 +83,10 @@ public class Writting implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Restriction restriction;
 
+	//bi-directional many-to-one association to Typewritting
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Typewritting typewritting;
+
 	//bi-directional many-to-one association to Writting
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="writting_father")
@@ -93,11 +95,6 @@ public class Writting implements Serializable {
 	//bi-directional many-to-one association to Writting
 	@OneToMany(mappedBy="writting")
 	private List<Writting> writtings;
-
-	//bi-directional many-to-one association to Pagination
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="paginationId")
-	private Pagination pagination;
 
 	public Writting() {
 	}
@@ -172,14 +169,6 @@ public class Writting implements Serializable {
 
 	public void setLimitTime(Date limitTime) {
 		this.limitTime = limitTime;
-	}
-
-	public int getMainWritting() {
-		return this.mainWritting;
-	}
-
-	public void setMainWritting(int mainWritting) {
-		this.mainWritting = mainWritting;
 	}
 
 	public String getName() {
@@ -298,6 +287,14 @@ public class Writting implements Serializable {
 		this.restriction = restriction;
 	}
 
+	public Typewritting getTypewritting() {
+		return this.typewritting;
+	}
+
+	public void setTypewritting(Typewritting typewritting) {
+		this.typewritting = typewritting;
+	}
+
 	public Writting getWritting() {
 		return this.writting;
 	}
@@ -326,14 +323,6 @@ public class Writting implements Serializable {
 		writting.setWritting(null);
 
 		return writting;
-	}
-
-	public Pagination getPagination() {
-		return this.pagination;
-	}
-
-	public void setPagination(Pagination pagination) {
-		this.pagination = pagination;
 	}
 
 }

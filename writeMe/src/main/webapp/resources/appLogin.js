@@ -7,7 +7,6 @@ angular.module('myApp', [
   'myApp.signup',
   'myApp.acceptLegalEstablishment',
   'myApp.resetPassword'
-
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/signin'});
