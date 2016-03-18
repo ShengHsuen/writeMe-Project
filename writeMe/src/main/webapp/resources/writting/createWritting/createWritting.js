@@ -42,8 +42,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		$scope.navWritting = function(){
 			createWritting();
 			$scope.valInvitados();
-			var path = "app#/showWrittings";
-			window.location.href = path;
 		}
 		
 		
@@ -58,7 +56,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
-
+			$scope.prepit = false;
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -90,6 +88,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			
 			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 				createUserHasWritting();
+				if($scope.prepit == false){
+					var path = "app#/showWrittings";
+					window.location.href = path;
+				}
+			}).catch(function(error){
+				console.log("Titulo no puede estar repetido");
+				$scope.prepit = true;
 			});
 
 		}

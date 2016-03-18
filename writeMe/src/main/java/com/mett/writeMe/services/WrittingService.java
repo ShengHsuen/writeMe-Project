@@ -100,10 +100,10 @@ public class WrittingService implements WrittingServiceInterface{
 		return WrittingPOJO;
 	}
 	
-	
+	// Comentado
 	public List<UserPOJO> getUsersPublished(){
 		List<UserPOJO> Users = new ArrayList<UserPOJO>();
-		List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
+		/*List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
 		System.out.println("Size: "+ Writtings.size());
 		int j = 0;
@@ -117,7 +117,7 @@ public class WrittingService implements WrittingServiceInterface{
 			}else{
 				
 			}
-		}
+		}*/
 		  return Users;
 	}
 	

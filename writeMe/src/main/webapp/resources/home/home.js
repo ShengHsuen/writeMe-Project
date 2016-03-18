@@ -24,6 +24,6 @@ angular.module('myApp.home', ['ngRoute'])
   $http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
    console.log("home.js");
    $scope.writting = response.writting;
-   $scope.user = response.user;
+  // $scope.user = response.user;
   });
 }]);

@@ -104,7 +104,7 @@
 			console.log("Published: " + publish + "Fecha: " + fecha);
 			$http.post('rest/protected/writting/publish',$scope.writting).success(function(response) {
 				console.log("writting/publish");
-			});
+			})
 		}
 		
 		
