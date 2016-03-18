@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
@@ -60,6 +59,7 @@ public class WrittingController {
 			ur.getWritting().setImage(resultFileName);
 			Boolean state = false;
 			state = WrittingService.saveWritting(ur);
+			
 			WrittingPOJO w = WrittingService.getWrittingByName(ur);
 			u = LoginService.getUser();
 			BeanUtils.copyProperties(w, wr);
@@ -67,7 +67,7 @@ public class WrittingController {
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
-			}		
+			}	
 		}else{
 			//create a common webservice error codes enum or statics
 			us.setCode(409);
@@ -93,6 +93,8 @@ public class WrittingController {
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
 
+		System.out.print("EDIT CONTENT IMPRIMIR EL POJO" + w.getName());
+
 		if(wr.getTypeWritting().equals("Personal")){
 			wr.setContent(ur.getWritting().getContent());
 			Boolean state = WrittingService.editWritting(wr);
@@ -102,12 +104,13 @@ public class WrittingController {
 			}
 		}else{
 			wr.setContent(ur.getWritting().getContent());
-		/*	Boolean state = WrittingService.editWrittingInvitation(ur);
+			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
+			Boolean state = WrittingService.editWrittingInvitation(wr);
 
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
-			}*/
+			}
 		}
 		return us;
 	}
@@ -148,6 +151,18 @@ public class WrittingController {
 		return us;
 	}
 
+	/**
+	 * @author Mildred Guerra
+	 * Add files to util
+	 * 
+	 * @param MultipartFile file
+	 */
+		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
+		public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur){	
+			 resultFileName = Utils.writeToFile(file,servletContext);
+			 System.out.println("Entra a agregar files");
+		}
+		
 	/**
 	 * @author Mildred Guerra
 	 * Delete writting
@@ -201,13 +216,17 @@ public class WrittingController {
 
 		return wr;
 	}
-		
-		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-		public void create(@RequestParam("file") MultipartFile file){	
-			
-			 resultFileName = Utils.writeToFile(file,servletContext);
-			 System.out.println("Entra a agregar files");
-		}
+	
+	/**
+	 * @author Mario Villalobos
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getContent", method = RequestMethod.POST)
+	public String getContent(@RequestBody WrittingRequest ur) {
+		String content = WrittingService.getWrittingContent(ur);
+		return content;
+	}
 
 		/**
 		 * @author Mildred Guerra
@@ -223,4 +242,5 @@ public class WrittingController {
 			response.setWritting(WrittingService.getAll());
 			return response;
 		}
+
 }

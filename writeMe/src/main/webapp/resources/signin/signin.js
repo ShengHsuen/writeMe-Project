@@ -19,7 +19,6 @@ angular.module('myApp.signin', ['ngRoute'])
 		  window.location.href = path;
 		 }
 	
-	$scope.user = {email:"cheng2094@gmail.com",password:"12345"};
 	$scope.login = function(){
 		
 		$http.post('rest/signin/checkuser',$scope.user).success(function (loginResponse) {

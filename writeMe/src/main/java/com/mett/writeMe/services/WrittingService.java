@@ -81,6 +81,27 @@ public class WrittingService implements WrittingServiceInterface{
 	
 	@Override
 	@Transactional
+	public List<WrittingPOJO> getWrittingsByMainWritting(Writting wr){
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		List<Writting> Writting = writtingRepository.findByNameContaining("prueba2");
+		List<Writting> Writtings = writtingRepository.findAll();
+		
+		WrittingPOJO dto = new WrittingPOJO();
+		BeanUtils.copyProperties(Writting.get(0), dto);
+		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
+		WrittingPOJO.add(dto);
+		
+		for(int i=0; i <= Writtings.size()-1; i++){
+			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
+				BeanUtils.copyProperties(Writtings.get(i), dto);
+				WrittingPOJO.add(dto);
+				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
+			}
+		}
+		return WrittingPOJO;
+	}
+	
+	
 	public List<UserPOJO> getUsersPublished(){
 		List<UserPOJO> Users = new ArrayList<UserPOJO>();
 		List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
@@ -111,14 +132,30 @@ public class WrittingService implements WrittingServiceInterface{
 		  System.out.println("La obra: "+ Writtings.get(0));
 		  return generateWrittingDtos(Writtings).get(0);
 	}
+
+
 	
-	/*@Override
-	@Transactional
-	public String getWrittingContent(WrittingRequest ur) {
-		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		  return generateWrittingDtos(Writtings).get(0).getContent();
-	}*/
-	
+	  @Override
+	  @Transactional 
+	  public String getWrittingContent(WrittingRequest ur) {
+      String content ="";
+	  Writting writting = writtingRepository.findOne(Integer.parseInt(ur.getSearchTerm()));
+	  List<Writting> wri = writtingRepository.findAll();
+      int j=0;
+      for (int i=0; i<= wri.size() -1; i++){
+    	  if(writting.getMainWritting() == wri.get(i).getMainWritting()){
+    		  j++;
+    		//  content = content + wri.get(i).getContent() ;
+    		  content =  wri.get(i).getContent() ;
+    		 // System.out.println("Aqui la obra" + content + "\n");
+    	  }else{
+    		  
+    	  }
+      }
+      return content;
+     }
+
+
 	/**
 	 * @param Writtings
 	 * @return
@@ -154,8 +191,9 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public Boolean editWritting(Writting writting){
-		Writting nwritting = writtingRepository.save(writting);
+	public Boolean editWritting(Writting wr) {
+		Writting nwritting = writtingRepository.save(wr);
+
 		return (nwritting == null) ? false : true;
 	}
 	
@@ -179,5 +217,35 @@ public class WrittingService implements WrittingServiceInterface{
 	public void deletewritting(int writtingId) {
 		writtingRepository.delete(writtingId);
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWrittingInvitation(com.mett.writeMe.contracts.WrittingRequest)
+	 */
+	@Override
+	@Transactional
+	public Boolean editWrittingInvitation(Writting wr) {
+		List<WrittingPOJO> wrPojo = getWrittingsByMainWritting(wr);
+		List<Writting> writting = new ArrayList<Writting>();
+		BeanUtils.copyProperties(wrPojo, writting);
+		int father = 0;
+		
+		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
+		for(int i=0;i<=UserHasWrittings.size()-1;i++){
+			if(wr.getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
+				wr.setWrittingId(0);
+				wr.setName(null);
+				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
+				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
+				
+//				father = wrPojo.get(wrPojo.size()-2).getWrittingId();
+//				wr.setWritting(writting.get(father));
+//				System.out.print("ID DEL PADRE ES:  "+writting.get(father).getWrittingId());
+				
+			}
+		}
+		Writting nWritting = writtingRepository.save(wr);
+
+		
+		return (nWritting == null) ? false : true;
+	}
 }

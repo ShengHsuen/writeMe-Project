@@ -1,6 +1,6 @@
 'use strict';
 
-	angular.module('myApp.writting', ['ngRoute'])
+	angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
@@ -9,7 +9,15 @@
 	  });
 	}])
 	
-	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
+	
+	
+	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+
+		
+//		$scope.$on("NAME_CHANNEL",function(event,name){
+//			$scope.name = name;
+//		});
+
 		
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -40,7 +48,54 @@
 		}
 
 		var update = function(){
+			$scope.writting={
+					"pageNumber": 0,
+					"pageSize": 0,
+					"direction": "",
+					"sortBy": [""],
+					"searchColumn": "string",
+					"searchTerm": "prueba3",
+					"writting": {
+						"name" : "prueba3",
+						"description" : "a",
+						"cantUsers": 0,
+						"date": fecha,
+						"likes": 0,
+						"limit time": "2100-01-01",
+						"numMaxCharacters": 10000,
+						"numMinCharacters": 30,
+						"published": publish,
+						"content": $scope.content
+					}
+			};
 			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
+				createUserHasWritting();
+			});
+		}
+		
+		var createUserHasWritting = function(){
+			$scope.userHasWritting={
+					  "pageNumber": 0,
+					  "pageSize": 0,
+					  "direction": "string",
+					  "sortBy": [
+					    "string"
+					  ],
+					  "searchColumn": "string",
+					  "searchTerm": "string",
+					  "userHasWritting": {
+						  "dateModifie": fecha,
+					      "statusColor": false,
+					      "user_has_writtingId": 0,
+					      "linkInvitation": "string",
+					      "banned": false,
+					      "dateCreate": fecha,
+					      "invitationStatus": false
+					}
+					
+			};
+			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+				
 			});
 		}
 		
@@ -51,5 +106,15 @@
 				console.log("writting/publish");
 			});
 		}
+		
+		$scope.loadData = function(){
+		
+			$scope.content = $localStorage.showContent;
+			console.log("Pa que dani vea" +$localStorage.showContent);
+			
+		}
+	
+		$scope.loadData();
+		
 		
 	}]);
