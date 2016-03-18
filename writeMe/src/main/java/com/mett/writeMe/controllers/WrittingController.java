@@ -174,9 +174,10 @@ public class WrittingController {
 		WrittingResponse wr= new WrittingResponse(); 
 		List<WrittingPOJO> listaUserHasWritting  =new ArrayList<WrittingPOJO>();
 		//buscar todos los userHasWritting
-
+		System.out.println("Esto es el id main en conttroler delete" + writtingMainId);
 		//botener todas para comparar con el padre
 		List<WrittingPOJO> allWrittings = getAll().getWritting();
+		List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
 		wr=getAll();
 		//comparar los que tienen de padre writtingId
 		allWrittings.stream().forEach(wt ->{
@@ -184,7 +185,6 @@ public class WrittingController {
 				//listaHijos.add(wt);
 				System.out.println("entra al hijo con el id padre" +wt.getMainWritting() );
 				//obtiene los userHasWritting de los hijos
-				List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
 
 				allUserHasWritting.stream().forEach(uhw ->{
 					System.out.println("for al userHasWritting" +uhw.getWritting().getWrittingId() +" y "+wt.getWrittingId() );
@@ -194,15 +194,17 @@ public class WrittingController {
 						//eliminar userhasWritting de los hijos
 						UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
 					}
-					if(uhw.getWritting().getWrittingId()==writtingMainId){
-						System.out.println("entra al userHasWritting main");
-						//eliminar userhasWritting del main
-						UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
-					}
 				});
 
 				//eliminar hijos
 				WrittingService.deletewritting(wt.getWrittingId());
+			}
+		});
+		allUserHasWritting.stream().forEach(uhw ->{
+			if(uhw.getWritting().getWrittingId()==writtingMainId){
+				System.out.println("entra al userHasWritting main");
+				//eliminar userhasWritting del main
+				UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
 			}
 		});
 		allWrittings = getAll().getWritting();
