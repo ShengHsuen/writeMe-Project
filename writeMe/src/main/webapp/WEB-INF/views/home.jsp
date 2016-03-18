@@ -158,10 +158,10 @@
 							</a>
 							</li>
 							<li class="line dk"></li>
-							<li><a href class="auto"> <span
+							<li><a href="app#/showWrittings" class="auto"> <span
 									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-book icon"></i> <span
-									class="font-bold">Mi biblioteca</span>
+								</span> <i class="glyphicon glyphicon-book icon"></i><span
+									class="font-bold" >Mi biblioteca </span>
 							</a>
 						</ul>
 					</nav>

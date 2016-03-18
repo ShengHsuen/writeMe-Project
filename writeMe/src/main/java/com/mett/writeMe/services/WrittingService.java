@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.UserHasWritting;
-//
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
@@ -83,7 +82,7 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByMainWritting(Writting wr){
 		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
-		List<Writting> Writting = writtingRepository.findByNameContaining("prueba2");
+		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
 		List<Writting> Writtings = writtingRepository.findAll();
 		
 		WrittingPOJO dto = new WrittingPOJO();

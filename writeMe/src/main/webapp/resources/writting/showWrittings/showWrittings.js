@@ -20,23 +20,20 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	};
 	
 	// Mostrar
-	$scope.init = function() {
+
 		$http.post('users/getWrittings',$scope.writting).success(function(response) {
 					$scope.writting = response.writtings;
 				});
-	}
-	$scope.init();
-	
-	
-	/*$scope.showWritting = function(wrid){
-		params: {writtingId: wrid}
-	    console.log("el id es "+wrid); // agarra el id 
-	}
-	*/
-	$scope.saveData = function(wrid){
+
+
+	$scope.saveData = function(wrid, name){
 		params: {content : wrid}
+	    params: {name : name}
 	    $localStorage.showContent = wrid;
+	    $localStorage.nameWritting = name;
+	    
 	    console.log("contendio " + wrid)
+	    console.log("Para que cheng aprenda " + name)
 	    window.location.href = "app#/writting"
 	}
 
