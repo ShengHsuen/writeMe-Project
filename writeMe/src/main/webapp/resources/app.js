@@ -13,4 +13,6 @@ angular.module('myApp', [
 
 .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});
+	
 }]);
+

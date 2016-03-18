@@ -62,6 +62,7 @@ angular.module('myApp.signup', ['ngRoute'])
 			$scope.pconfirm = true;
 		}
 	}
+	
 	$scope.navAcceptLegal= function(){
 		var path = "/writeMe/#/acceptLegalEstablishment";
 		window.location.href = path;

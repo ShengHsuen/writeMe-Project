@@ -26,4 +26,11 @@ angular.module('myApp.home', ['ngRoute'])
    $scope.writting = response.writting;
    $scope.user = response.user;
   });
+
+	
+	$scope.signout = function(){
+			console.log("entra aqui")
+		var path = "/writeMe/#/signin";
+		window.location.href = path;
+	}
 }]);
