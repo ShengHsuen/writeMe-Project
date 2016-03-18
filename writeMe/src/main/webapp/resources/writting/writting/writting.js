@@ -27,16 +27,8 @@
 				"searchColumn": "string",
 				"searchTerm": "fff",
 				"writting": {
-					"name" : "fff",
-					"description" : "a",
-					"cantUsers": 0,
-					"date": fecha,
-					"likes": 0,
-					"limit time": "2100-01-01",
-					"numMaxCharacters": 10000,
-					"numMinCharacters": 30,
 					"published": publish,
-					"content": $scope.content
+					"date": fecha
 				}
 		};
 		
@@ -55,7 +47,7 @@
 			publish = true;
 			console.log("Published: " + publish + "Fecha: " + fecha);
 			$http.post('writting/publish',$scope.writting).success(function(response) {
-
+				console.log("writting/publish");
 			});
 		}
 		

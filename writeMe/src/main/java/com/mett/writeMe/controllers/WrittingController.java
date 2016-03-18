@@ -102,11 +102,12 @@ public class WrittingController {
 	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		System.out.println("WrittingPOJO: " + w.getName());
 		BeanUtils.copyProperties(w, wr);
-		wr.setContent(ur.getWritting().getContent());
+		//wr.setContent(ur.getWritting().getContent());
 		wr.setDate(ur.getWritting().getDate());
 		wr.setPublished(ur.getWritting().getPublished());
-		Boolean state = WrittingService.editWritting(wr);
+		Boolean state = WrittingService.publish(ur);
 
 		if (state) {
 			us.setCode(200);

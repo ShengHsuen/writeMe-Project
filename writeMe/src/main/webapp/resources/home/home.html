@@ -6,8 +6,10 @@
 	  </div>
 	  <div class="hbox hbox-auto-xs hbox-auto-sm">
 	  		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
-	  			<il ng-repeat="wr in writting" class="list-group-item clearfix b-l-3x b-l-info"><p>Título:{{wr.name}}</p><p>Categoría:{{wr.category}}</p><p>Descripción:{{wr.description}}</p></il>
-				<p ng-repeat="us in user">Autor:{{us.author}}</p>
+	  			<!--  <il ng-repeat="us in user">Autor:{{user.author}}</il>-->
+	  			<il ng-repeat="wr in writting" class="list-group-item clearfix b-l-3x b-l-info"><p>Título:{{wr.name}}</p><p>Categoría:{{wr.category}}</p><p>Descripción:{{wr.description}}</p>
+				<img ng-src="{{wr.image}}" width="300" height="200"></img></il>
+				
 	 		</ul>
 	   </div>
 	  

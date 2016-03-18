@@ -64,7 +64,7 @@ public class WrittingService implements WrittingServiceInterface{
 		List<UserPOJO> Users = new ArrayList<UserPOJO>();
 		List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
-		System.out.println(Writtings.size());
+		System.out.println("Size: "+ Writtings.size());
 		int j = 0;
 		for(int i=0;i<=UserHasWrittings.size()-1;i++){
 			if(Writtings.get(j).getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
@@ -135,6 +135,16 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public Boolean editWritting(Writting writting){
 		Writting nwritting = writtingRepository.save(writting);
+		return (nwritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean publish(WrittingRequest ur){
+		List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
+		Writtings.get(0).setPublished(true);
+		Writtings.get(0).setDate(ur.getWritting().getDate());
+		Writting nwritting = writtingRepository.save(Writtings.get(0));
 		return (nwritting == null) ? false : true;
 	}
 }
