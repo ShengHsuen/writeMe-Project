@@ -1,10 +1,8 @@
 package com.mett.writeMe.controllers;
 
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,11 +21,10 @@ import com.mett.writeMe.services.UsersServiceInterface;
  */
 @RestController
 
-@RequestMapping(value ="/users")
+@RequestMapping(value ="users")
 
 public class UserController {
 	@Autowired private UsersServiceInterface usersService;
-	@Autowired private HttpServletRequest request;
 	
 	/**
 	 * @param ur
@@ -61,26 +58,6 @@ public class UserController {
 			@RequestParam("idUser") int idUser){	
 		    usersService.deleteUser(idUser);
 			
-	}
-	
-	@RequestMapping(value ="/getWrittings", method = RequestMethod.POST)
-	public UsersResponse getWrittings(HttpServletRequest servletRequest){	
-
-		UsersResponse response = new UsersResponse();
-		HttpSession currentSession = servletRequest.getSession();
-		response.setCode(200);
-		response.setCodeMessage("obtiene bien los writtings");
-		response.setWrittings(usersService.getWrittingsByUser(currentSession));
-		return response;		
-	}
-	
-	@RequestMapping(value ="/getAll", method = RequestMethod.POST)
-	public UsersResponse getAll(@RequestBody UsersRequest ur){	
-		UsersResponse us = new UsersResponse();
-		us.setCode(200);
-		us.setCodeMessage("users fetch success");
-		us.setUsers(usersService.getAll(ur));
-		return us;		
 	}
 	
 }
