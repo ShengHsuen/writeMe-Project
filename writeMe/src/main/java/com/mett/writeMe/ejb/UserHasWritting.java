@@ -20,7 +20,7 @@ public class UserHasWritting implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
 
-	private byte banned;
+	private boolean banned;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
@@ -28,11 +28,11 @@ public class UserHasWritting implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateModifie;
 
-	private byte invitationStatus;
+	private boolean invitationStatus;
 
 	private String linkInvitation;
 
-	private byte statusColor;
+	private boolean statusColor;
 
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="userHasWritting")
@@ -65,11 +65,11 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-	public byte getBanned() {
+	public boolean getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(byte banned) {
+	public void setBanned(boolean banned) {
 		this.banned = banned;
 	}
 
@@ -89,11 +89,11 @@ public class UserHasWritting implements Serializable {
 		this.dateModifie = dateModifie;
 	}
 
-	public byte getInvitationStatus() {
+	public boolean getInvitationStatus() {
 		return this.invitationStatus;
 	}
 
-	public void setInvitationStatus(byte invitationStatus) {
+	public void setInvitationStatus(boolean invitationStatus) {
 		this.invitationStatus = invitationStatus;
 	}
 
@@ -105,11 +105,11 @@ public class UserHasWritting implements Serializable {
 		this.linkInvitation = linkInvitation;
 	}
 
-	public byte getStatusColor() {
+	public boolean getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(byte statusColor) {
+	public void setStatusColor(boolean statusColor) {
 		this.statusColor = statusColor;
 	}
 
