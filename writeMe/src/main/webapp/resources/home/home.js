@@ -12,7 +12,6 @@ angular.module('myApp.home', ['ngRoute'])
 .controller('HomeCtrl', ['$scope','$http',function($scope,$http) {
 	$scope.writting = [];
 	$scope.user = [];
-	$scope.updateHome = function(){
 		$scope.writting = {"pageNumber": 0,
 								"pageSize": 0,
 								"direction": "",
@@ -27,6 +26,4 @@ angular.module('myApp.home', ['ngRoute'])
 			$scope.writting = response.writting;
 			$scope.user = response.user;
 		});
-		
-	}
 }]);

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.UserHasWritting;
-//
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
