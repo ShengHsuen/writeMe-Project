@@ -212,20 +212,22 @@ public class WrittingController {
 						//eliminar userhasWritting de los hijos
 						UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
 					}
-					else if(uhw.getWritting().getWrittingId()==writtingMainId){
+					if(uhw.getWritting().getWrittingId()==writtingMainId){
 						System.out.println("entra al userHasWritting main");
 						//eliminar userhasWritting del main
-						//UserHasWrittingService.deleteUserHaswritting(writtingMainId);
+						UserHasWrittingService.deleteUserHaswritting(writtingMainId);
 					}
 				});
 
 				//eliminar hijos
 				WrittingService.deletewritting(wt.getWrittingId());
 			}
-			else if(wt.getWrittingId()==writtingMainId){
+		});
+		allWrittings.stream().forEach(wt ->{
+			if(wt.getWrittingId()==writtingMainId){
 
 				//eliminar el main
-			//	WrittingService.deletewritting(writtingMainId);
+				WrittingService.deletewritting(writtingMainId);
 			}
 
 		});
