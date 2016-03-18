@@ -83,7 +83,7 @@ public class WrittingController {
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		us.setWritting(WrittingService.getPublished(ur));
-		us.setUser(WrittingService.getUsersPublished());
+		//us.setUser(WrittingService.getUsersPublished());
 		return us;		
 	}
 
@@ -118,12 +118,12 @@ public class WrittingController {
 	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
-		WrittingPOJO w = WrittingService.getWrittingByName(ur);
-		System.out.println("WrittingPOJO: " + w.getName());
-		BeanUtils.copyProperties(w, wr);
+		//WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		//System.out.println("WrittingPOJO: " + w.getName());
+		/*BeanUtils.copyProperties(w, wr);
 		//wr.setContent(ur.getWritting().getContent());
 		wr.setDate(ur.getWritting().getDate());
-		wr.setPublished(ur.getWritting().getPublished());
+		wr.setPublished(ur.getWritting().getPublished());*/
 		Boolean state = WrittingService.publish(ur);
 
 		if (state) {

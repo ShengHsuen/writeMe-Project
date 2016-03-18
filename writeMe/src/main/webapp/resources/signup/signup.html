@@ -37,21 +37,17 @@
           </div>
           <div class="checkbox m-b-md m-t-none">
             <label class="i-checks">
-              <input type="checkbox" ng-model="agree" required><i></i> Agree the <a style="color: rgb(51, 122, 183);" ng-click="navAcceptLegal()" href>terms and policy</a>
+              <input type="checkbox" ng-model="agree" required><i></i> Aceptar los <a style="color: rgb(51, 122, 183);" ng-click="navAcceptLegal()" href>terminos y politicas</a>
             </label>
           </div>
           <p ng-show="pconfirm" class="text-center text-danger"><small>Las contraseñas deben coincidir</small></p>
-          <button ng-disabled="form.$invalid" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="createAccount()">Sign up</button>
+          <p ng-show="prepit" class="text-center text-danger"><small>Nick o correo ya existen</small></p>
+          <button ng-disabled="form.$invalid" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="createAccount()">Crear cuenta</button>
 
           <div class="line line-dashed"></div>
-          <p class="text-center"><small>Already have an account?</small></p>
-          <a ng-click="navSignin()" ui-sref="access.signin" class="btn btn-lg btn-default btn-block">Sign in</a>
+          <p class="text-center"><small>Ya tiene cuenta?</small></p>
+          <a ng-click="navSignin()" ui-sref="access.signin" class="btn btn-lg btn-default btn-block">Iniciar sesion</a>
         </form>
-      </div>
-      <div class="text-center">
-        <p>
-  			<small class="text-muted">Web app framework base on Bootstrap and AngularJS<br>&copy; 2014</small>
-		</p>
       </div>
     </div>
 

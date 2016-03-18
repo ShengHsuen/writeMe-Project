@@ -35,6 +35,7 @@ angular.module('myApp.signup', ['ngRoute'])
 				}
 		};
 		$scope.pConfirm();
+		$scope.prepit = false;
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
 				$scope.user = {email: $scope.mail};
@@ -46,9 +47,13 @@ angular.module('myApp.signup', ['ngRoute'])
 						alert("invalido");
 					}
 				});
-				
+				if($scope.prepit == false){
+					$scope.navSignin();
+				}
+			}).catch(function(error){
+				console.log("Correo o Nick invalido");
+				$scope.prepit = true;
 			});
-			$scope.navSignin();
 		}else{
 			
 		}
