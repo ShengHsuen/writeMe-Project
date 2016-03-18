@@ -234,23 +234,14 @@ public class WrittingService implements WrittingServiceInterface {
 				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
 				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
 				
-				father = wrPojo.get(wrPojo.size()-2).getWrittingId();
-				wr.setWritting(writting.get(father));
-				System.out.print("ID DEL PADRE ES:  "+writting.get(father).getWrittingId());
+//				father = wrPojo.get(wrPojo.size()-2).getWrittingId();
+//				wr.setWritting(writting.get(father));
+//				System.out.print("ID DEL PADRE ES:  "+writting.get(father).getWrittingId());
 				
 			}
 		}
 		Writting nWritting = writtingRepository.save(wr);
-		
-		
-//		for(int i = 0; i <= wrPojo.size()-1; i++){
-//			father = nWritting.getWrittingId();
-//			rest = wrPojo.get(i).getWrittingId();
-//			diference = father - rest;
-//			if(diference < ){
-//				
-//			}
-//		}
+
 		
 		return (nWritting == null) ? false : true;
 	}
