@@ -12,57 +12,57 @@ import java.util.List;
 @Entity
 @NamedQuery(name="Pagination.findAll", query="SELECT p FROM Pagination p")
 public class Pagination implements Serializable {
-	private static final long serialVersionUID = 1L;
+ private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int paginationId;
+ @Id
+ @GeneratedValue(strategy=GenerationType.AUTO)
+ private int paginationId;
 
-	private String numMaxCharacters;
+ private String numMaxCharacters;
 
-	//bi-directional many-to-one association to Writting
-	@OneToMany(mappedBy="pagination")
-	private List<Writting> writtings;
+ //bi-directional many-to-one association to Writting
+ @OneToMany(mappedBy="pagination")
+ private List<Writting> writtings;
 
-	public Pagination() {
-	}
+ public Pagination() {
+ }
 
-	public int getPaginationId() {
-		return this.paginationId;
-	}
+ public int getPaginationId() {
+  return this.paginationId;
+ }
 
-	public void setPaginationId(int paginationId) {
-		this.paginationId = paginationId;
-	}
+ public void setPaginationId(int paginationId) {
+  this.paginationId = paginationId;
+ }
 
-	public String getNumMaxCharacters() {
-		return this.numMaxCharacters;
-	}
+ public String getNumMaxCharacters() {
+  return this.numMaxCharacters;
+ }
 
-	public void setNumMaxCharacters(String numMaxCharacters) {
-		this.numMaxCharacters = numMaxCharacters;
-	}
+ public void setNumMaxCharacters(String numMaxCharacters) {
+  this.numMaxCharacters = numMaxCharacters;
+ }
 
-	public List<Writting> getWrittings() {
-		return this.writtings;
-	}
+ public List<Writting> getWrittings() {
+  return this.writtings;
+ }
 
-	public void setWrittings(List<Writting> writtings) {
-		this.writtings = writtings;
-	}
+ public void setWrittings(List<Writting> writtings) {
+  this.writtings = writtings;
+ }
 
-	public Writting addWritting(Writting writting) {
-		getWrittings().add(writting);
-		writting.setPagination(this);
+ public Writting addWritting(Writting writting) {
+  getWrittings().add(writting);
+  writting.setPagination(this);
 
-		return writting;
-	}
+  return writting;
+ }
 
-	public Writting removeWritting(Writting writting) {
-		getWrittings().remove(writting);
-		writting.setPagination(null);
+ public Writting removeWritting(Writting writting) {
+  getWrittings().remove(writting);
+  writting.setPagination(null);
 
-		return writting;
-	}
+  return writting;
+ }
 
 }

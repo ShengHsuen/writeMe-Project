@@ -11,7 +11,6 @@
 		<class>com.mett.writeMe.ejb.Mylibrary</class>
 		<class>com.mett.writeMe.ejb.Notification</class>
 		<class>com.mett.writeMe.ejb.Notificationtype</class>
-		<class>com.mett.writeMe.ejb.Pagination</class>
 		<class>com.mett.writeMe.ejb.Payaccount</class>
 		<class>com.mett.writeMe.ejb.Record</class>
 		<class>com.mett.writeMe.ejb.Report</class>

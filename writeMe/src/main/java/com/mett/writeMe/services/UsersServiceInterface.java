@@ -11,13 +11,11 @@ import com.mett.writeMe.pojo.WrittingPOJO;
 
 
 public interface UsersServiceInterface {
-	
+    
 	List<UserPOJO> getAll(UsersRequest ur);
 	List<UserPOJO> getAllByName(UsersRequest ur);
 	Boolean saveUser(UsersRequest ur);
 	void deleteUser (int idUser);
 	User getUserByMail(UsersRequest ur);
 	List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession);
-
-	
 }

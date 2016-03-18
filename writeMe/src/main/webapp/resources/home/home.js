@@ -22,10 +22,11 @@ angular.module('myApp.home', ['ngRoute'])
 								"user": {},
 								"writting": {}	
 								};
-		$http.post('writting/getPublished',$scope.writting).success(function(response){
+		$http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
 			console.log("home.js");
 			$scope.writting = response.writting;
 			$scope.user = response.user;
 		});
+		
 	}
 }]);
