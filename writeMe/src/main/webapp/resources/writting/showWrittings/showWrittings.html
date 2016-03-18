@@ -5,7 +5,7 @@
 	  <div class="hbox hbox-auto-xs hbox-auto-sm">
 	  		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
 	  			<il ng-repeat="wr in writting" class="list-group-item clearfix b-l-3x b-l-info"><p>Título: {{wr.name}}</p><p>Categoría: {{wr.category}}</p><p>Descripción: {{wr.description}}</p>
-	  				<button ng-click="saveData(wr.content)"> <span class="glyphicon glyphicon-pencil"></span>
+	  				<button ng-click="saveData(wr.content, wr.name)"> <span class="glyphicon glyphicon-pencil"></span>
 					</button>
 				
 	  			</il>
