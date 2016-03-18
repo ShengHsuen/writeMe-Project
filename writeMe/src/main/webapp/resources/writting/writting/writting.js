@@ -48,7 +48,54 @@
 		}
 
 		var update = function(){
+			$scope.writting={
+					"pageNumber": 0,
+					"pageSize": 0,
+					"direction": "",
+					"sortBy": [""],
+					"searchColumn": "string",
+					"searchTerm": "prueba3",
+					"writting": {
+						"name" : "prueba3",
+						"description" : "a",
+						"cantUsers": 0,
+						"date": fecha,
+						"likes": 0,
+						"limit time": "2100-01-01",
+						"numMaxCharacters": 10000,
+						"numMinCharacters": 30,
+						"published": publish,
+						"content": $scope.content
+					}
+			};
 			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
+				createUserHasWritting();
+			});
+		}
+		
+		var createUserHasWritting = function(){
+			$scope.userHasWritting={
+					  "pageNumber": 0,
+					  "pageSize": 0,
+					  "direction": "string",
+					  "sortBy": [
+					    "string"
+					  ],
+					  "searchColumn": "string",
+					  "searchTerm": "string",
+					  "userHasWritting": {
+						  "dateModifie": fecha,
+					      "statusColor": false,
+					      "user_has_writtingId": 0,
+					      "linkInvitation": "string",
+					      "banned": false,
+					      "dateCreate": fecha,
+					      "invitationStatus": false
+					}
+					
+			};
+			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+				
 			});
 		}
 		
