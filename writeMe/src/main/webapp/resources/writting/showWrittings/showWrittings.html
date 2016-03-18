@@ -7,7 +7,9 @@
 	  			<il ng-repeat="wr in writting" class="list-group-item clearfix b-l-3x b-l-info"><p>Título: {{wr.name}}</p><p>Categoría: {{wr.category}}</p><p>Descripción: {{wr.description}}</p>
 	  				<button ng-click="saveData(wr.content, wr.name)"> <span class="glyphicon glyphicon-pencil"></span>
 					</button>
-				
+					<button ng-click="deleteWritting(wr.writtingId)"  >
+									<span class="glyphicon glyphicon-trash"></span>
+					</button>
 	  			</il>
 	 		</ul>
 	   </div>
