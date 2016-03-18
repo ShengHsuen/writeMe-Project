@@ -33,7 +33,7 @@
 				"direction": "",
 				"sortBy": [""],
 				"searchColumn": "string",
-				"searchTerm": "fff",
+				"searchTerm": $scope.name,
 				"writting": {
 					"published": publish,
 					"date": fecha,
@@ -54,9 +54,9 @@
 					"direction": "",
 					"sortBy": [""],
 					"searchColumn": "string",
-					"searchTerm": "prueba3",
+					"searchTerm": $scope.name,
 					"writting": {
-						"name" : "prueba3",
+						"name" : $scope.name,
 						"description" : "a",
 						"cantUsers": 0,
 						"date": fecha,
@@ -109,8 +109,8 @@
 		
 		$scope.loadData = function(){
 			$scope.content = $localStorage.showContent;
-			
-			console.log("Pa que dani vea" +$localStorage.showContent);	
+			$scope.name = $localStorage.nameWritting;
+			console.log("aqui esta papillos " + $scope.name);
 		}
 		$scope.loadData();
 		

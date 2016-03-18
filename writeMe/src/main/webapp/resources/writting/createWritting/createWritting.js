@@ -40,10 +40,10 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			}
 		}
 		$scope.navWritting = function(){
-			var path = "/writeMe/app#/writting";
-			window.location.href = path;
 			createWritting();
 			$scope.valInvitados();
+			var path = "app#/showWrittings";
+			window.location.href = path;
 		}
 		
 		
@@ -52,10 +52,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 				$scope.cantUsers = 10;
 			}
 		}
-		
-    	/*$scope.passName = function(){
-    		$scope.$emit("passName_channel",$scope.name);
-    	}*/
 		
 		var createWritting = function(){
 
