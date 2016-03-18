@@ -150,6 +150,18 @@ public class WrittingController {
 
 	/**
 	 * @author Mildred Guerra
+	 * Add files to util
+	 * 
+	 * @param MultipartFile file
+	 */
+		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
+		public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur){	
+			 resultFileName = Utils.writeToFile(file,servletContext);
+			 System.out.println("Entra a agregar files");
+		}
+		
+	/**
+	 * @author Mildred Guerra
 	 * Delete writting
 	 * @param  int idwritting
 	 * @return WrittingResponse wr
@@ -201,13 +213,17 @@ public class WrittingController {
 
 		return wr;
 	}
-		
-		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-		public void create(@RequestParam("file") MultipartFile file){	
-			
-			 resultFileName = Utils.writeToFile(file,servletContext);
-			 System.out.println("Entra a agregar files");
-		}
+	
+	/**
+	 * @author Mario Villalobos
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getContent", method = RequestMethod.POST)
+	public String getContent(@RequestBody WrittingRequest ur) {
+		String content = WrittingService.getWrittingContent(ur);
+		return content;
+	}
 
 		/**
 		 * @author Mildred Guerra
@@ -223,4 +239,5 @@ public class WrittingController {
 			response.setWritting(WrittingService.getAll());
 			return response;
 		}
+
 }

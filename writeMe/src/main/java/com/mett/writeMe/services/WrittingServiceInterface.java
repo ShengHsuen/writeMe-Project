@@ -16,11 +16,17 @@ public interface WrittingServiceInterface {
 	List<WrittingPOJO> getAllByName(WrittingRequest ur);
 	Boolean saveWritting(WrittingRequest ur);
 	WrittingPOJO getWrittingByName(WrittingRequest ur);
-	//String getWrittingContent(WrittingRequest ur);
+
 	Boolean editWritting(Writting writting);
 	List<WrittingPOJO> getPublished(WrittingRequest ur);
 	List<UserPOJO> getUsersPublished();
+
+	String getWrittingContent(WrittingRequest ur);
+	
+
 	 Boolean publish(WrittingRequest ur);
 	 List<WrittingPOJO> getAll();
 	void deletewritting(int writtingId);
+	Boolean editWrittingInvitation(WrittingRequest ur);
+
 }
