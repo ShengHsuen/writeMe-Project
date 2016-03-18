@@ -1,6 +1,6 @@
 'use strict';
 
-	angular.module('myApp.writting', ['ngRoute'])
+	angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
@@ -9,7 +9,15 @@
 	  });
 	}])
 	
-	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
+	
+	
+	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+
+		
+//		$scope.$on("NAME_CHANNEL",function(event,name){
+//			$scope.name = name;
+//		});
+
 		
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -98,5 +106,15 @@
 				console.log("writting/publish");
 			});
 		}
+		
+		$scope.loadData = function(){
+		
+			$scope.content = $localStorage.showContent;
+			console.log("Pa que dani vea" +$localStorage.showContent);
+			
+		}
+	
+		$scope.loadData();
+		
 		
 	}]);

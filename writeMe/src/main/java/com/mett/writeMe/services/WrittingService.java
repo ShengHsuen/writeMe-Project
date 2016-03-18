@@ -132,14 +132,30 @@ public class WrittingService implements WrittingServiceInterface{
 		  System.out.println("La obra: "+ Writtings.get(0));
 		  return generateWrittingDtos(Writtings).get(0);
 	}
+
+
 	
-	/*@Override
-	@Transactional
-	public String getWrittingContent(WrittingRequest ur) {
-		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		  return generateWrittingDtos(Writtings).get(0).getContent();
-	}*/
-	
+	  @Override
+	  @Transactional 
+	  public String getWrittingContent(WrittingRequest ur) {
+      String content ="";
+	  Writting writting = writtingRepository.findOne(Integer.parseInt(ur.getSearchTerm()));
+	  List<Writting> wri = writtingRepository.findAll();
+      int j=0;
+      for (int i=0; i<= wri.size() -1; i++){
+    	  if(writting.getMainWritting() == wri.get(i).getMainWritting()){
+    		  j++;
+    		//  content = content + wri.get(i).getContent() ;
+    		  content =  wri.get(i).getContent() ;
+    		 // System.out.println("Aqui la obra" + content + "\n");
+    	  }else{
+    		  
+    	  }
+      }
+      return content;
+     }
+
+
 	/**
 	 * @param Writtings
 	 * @return
@@ -201,7 +217,7 @@ public class WrittingService implements WrittingServiceInterface{
 	public void deletewritting(int writtingId) {
 		writtingRepository.delete(writtingId);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWrittingInvitation(com.mett.writeMe.contracts.WrittingRequest)
 	 */
