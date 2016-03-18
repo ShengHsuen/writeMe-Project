@@ -1,6 +1,6 @@
 'use strict';
 
-	angular.module('myApp.writting', ['ngRoute'])
+	angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
@@ -11,7 +11,7 @@
 	
 	
 	
-	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
+	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
 
 		
 //		$scope.$on("NAME_CHANNEL",function(event,name){
@@ -92,5 +92,11 @@
 			});
 			createUserHasWritting();
 		}
+		
+		$scope.loadData = function(){
+			$scope.content = $localStorage.content;
+		}
+		
+		$scope.loadData();
 		
 	}]);

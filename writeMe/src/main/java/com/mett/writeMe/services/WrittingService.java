@@ -154,14 +154,15 @@ public class WrittingService implements WrittingServiceInterface {
 	  @Transactional 
 	  public String getWrittingContent(WrittingRequest ur) {
       String content ="";
-	  List <Writting> writting = writtingRepository.findByNameContaining(ur.getSearchTerm());
+	  Writting writting = writtingRepository.findOne(Integer.parseInt(ur.getSearchTerm()));
 	  List<Writting> wri = writtingRepository.findAll();
       int j=0;
       for (int i=0; i<= wri.size() -1; i++){
-    	  if(writting.get(j).getWrittingId() == wri.get(i).getWrittingId()){
+    	  if(writting.getMainWritting() == wri.get(i).getMainWritting()){
     		  j++;
-    		  content = content + wri.get(i).getContent() ;
-    		  System.out.println("Aqui la obra" + content);
+    		//  content = content + wri.get(i).getContent() ;
+    		  content =  wri.get(i).getContent() ;
+    		 // System.out.println("Aqui la obra" + content + "\n");
     	  }else{
     		  
     	  }

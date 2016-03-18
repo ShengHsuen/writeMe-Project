@@ -9,6 +9,7 @@
 <html lang="en" ng-app="myApp" class="no-js">
 <!--<![endif]-->
 <head>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Write Me / Mett</title>
@@ -365,6 +366,8 @@
   <script src="resources/bower_components/angular/angular.js"></script>
   <script src="resources/bower_components/angular-route/angular-route.js"></script>
   
+  <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
+  
   <script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
   <script src="resources/non_bower_components/angular-file-upload.min.js"></script>
   
@@ -414,19 +417,19 @@
 
 	<!-- Del bower y home -->
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
-	<script
-		src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="resources/bower_components/angular/angular.js"></script>
 	<script src="resources/bower_components/angular-route/angular-route.js"></script>
-
-	<script
-		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+	
+    <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
+    
+	<script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
 	<script src="resources/non_bower_components/angular-file-upload.min.js"></script>
-
 	<script src="resources/app.js"></script>
 
 	<!-- Del template -->
 	<script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+
 	<script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
 	<script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
 

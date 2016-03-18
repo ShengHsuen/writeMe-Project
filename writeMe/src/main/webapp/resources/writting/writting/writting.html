@@ -2,12 +2,15 @@
 	<div class="col-sm-10">
 		<div id="editor">
 			<form>
-				<textarea id='edit' style="margin-top: 30px;" placeholder="Type some text" ng-model="content"></textarea>
-				<input type="submit" ng-click="send()">
+				<textarea id='edit' style="margin-top: 30px;" placeholder="Type some text" ng-model="content">
+				
+				</textarea>
+			<p {{content}}> {{content}} </p>
 			</form>
 		</div>
 		<button class="btn btn-lg btn-default btn-block" class="btn btn-default" data-toggle="confirmation" ng-click="publish()">Publicar</button>
-
+					
+					
 		<script>
 			$(function() {
 				$('#edit').on('froalaEditor.initialized', function(e, editor) {

@@ -211,11 +211,13 @@ public class WrittingController {
 	}
 	
 	
+	/**
+	 * @author Mario Villalobos
+	 * @param ur
+	 * @return
+	 */
 	@RequestMapping(value = "/getContent", method = RequestMethod.POST)
 	public String getContent(@RequestBody WrittingRequest ur) {
-		WrittingResponse response = new WrittingResponse();
-		response.setCode(200);
-		response.setCodeMessage("La obra, la muestra");
 		String content = WrittingService.getWrittingContent(ur);
 		return content;
 	}
