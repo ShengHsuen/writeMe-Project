@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Write Me / Mett ADMI</title>
+<title>Write Me / Mett</title>
 <meta name="description"
 	content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
 <meta name="viewport"
@@ -116,7 +116,7 @@
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
 					ui-shift="prependTo" data-target=".navbar-collapse" role="search"
-					ng-controller="HomeAdminCtrl">
+					ng-controller="HomeCtrl">
 				</form>
 				<!-- / search form -->
 
@@ -164,10 +164,6 @@
 							<li><a href="appAdmin#/legalEstablishment" class="auto">
 									 <i class="glyphicon glyphicon-briefcase"></i> <span>Términos
 										y condiciones</span>
-							</a></li>
-							<li><a href="#/" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
 							</a></li>
 
 						</ul>
@@ -219,7 +215,7 @@
 	<script
 		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
 	<script src="resources/legalEstablishment/legalEstablishment.js"></script>
-	<script src="resources/homeAdmin/homeAdmin.js"></script>
+	<script src="resources/home/home.js"></script>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
