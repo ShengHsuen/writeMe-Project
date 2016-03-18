@@ -7,27 +7,16 @@ import com.mett.writeMe.contracts.BaseResponse;
 
 public class UserHasWrittingResponse extends BaseResponse{
 	private List<UserHasWrittingPOJO> userHasWritting;
-	private int idUserHasWritting;
 
 	public UserHasWrittingResponse() {
 		super();
 	}
 	
-	public List<UserHasWrittingPOJO> getUserHasWritting() {
+	public List<UserHasWrittingPOJO> getUsuarios() {
 		return userHasWritting;
 	}
 
-	public void setUserHasWritting(List<UserHasWrittingPOJO> userHasWritting) {
+	public void setUsuarios(List<UserHasWrittingPOJO> usuarios) {
 		this.userHasWritting = userHasWritting;
 	}
-
-	public int getIdUserHasWritting() {
-		return idUserHasWritting;
-	}
-
-	public void setIdUserHasWritting(int idUserHasWritting) {
-		this.idUserHasWritting = idUserHasWritting;
-	}
-	
-	
 }

@@ -7,7 +7,6 @@ angular.module('myApp', [
   'myApp.acceptLegalEstablishment',
   'myApp.createWritting',
   'myApp.writting',
-  'myApp.showWrittings',
   'ui.grid'
 ])
 
