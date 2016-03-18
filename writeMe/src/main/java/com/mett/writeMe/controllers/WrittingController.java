@@ -98,7 +98,7 @@ public class WrittingController {
 		return us;
 	}
 	
-	@RequestMapping(value = "rest/protected/publish", method = RequestMethod.POST)
+	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
