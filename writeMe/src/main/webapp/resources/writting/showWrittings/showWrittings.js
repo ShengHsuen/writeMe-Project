@@ -35,7 +35,8 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	*/
 	$scope.saveData = function(wrid){
 		params: {content : wrid}
-	    $localStorage.content = wrid;
+	    $localStorage.showContent = wrid;
+	    console.log("contendio " + wrid)
 	    window.location.href = "app#/writting"
 	}
 

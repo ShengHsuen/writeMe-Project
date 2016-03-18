@@ -94,9 +94,13 @@
 		}
 		
 		$scope.loadData = function(){
-			$scope.content = $localStorage.content;
-		}
 		
+			$scope.content = $localStorage.showContent;
+			console.log($localStorage.showContent);
+			
+		}
+	
 		$scope.loadData();
+		
 		
 	}]);
