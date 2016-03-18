@@ -61,7 +61,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			for ( var i = 0; i < $scope.files.length; i++) {
     			var file = $scope.files[i];
     			$scope.upload = $upload.upload({
-    				url : 'writting/addFiles',
+    				url : 'rest/protected/writting/addFiles',
     				file : file,
     			}).progress(
     					function(evt) {
@@ -154,7 +154,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			};*/
 
 			
-			$http.post('writting/create',$scope.writting).success(function(response) {
+			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 				createUserHasWritting();
 			});
 
@@ -182,7 +182,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			};
 
 			
-			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});
 		}

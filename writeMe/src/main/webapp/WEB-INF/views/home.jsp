@@ -141,7 +141,7 @@
 
 
 		<!-- aside -->
-		<aside id="aside" class="hidden-xsbg-dark app-aside-fixed  ">
+		<aside id="aside" class="app-aside hidden-xs bg-dark">
 			<div class="aside-wrap" >
 				<div class="navi-wrap">
 

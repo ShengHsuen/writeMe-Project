@@ -12,7 +12,6 @@ angular.module('myApp.home', ['ngRoute'])
 .controller('HomeCtrl', ['$scope','$http',function($scope,$http) {
 	$scope.writting = [];
 	$scope.user = [];
-	$scope.home = [$scope.user,$scope.writting];
 	$scope.updateHome = function(){
 		$scope.writting = {"pageNumber": 0,
 								"pageSize": 0,
@@ -23,7 +22,7 @@ angular.module('myApp.home', ['ngRoute'])
 								"user": {},
 								"writting": {}	
 								};
-		$http.post('writting/getPublished',$scope.writting).success(function(response){
+		$http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
 			console.log("home.js");
 			$scope.writting = response.writting;
 			$scope.user = response.user;

@@ -29,7 +29,7 @@ import com.mett.writeMe.utils.Utils;
  */
 @RestController
 
-@RequestMapping(value = "/writting")
+@RequestMapping(value = "rest/protected/writting")
 
 public class WrittingController {
 	@Autowired
@@ -98,7 +98,7 @@ public class WrittingController {
 		return us;
 	}
 	
-	@RequestMapping(value = "/publish", method = RequestMethod.POST)
+	@RequestMapping(value = "rest/protected/publish", method = RequestMethod.POST)
 	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);

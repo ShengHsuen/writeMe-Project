@@ -21,7 +21,7 @@ import com.mett.writeMe.services.UsersServiceInterface;
  */
 @RestController
 
-@RequestMapping(value ="/users")
+@RequestMapping(value ="users")
 
 public class UserController {
 	@Autowired private UsersServiceInterface usersService;

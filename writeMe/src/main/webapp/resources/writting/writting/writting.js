@@ -28,7 +28,8 @@
 				"searchTerm": "fff",
 				"writting": {
 					"published": publish,
-					"date": fecha
+					"date": fecha,
+					"content": $scope.content
 				}
 		};
 		
@@ -39,14 +40,14 @@
 		}
 
 		var update = function(){
-			$http.post('writting/editContent',$scope.writting).success(function(response) {
+			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
 			});
 		}
 		
 		$scope.publish = function(){
 			publish = true;
 			console.log("Published: " + publish + "Fecha: " + fecha);
-			$http.post('writting/publish',$scope.writting).success(function(response) {
+			$http.post('rest/protected/writting/publish',$scope.writting).success(function(response) {
 				console.log("writting/publish");
 			});
 		}
