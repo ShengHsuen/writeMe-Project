@@ -38,6 +38,7 @@ angular.module('myApp.signup', ['ngRoute'])
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
 				$scope.user = {email: $scope.mail};
+				
 				$http.post('rest/email/confCuenta',$scope.user).success(function (userResponse) {
 					if(userResponse.code == 200){
 						$scope.navSignin();
@@ -47,6 +48,7 @@ angular.module('myApp.signup', ['ngRoute'])
 				});
 				
 			});
+			$scope.navSignin();
 		}else{
 			
 		}

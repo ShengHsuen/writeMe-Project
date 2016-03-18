@@ -15,7 +15,7 @@ import com.mett.writeMe.repositories.LoginRepository;
 public class LoginService implements LoginServiceInterface{
 
 	@Autowired private LoginRepository loginRepository;
-	private static User user;
+	private User user;
 	
 	@Override
 	@Transactional

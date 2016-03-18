@@ -9,14 +9,7 @@
 	  });
 	}])
 	
-	
-	
 	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
-
-		
-//		$scope.$on("NAME_CHANNEL",function(event,name){
-//			$scope.name = name;
-//		});
 		
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -26,6 +19,19 @@
 		
 		var publish = false;
 		
+		$scope.writting={
+				"pageNumber": 0,
+				"pageSize": 0,
+				"direction": "",
+				"sortBy": [""],
+				"searchColumn": "string",
+				"searchTerm": "fff",
+				"writting": {
+					"published": publish,
+					"date": fecha,
+					"content": $scope.content
+				}
+		};
 		
 		$scope.send = function(){
 			$scope.content = $('#edit').val();
@@ -34,63 +40,16 @@
 		}
 
 		var update = function(){
-			$scope.writting={
-					"pageNumber": 0,
-					"pageSize": 0,
-					"direction": "",
-					"sortBy": [""],
-					"searchColumn": "string",
-					"searchTerm": "prueba4",
-					"writting": {
-						"name" : "prueba4",
-						"description" : "a",
-						"cantUsers": 0,
-						"date": fecha,
-						"likes": 0,
-						"limit time": "2100-01-01",
-						"numMaxCharacters": 10000,
-						"numMinCharacters": 30,
-						"published": publish,
-						"content": $scope.content
-					}
-			};
-			$http.post('writting/editContent',$scope.writting).success(function(response) {
-				createUserHasWritting();
-			});
-		}
-		
-		var createUserHasWritting = function(){
-			$scope.userHasWritting={
-					  "pageNumber": 0,
-					  "pageSize": 0,
-					  "direction": "string",
-					  "sortBy": [
-					    "string"
-					  ],
-					  "searchColumn": "string",
-					  "searchTerm": "string",
-					  "userHasWritting": {
-						  "dateModifie": "2016-02-02",
-					      "statusColor": false,
-					      "user_has_writtingId": 0,
-					      "linkInvitation": "string",
-					      "banned": false,
-					      "dateCreate": "2016-02-02",
-					      "invitationStatus": false
-					}
-					
-			};
-			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
-				
+			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
 			});
 		}
 		
 		$scope.publish = function(){
 			publish = true;
 			console.log("Published: " + publish + "Fecha: " + fecha);
-			$http.post('writting/publish',$scope.writting).success(function(response) {
+			$http.post('rest/protected/writting/publish',$scope.writting).success(function(response) {
+				console.log("writting/publish");
 			});
-			createUserHasWritting();
 		}
 		
 	}]);

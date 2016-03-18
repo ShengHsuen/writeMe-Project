@@ -16,7 +16,7 @@ import com.mett.writeMe.services.MyLibraryServiceInterface;
  */
 @RestController
 
-@RequestMapping(value ="/myLibraries")
+@RequestMapping(value ="rest/protected/myLibraries")
 
 public class MyLibraryController {
 @Autowired private MyLibraryServiceInterface usersService;

@@ -21,7 +21,6 @@ import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
-import com.mett.writeMe.pojo.LegalEstablishmentPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.LoginServiceInterface;
@@ -35,7 +34,7 @@ import com.mett.writeMe.utils.Utils;
  */
 @RestController
 
-@RequestMapping(value = "/writting")
+@RequestMapping(value = "rest/protected/writting")
 
 public class WrittingController {
 	@Autowired
@@ -49,22 +48,6 @@ public class WrittingController {
 	private User u = new User();
 	private Writting wr = new Writting();
 	private String resultFileName;
-
-
-	/**
-	 * @author Mildred Guerra
-	 * This method get all the writtings 
-	 * 
-	 * @return WrittingResponse response
-	 */
-	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
-	public WrittingResponse getAll() {
-		WrittingResponse response = new WrittingResponse();
-		response.setCode(200);
-		response.setCodeMessage("Muestra reglas satisfactoriamente");
-		response.setWritting(WrittingService.getAll());
-		return response;
-	}
 	/**
 	 * @param ur
 	 * @return
@@ -106,7 +89,6 @@ public class WrittingController {
 
 	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
 	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
-
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
@@ -120,12 +102,12 @@ public class WrittingController {
 			}
 		}else{
 			wr.setContent(ur.getWritting().getContent());
-			Boolean state = WrittingService.editWrittingInvitation(ur);
+		/*	Boolean state = WrittingService.editWrittingInvitation(ur);
 
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
-			}
+			}*/
 		}
 		return us;
 	}
@@ -134,11 +116,12 @@ public class WrittingController {
 	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		System.out.println("WrittingPOJO: " + w.getName());
 		BeanUtils.copyProperties(w, wr);
-		wr.setContent(ur.getWritting().getContent());
+		//wr.setContent(ur.getWritting().getContent());
 		wr.setDate(ur.getWritting().getDate());
 		wr.setPublished(ur.getWritting().getPublished());
-		Boolean state = WrittingService.editWritting(wr);
+		Boolean state = WrittingService.publish(ur);
 
 		if (state) {
 			us.setCode(200);
@@ -146,9 +129,6 @@ public class WrittingController {
 		}
 		return us;
 	}
-
-
-
 	/**
 	 * @param ur
 	 * @return
@@ -166,19 +146,6 @@ public class WrittingController {
 			us.setCodeMessage("write created succesfully");
 		}
 		return us;
-	}
-
-	/**
-	 * @author Mildred Guerra
-	 * Add files to util
-	 * 
-	 * @param MultipartFile file
-	 */
-	@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-	public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur){	
-
-		resultFileName = Utils.writeToFile(file,servletContext);
-		System.out.println("Entra a agregar files");
 	}
 
 	/**
@@ -234,4 +201,26 @@ public class WrittingController {
 
 		return wr;
 	}
+		
+		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
+		public void create(@RequestParam("file") MultipartFile file){	
+			
+			 resultFileName = Utils.writeToFile(file,servletContext);
+			 System.out.println("Entra a agregar files");
+		}
+
+		/**
+		 * @author Mildred Guerra
+		 * This method get all the writtings 
+		 * 
+		 * @return WrittingResponse response
+		 */
+		@RequestMapping(value = "/getAll", method = RequestMethod.POST)
+		public WrittingResponse getAll() {
+			WrittingResponse response = new WrittingResponse();
+			response.setCode(200);
+			response.setCodeMessage("Muestra reglas satisfactoriamente");
+			response.setWritting(WrittingService.getAll());
+			return response;
+		}
 }

@@ -26,7 +26,7 @@
               <input type="email" placeholder="Email" class="form-control no-border" ng-model="mail" required>
             </div>
             <div class="list-group-item">
-                <input type="date" class="form-control no-border" ng-model="birthDay" required>
+                <input placeholder="Fecha de nacimiento" type="date" class="form-control no-border" ng-model="birthDay" required>
              </div>
             <div class="list-group-item">
                <input type="password" placeholder="Contraseña" class="form-control no-border" ng-model="password" required>
@@ -37,16 +37,21 @@
           </div>
           <div class="checkbox m-b-md m-t-none">
             <label class="i-checks">
-              <input type="checkbox" ng-model="agree" required><i></i> Aceptar <a style="color: rgb(51, 122, 183);" ng-click="navAcceptLegal()" href>términos y politicas</a>
+              <input type="checkbox" ng-model="agree" required><i></i> Agree the <a style="color: rgb(51, 122, 183);" ng-click="navAcceptLegal()" href>terms and policy</a>
             </label>
           </div>
           <p ng-show="pconfirm" class="text-center text-danger"><small>Las contraseñas deben coincidir</small></p>
-          <button ng-disabled="form.$invalid" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="createAccount()">Crear cuenta</button>
+          <button ng-disabled="form.$invalid" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="createAccount()">Sign up</button>
 
           <div class="line line-dashed"></div>
-          <p class="text-center"><small>Ya tiene una cuenta?</small></p>
-          <a ng-click="navSignin()" ui-sref="access.signin" class="btn btn-lg btn-default btn-block">Iniciar sesión</a>
+          <p class="text-center"><small>Already have an account?</small></p>
+          <a ng-click="navSignin()" ui-sref="access.signin" class="btn btn-lg btn-default btn-block">Sign in</a>
         </form>
+      </div>
+      <div class="text-center">
+        <p>
+  			<small class="text-muted">Web app framework base on Bootstrap and AngularJS<br>&copy; 2014</small>
+		</p>
       </div>
     </div>
 
