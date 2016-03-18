@@ -2,7 +2,7 @@ package com.mett.writeMe.controllers;
 
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,6 +58,17 @@ public class UserController {
 			@RequestParam("idUser") int idUser){	
 		    usersService.deleteUser(idUser);
 			
+	}
+	
+	@RequestMapping(value ="/getWrittings", method = RequestMethod.POST)
+	public UsersResponse getWrittings(HttpServletRequest servletRequest){	
+
+		UsersResponse response = new UsersResponse();
+		HttpSession currentSession = servletRequest.getSession();
+		response.setCode(200);
+		response.setCodeMessage("obtiene bien los writtings");
+		response.setWrittings(usersService.getWrittingsByUser(currentSession));
+		return response;		
 	}
 	
 }

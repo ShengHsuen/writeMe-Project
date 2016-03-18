@@ -150,7 +150,6 @@ public class WrittingController {
 
 	/**
 	 * @author Mildred Guerra
-<<<<<<< HEAD
 	 * Add files to util
 	 * 
 	 * @param MultipartFile file
@@ -163,8 +162,6 @@ public class WrittingController {
 		
 	/**
 	 * @author Mildred Guerra
-=======
->>>>>>> 9682541e3fde8b2126013240e7322c3b49b9bb56
 	 * Delete writting
 	 * @param  int idwritting
 	 * @return WrittingResponse wr
@@ -227,13 +224,6 @@ public class WrittingController {
 		String content = WrittingService.getWrittingContent(ur);
 		return content;
 	}
-		
-		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-		public void create(@RequestParam("file") MultipartFile file){	
-			
-			 resultFileName = Utils.writeToFile(file,servletContext);
-			 System.out.println("Entra a agregar files");
-		}
 
 		/**
 		 * @author Mildred Guerra

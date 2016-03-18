@@ -63,7 +63,7 @@
 		$scope.loadData = function(){
 		
 			$scope.content = $localStorage.showContent;
-			console.log($localStorage.showContent);
+			console.log("Pa que dani vea" +$localStorage.showContent);
 			
 		}
 	

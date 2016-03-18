@@ -10,16 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mett.writeMe.ejb.LegalEstablishment;
+import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.ejb.User;
-
-
 import com.mett.writeMe.ejb.UserHasWritting;
-
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
-import com.mett.writeMe.contracts.LoginRequest;
-import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.UserRepository;
 
@@ -31,7 +26,8 @@ import com.mett.writeMe.repositories.UserRepository;
 @Service
 public class UsersService implements UsersServiceInterface{
 	@Autowired 
-	private UserRepository userRepository;	
+	private UserRepository userRepository;
+	@Autowired 
 	private UserHasWrittingRepository userHasWrittingRepository;
 
 	/* (non-Javadoc)
@@ -105,18 +101,21 @@ public class UsersService implements UsersServiceInterface{
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUser(javax.servlet.http.HttpSession)
 	 */
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUser(javax.servlet.http.HttpSession)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession){
 		int idUser = (int)currentSession.getAttribute("idUser");
 		User user = userRepository.findOne(idUser);
-		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
+		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAll();
 		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
 	
-		for (int i=0; i<= UserHasWrittings.size()-1; i++){
-			if (user.getUserId() == UserHasWrittings.get(i).getUser().getUserId()){
+		for (int i=0; i<= userHasWrittings.size()-1; i++){
+			if (user.getUserId() == userHasWrittings.get(i).getUser().getUserId()){
 				WrittingPOJO dto = new WrittingPOJO();
-				BeanUtils.copyProperties(UserHasWrittings.get(i).getWritting(), dto);
+				BeanUtils.copyProperties(userHasWrittings.get(i).getWritting(), dto);
 				writtings.add(dto);
 			}else{
 				
