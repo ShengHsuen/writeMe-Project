@@ -9,9 +9,9 @@
 			</form>
 		</div>
 		<input type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">
-		<p ng-show="pvalcontent" class="text-center text-danger"><small>Ingrese contenido antes de publicar</small></p>
+		
 		<button class="btn btn-lg btn-default btn-block" class="btn btn-default" data-toggle="confirmation" ng-click="publish()">Publicar</button>
-         
+         <p ng-show="pvalcontent" class="text-center text-danger"><small>Ingrese contenido antes de publicar</small></p>
 		<script>
 			$(function() {
 				$('#edit').on('froalaEditor.initialized', function(e, editor) {

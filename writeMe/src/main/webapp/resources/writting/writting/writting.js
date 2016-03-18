@@ -108,7 +108,7 @@
 			}).catch(function(error){
 				console.log("Debe ingresar contenido en el writting");
 				$scope.pvalcontent = true;
-			});;
+			});
 		}
 		
 		
