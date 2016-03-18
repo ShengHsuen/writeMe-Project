@@ -1,6 +1,6 @@
 'use strict';
 
-	angular.module('myApp.writting', ['ngRoute'])
+	angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 
 	.config(['$routeProvider', function($routeProvider) {
 	  $routeProvider.when('/writting', {
@@ -9,7 +9,15 @@
 	  });
 	}])
 	
-	.controller('WrittingCtrl', ['$scope','$http',function($scope,$http) {
+	
+	
+	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+
+		
+//		$scope.$on("NAME_CHANNEL",function(event,name){
+//			$scope.name = name;
+//		});
+
 		
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -27,15 +35,8 @@
 				"searchColumn": "string",
 				"searchTerm": "fff",
 				"writting": {
-					"name" : "fff",
-					"description" : "a",
-					"cantUsers": 0,
-					"date": fecha,
-					"likes": 0,
-					"limit time": "2100-01-01",
-					"numMaxCharacters": 10000,
-					"numMinCharacters": 30,
 					"published": publish,
+					"date": fecha,
 					"content": $scope.content
 				}
 		};
@@ -47,16 +48,26 @@
 		}
 
 		var update = function(){
-			$http.post('writting/editContent',$scope.writting).success(function(response) {
+			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
 			});
 		}
 		
 		$scope.publish = function(){
 			publish = true;
 			console.log("Published: " + publish + "Fecha: " + fecha);
-			$http.post('writting/publish',$scope.writting).success(function(response) {
-
+			$http.post('rest/protected/writting/publish',$scope.writting).success(function(response) {
+				console.log("writting/publish");
 			});
 		}
+		
+		$scope.loadData = function(){
+		
+			$scope.content = $localStorage.showContent;
+			console.log("Pa que dani vea" +$localStorage.showContent);
+			
+		}
+	
+		$scope.loadData();
+		
 		
 	}]);

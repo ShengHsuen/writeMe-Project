@@ -15,7 +15,7 @@ import com.mett.writeMe.services.UserHasWrittingServiceInterface;
  * @author Sheng
  */
 @RestController
-@RequestMapping(value ="/userHasWritting")
+@RequestMapping(value ="rest/protected/userHasWritting")
 
 public class UserHasWrittingController{
 	

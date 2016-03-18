@@ -35,10 +35,31 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getAll(WrittingRequest ur) {
-		List<Writting> Writtings =  writtingRepository.findAll();
+		List<Writting> Writtings = writtingRepository.findAll();
 		return generateWrittingDtos(Writtings);
 	}
-	
+
+	/* @author Mildred Guerra
+	 * Get the list of all writtings
+	 * Return a List<WrittingPOJO>  dtos 
+	 */
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getAll() {
+		List<Writting> wirttings = writtingRepository.findAll();
+		List<WrittingPOJO> dtos = new ArrayList<WrittingPOJO>();
+		wirttings.stream().forEach(tu ->{
+			WrittingPOJO dto = new WrittingPOJO();
+			BeanUtils.copyProperties(tu, dto);
+			if( tu.getWritting()!= null){
+
+				dto.setWrittingFather(tu.getWritting().getWrittingId());
+			}
+			dtos.add(dto);
+		});
+		return dtos;
+	}
+
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAllByName(com.mett.writeMe.contracts.WrittingRequest)
 	 */
@@ -64,7 +85,7 @@ public class WrittingService implements WrittingServiceInterface{
 		List<UserPOJO> Users = new ArrayList<UserPOJO>();
 		List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
-		System.out.println(Writtings.size());
+		System.out.println("Size: "+ Writtings.size());
 		int j = 0;
 		for(int i=0;i<=UserHasWrittings.size()-1;i++){
 			if(Writtings.get(j).getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
@@ -90,14 +111,30 @@ public class WrittingService implements WrittingServiceInterface{
 		  System.out.println("La obra: "+ Writtings.get(0));
 		  return generateWrittingDtos(Writtings).get(0);
 	}
+
+
 	
-	/*@Override
-	@Transactional
-	public String getWrittingContent(WrittingRequest ur) {
-		  List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
-		  return generateWrittingDtos(Writtings).get(0).getContent();
-	}*/
-	
+	  @Override
+	  @Transactional 
+	  public String getWrittingContent(WrittingRequest ur) {
+      String content ="";
+	  Writting writting = writtingRepository.findOne(Integer.parseInt(ur.getSearchTerm()));
+	  List<Writting> wri = writtingRepository.findAll();
+      int j=0;
+      for (int i=0; i<= wri.size() -1; i++){
+    	  if(writting.getMainWritting() == wri.get(i).getMainWritting()){
+    		  j++;
+    		//  content = content + wri.get(i).getContent() ;
+    		  content =  wri.get(i).getContent() ;
+    		 // System.out.println("Aqui la obra" + content + "\n");
+    	  }else{
+    		  
+    	  }
+      }
+      return content;
+     }
+
+
 	/**
 	 * @param Writtings
 	 * @return
@@ -137,4 +174,39 @@ public class WrittingService implements WrittingServiceInterface{
 		Writting nwritting = writtingRepository.save(writting);
 		return (nwritting == null) ? false : true;
 	}
+	
+	@Override
+	@Transactional
+	public Boolean publish(WrittingRequest ur){
+		List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
+		Writtings.get(0).setPublished(true);
+		Writtings.get(0).setDate(ur.getWritting().getDate());
+		Writting nwritting = writtingRepository.save(Writtings.get(0));
+		return (nwritting == null) ? false : true;
+	}
+
+	
+	/* @author Mildred Guerra
+	 * Delete a writting
+	 * @param int writtingId
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.writeMe.ejb.Writting)
+	 */
+	@Override
+	public void deletewritting(int writtingId) {
+		writtingRepository.delete(writtingId);
+	}
+	
+
+	/* (non-Javadoc)
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWrittingInvitation(com.mett.writeMe.contracts.WrittingRequest)
+	 */
+	@Override
+	@Transactional
+	public Boolean editWrittingInvitation(WrittingRequest ur) {
+		Writting writting = new Writting();
+		BeanUtils.copyProperties(ur.getWritting(), writting);
+		Writting nWritting = writtingRepository.save(writting);
+		return (nWritting == null) ? false : true;
+	}
+
 }

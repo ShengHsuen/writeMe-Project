@@ -58,21 +58,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
     	}*/
 		
 		var createWritting = function(){
-			for ( var i = 0; i < $scope.files.length; i++) {
-    			var file = $scope.files[i];
-    			$scope.upload = $upload.upload({
-    				url : 'writting/addFiles',
-    				file : file,
-    			}).progress(
-    					function(evt) {
-    						console.log('percent: '+ parseInt(100.0 * evt.loaded / evt.total));
-    					}).success(function(data, status, headers, config) {
-    						// Rent is uploaded successfully
-    						console.log(data);
-    					});
-    	    			//.error(...)
-    	    			//.then(success, error, progress); 
-        		}
+
 			$scope.writting={
 					"pageNumber": 0,
 					"pageSize": 0,
@@ -154,7 +140,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			};*/
 
 			
-			$http.post('writting/create',$scope.writting).success(function(response) {
+			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 				createUserHasWritting();
 			});
 
@@ -182,12 +168,27 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			};
 
 			
-			$http.post('writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
+			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});
 		}
 		 $scope.onFileSelect = function($files) {
 		    	$scope.files = $files;
+				for ( var i = 0; i < $scope.files.length; i++) {
+	    			var file = $scope.files[i];
+	    			$scope.upload = $upload.upload({
+	    				url : 'rest/protected/writting/addFiles',
+	    				file : file,
+	    			}).progress(
+	    					function(evt) {
+	    						console.log('percent: '+ parseInt(100.0 * evt.loaded / evt.total));
+	    					}).success(function(data, status, headers, config) {
+	    						// Rent is uploaded successfully
+	    						console.log(data);
+	    					});
+	    	    			//.error(...)
+	    	    			//.then(success, error, progress); 
+	        		}
 		    };
 		    
 }]);

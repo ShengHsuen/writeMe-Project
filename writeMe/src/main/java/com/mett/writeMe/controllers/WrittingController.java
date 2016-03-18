@@ -1,5 +1,8 @@
 package com.mett.writeMe.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.BeanUtils;
@@ -17,6 +20,8 @@ import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserPOJO;
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
@@ -29,7 +34,7 @@ import com.mett.writeMe.utils.Utils;
  */
 @RestController
 
-@RequestMapping(value = "/writting")
+@RequestMapping(value = "rest/protected/writting")
 
 public class WrittingController {
 	@Autowired
@@ -52,17 +57,17 @@ public class WrittingController {
 		WrittingResponse us = new WrittingResponse();
 
 		if(!resultFileName.equals("")){
-		ur.getWritting().setImage(resultFileName);
-		Boolean state = false;
-		state = WrittingService.saveWritting(ur);
-		WrittingPOJO w = WrittingService.getWrittingByName(ur);
-		u = LoginService.getUser();
-		BeanUtils.copyProperties(w, wr);
+			ur.getWritting().setImage(resultFileName);
+			Boolean state = false;
+			state = WrittingService.saveWritting(ur);
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			u = LoginService.getUser();
+			BeanUtils.copyProperties(w, wr);
 
-		if (state) {
-			us.setCode(200);
-			us.setCodeMessage("write created succesfully");
-		}		
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}		
 		}else{
 			//create a common webservice error codes enum or statics
 			us.setCode(409);
@@ -70,7 +75,7 @@ public class WrittingController {
 		}
 		return us;
 	}
-	
+
 	@RequestMapping(value ="/getPublished", method = RequestMethod.POST)
 	public WrittingResponse getPublished(@RequestBody WrittingRequest ur){	
 		System.out.println("Controller /getPublished");
@@ -87,26 +92,36 @@ public class WrittingController {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
-		System.out.println("contenido de UR: " + ur.getWritting().getContent());
-		wr.setContent(ur.getWritting().getContent());
-		Boolean state = WrittingService.editWritting(wr);
 
-		if (state) {
-			us.setCode(200);
-			us.setCodeMessage("write created succesfully");
+		if(wr.getTypeWritting().equals("Personal")){
+			wr.setContent(ur.getWritting().getContent());
+			Boolean state = WrittingService.editWritting(wr);
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
+		}else{
+			wr.setContent(ur.getWritting().getContent());
+		/*	Boolean state = WrittingService.editWrittingInvitation(ur);
+
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}*/
 		}
 		return us;
 	}
-	
+
 	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		System.out.println("WrittingPOJO: " + w.getName());
 		BeanUtils.copyProperties(w, wr);
-		wr.setContent(ur.getWritting().getContent());
+		//wr.setContent(ur.getWritting().getContent());
 		wr.setDate(ur.getWritting().getDate());
 		wr.setPublished(ur.getWritting().getPublished());
-		Boolean state = WrittingService.editWritting(wr);
+		Boolean state = WrittingService.publish(ur);
 
 		if (state) {
 			us.setCode(200);
@@ -114,7 +129,6 @@ public class WrittingController {
 		}
 		return us;
 	}
-	
 	/**
 	 * @param ur
 	 * @return
@@ -133,12 +147,97 @@ public class WrittingController {
 		}
 		return us;
 	}
-		
+
+	/**
+	 * @author Mildred Guerra
+	 * Add files to util
+	 * 
+	 * @param MultipartFile file
+	 */
 		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-		public void create(@RequestParam("file") MultipartFile file){	
-			
+		public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur){	
 			 resultFileName = Utils.writeToFile(file,servletContext);
 			 System.out.println("Entra a agregar files");
+		}
+		
+	/**
+	 * @author Mildred Guerra
+	 * Delete writting
+	 * @param  int idwritting
+	 * @return WrittingResponse wr
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+	public  WrittingResponse delete(@RequestParam("writtingId") int writtingMainId) {
+		WrittingResponse wr= new WrittingResponse(); 
+		List<WrittingPOJO> listaUserHasWritting  =new ArrayList<WrittingPOJO>();
+		//buscar todos los userHasWritting
+
+		//botener todas para comparar con el padre
+		List<WrittingPOJO> allWrittings = getAll().getWritting();
+		wr=getAll();
+		//comparar los que tienen de padre writtingId
+		allWrittings.stream().forEach(wt ->{
+			if(wt.getWrittingFather()==writtingMainId){
+				//listaHijos.add(wt);
+				System.out.println("entra al hijo con el id padre" +wt.getWrittingFather() );
+				//obtiene los userHasWritting de los hijos
+				List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
+
+				allUserHasWritting.stream().forEach(uhw ->{
+					System.out.println("for al userHasWritting" +uhw.getWritting().getWrittingId() +" y "+wt.getWrittingId() );
+					//comparar los que tienen de writtingId del hijo
+					if(uhw.getWritting().getWrittingId()==wt.getWrittingId()){
+						System.out.println("entra al userHasWritting");
+						//eliminar userhasWritting de los hijos
+						UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
+					}
+					if(uhw.getWritting().getWrittingId()==writtingMainId){
+						System.out.println("entra al userHasWritting main");
+						//eliminar userhasWritting del main
+						UserHasWrittingService.deleteUserHaswritting(writtingMainId);
+					}
+				});
+
+				//eliminar hijos
+				WrittingService.deletewritting(wt.getWrittingId());
+			}
+		});
+		allWrittings.stream().forEach(wt ->{
+			if(wt.getWrittingId()==writtingMainId){
+
+				//eliminar el main
+				WrittingService.deletewritting(writtingMainId);
+			}
+
+		});
+
+		return wr;
+	}
+	
+	/**
+	 * @author Mario Villalobos
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getContent", method = RequestMethod.POST)
+	public String getContent(@RequestBody WrittingRequest ur) {
+		String content = WrittingService.getWrittingContent(ur);
+		return content;
+	}
+
+		/**
+		 * @author Mildred Guerra
+		 * This method get all the writtings 
+		 * 
+		 * @return WrittingResponse response
+		 */
+		@RequestMapping(value = "/getAll", method = RequestMethod.POST)
+		public WrittingResponse getAll() {
+			WrittingResponse response = new WrittingResponse();
+			response.setCode(200);
+			response.setCodeMessage("Muestra reglas satisfactoriamente");
+			response.setWritting(WrittingService.getAll());
+			return response;
 		}
 
 }
