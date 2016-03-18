@@ -19,6 +19,15 @@ public class WrittingPOJO {
 	private String category;
 	private String image; 
 	private int writtingFather;
+	private int mainWritting;
+	public int getMainWritting() {
+		return mainWritting;
+	}
+
+	public void setMainWritting(int mainWritting) {
+		this.mainWritting = mainWritting;
+	}
+
 	public WrittingPOJO() {
 		super();
 		// TODO Auto-generated constructor stub
