@@ -83,7 +83,7 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByMainWritting(Writting wr){
 		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
-		List<Writting> Writting = writtingRepository.findByNameContaining("prueba2");
+		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
 		List<Writting> Writtings = writtingRepository.findAll();
 		
 		WrittingPOJO dto = new WrittingPOJO();

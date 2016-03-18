@@ -33,13 +33,12 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	    console.log("el id es "+wrid); // agarra el id 
 	}
 	*/
-	$scope.saveData = function(wrid){
+	$scope.saveData = function(wrid, name){
 		params: {content : wrid}
 	    $localStorage.showContent = wrid;
+	    $localStorage.name = name
 	    console.log("contendio " + wrid)
 	    window.location.href = "app#/writting"
 	}
-
-
 
 } ]);

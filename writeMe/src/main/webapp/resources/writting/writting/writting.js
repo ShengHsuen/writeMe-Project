@@ -108,12 +108,10 @@
 		}
 		
 		$scope.loadData = function(){
-		
 			$scope.content = $localStorage.showContent;
-			console.log("Pa que dani vea" +$localStorage.showContent);
 			
+			console.log("Pa que dani vea" +$localStorage.showContent);	
 		}
-	
 		$scope.loadData();
 		
 		
