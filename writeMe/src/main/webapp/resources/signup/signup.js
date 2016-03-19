@@ -47,15 +47,14 @@ angular.module('myApp.signup', ['ngRoute'])
 						alert("invalido");
 					}
 				});
-				if($scope.prepit == false){
-					$scope.navSignin();
-				}
-			}).catch(function(error){
-				console.log("Correo o Nick invalido");
-				$scope.prepit = true;
-			});
-		}else{
-			
+			    if($scope.prepit == false){
+			        $scope.navSignin();
+			       }
+			      }).catch(function(error){
+			       console.log("Correo o Nick invalido");
+			       $scope.prepit = true;
+			      });
+		      }else{	
 		}
 		
 	}

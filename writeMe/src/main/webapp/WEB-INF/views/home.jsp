@@ -131,7 +131,7 @@
 							class="caret"></b>
 					</a> <!-- dropdown -->
 						<ul class="dropdown-menu animated fadeInRight w">
-							<li><a ui-sref="access.signin">Cerrar sesión</a></li>
+							<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
 						</ul> <!-- / dropdown --></li>
 				</ul>
 				<!-- / navbar right -->
