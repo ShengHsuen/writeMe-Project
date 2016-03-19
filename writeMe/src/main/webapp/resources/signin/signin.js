@@ -10,6 +10,7 @@ angular.module('myApp.signin', ['ngRoute'])
 }])
 
 .controller('SignInCtrl', ['$scope','$http',function($scope,$http) {
+	$scope.accountInvalid = false;
 	$scope.navResetPass= function(){
 		  var path = "/writeMe/#/resetPassword";
 		  window.location.href = path;
@@ -34,7 +35,7 @@ angular.module('myApp.signin', ['ngRoute'])
     			}
     			
     		}else{
-    			alert("invalido");
+    			$scope.accountInvalid = true;
     		}
     	});
 	}
