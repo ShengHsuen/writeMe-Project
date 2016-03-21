@@ -15,7 +15,9 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-	$scope.files = {};
+	$scope.files = {
+			"src":"http://localhost:8080/writeMe/resources/writtingImages/1458594787863.jpg"
+	};
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -142,5 +144,20 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 	    	    			//.then(success, error, progress); 
 	        		}
 		    };
+		    function readURL(input) {
+		        if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+		            
+		            reader.onload = function (e) {
+		                $('#blah').attr('src', e.target.result);
+		            }
+		            
+		            reader.readAsDataURL(input.files[0]);
+		        }
+		    }
+		    
+		    $("#imgInp").change(function(){
+		        readURL(this);
+		    });
 		    
 }]);

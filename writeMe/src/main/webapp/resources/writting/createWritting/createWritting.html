@@ -38,10 +38,14 @@
           		</div>
 
           		<label class="col-sm-2 control-label">Portada</label>
-          		<div class="col-sm-10">
+          		<!-- <div class="col-sm-10">
 		     	   <input type="file" name="inputfile" required accept=".png , .jpg, .jpeg" ng-file-select="onFileSelect($files)" >
-          		</div>
-          		
+          		</div> -->
+          		    <form id="form1">
+        <input type='file' id="imgInp"  required accept=".png , .jpg, .jpeg" ng-file-select="onFileSelect($files)"  />
+        <br>
+        <img id="blah" src="http://localhost:8080/writeMe/resources/writtingImages/1458594787863.jpg" alt="your image" height="200" width="400"/>
+    </form>
 			<p ng-show="prepit" class="text-center text-danger"><small>Titulo de obra ya existe</small></p>
           	<div class="col-sm-15">	
             	<button type="submit" ng-disabled="form.$invalid" ng-click="navWritting()" class="btn btn-sm btn-primary">Aceptar</button>
