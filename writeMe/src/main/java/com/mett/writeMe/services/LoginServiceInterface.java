@@ -10,6 +10,5 @@ public interface LoginServiceInterface {
 
 	public void checkUser(LoginRequest lr, LoginResponse response, HttpSession currentSession);
 	public User getUser();
-	void userNull(LoginRequest lr, LoginResponse response, HttpSession currentSession);
 
 }

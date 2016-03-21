@@ -10,7 +10,8 @@ angular.module('myApp.home', ['ngRoute'])
 }])
 
 .controller('HomeCtrl', ['$scope','$http',function($scope,$http) {
- $scope.writting = [];
+	
+	$scope.writting = [];
  $scope.user = [];
   $scope.writting = {"pageNumber": 0,
         "pageSize": 0,
@@ -27,10 +28,4 @@ angular.module('myApp.home', ['ngRoute'])
   // $scope.user = response.user;
   });
 
-	
-	$scope.signout = function(){
-			console.log("entra aqui")
-		var path = "/writeMe/#/signin";
-		window.location.href = path;
-	}
 }]);

@@ -123,12 +123,10 @@
 				<!-- nabar right -->
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a href="" data-toggle="dropdown"
-						class="dropdown-toggle clear" data-toggle="dropdown"> <span
-							class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"
-							style="padding-top: 26px;"> <i
-								class="on md b-white bottom"></i>
-						</span> <span class="hidden-sm hidden-md"></span> <b
-							class="caret"></b>
+						class="dropdown-toggle clear" data-toggle="dropdown"> 
+						<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
+						<span class="hidden-sm hidden-md">{{user.name}}</span> 
+						<b class="caret"></b>
 					</a> <!-- dropdown -->
 						<ul class="dropdown-menu animated fadeInRight w">
 						<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
@@ -172,7 +170,7 @@
 		</aside>
 		<!-- / aside -->
 
-		<div ng-view></div>
+		<div ng-view ng-controller="mainCtrl"></div>
 
 
 		<!-- footer -->

@@ -41,15 +41,5 @@ public class LoginController {
 		loginService.checkUser(lr,response,currentSession);
 		return response;	
 	}
-	
-	@RequestMapping(value = "/userNull", method = RequestMethod.POST)
-	@Transactional	
-	public BaseResponse userNull(@RequestBody LoginRequest lr,HttpServletRequest servletRequest,HttpServletResponse servletResponse){		
-		LoginResponse response = new LoginResponse();
-		HttpSession currentSession = servletRequest.getSession();
-		System.out.println("This is: "+currentSession);
-		loginService.checkUser(lr,response,currentSession);
-		return response;	
-	}
 }
 
