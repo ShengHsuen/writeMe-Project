@@ -16,6 +16,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 	var dia = $scope.date.getDate() + 1;
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 	$scope.files = {};
+	$scope.typeSelected = "Personal";
+	$scope.cateSelected = "Antiguedades y Coleccionables";
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -33,10 +35,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
-			if($scope.type != "Personal"){
+			if($scope.typeSelected != "Personal"){
 				$scope.showCantUsers = true;
+				console.log("true");
 			}else{
 				$scope.showCantUsers = false;
+				$scope.cantUsers = 0;
+				console.log($scope.cantUsers);
 			}
 		}
 		$scope.navWritting = function(){
