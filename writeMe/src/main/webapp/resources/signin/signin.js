@@ -11,10 +11,20 @@ angular.module('myApp.signin', ['ngRoute'])
 
 .controller('SignInCtrl', ['$scope','$http',function($scope,$http) {
 	$scope.accountInvalid = false;
+	
+	userNull();
+	
+	var userNull = function(){
+		$scope.user = {email:"", password:""};
+		$http.post('rest/signin/userNull', $scope.user).success(function (loginResponse) {
+		})
+	}
+	
 	$scope.navResetPass= function(){
 		  var path = "/writeMe/#/resetPassword";
 		  window.location.href = path;
 		 }
+	
 	$scope.navSignup = function(){
 		  var path = "/writeMe/#/signup";
 		  window.location.href = path;

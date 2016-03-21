@@ -20,8 +20,8 @@
         <div class="list-group-item">
            <input type="password"  placeholder="Contraseña" class="form-control no-border" ng-model="user.password" required>
         </div>
-        </form>
-        <p ng-show="accountInvalid" class="text-center text-danger"><small>El correo o la contraseña inválido</small></p>
+      </form>
+      <p ng-show="accountInvalid" class="text-center text-danger"><small>El correo o la contraseña inválido</small></p>
       </div>
       <button type="submit" ng-disabled="form.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="login()">Ingresar</button>
       <div class="text-center m-t m-b"><a ui-sref="access.forgotpwd"  ng-click="navResetPass()" > Olvidaste la contraseña?</a></div>

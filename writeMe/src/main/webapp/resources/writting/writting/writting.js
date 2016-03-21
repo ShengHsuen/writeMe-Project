@@ -104,13 +104,14 @@
 			console.log("Published: " + publish + "Fecha: " + fecha);
 			$http.post('rest/protected/writting/publish',$scope.writting).success(function(response) {
 				console.log("writting/publish");
-			});
+			})
 		}
 		
 		$scope.loadData = function(){
 			$scope.content = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
-			console.log("aqui esta papillos " + $scope.name);
+			$scope.content= $scope.content.replace(/(<\?[a-z]*(\s[^>]*)?\?(>|$)|<!\[[a-z]*\[|\]\]>|<!DOCTYPE[^>]*?(>|$)|<!--[\s\S]*?(-->|$)|<[a-z?!\/]([a-z0-9_:.])*(\s[^>]*)?(>|$))/gi, '');
+			$scope.content= $scope.content.replace(/&nbsp;/g,'');
 		}
 		$scope.loadData();
 		

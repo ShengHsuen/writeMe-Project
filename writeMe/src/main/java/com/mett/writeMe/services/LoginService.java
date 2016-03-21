@@ -47,4 +47,9 @@ public class LoginService implements LoginServiceInterface{
 		return user;
 	}
 	
+	@Transactional
+	public void userNull(LoginRequest lr, LoginResponse response, HttpSession currentSession) {
+			currentSession.setAttribute(null, null);
+	}
+	
 }
