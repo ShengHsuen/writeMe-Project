@@ -10,7 +10,32 @@
 		</div>
 		<input type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">
 		
+		<p ng-show="psuccess" class="text-center text-success"><small>Obra publicada correctamente!</small></p>
 		<button class="btn btn-lg btn-default btn-block" class="btn btn-default" data-toggle="confirmation" ng-click="publish()">Publicar</button>
+		
+		<div class="container">
+<a href="#" class="confirm-delete" data-id="1">Delete</a><br>
+<a href="#" class="confirm-delete" data-id="2">Delete</a><br>
+<a href="#" class="confirm-delete" data-id="3">Delete</a><br>
+<a href="#" class="confirm-delete" data-id="4">Delete</a><br>
+</div>
+
+<div id="myModal" class="modal hide">
+    <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+         <h3>Delete</h3>
+    </div>
+    <div class="modal-body">
+        <p>You are about to delete.</p>
+        <p>Do you want to proceed?</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYes" class="btn danger">Yes</a>
+      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+</div>
+		
+		
 		<script>
 			$(function() {
 				$('#edit').on('froalaEditor.initialized', function(e, editor) {
