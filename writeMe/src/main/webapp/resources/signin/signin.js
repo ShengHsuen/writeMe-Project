@@ -32,11 +32,11 @@ angular.module('myApp.signin', ['ngRoute', 'ngStorage'])
 	$scope.login = function(){
 		$http.post('rest/signin/checkuser',$scope.user).success(function (loginResponse) {
     		if(loginResponse.code == 200){
-    			var user = {"userId":loginResponse.idUser,"name":loginResponse.name,"lastName":loginResponse.lastName, "admin":loginResponse.admin};
+    			var user = {"userId":loginResponse.idUser,"name":loginResponse.name,"lastName":loginResponse.lastName, "author":loginResponse.author, "admin":loginResponse.admin};
     			console.log(user);
     			
     			$scope.saveData = function(){
-    				$scope.user = {"userId":loginResponse.idUser,"name":loginResponse.name,"lastName":loginResponse.lastName, "admin":loginResponse.admin};
+    				$scope.user = {"userId":loginResponse.idUser,"name":loginResponse.name,"lastName":loginResponse.lastName, "author":loginResponse.author, "admin":loginResponse.admin};
     			    $localStorage.data = $scope.user;
     			}
     			$scope.saveData();

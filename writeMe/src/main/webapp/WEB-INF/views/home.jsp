@@ -69,7 +69,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="app app-header-fixed ">
+	<div class="app app-header-fixed" ng-controller="mainCtrl">
 		<!-- header -->
 		<header id="header" class="app-header navbar" role="menu">
 			<!-- navbar header -->
@@ -115,8 +115,9 @@
 
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
-					ui-shift="prependTo" data-target=".navbar-collapse" role="search"
-					ng-controller="HomeCtrl">
+					ui-shift="prependTo" data-target=".navbar-collapse" role="search">
+<!-- 					ng-controller="HomeCtrl" -->
+					
 				</form>
 				<!-- / search form -->
 
@@ -125,7 +126,7 @@
 					<li class="dropdown"><a href="" data-toggle="dropdown"
 						class="dropdown-toggle clear" data-toggle="dropdown"> 
 						<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
-						<span class="hidden-sm hidden-md">{{user.name}}</span> 
+						<span class="hidden-sm hidden-md">{{user.author}}</span> 
 						<b class="caret"></b>
 					</a> <!-- dropdown -->
 						<ul class="dropdown-menu animated fadeInRight w">
@@ -170,7 +171,7 @@
 		</aside>
 		<!-- / aside -->
 
-		<div ng-view ng-controller="mainCtrl"></div>
+		<div ng-view></div>
 
 
 		<!-- footer -->

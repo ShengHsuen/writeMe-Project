@@ -217,15 +217,16 @@ public class WrittingService implements WrittingServiceInterface{
 		writtingRepository.delete(writtingId);
 	}
 
-	/* (non-Javadoc)
+	/* @author Sheng Hsuen Cheng
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWrittingInvitation(com.mett.writeMe.contracts.WrittingRequest)
 	 */
 	@Override
 	@Transactional
 	public Boolean editWrittingInvitation(Writting wr) {
-		List<WrittingPOJO> wrPojo = getWrittingsByMainWritting(wr);
+		List<WrittingPOJO> wrPojos = getWrittingsByMainWritting(wr);
 		List<Writting> writting = new ArrayList<Writting>();
-		BeanUtils.copyProperties(wrPojo, writting);
+		WrittingPOJO wrPOJO = new WrittingPOJO();
+		BeanUtils.copyProperties(wrPojos, writting);
 		int father = 0;
 		
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
@@ -236,9 +237,13 @@ public class WrittingService implements WrittingServiceInterface{
 				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
 				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
 				
-//				father = wrPojo.get(wrPojo.size()-2).getWrittingId();
-//				wr.setWritting(writting.get(father));
-//				System.out.print("ID DEL PADRE ES:  "+writting.get(father).getWrittingId());
+				
+//				dto.setWrittingFather(tu.getWritting().getWrittingId());
+//				BeanUtils.copyProperties(wr, wrPOJO);
+//				wrPOJO.setWrittingFather(writting.get(father));
+//				father = wrPojos.get(wrPojos.size()-2);
+////				wr.setWritting(writting.get(father));
+////				System.out.print("ID DEL PADRE ES:  "+writting.get(father).getWrittingId());
 				
 			}
 		}
