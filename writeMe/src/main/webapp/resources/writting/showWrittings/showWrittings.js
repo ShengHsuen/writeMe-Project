@@ -24,8 +24,6 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 		$http.post('users/getWrittings',$scope.writting).success(function(response) {
 					$scope.writting = response.writtings;
 				});
-
-
 	$scope.saveData = function(wrid, name){
 		params: {content : wrid}
 	    params: {name : name}
@@ -33,6 +31,7 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	    $localStorage.nameWritting = name;
 	    window.location.href = "app#/writting"
 	}
+
 	/*
 	 * @author Mildred Guerra
      *callback for ng-click 'deleteWritting':

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
+angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStorage'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/createWritting', {
@@ -9,13 +9,20 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', function($scope,$http,$location,$upload) {
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage', function($scope,$http,$location,$upload, $localStorage) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
-	var dia = $scope.date.getDate() + 1;
+	var dia = $scope.date.getDate();
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-	$scope.files = {};
+
+	$scope.files = {
+			"src":"http://localhost:8080/writeMe/resources/writtingImages/1458594787863.jpg"
+	};
+	$('#blah').attr('src', $scope.files.src);
+
+	$scope.typeSelected = "Personal";
+	$scope.cateSelected = "Antiguedades y Coleccionables";
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -33,10 +40,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
-			if($scope.type != "Personal"){
+			if($scope.typeSelected != "Personal"){
 				$scope.showCantUsers = true;
+				console.log("true");
 			}else{
 				$scope.showCantUsers = false;
+				$scope.cantUsers = 0;
+				console.log($scope.cantUsers);
 			}
 		}
 		$scope.navWritting = function(){
@@ -50,10 +60,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 				$scope.cantUsers = 10;
 			}
 		}
-		
-    	/*$scope.passName = function(){
-    		$scope.$emit("passName_channel",$scope.name);
-    	}*/
 		
 		var createWritting = function(){
 			$scope.prepit = false;
@@ -82,9 +88,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					      "likes": 0
 					}
 			};
-
-		    
-
+			
 			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 			    createUserHasWritting();
 			    if($scope.prepit == false){
@@ -108,12 +112,12 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					  "searchColumn": "string",
 					  "searchTerm": "string",
 					  "userHasWritting": {
-						  "dateModifie": "2016-02-02",
+						  "dateModifie": fecha,
 					      "statusColor": false,
 					      "user_has_writtingId": 0,
 					      "linkInvitation": "string",
 					      "banned": false,
-					      "dateCreate": "2016-02-02",
+					      "dateCreate": fecha,
 					      "invitationStatus": false
 					}
 					
@@ -142,5 +146,20 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 	    	    			//.then(success, error, progress); 
 	        		}
 		    };
+		    function readURL(input) {
+		        if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+		            
+		            reader.onload = function (e) {
+		                $('#blah').attr('src', e.target.result);
+		            }
+		            
+		            reader.readAsDataURL(input.files[0]);
+		        }
+		    }
+		    
+		    $("#imgInp").change(function(){
+		        readURL(this);
+		    });
 		    
 }]);

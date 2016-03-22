@@ -59,6 +59,7 @@
 	<script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
 	<script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
 	<script src="resources/resetPassword/resetPassword.js"></script>
+	  <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
 	<!-- Del template -->
 	<script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
 	<script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
