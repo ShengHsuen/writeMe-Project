@@ -73,7 +73,7 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public List<WrittingPOJO> getPublished(WrittingRequest ur){
 		  System.out.println("Service /getPublished");
-		  List<Writting> Writtings =  writtingRepository.findByPublishedTrue();
+		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueOrderByWrittingIdDesc();
 		  //System.out.println("Service /getPublished : " + Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
 		  return generateWrittingDtos(Writtings);
 	}

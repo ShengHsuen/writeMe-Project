@@ -15,7 +15,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate();
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-	$scope.files = {};
+
+	$scope.files = {
+			"src":"http://localhost:8080/writeMe/resources/writtingImages/1458594787863.jpg"
+	};
+	$('#blah').attr('src', $scope.files.src);
+
+	$scope.typeSelected = "Personal";
+	$scope.cateSelected = "Antiguedades y Coleccionables";
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
@@ -33,10 +40,13 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
-			if($scope.type != "Personal"){
+			if($scope.typeSelected != "Personal"){
 				$scope.showCantUsers = true;
+				console.log("true");
 			}else{
 				$scope.showCantUsers = false;
+				$scope.cantUsers = 0;
+				console.log($scope.cantUsers);
 			}
 		}
 		$scope.navWritting = function(){
@@ -136,5 +146,20 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 	    	    			//.then(success, error, progress); 
 	        		}
 		    };
+		    function readURL(input) {
+		        if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+		            
+		            reader.onload = function (e) {
+		                $('#blah').attr('src', e.target.result);
+		            }
+		            
+		            reader.readAsDataURL(input.files[0]);
+		        }
+		    }
+		    
+		    $("#imgInp").change(function(){
+		        readURL(this);
+		    });
 		    
 }]);
