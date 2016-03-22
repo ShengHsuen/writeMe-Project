@@ -1,5 +1,7 @@
        <div class="form-group">
 	<div class="col-sm-10">
+		<p ng-show="modifiedDate" class="text-center"><small>Ultima modificación: {{modified}}</small></p>
+		<p ng-hide="notModified" class="text-center"><small>No se han guardado los cambios</small></p>
 		<div id="editor">
 			<form>
 				<textarea id='edit' style="margin-top: 30px;" placeholder="Type some text" ng-model="content">
@@ -8,7 +10,7 @@
 			
 			</form>
 		</div>
-		<input type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">
+		<button type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">Guardar</button>
 		<button class="btn btn-lg btn-default btn-block" data-target="#add" data-title="Add" data-toggle="modal" class="btn btn-default" data-toggle="confirmation">Publicar</button>
 		
 		

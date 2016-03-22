@@ -10,12 +10,6 @@
 	}])
 	
 	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
-
-		$scope.date = new Date();
-		var anno = $scope.date.getFullYear();
-		var mes = $scope.date.getMonth() + 1;
-		var dia = $scope.date.getDate();
-		var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 		
 		var publish = false;
 		
@@ -41,6 +35,21 @@
 		});
 		
 		$scope.send = function(){
+			$('html, body').animate( {scrollTop : 0}, 800 );
+			
+			$scope.date = new Date();
+			var year = $scope.date.getFullYear();
+			var month = $scope.date.getMonth() + 1;
+			var day = $scope.date.getDate();
+			var hour = $scope.date.getHours();
+			var minute = $scope.date.getMinutes();
+			var second = $scope.date.getSeconds();
+			$scope.fecha = year.toString() + "-" + month.toString() + "-" + day.toString();
+			$scope.modified = $scope.fecha + " " + hour.toString() + ":" + minute.toString() + ":" + second.toString();
+			
+			$scope.modifiedDate = true;
+			$scope.notModified = true;
+			
 			$scope.content = $('#edit').val();
 			console.log($scope.content);
 			update();
@@ -58,7 +67,7 @@
 						"name" : $scope.name,
 						"description" : "a",
 						"cantUsers": 0,
-						"date": fecha,
+						"date": $scope.fecha,
 						"likes": 0,
 						"limit time": "2100-01-01",
 						"numMaxCharacters": 10000,
@@ -68,7 +77,13 @@
 					}
 			};
 			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
-				createUserHasWritting();
+				if($scope.writting.getTypeWritting.equals("Personal")){
+					console.log("NO CREA UN USERHASWRITTING");
+				}else{
+					console.log("SI CREA EL USERHASWRITTING");
+					createUserHasWritting();
+				}
+				
 			});
 		}
 		
@@ -83,7 +98,7 @@
 					  "searchColumn": "string",
 					  "searchTerm": "string",
 					  "userHasWritting": {
-						  "dateModifie": fecha,
+						  "dateModifie": $scope.fecha,
 					      "statusColor": false,
 					      "user_has_writtingId": 0,
 					      "linkInvitation": "string",
