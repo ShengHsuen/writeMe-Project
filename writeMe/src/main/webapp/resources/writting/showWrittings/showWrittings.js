@@ -29,9 +29,6 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	    params: {name : name}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
-
-	    console.log("contendio " + wrid)
-	    console.log("Para que cheng aprenda " + name)
 	    window.location.href = "app#/writting"
 	}
 

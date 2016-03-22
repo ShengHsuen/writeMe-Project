@@ -10,6 +10,13 @@
 	}])
 	
 	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+
+		$scope.loadData = function(){
+			$scope.contentWithoutTags = $localStorage.showContent;
+			$scope.name = $localStorage.nameWritting;
+		}
+		$scope.loadData();
+		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
 		
 		var publish = false;
 		
@@ -51,7 +58,7 @@
 			$scope.notModified = true;
 			
 			$scope.content = $('#edit').val();
-			console.log($scope.content);
+			console.log("ENTRA TODOS LOS DATOS?" + $scope.writting);
 			update();
 		}
 
@@ -76,6 +83,7 @@
 						"content": $scope.content
 					}
 			};
+
 			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
 				if($scope.writting.getTypeWritting.equals("Personal")){
 					console.log("NO CREA UN USERHASWRITTING");
@@ -83,8 +91,9 @@
 					console.log("SI CREA EL USERHASWRITTING");
 					createUserHasWritting();
 				}
-				
+
 			});
+			
 		}
 		
 		var createUserHasWritting = function(){
@@ -111,6 +120,7 @@
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				
 			});
+		
 		}
 		
 		$scope.publish = function(){
@@ -142,14 +152,5 @@
 				console.log("writting/publish");
 			})
 		}
-		
-		$scope.loadData = function(){
-			$scope.content = $localStorage.showContent;
-			$scope.name = $localStorage.nameWritting;
-			$scope.content= $scope.content.replace(/(<\?[a-z]*(\s[^>]*)?\?(>|$)|<!\[[a-z]*\[|\]\]>|<!DOCTYPE[^>]*?(>|$)|<!--[\s\S]*?(-->|$)|<[a-z?!\/]([a-z0-9_:.])*(\s[^>]*)?(>|$))/gi, '');
-			$scope.content= $scope.content.replace(/&nbsp;/g,'');
-		}
-		$scope.loadData();
-		
-		
+
 	}]);

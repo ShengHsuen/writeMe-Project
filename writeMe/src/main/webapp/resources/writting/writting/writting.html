@@ -1,11 +1,11 @@
        <div class="form-group">
-	<div class="col-sm-10">
+	<div class="col-sm-10" >
 		<p ng-show="modifiedDate" class="text-center"><small>Ultima modificación: {{modified}}</small></p>
 		<p ng-hide="notModified" class="text-center"><small>No se han guardado los cambios</small></p>
-		<div id="editor">
-			<form>
-				<textarea id='edit' style="margin-top: 30px;" placeholder="Type some text" ng-model="content">
-		               {{content}}
+		<div id="froala-editor">
+			<form  >
+				<textarea class="selector" style="margin-top: 30px;" placeholder="Type some text" ng-model="content" id='edit'>
+					{{contentWithoutTags}}
 				</textarea>
 			
 			</form>
@@ -33,7 +33,7 @@
 	<!-- /.modal-dialog --> 
 	</div>
 		
-		
+
 		<script>
 			$(function() {
 				$('#edit').on('froalaEditor.initialized', function(e, editor) {
@@ -47,6 +47,7 @@
 					placeholderText : null
 				})
 			});
+			
 		</script>
 	</div>
 </div>
