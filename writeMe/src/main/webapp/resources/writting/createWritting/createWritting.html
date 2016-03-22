@@ -1,4 +1,4 @@
- <meta charset="utf-8">
+<meta charset="utf-8">
  
 <div class="bg-light lter b-b wrapper-md">
   <h1 class="m-n font-thin h3">Obra</h1>
@@ -26,14 +26,14 @@
           	    </div>
           	    <label class="col-sm-2 control-label">Categoría</label>
          		<div class="col-sm-10">
-           	 		<select ng-click="chkIfPersonal()" name="account" class="form-control m-b" ng-model="cateSelected" required>
+           	 		<select name="account" class="form-control m-b" ng-model="cateSelected" required>
               			<option ng-repeat="cate in category">{{cate}}</option>
             		</select>
           	    </div>
           	    <div ng-show="showCantUsers">
           	    	<label class="col-sm-2 control-label">Invitados</label>
           			<div class="col-sm-10">
-		            	<input type="number" min="1" max="10" ng-model="cantUsers"></input>
+		            	<input type="number" min="1" max="10" ng-model="cantUsers" required></input>
           			</div>
           		</div>
 
@@ -42,7 +42,7 @@
 		     	   <input type="file" name="inputfile" required accept=".png , .jpg, .jpeg" ng-file-select="onFileSelect($files)" >
           		</div>
           		
-			<p ng-show="prepit" class="text-center text-danger"><small>Titulo de obra ya existe</small></p>
+			<p ng-show="prepit" class="text-center text-danger"><small>Título de obra ya existe</small></p>
           	<div class="col-sm-15">	
             	<button type="submit" ng-disabled="form.$invalid" ng-click="navWritting()" class="btn btn-sm btn-primary">Aceptar</button>
           	</div>

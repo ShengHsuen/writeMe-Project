@@ -9,8 +9,29 @@
 			</form>
 		</div>
 		<input type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">
+		<button class="btn btn-lg btn-default btn-block" data-target="#add" data-title="Add" data-toggle="modal" class="btn btn-default" data-toggle="confirmation">Publicar</button>
 		
-		<button class="btn btn-lg btn-default btn-block" class="btn btn-default" data-toggle="confirmation" ng-click="publish()">Publicar</button>
+		
+	<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+		 <div class="modal-dialog">
+			  <div class="modal-content">
+			   		<div class="modal-header">
+				       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+				       <h4 class="modal-title custom_align" id="Heading">Seguro que desea publicar la obra?</h4>
+			       </div>
+			       <div class="modal-content">
+			       <p ng-show="psuccess" class="text-center text-success">Obra publicada correctamente!</p>
+			       </div>
+			      <div class="modal-footer ">
+			      	<button ng-click="publish()" type="button" class="btn btn-success btn-lg" style="width: 100%;">Publicar</button>
+			      </div>
+		    </div>
+		<!-- /.modal-content --> 
+		</div>
+	<!-- /.modal-dialog --> 
+	</div>
+		
+		
 		<script>
 			$(function() {
 				$('#edit').on('froalaEditor.initialized', function(e, editor) {
