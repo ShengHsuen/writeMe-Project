@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
+angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStorage'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/createWritting', {
@@ -9,11 +9,11 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', function($scope,$http,$location,$upload) {
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage', function($scope,$http,$location,$upload, $localStorage) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
-	var dia = $scope.date.getDate() + 1;
+	var dia = $scope.date.getDate();
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 
 	$scope.files = {
@@ -61,10 +61,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 			}
 		}
 		
-    	/*$scope.passName = function(){
-    		$scope.$emit("passName_channel",$scope.name);
-    	}*/
-		
 		var createWritting = function(){
 			$scope.prepit = false;
 			$scope.writting={
@@ -92,9 +88,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					      "likes": 0
 					}
 			};
-
-		    
-
+			
 			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 			    createUserHasWritting();
 			    if($scope.prepit == false){
@@ -118,12 +112,12 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 					  "searchColumn": "string",
 					  "searchTerm": "string",
 					  "userHasWritting": {
-						  "dateModifie": "2016-02-02",
+						  "dateModifie": fecha,
 					      "statusColor": false,
 					      "user_has_writtingId": 0,
 					      "linkInvitation": "string",
 					      "banned": false,
-					      "dateCreate": "2016-02-02",
+					      "dateCreate": fecha,
 					      "invitationStatus": false
 					}
 					

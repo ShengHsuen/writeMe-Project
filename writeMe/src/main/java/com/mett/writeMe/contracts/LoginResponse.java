@@ -11,6 +11,7 @@ public class LoginResponse extends BaseResponse {
 	private int idUser;
 	private String name;
 	private String lastName;
+	private String author;
 	private boolean admin;
 
 	public LoginResponse() {
@@ -47,6 +48,14 @@ public class LoginResponse extends BaseResponse {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	
