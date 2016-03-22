@@ -18,13 +18,16 @@ angular.module('myApp.resetPassword', ['ngRoute'])
 
 	//Send the email with a password
 	$scope.sendEmail = function(){
+		$scope.prepit = false;
+		$scope.prepitSucc = false;
 		$scope.user = {email: $scope.email};
 		$http.post('rest/email/resetPassword',$scope.user).success(function (userResponse) {
-			if(userResponse.code == 200){
-				$scope.navSignin();
-			}else{
-				alert("invalido");
-			}
-		});
+			$scope.prepitSucc = true;	
+			$scope.navSignin();
+			
+		 }).catch(function(error){
+			    console.log("El correo no existte");
+			    $scope.prepit = true;
+			   });
 	}
 } ])
