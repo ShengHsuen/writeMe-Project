@@ -7,18 +7,19 @@
 	    templateUrl: 'resources/writting/writting/writting.html',
 	    controller: 'WrittingCtrl'
 	  });
-	}])
-	
-	
-	
-	.controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
-
+	}]).controller('WrittingCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
 		
-//		$scope.$on("NAME_CHANNEL",function(event,name){
-//			$scope.name = name;
-//		});
-
 		
+		$scope.loadData = function(){
+			$scope.contentWithoutTags = $localStorage.showContent;
+			$scope.name = $localStorage.nameWritting;
+		}
+		$scope.loadData();
+		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
+
+
+		var edit = $('#edit').val();
+		console.log(edit);
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -43,7 +44,6 @@
 		
 		$scope.send = function(){
 			$scope.content = $('#edit').val();
-			console.log($scope.content);
 			update();
 		}
 
@@ -68,9 +68,12 @@
 						"content": $scope.content
 					}
 			};
+
 			$http.post('rest/protected/writting/editContent',$scope.writting).success(function(response) {
-				createUserHasWritting();
+				//createUserHasWritting();
+			
 			});
+			
 		}
 		
 		var createUserHasWritting = function(){
@@ -97,6 +100,7 @@
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				
 			});
+		
 		}
 		
 		$scope.publish = function(){
@@ -106,16 +110,4 @@
 				console.log("writting/publish");
 			})
 		}
-		
-		
-		$scope.loadData = function(){
-			$scope.content = $localStorage.showContent;
-			$scope.name = $localStorage.nameWritting;
-			$scope.content= $scope.content.replace(/(<\?[a-z]*(\s[^>]*)?\?(>|$)|<!\[[a-z]*\[|\]\]>|<!DOCTYPE[^>]*?(>|$)|<!--[\s\S]*?(-->|$)|<[a-z?!\/]([a-z0-9_:.])*(\s[^>]*)?(>|$))/gi, '');
-			$scope.content= $scope.content.replace(/&nbsp;/g,'');
-		}
-	
-		$scope.loadData();
-		
-		
 	}]);
