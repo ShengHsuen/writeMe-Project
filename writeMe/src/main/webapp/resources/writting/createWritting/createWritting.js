@@ -18,6 +18,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload'])
 	$scope.files = {
 			"src":"http://localhost:8080/writeMe/resources/writtingImages/1458594787863.jpg"
 	};
+	$('#blah').attr('src', $scope.files.src);
 		//Variables
 		$scope.showCantUsers = false;
 		$scope.category =[ "Antiguedades y Coleccionables", "Arquitectura", "Arte","Artes Escénicas", "Autoayuda","Biografía y Autobiografía",
