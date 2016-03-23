@@ -46,13 +46,10 @@ var init = function(){
     			  $http({ url: 'rest/protected/writting/delete', 
     	                method: 'DELETE', 
     	                params: {writtingId: writtingId}
-    			  });
+    			  }).success(function() {
+    					init();
+    			    });
     	        }
-    var obtenerWrittings = function(){
-    	$http.post('users/getWrittings',$scope.writting).success(function(response) {
-			$scope.writting = response.writtings;
-		});
-    }
     
     $scope.$on('show-writtings', function(event, args) {
   	  init();
