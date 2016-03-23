@@ -8,8 +8,6 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage',function($scope, $http, $localStorage) {
 	
-
-	
 	// Mostrar
 var init = function(){
 	$scope.writting = [];
