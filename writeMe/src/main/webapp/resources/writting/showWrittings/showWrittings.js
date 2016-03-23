@@ -20,10 +20,12 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	};
 	
 	// Mostrar
-
+	$scope.init = function() {
 		$http.post('users/getWrittings',$scope.writting).success(function(response) {
 					$scope.writting = response.writtings;
 				});
+	}
+	$scope.init();
 	$scope.saveData = function(wrid, name){
 		params: {content : wrid}
 	    params: {name : name}
@@ -44,7 +46,9 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
     			  $http({ url: 'rest/protected/writting/delete', 
     	                method: 'DELETE', 
     	                params: {writtingId: writtingId}
-    			  });
+    			  }).success(function() {
+    					$scope.init();
+    			    });
     	        }
     var obtenerWrittings = function(){
     	$http.post('users/getWrittings',$scope.writting).success(function(response) {
