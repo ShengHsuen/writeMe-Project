@@ -8,6 +8,10 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage',function($scope, $http, $localStorage) {
 	
+
+	
+	// Mostrar
+var init = function(){
 	$scope.writting = [];
 	$scope.writting = {
 			"pageNumber" : 0,
@@ -19,22 +23,20 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 			"writting" : {}
 	};
 	
-	// Mostrar
-	$scope.init = function() {
-		$http.post('users/getWrittings',$scope.writting).success(function(response) {
-					$scope.writting = response.writtings;
-				});
-	}
-	$scope.init();
+	$http.post('users/getWrittings',$scope.writting).success(function(response) {
+		$scope.writting = response.writtings;
+	});
+}
+		
+		
 	$scope.saveData = function(wrid, name){
 		params: {content : wrid}
 	    params: {name : name}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
-
-	    console.log("contendio " + wrid)
-	    console.log("Para que cheng aprenda " + name)
+	    console.log("Aqui entra " + $localStorage.showContent);
 	    window.location.href = "app#/writting"
+	
 	}
 
 	/*
@@ -47,13 +49,13 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
     	                method: 'DELETE', 
     	                params: {writtingId: writtingId}
     			  }).success(function() {
-    					$scope.init();
+    					init();
     			    });
     	        }
-    var obtenerWrittings = function(){
-    	$http.post('users/getWrittings',$scope.writting).success(function(response) {
-			$scope.writting = response.writtings;
-		});
-    }
+    
+    $scope.$on('scanner-started', function(event, args) {
+  	  init();
+    });
+    init();
 
 } ]);
