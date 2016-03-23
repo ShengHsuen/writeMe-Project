@@ -28,7 +28,13 @@ angular.module('myApp.home', ['ngRoute'])
 	   $scope.writting = response.writting;
 	  // $scope.user = response.user;
 	  });
-  }
+  };
+  
+  $scope.$on('scanner-started', function(event, args) {
+	  init();
+  });
+  
   init();
+  
 
 }]);
