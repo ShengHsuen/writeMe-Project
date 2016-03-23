@@ -1,24 +1,15 @@
 <meta charset="utf-8">
   <!-- content -->
-    <style>.center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}</style> 
   <div id="content" class="app-content" role="main">
-      <div class="btn-group">
-	       <button ng-click="updateHome()" class="btn btn-sm btn-bg btn-default" data-toggle="tooltip" data-placement="bottom" data-title="Refresh" data-original-title="" title=""><i class="fa fa-refresh"></i></button>
-	  </div>
-	  <div style="  display: block;margin-left: auto; margin-right: auto;" 
-	   class="hbox hbox-auto-xs hbox-auto-sm">
-	  		<ul class="list-group list-group-lg no-radius m-b-none m-t-n-xxs">
-	  			<il ng-repeat="wr in writting.concat(user)" class="list-group-item clearfix b-l-3x b-l-info"><p>Título:{{wr.name}}</p><p>Categoría:{{wr.category}}</p><p>Descripción:{{wr.description}}</p>
-	  			<p>Autor:{{user[$index].author}}</p>
-	  			<img ng-src="{{wr.image}}" width="270" height="200"></img></il>
+	  <div class="text-center" class="hbox hbox-auto-xs hbox-auto-sm">
+	  		<ul class="list-group">
+	  			<!--  <il ng-repeat="us in user">Autor:{{user.author}}</il>-->
+	  			<il ng-repeat="wr in writting" class="list-group-item"><p class="lead">Título:{{ " " + wr.name}}</p>
+	  			<p class="">Categoría:{{" " + wr.category}}</p><p class="">Descripción:{{" " + wr.description}}</p>
+				<img ng-src="{{wr.image}}" width="300" height="200"></img></il>
+				
 	 		</ul>
 	   </div>
 	  
   </div>
-  
-
   <!-- /content -->

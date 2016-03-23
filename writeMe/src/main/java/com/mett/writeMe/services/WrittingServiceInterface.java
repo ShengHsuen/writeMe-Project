@@ -14,11 +14,18 @@ import com.mett.writeMe.pojo.WrittingPOJO;
 public interface WrittingServiceInterface {
 	List<WrittingPOJO> getAll(WrittingRequest ur);
 	List<WrittingPOJO> getAllByName(WrittingRequest ur);
-	Boolean saveWritting(WrittingRequest ur);
-	WrittingPOJO getWrittingByName(WrittingRequest ur);
-	//String getWrittingContent(WrittingRequest ur);
-	Boolean editWritting(Writting writting);
+
+	List<WrittingPOJO> getAll();
 	List<WrittingPOJO> getPublished(WrittingRequest ur);
 	List<UserPOJO> getUsersPublished();
-	
+	List<WrittingPOJO> getWrittingsByMainWritting(Writting wr);
+	WrittingPOJO getWrittingByName(WrittingRequest ur);
+	String getWrittingContent(WrittingRequest ur);
+	void deletewritting(int writtingId);
+	Boolean saveWritting(WrittingRequest ur);
+	Boolean editWritting(Writting wr);
+	Boolean editWrittingInvitation(Writting wr);
+	Boolean publish(WrittingRequest ur);
+
+
 }

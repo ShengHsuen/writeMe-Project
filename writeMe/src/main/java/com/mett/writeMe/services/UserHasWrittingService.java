@@ -55,5 +55,23 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		});	
 		return uiWrittings;
 	}
+
+	@Override
+	public void deleteUserHaswritting(int uHwrittingId) {
+		// TODO Auto-generated method stub
+		userHasWrittingRepository.delete(uHwrittingId);
+	}
 	
+	@Override
+	@Transactional
+	public List<UserHasWrittingPOJO> getAll() {
+		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
+		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
+		UserHasWrittings.stream().forEach(uw ->{
+			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(uw, dto);
+			dtos.add(dto);
+		});
+		return dtos;
+	}
 }

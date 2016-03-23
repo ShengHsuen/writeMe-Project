@@ -64,11 +64,13 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 	}
     // callback for ng-click 'deleteLegal':
     $scope.deleteLegal = function (legalId) {
-    			  $http({ url: 'rest/protected/legal/delete', 
-    	                method: 'DELETE', 
-    	                params: {legal_establishmentId: legalId}
-    			  });
-					$scope.init();
+
+		  $http({ url: 'rest/protected/legal/delete', 
+              method: 'DELETE', 
+              params: {legal_establishmentId: legalId}
+		  }).success(function() {
+			$scope.init();
+	    });
     	        }
 
 } ]);

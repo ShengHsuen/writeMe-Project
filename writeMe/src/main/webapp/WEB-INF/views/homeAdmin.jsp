@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Write Me / Mett ADMI</title>
+<title>Write Me / Mett</title>
 <meta name="description"
 	content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
 <meta name="viewport"
@@ -68,7 +68,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="app app-header-fixed ">
+	<div class="app app-header-fixed" ng-controller="mainAdminCtrl">
 		<!-- header -->
 		<header id="header" class="app-header navbar" role="menu">
 			<!-- navbar header -->
@@ -82,7 +82,7 @@
 					<i class="glyphicon glyphicon-align-justify"></i>
 				</button>
 				<!-- brand -->
-				<a href="#/" class="navbar-brand text-lt"> <i class="fa fa-btc"></i>
+				<a href="#/" class="navbar-brand text-lt">
 					<span class="hidden-folded m-l-xs">WriteMe</span>
 				</a>
 				<!-- / brand -->
@@ -105,129 +105,32 @@
 				<!-- / buttons -->
 
 				<!-- link and dropdown -->
-				<ul class="nav navbar-nav hidden-sm">
-					<li class="dropdown pos-stc"><a href="" data-toggle="dropdown"
-						class="dropdown-toggle"> <span>Categorías</span> <span
-							class="caret"></span>
-					</a>
-						<div class="dropdown-menu wrapper w-full bg-white">
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="m-l-xs m-t-xs m-b-xs font-bold">Navegación</div>
-									<div class="row">
-										<div class="col-xs-6">
-											<ul class="list-unstyled l-h-2x">
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Acción</a>
-												</li>
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Humor</a>
-												</li>
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Fantasía</a>
-												</li>
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Paranormal</a>
-												</li>
-											</ul>
-										</div>
-										<div class="col-xs-6">
-											<ul class="list-unstyled l-h-2x">
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Romance</a>
-												</li>
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Terror</a>
-												</li>
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Aventura</a>
-												</li>
-												<li><a href><i
-														class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Misterio
-														/ suspenso</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div></li>
+				<!-- <ul class="nav navbar-nav hidden-sm">
 					<li><a ng-click="navCreate_Writting()"> <i
 							class="fa fa-fw fa-plus visible-xs-inline-block"></i> <span
 							translate="header.navbar.new.NEW">Crear obra</span> </span>
-					</a></li>
-				</ul>
+					</a></li> 
+				</ul> -->
 				<!-- / link and dropdown -->
 
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
-					ui-shift="prependTo" data-target=".navbar-collapse" role="search"
-					ng-controller="HomeAdminCtrl">
-
-					<div class="form-group">
-						<div class="input-group">
-							<input type="text" ng-model="selected"
-								typeahead="state for state in states | filter:$viewValue | limitTo:8"
-								class="form-control input-sm bg-light no-border rounded padder"
-								placeholder="Buscar..."> <span class="input-group-btn">
-								<button type="submit" class="btn btn-sm bg-light rounded">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</div>
-					</div>
+					ui-shift="prependTo" data-target=".navbar-collapse" role="search">
+<!-- 					ng-controller="HomeCtrl" -->
 				</form>
 				<!-- / search form -->
 
 				<!-- nabar right -->
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="" data-toggle="dropdown"
-						class="dropdown-toggle"> <i class="icon-bell fa-fw"></i> <span
-							class="visible-xs-inline">Notificaciones</span> <span
-							class="badge badge-sm up bg-danger pull-right-xs">2</span>
-					</a> <!-- dropdown -->
-						<div class="dropdown-menu w-xl animated fadeInUp">
-							<div class="panel bg-white">
-								<div class="panel-heading b-light bg-light">
-									<strong><span>2</span> notificaciones</strong>
-								</div>
-								<div class="list-group">
-									<a href class="list-group-item"> <span
-										class="pull-left m-r thumb-sm"> </span> <span
-										class="clear block m-b-none"> Use awesome animate.css<br>
-											<small class="text-muted">10 minutes ago</small>
-									</span>
-									</a> <a href class="list-group-item"> <span
-										class="clear block m-b-none"> 1.0 initial released<br>
-											<small class="text-muted">1 hour ago</small>
-									</span>
-									</a>
-								</div>
-								<div class="panel-footer text-sm">
-									<a href class="pull-right"><i class="fa fa-cog"></i></a> <a
-										href="#notes" data-toggle="class:show animated fadeInRight">Ver
-										todas las notificaciones</a>
-								</div>
-							</div>
-						</div> <!-- / dropdown --></li>
-					<li class="dropdown"><a href="" data-toggle="dropdown"
-						class="dropdown-toggle clear" data-toggle="dropdown"> <span
-							class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"
-							style="padding-top: 26px;"> <i
-								class="on md b-white bottom"></i>
-						</span> <span class="hidden-sm hidden-md">John.Smith</span> <b
-							class="caret"></b>
+
+					<li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
+						<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"> <i
+								class="on md b-white bottom"></i></span> 
+						<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span>  
+						<b class="caret"></b>
 					</a> <!-- dropdown -->
 						<ul class="dropdown-menu animated fadeInRight w">
-
-							<li><a ui-sref="app.page.profile">Perfil</a></li>
-
-							<li class="divider"></li>
-							<li><a href> <span class="badge bg-danger pull-right">30%</span>
-									<span>Configuración</span>
-							</a></li>
-							<li><a ui-sref="app.docs"> Ayuda </a></li>
-							<li class="divider"></li>
-							<li><a ui-sref="access.signin">Cerrar sesión</a></li>
+						<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
 						</ul> <!-- / dropdown --></li>
 				</ul>
 				<!-- / navbar right -->
@@ -241,41 +144,6 @@
 		<aside id="aside" class="app-aside hidden-xs bg-dark">
 			<div class="aside-wrap">
 				<div class="navi-wrap">
-					<!-- user -->
-					<div class="clearfix hidden-xs text-center hide" id="aside-user">
-						<div class="dropdown wrapper">
-							<a href="app.page.profile"> <span
-								class="thumb-lg w-auto-folded avatar m-t-sm"> </span>
-							</a> <a href="" data-toggle="dropdown"
-								class="dropdown-toggle hidden-folded"> <span class="clear">
-									<span class="block m-t-sm"> <strong
-										class="font-bold text-lt">John.Smith</strong> <b class="caret"></b>
-								</span> <span class="text-muted text-xs block">Art Director</span>
-							</span>
-							</a>
-							<!-- dropdown -->
-							<ul class="dropdown-menu animated fadeInRight w hidden-folded">
-								<li class="wrapper b-b m-b-sm bg-info m-t-n-xs"><span
-									class="arrow top hidden-folded arrow-info"></span>
-									<div>
-										<p>300mb of 500mb used</p>
-									</div>
-									<div class="progress progress-xs m-b-none dker">
-										<div class="progress-bar bg-white" data-toggle="tooltip"
-											data-original-title="50%" style="width: 50%"></div>
-									</div></li>
-								<li><a href>Settings</a></li>
-								<li><a href="page_profile.html">Profile</a></li>
-								<li><a href> <span class="badge bg-danger pull-right">3</span>
-										Notifications
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="page_signin.html">Logout</a></li>
-							</ul>
-							<!-- / dropdown -->
-						</div>
-						<div class="line dk hidden-folded"></div>
-					</div>
 					<!-- / user -->
 
 					<!-- nav -->
@@ -284,63 +152,16 @@
 							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
 								<span></span>
 							</li>
-							<li><a href="home.html" class="auto"> <span
-									class="pull-right text-muted"> <i
-										class="fa fa-fw fa-angle-right text"></i> <i
-										class="fa fa-fw fa-angle-down text-active"></i>
+							<li><a href="#/" class="auto"> <span
+									class="pull-right text-muted">
 								</span> <i class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></li>
 							</a>
 							</li>
-							<li class="line dk"></li>
-							<li><a href="page_profile.html"> <i
-									class="icon-user icon text-success-lter"></i>  <span>Perfil</span>
-							</a></li>
-							<li><a href="page_profile.html"> <i
-									class="icon-user icon text-success-lter"></i> <span>Usuarios</span>
-							</a></li>
-							<li><a href="page_profile.html"> <i
-									class="icon-user icon text-success-lter"></i>  <span>Obras</span>
-							</a></li>
-							<li><a href class="auto"> <span
-									class="pull-right text-muted"> <i
-										class="fa fa-fw fa-angle-right text"></i> <i
-										class="fa fa-fw fa-angle-down text-active"></i>
-								</span> <i class="glyphicon glyphicon-book icon"></i> <span
-									class="font-bold">Mi biblioteca</span>
-							</a>
-								<ul class="nav nav-sub dk">
-									<li class="nav-sub-header"><a href> <span>Mi
-												biblioteca</span>
-									</a></li>
-									<li><a href="index.html"> <span>Personal</span>
-									</a></li>
-									<li><a href="dashboard.html"> <b
-											class="label bg-info pull-right">3</b> <span>Compartido</span>
-									</a></li>
-								</ul></li>
 
-							<li class="line dk"></li>
-							<li><a href="page_price.html" class="auto"> <span
-									class="pull-right text-muted"> <i
-										class="fa fa-fw fa-angle-right text"></i> <i
-										class="fa fa-fw fa-angle-down text-active"></i>
-								</span> <i class="glyphicon glyphicon-gift icon"></i> <span>Donaciones</span>
-							</a></li>
-							<li><a href="mail.html"> <b
-									class="badge bg-info pull-right">9</b> <i
-									class="glyphicon glyphicon-envelope icon text-info-lter"></i> <span
-									class="font-bold">Mensajes</span>
-							</a></li>
 							<li class="line dk"></li>
 							<li><a href="appAdmin#/legalEstablishment" class="auto">
 									 <i class="glyphicon glyphicon-briefcase"></i> <span>Términos
 										y condiciones</span>
-							</a></li>
-							<li><a href="ui_chart.html" class="auto"> <span
-									class="pull-right text-muted"> <i
-										class="fa fa-fw fa-angle-right text"></i> <i
-										class="fa fa-fw fa-angle-down text-active"></i>
-								</span> <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
 							</a></li>
 
 						</ul>
@@ -372,6 +193,8 @@
 	<script src="resources/bower_components/angular/angular.js"></script>
 	<script src="resources/bower_components/angular-route/angular-route.js"></script>
 	<script src="resources/appAdmin.js"></script>
+	
+	<script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
 
 	<!-- Del template -->
 	<script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
@@ -392,7 +215,7 @@
 	<script
 		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
 	<script src="resources/legalEstablishment/legalEstablishment.js"></script>
-	<script src="resources/homeAdmin/homeAdmin.js"></script>
+	<script src="resources/home/home.js"></script>
 
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>

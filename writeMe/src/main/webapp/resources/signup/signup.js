@@ -35,9 +35,11 @@ angular.module('myApp.signup', ['ngRoute'])
 				}
 		};
 		$scope.pConfirm();
+		$scope.prepit = false;
 		if(canCreate == true){
 			$http.post('users/create',$scope.requestObject).success(function(response) {
 				$scope.user = {email: $scope.mail};
+				
 				$http.post('rest/email/confCuenta',$scope.user).success(function (userResponse) {
 					if(userResponse.code == 200){
 						$scope.navSignin();
@@ -45,10 +47,14 @@ angular.module('myApp.signup', ['ngRoute'])
 						alert("invalido");
 					}
 				});
-				
-			});
-		}else{
-			
+			    if($scope.prepit == false){
+			        $scope.navSignin();
+			       }
+			      }).catch(function(error){
+			       console.log("Correo o Nick invalido");
+			       $scope.prepit = true;
+			      });
+		      }else{	
 		}
 		
 	}
@@ -60,6 +66,7 @@ angular.module('myApp.signup', ['ngRoute'])
 			$scope.pconfirm = true;
 		}
 	}
+	
 	$scope.navAcceptLegal= function(){
 		var path = "/writeMe/#/acceptLegalEstablishment";
 		window.location.href = path;
