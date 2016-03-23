@@ -17,7 +17,7 @@
 		}
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
-
+		
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -26,7 +26,12 @@
 		
 		var publish = false;
 		
-		$scope.psuccess = false;
+		$scope.success = false;
+		
+		$scope.send = function(){
+			$scope.content = $('#edit').val();
+			update();
+		}
 		
 		$('#myModal').on('show', function() {
 		    var id = $(this).data('id'),
@@ -47,10 +52,7 @@
 		  	$('#myModal').modal('hide');
 		});
 		
-		$scope.send = function(){
-			$scope.content = $('#edit').val();
-			update();
-		}
+
 
 		var update = function(){
 			$scope.writting={
