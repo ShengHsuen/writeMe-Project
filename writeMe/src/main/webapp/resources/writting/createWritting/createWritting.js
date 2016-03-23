@@ -63,16 +63,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		}
 		
 		var createWritting = function(){
-			$scope.files = $files;
-			for ( var i = 0; i < $scope.files.length; i++) {
-    			var file = $scope.files[i];
-    			$scope.upload = $upload.upload({
-    				url : 'rest/protected/writting/addFiles',
-    				file : file,
-    			}).progress(
-    					function(evt) {
-    						console.log('percent: '+ parseInt(100.0 * evt.loaded / evt.total));
-    					}).success(function(data, status, headers, config) {
 			$scope.prepit = false;
 			$scope.writting={
 					"pageNumber": 0,
@@ -111,10 +101,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			    console.log("Titulo no puede estar repetido");
 			    $scope.prepit = true;
 			   });
-    					});
-    			//.error(...)
-    			//.then(success, error, progress); 
-		};
+
 		}
 		var createUserHasWritting = function(){
 			$scope.userHasWritting={
