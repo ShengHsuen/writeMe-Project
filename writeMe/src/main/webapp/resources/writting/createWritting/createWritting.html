@@ -44,10 +44,14 @@
 						<form id="form1">
 							<input type='file' id="imgInp" 
 								accept=".png , .jpg, .jpeg"
-								ng-file-select="onFileSelect($files)" /> <br> 
+								ng-file-select="onFileSelect($files)" style="color: rgb(255, 255, 255);"/> <br> 
 								<div class="col-lg-2"></div>
 								<img id="blah" src="" alt="Imagen de portada" height="200" width="400" />
 						</form>
+						
+						<p ng-show="pimg" class="text-center text-danger">
+							<small>Agregue una imagen de portada</small>
+						</p>
 						<p ng-show="prepit" class="text-center text-danger">
 							<small>Titulo de obra ya existe</small>
 						</p>
