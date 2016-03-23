@@ -17,7 +17,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 
 	$scope.files = {
-			"src":"http://localhost:8080/writeMe/resources/writtingImages/1458594787863.jpg"
+			"src":"http://localhost:8080/writeMe/resources/writtingImages/imageDefault.jpg"
 	};
 	$('#blah').attr('src', $scope.files.src);
 
@@ -34,9 +34,9 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		                   "Manualidades y Hobbies","Mascotas y Animales","Matemáticas","Medicina","Música","Naturaleza y Aire libre",
 		                   "Negocios y Economia","Niños y Jóvenes","Novelties","Papeleria","Poesía","Psicología","Referencia",
 		                   "Religión y Espiritualidad","Salud y Bienestar","Tecnología","Transporte","Tweens Fiction","Tweens Nonfiction",
-		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction"
+		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction","Otros"
 		                  ];
-		$scope.types =["Personal","Por invitacion","Publica"];
+		$scope.types =["Personal","Por invitacion","Pública"];
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
@@ -49,6 +49,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 				console.log($scope.cantUsers);
 			}
 		}
+		$scope.chkIfPersonal();
 		$scope.navWritting = function(){
 			createWritting();
 			$scope.valInvitados();
