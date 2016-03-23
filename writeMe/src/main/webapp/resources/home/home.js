@@ -9,9 +9,9 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope','$http',function($scope,$http) {
+.controller('HomeCtrl', ['$scope','$http','$rootScope', function($scope,$http,$rootScope) {
 	
-  var init = function(){
+   $scope.init = function(){
 	  $scope.writting = [];
 	  $scope.user = [];
 	  $scope.writting = {"pageNumber": 0,
@@ -31,10 +31,10 @@ angular.module('myApp.home', ['ngRoute'])
   };
   
   $scope.$on('home-started', function(event, args) {
-	  init();
+	  $scope.init();
   });
   
-  init();
+  $scope.init();
   
 
 }]);

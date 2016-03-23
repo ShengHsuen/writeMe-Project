@@ -7,6 +7,7 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 		controller : 'showWrittingsCtrl'
 	});
 } ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
+
 	
 	// Mostrar
 var init = function(){
