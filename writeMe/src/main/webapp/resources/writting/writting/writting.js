@@ -11,6 +11,13 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 
 .controller('WrittingCtrl', ['$scope', '$http', '$localStorage', '$rootScope', function($scope, $http, $localStorage, $rootScope) {
 
+	$scope.loadData = function(){
+		$scope.contentWithoutTags = $localStorage.showContent;
+		$scope.name = $localStorage.nameWritting;
+	}
+	$scope.loadData();
+	$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
+	
     $scope.date = new Date();
     var anno = $scope.date.getFullYear();
     var mes = $scope.date.getMonth() + 1;
@@ -135,12 +142,5 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
             console.log("writting/publish");
         })
     }
-
-    $scope.loadData = function() {
-        $scope.content = $localStorage.showContent;
-        $scope.name = $localStorage.nameWritting;
-        $scope.content = $scope.content.replace(/(<\?[a-z]*(\s[^>]*)?\?(>|$)|<!\[[a-z]*\[|\]\]>|<!DOCTYPE[^>]*?(>|$)|<!--[\s\S]*?(-->|$)|<[a-z?!\/]([a-z0-9_:.])*(\s[^>]*)?(>|$))/gi, '');
-        $scope.content = $scope.content.replace(/&nbsp;/g, '');
-    }
-    $scope.loadData();
+    
 }]);
