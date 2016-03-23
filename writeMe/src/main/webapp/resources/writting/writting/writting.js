@@ -17,6 +17,8 @@
 		var dia = $scope.date.getDate();
 		var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 		
+		$scope.ppublish = false;
+		
 		var publish = false;
 		
 		$scope.psuccess = false;
@@ -44,8 +46,11 @@
 			$scope.content = $('#edit').val();
 			console.log($scope.content);
 			update();
-		}
-
+		};
+		$scope.navHome = function(){
+	     	var path = "app#/home";
+	     	window.location.href = path;
+		};
 		var update = function(){
 			$scope.writting={
 					"pageNumber": 0,
@@ -123,11 +128,11 @@
 			publish = true;
 			$scope.content = $('#edit').val();
 			console.log("Published: " + publish + "Fecha: " + fecha);
+			$scope.navHome();
 			$http.post('rest/protected/writting/publish',$scope.writting).success(function(response) {
 				console.log("writting/publish");
 			})
 		}
-		
 		
 		$scope.loadData = function(){
 			$scope.content = $localStorage.showContent;
@@ -135,7 +140,6 @@
 			$scope.content= $scope.content.replace(/(<\?[a-z]*(\s[^>]*)?\?(>|$)|<!\[[a-z]*\[|\]\]>|<!DOCTYPE[^>]*?(>|$)|<!--[\s\S]*?(-->|$)|<[a-z?!\/]([a-z0-9_:.])*(\s[^>]*)?(>|$))/gi, '');
 			$scope.content= $scope.content.replace(/&nbsp;/g,'');
 		}
-	
 		$scope.loadData();
 		
 		
