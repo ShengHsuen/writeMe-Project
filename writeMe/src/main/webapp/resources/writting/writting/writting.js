@@ -7,28 +7,39 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         templateUrl: 'resources/writting/writting/writting.html',
         controller: 'WrittingCtrl'
     });
-}])
-
-.controller('WrittingCtrl', ['$scope', '$http', '$localStorage', '$rootScope', function($scope, $http, $localStorage, $rootScope) {
-
-	$scope.loadData = function(){
-		$scope.contentWithoutTags = $localStorage.showContent;
-		$scope.name = $localStorage.nameWritting;
-	}
-	$scope.loadData();
-	$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
+ }]).controller('WrittingCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
+		
+		
+		$scope.loadData = function(){
+			$scope.contentWithoutTags = $localStorage.showContent;
+			$scope.name = $localStorage.nameWritting;
+		}
+		$scope.loadData();
+		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
+		
+		$scope.date = new Date();
+		var anno = $scope.date.getFullYear();
+		var mes = $scope.date.getMonth() + 1;
+		var dia = $scope.date.getDate();
+		var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
+		
+		var publish = false;
+		
+		
+		$scope.send = function(){
+			$scope.content = $('#edit').val();
+			update();
+		}
 	
-    $scope.date = new Date();
-    var anno = $scope.date.getFullYear();
-    var mes = $scope.date.getMonth() + 1;
-    var dia = $scope.date.getDate();
-    var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-
     $scope.ppublish = false;
-
-    var publish = false;
-
     $scope.psuccess = false;
+		$('#btnYes').click(function() {
+		    // handle deletion here
+		  	var id = $('#myModal').data('id');
+		  	$('[data-id='+id+']').remove();
+		  	$('#myModal').modal('hide');
+		});
+ 
 
     $('#myModal').on('show', function() {
         var id = $(this).data('id'),
@@ -49,11 +60,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         $('#myModal').modal('hide');
     });
 
-    $scope.send = function() {
-        $scope.content = $('#edit').val();
-        console.log($scope.content);
-        update();
-    };
     $scope.navHome = function() {
         var path = "app#/home";
         window.location.href = path;
@@ -81,7 +87,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
             }
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
-            createUserHasWritting();
         });
     }
 
