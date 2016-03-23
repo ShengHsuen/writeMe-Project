@@ -8,8 +8,8 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         controller: 'WrittingCtrl'
     });
  }]).controller('WrittingCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
-		
-		
+	 
+		 
 		$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
@@ -17,6 +17,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
 		
+		    
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;

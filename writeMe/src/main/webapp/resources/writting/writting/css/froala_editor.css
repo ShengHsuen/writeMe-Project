@@ -152,7 +152,7 @@ iframe.fr-iframe {
 .fr-wrapper {
 	position: relative;
 	z-index: 1;
-	height: 510px;
+	
 }
 
 .fr-wrapper::after {
