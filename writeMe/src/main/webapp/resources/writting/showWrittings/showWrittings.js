@@ -8,6 +8,10 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage',function($scope, $http, $localStorage) {
 	
+
+	
+	// Mostrar
+var init = function(){
 	$scope.writting = [];
 	$scope.writting = {
 			"pageNumber" : 0,
@@ -19,11 +23,11 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 			"writting" : {}
 	};
 	
-	// Mostrar
-
-		$http.post('users/getWrittings',$scope.writting).success(function(response) {
-					$scope.writting = response.writtings;
-				});
+	$http.post('users/getWrittings',$scope.writting).success(function(response) {
+		$scope.writting = response.writtings;
+	});
+}
+		
 		
 	$scope.saveData = function(wrid, name){
 		params: {content : wrid}
@@ -51,5 +55,10 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 			$scope.writting = response.writtings;
 		});
     }
+    
+    $scope.$on('scanner-started', function(event, args) {
+  	  init();
+    });
+    init();
 
 } ]);
