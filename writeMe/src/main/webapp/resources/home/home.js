@@ -30,7 +30,7 @@ angular.module('myApp.home', ['ngRoute'])
 	  });
   };
   
-  $scope.$on('scanner-started', function(event, args) {
+  $scope.$on('home-started', function(event, args) {
 	  init();
   });
   

@@ -52,6 +52,7 @@
 <link rel="stylesheet" href="resources/writting/writting/css/plugins/code_view.css">
 <link rel="stylesheet" href="resources/writting/writting/css/plugins/code_view.css">
 <link rel="stylesheet" href="resources/writting/writting/css/plugins/fullscreen.min.css">
+<link rel="stylesheet" href="resources/writting/writting/css/froala_style.min.css" type="text/css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 

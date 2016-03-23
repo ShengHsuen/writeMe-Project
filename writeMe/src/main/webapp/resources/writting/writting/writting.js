@@ -8,8 +8,8 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         controller: 'WrittingCtrl'
     });
  }]).controller('WrittingCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
+
 	 
-		 
 		$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
@@ -17,7 +17,8 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
 		
-		    
+		//$('.fr-view').froalaEditor('html.set', $scope.contentWithoutTags);
+	
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -25,7 +26,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
 		
 		var publish = false;
-		
 		
 		$scope.send = function(){
 			$scope.content = $('#edit').val();
@@ -62,9 +62,10 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
     });
 
     $scope.navHome = function() {
+    	 $rootScope.$broadcast('home-started');
         var path = "app#/home";
         window.location.href = path;
-        $rootScope.$broadcast('scanner-started');
+       
     };
     var update = function() {
         $scope.writting = {

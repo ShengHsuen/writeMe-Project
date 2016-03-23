@@ -6,9 +6,7 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 		templateUrl : 'resources/writting/showWrittings/showWrittings.html',
 		controller : 'showWrittingsCtrl'
 	});
-} ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage',function($scope, $http, $localStorage) {
-	
-
+} ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
 	
 	// Mostrar
 var init = function(){
@@ -56,7 +54,7 @@ var init = function(){
 		});
     }
     
-    $scope.$on('scanner-started', function(event, args) {
+    $scope.$on('show-writtings', function(event, args) {
   	  init();
     });
     init();
