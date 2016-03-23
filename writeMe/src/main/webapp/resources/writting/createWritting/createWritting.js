@@ -9,7 +9,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage', function($scope,$http,$location,$upload, $localStorage) {
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage','$rootScope', function($scope,$http,$location,$upload, $localStorage,$rootScope ) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
