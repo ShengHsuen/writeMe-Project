@@ -7,9 +7,10 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         templateUrl: 'resources/writting/writting/writting.html',
         controller: 'WrittingCtrl'
     });
- }]).controller('WrittingCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
+ }])
+ 
+ .controller('WrittingCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
 	 
-		 
 		$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
@@ -17,7 +18,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
 		
-		    
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -26,14 +26,13 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		
 		var publish = false;
 		
+	    $scope.ppublish = false;
 		
 		$scope.send = function(){
 			$scope.content = $('#edit').val();
 			update();
 		}
-	
-    $scope.ppublish = false;
-    $scope.psuccess = false;
+
 		$('#btnYes').click(function() {
 		    // handle deletion here
 		  	var id = $('#myModal').data('id');
@@ -42,29 +41,29 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		});
  
 
-    $('#myModal').on('show', function() {
-        var id = $(this).data('id'),
-            removeBtn = $(this).find('.danger');
-    })
+		$('#myModal').on('show', function() {
+			var id = $(this).data('id'),
+            	removeBtn = $(this).find('.danger');
+		})
 
-    $('.confirm-delete').on('click', function(e) {
-        e.preventDefault();
+		$('.confirm-delete').on('click', function(e) {
+			e.preventDefault();
 
-        var id = $(this).data('id');
-        $('#myModal').data('id', id).modal('show');
-    });
+			var id = $(this).data('id');
+			$('#myModal').data('id', id).modal('show');
+		});
 
-    $('#btnYes').click(function() {
-        // handle deletion here
-        var id = $('#myModal').data('id');
-        $('[data-id=' + id + ']').remove();
-        $('#myModal').modal('hide');
-    });
+		$('#btnYes').click(function() {
+			// handle deletion here
+			var id = $('#myModal').data('id');
+			$('[data-id=' + id + ']').remove();
+			$('#myModal').modal('hide');
+		});
 
     $scope.navHome = function() {
+    	$rootScope.$broadcast('home-started');
         var path = "app#/home";
         window.location.href = path;
-        $rootScope.$broadcast('scanner-started');
     };
     var update = function() {
         $scope.writting = {
@@ -138,8 +137,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
                 "content": $scope.content
             }
         };
-        
-        $scope.psuccess = true;
+   
         publish = true;
         $scope.content = $('#edit').val();
         console.log("Published: " + publish + "Fecha: " + fecha);
