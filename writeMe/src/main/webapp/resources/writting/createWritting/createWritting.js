@@ -157,7 +157,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 	        		}
 		    };
 		    function readURL(input) {
-
+		    		
 				 $scope.pimg = false;
 		        if (input.files && input.files[0]) {
 		            var reader = new FileReader();
@@ -172,6 +172,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		    }
 		    
 		    $("#imgInp").change(function(){
+		    	$('#blah').removeClass( "hide");
 		        readURL(this);
 		    });
 		    

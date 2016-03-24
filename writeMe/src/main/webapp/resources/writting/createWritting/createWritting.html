@@ -46,7 +46,7 @@
 								accept=".png , .jpg, .jpeg"
 								ng-file-select="onFileSelect($files)" style="color: rgb(255, 255, 255);"/> <br> 
 								<div class="col-lg-2"></div>
-								<img id="blah" src="" alt="Imagen de portada" height="200" width="400" />
+								<img id="blah" class="hide" src="" alt="Imagen de portada" height="394" width="260" />
 						</form>
 						
 						<p ng-show="pimg" class="text-center text-danger">
@@ -55,7 +55,7 @@
 						<p ng-show="prepit" class="text-center text-danger">
 							<small>Titulo de obra ya existe</small>
 						</p>
-				<div class="col-sm-15">
+				<div class="col-sm-12">
 					<button type="submit" ng-disabled="form.$invalid" ng-click="navWritting()" class="btn btn-sm btn-primary" style="margin-top:20px">Aceptar</button>
 					<button class="btn btn-sm btn-primary" style="margin-top:20px; margin-left:10px"><a href="#app/home">Cancelar</a></button>
 				</div>
