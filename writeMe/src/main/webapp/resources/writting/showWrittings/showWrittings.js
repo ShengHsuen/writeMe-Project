@@ -51,7 +51,7 @@ var init = function(){
     			    });
     	        }
     
-    $scope.$on('scanner-started', function(event, args) {
+    $scope.$on('show-writtings', function(event, args) {
   	  init();
     });
     init();
