@@ -11,6 +11,7 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	
 	// Mostrar
 var init = function(){
+
 	$scope.writting = [];
 	$scope.writting = {
 			"pageNumber" : 0,

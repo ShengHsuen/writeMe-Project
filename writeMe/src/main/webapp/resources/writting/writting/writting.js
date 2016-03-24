@@ -83,7 +83,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		});
 
     $scope.navHome = function() {
-
     	$rootScope.$broadcast('home-started');
         var path = "app#/home";
         window.location.href = path;
