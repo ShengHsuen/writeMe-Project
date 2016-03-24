@@ -9,18 +9,19 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
   });
 }])
 
-.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage', function($scope,$http,$location,$upload, $localStorage) {
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage','$rootScope', function($scope,$http,$location,$upload, $localStorage,$rootScope) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
 	var dia = $scope.date.getDate();
 	var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-
+	$scope.pimg = false;
 	$scope.files = {
-			"src":"http://localhost:8080/writeMe/resources/writtingImages/imageDefault.jpg"
+			
 	};
+	/*"src":"http://localhost:8080/writeMe/resources/writtingImages/imageDefault.jpg"
 	$('#blah').attr('src', $scope.files.src);
-
+*/
 	$scope.typeSelected = "Personal";
 	$scope.cateSelected = "Antiguedades y Coleccionables";
 		//Variables
@@ -51,8 +52,15 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		}
 		$scope.chkIfPersonal();
 		$scope.navWritting = function(){
-			createWritting();
-			$scope.valInvitados();
+			console.log($("#imgInp")[0].value);
+			if( $("#imgInp")[0].value != ""){
+				createWritting();
+				$scope.valInvitados();
+			}else{
+				console.log("esta aqui");
+				 $scope.pimg = true;
+				 $('#blah').attr('alt', "");
+			}
 		}
 		
 		
@@ -94,9 +102,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			    createUserHasWritting();
 			    if($scope.prepit == false){
 			    	$rootScope.$broadcast('show-writtings');
-				     var path = "app#/showWrittings";
-				     window.location.href = path;
-			     
+			    	var path = "app#/showWrittings";
+			    	window.location.href = path; 
 			    }
 			   }).catch(function(error){
 			    console.log("Titulo no puede estar repetido");
@@ -150,11 +157,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 	        		}
 		    };
 		    function readURL(input) {
+		    		
+				 $scope.pimg = false;
 		        if (input.files && input.files[0]) {
 		            var reader = new FileReader();
 		            
 		            reader.onload = function (e) {
 		                $('#blah').attr('src', e.target.result);
+		                $('#blah').attr('alt', "Imagen de portada");
 		            }
 		            
 		            reader.readAsDataURL(input.files[0]);
@@ -162,6 +172,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		    }
 		    
 		    $("#imgInp").change(function(){
+		    	$('#blah').removeClass( "hide");
 		        readURL(this);
 		    });
 		    

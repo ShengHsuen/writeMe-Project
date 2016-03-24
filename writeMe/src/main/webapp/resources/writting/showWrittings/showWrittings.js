@@ -8,8 +8,6 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage',function($scope, $http, $localStorage) {
 	
-
-	
 	// Mostrar
 var init = function(){
 	$scope.writting = [];
@@ -48,7 +46,9 @@ var init = function(){
     			  $http({ url: 'rest/protected/writting/delete', 
     	                method: 'DELETE', 
     	                params: {writtingId: writtingId}
-    			  });
+    			  }).success(function() {
+    					init();
+    			    });
     	        }
     
     $scope.$on('show-writtings', function(event, args) {
