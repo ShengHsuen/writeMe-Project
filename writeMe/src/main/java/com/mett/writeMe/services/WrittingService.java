@@ -3,17 +3,21 @@ package com.mett.writeMe.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
+import com.mett.writeMe.repositories.UserRepository;
 import com.mett.writeMe.repositories.WrittingRepository;
 
 /**
@@ -26,7 +30,9 @@ public class WrittingService implements WrittingServiceInterface{
 	@Autowired 
 	private WrittingRepository writtingRepository;
 	@Autowired 
-	private UserHasWrittingRepository userHasWrittingRepository;	
+	private UserHasWrittingRepository userHasWrittingRepository;
+	@Autowired
+	private UserRepository userRepository; 
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
@@ -91,6 +97,8 @@ public class WrittingService implements WrittingServiceInterface{
 		WrittingPOJO.add(dto);
 		
 		for(int i=0; i <= Writtings.size()-1; i++){
+			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
+			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
 			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
 				BeanUtils.copyProperties(Writtings.get(i), dto);
 				WrittingPOJO.add(dto);
@@ -222,28 +230,38 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public Boolean editWrittingInvitation(Writting wr) {
+	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
+		int idUser = (int)currentSession.getAttribute("idUser");
+		User user = userRepository.findOne(idUser);
+		
 		List<WrittingPOJO> wrPojos = getWrittingsByMainWritting(wr);
-		List<Writting> writting = new ArrayList<Writting>();
-		WrittingPOJO wrPOJO = new WrittingPOJO();
-		BeanUtils.copyProperties(wrPojos, writting);
-		int father = 0;
+		List<Writting> writtings = new ArrayList<Writting>();
+		Writting writtingFather = new Writting();
+		BeanUtils.copyProperties(wrPojos, writtings);
+		int idFather = 0;
+		int getIdFather = 0;
+		
 		
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
 		for(int i=0;i<=UserHasWrittings.size()-1;i++){
 			if(wr.getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
+//				if(user.getUserId() == ){
+//					
+//				}
+				
 				wr.setWrittingId(0);
 				wr.setName(null);
 				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
 				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
 				
 				
-//				dto.setWrittingFather(tu.getWritting().getWrittingId());
-//				BeanUtils.copyProperties(wr, wrPOJO);
-//				wrPOJO.setWrittingFather(writting.get(father));
-//				father = wrPojos.get(wrPojos.size()-2);
-////				wr.setWritting(writting.get(father));
-////				System.out.print("ID DEL PADRE ES:  "+writting.get(father).getWrittingId());
+				idFather = wrPojos.size()-1;
+				getIdFather = wrPojos.get(idFather).getWrittingId();
+				System.out.print("ESTE ES EL ID DEL PADRE"+idFather);
+				writtingFather = writtingRepository.findOne(getIdFather);
+				
+				wr.setWritting(writtingFather);
+				System.out.print("ID DEL PADRE ES:  "+writtingFather.getWrittingId());
 				
 			}
 		}

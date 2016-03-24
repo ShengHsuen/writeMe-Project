@@ -2,6 +2,8 @@ package com.mett.writeMe.services;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
@@ -24,8 +26,8 @@ public interface WrittingServiceInterface {
 	void deletewritting(int writtingId);
 	Boolean saveWritting(WrittingRequest ur);
 	Boolean editWritting(Writting wr);
-	Boolean editWrittingInvitation(Writting wr);
 	Boolean publish(WrittingRequest ur);
+	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
 
 
 }

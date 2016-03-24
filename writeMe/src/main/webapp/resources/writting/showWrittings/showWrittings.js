@@ -50,13 +50,8 @@ var init = function(){
     	                params: {writtingId: writtingId}
     			  });
     	        }
-    var obtenerWrittings = function(){
-    	$http.post('users/getWrittings',$scope.writting).success(function(response) {
-			$scope.writting = response.writtings;
-		});
-    }
     
-    $scope.$on('scanner-started', function(event, args) {
+    $scope.$on('show-writtings', function(event, args) {
   	  init();
     });
     init();
