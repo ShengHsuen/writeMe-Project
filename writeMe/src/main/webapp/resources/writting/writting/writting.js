@@ -83,6 +83,12 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         var path = "app#/home";
         window.location.href = path;
     };
+    
+    $scope.navInvitation = function(){
+    	var path = "app#/invitation";
+        window.location.href = path;
+    }
+    
     var update = function() {
         $scope.writting = {
             "pageNumber": 0,
