@@ -14,25 +14,25 @@
           </div>
           <div class="list-group list-group-sm">
             <div class="list-group-item">
-              <input placeholder="Nombre" class="form-control no-border" ng-model="name" required>
+              <input maxlength="35" placeholder="Nombre" class="form-control no-border" ng-model="name" required>
             </div>
               <div class="list-group-item">
-              <input placeholder="Apellido" class="form-control no-border" ng-model="lastName" required>
+              <input maxlength="35" placeholder="Apellido" class="form-control no-border" ng-model="lastName" required>
             </div>
               <div class="list-group-item">
-              <input placeholder="Nick" class="form-control no-border" ng-model="nickName" required>
+              <input maxlength="35" placeholder="Nick" class="form-control no-border" ng-model="nickName" required>
             </div>
             <div class="list-group-item">
-              <input type="email" placeholder="Email" class="form-control no-border" ng-model="mail" required>
+              <input maxlength="35" type="email" placeholder="Email" class="form-control no-border" ng-model="mail" required>
             </div>
             <div class="list-group-item">
                 <input placeholder="Fecha de nacimiento" onfocus="(this.type='date')" type="text" id="date" class="form-control no-border" ng-model="birthDay" required>
              </div>
             <div class="list-group-item">
-               <input type="password" placeholder="Contraseña" class="form-control no-border" ng-model="password" required>
+               <input maxlength="35" type="password" placeholder="Contraseña" class="form-control no-border" ng-model="password" required>
             </div>
               <div class="list-group-item">
-               <input type="password" placeholder="Confirmar contraseña" class="form-control no-border" ng-model="passwordConfirm" required>
+               <input maxlength="35" type="password" placeholder="Confirmar contraseña" class="form-control no-border" ng-model="passwordConfirm" required>
             </div>
           </div>
           <div class="checkbox m-b-md m-t-none">
@@ -41,6 +41,7 @@
             </label>
           </div>
           <p ng-show="pconfirm" class="text-center text-danger"><small>Las contraseñas deben coincidir</small></p>
+          <p ng-show="ppassword" class="text-center text-danger"><small>La contraseña debe tener como mínimo cinco caracteres</small></p>
           <p ng-show="prepit" class="text-center text-danger"><small>Nick o correo ya existen</small></p>
           <button ng-disabled="form.$invalid" type="submit" class="btn btn-lg btn-primary btn-block" ng-click="createAccount()">Crear cuenta</button>
 

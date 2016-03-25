@@ -52,6 +52,7 @@ var init = function(){
     	        }
     
     $scope.$on('show-writtings', function(event, args) {
+      setTimeout(myFunction, 3000);
   	  init();
     });
     init();

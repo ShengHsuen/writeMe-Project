@@ -17,8 +17,7 @@
 		        <div class="hovereffect form-group overlay info">
 		        	<img ng-src="{{wr.image}}" width="260" height="394" ng-click="saveData(wr.content, wr.name)"></img>
 		        </div>
-		        <button class="btn btn-sm btn-primary" ng-click="ppublish = !ppublish"  ng-messages="expression" data-toggle="modal" data-target="#myModal" >Eliminar</button> 
-	            <div ng-show="ppublish" class="row bg-light lter b-b wrapper-sm hidden-print">
+		        	            <div ng-show="ppublish" class="row bg-light lter b-b wrapper-sm hidden-print">
 				<h5 class="text-center" class="m-n font-thin h5">Seguro que deseas eliminar la obra {{wr.name}} ?</h5>
 				<div class="btn-group col-md-2 col-md-offset-5 text-center">
 					<p>
@@ -27,6 +26,8 @@
 					</p>
 				</div>
 		       </div>	
+		        <button class="btn btn-sm btn-primary" ng-click="ppublish = !ppublish"  ng-messages="expression" data-toggle="modal" data-target="#myModal" >Eliminar</button> 
+
           </form>
         </div>
       </div>

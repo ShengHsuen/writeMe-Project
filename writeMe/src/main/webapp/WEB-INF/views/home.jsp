@@ -112,21 +112,42 @@
 				</form>
 				<!-- / search form -->
 
-				<!-- nabar right -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a href="" data-toggle="dropdown"
-						class="dropdown-toggle clear" data-toggle="dropdown"> 
-						<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
-						<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span> 
-						<b class="caret"></b>
-					</a> <!-- dropdown -->
-						<ul class="dropdown-menu animated fadeInRight w">
-						<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
-						</ul> <!-- / dropdown --></li>
-				</ul>
-				<!-- / navbar right -->
-			</div>
-			<!-- / navbar collapse -->
+		<ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+              <i class="icon-bell fa-fw"></i>
+              <span class="visible-xs-inline">Notifications</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl animated fadeInUp">
+              <div class="panel bg-white">
+                <div class="panel-heading b-light bg-light">
+                  <strong>Notificaciones</strong>
+                </div>
+                <div class="list-group">
+                  <a href class="list-group-item">
+                    <span class="clear block m-b-none">El usuario {{user.name}} te ha invitado a la obra {{writting.name}}<br>
+                    </span>
+                  </a>
+                </div>
+                <div class="panel-footer text-sm">
+                  <a href class="pull-right"><i class="fa fa-cog"></i></a>
+                  <a href="#notes" data-toggle="class:show animated fadeInRight">Ver todas las notificaciones</a>
+                </div>
+              </div>
+            </div>
+            <!-- / dropdown -->
+          </li>
+          <li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
+			<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
+			<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span> 
+			<b class="caret"></b>
+			</a> <!-- dropdown -->
+			<ul class="dropdown-menu animated fadeInRight w">
+				<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
+			</ul> <!-- / dropdown --></li>
+        </ul>
 		</header>
 		<!-- / header -->
 
@@ -266,6 +287,7 @@
 	<script src="resources/legalEstablishment/legalEstablishment.js"></script>
 	<script src="resources/writting/createWritting/createWritting.js"></script>
 	<script src="resources/writting/writting/writting.js"></script>
+	<script src="resources/invitation/invitation.js"></script>
 
 	<script
 		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
