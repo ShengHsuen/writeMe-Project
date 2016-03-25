@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+     <div class="bg-light lter b-b wrapper-md hidden-print">
+ 		 <h1 class="m-n font-thin h3 inline">{{"Invitar autores a la obra " + name}}</h1>
+	</div>
+	<div class="bg-light lter b-b wrapper-md hidden-print input-group">
+		<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Buscar autores...">
+		<span class="input-group-btn">
+           <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+       </span>
+	</div>  
+	  <div class="text-center" class="hbox hbox-auto-xs hbox-auto-sm">
+  		<ul class="list-group">
+			<li  ng-repeat="us in user | filter:{author:selected}" class="list-group-item">{{ " " + us.author}} <button class="glyphicon glyphicon-plus pull-right" style="color:green"></button></li>
+			
+		</ul>
+	  </div>
+  </div>

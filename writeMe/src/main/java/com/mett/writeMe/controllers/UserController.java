@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.contracts.UsersResponse;
-import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.services.UsersServiceInterface;
 
 /**
@@ -41,6 +40,16 @@ public class UserController {
 			}
 			return us;
 	}
+	
+	/*
+	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
+	public UsersResponse getAll() {
+		UsersResponse response = new UsersResponse();
+		response.setCode(200);
+		response.setCodeMessage("Recibe usuarios satisfactoriamente");
+		response.setUsers(usersService.getAll());
+		return response;
+	}*/
 	
 	@RequestMapping(value ="/edit", method = RequestMethod.POST)
 	public UsersResponse edit(@RequestBody UsersRequest ur){	
