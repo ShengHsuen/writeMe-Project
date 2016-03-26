@@ -42,10 +42,27 @@
 		     	   <input type="file" name="inputfile" required accept=".png , .jpg, .jpeg" ng-file-select="onFileSelect($files)" >
           		</div> -->
 						<form id="form1">
-							<input type='file' id="imgInp" 
-								accept=".png , .jpg, .jpeg"
-								ng-file-select="onFileSelect($files)" style="color: rgb(255, 255, 255);"/> <br> 
-								<div class="col-lg-2"></div>
+							<input type='file' id="imgInp" accept=".png , .jpg, .jpeg"
+								ng-file-select="onFileSelect($files)" style="color: rgb(255, 255, 255);"/> 
+					<!-- 		<div class="form-group">
+								<div class="col-sm-10">
+									<input style="position: absolute; clip: rect(0px, 0px, 0px, 0px);"
+										id="filestyle-0" ui-jq="filestyle" data-icon="false" accept=".png , .jpg, .jpeg"
+								ng-file-select="onFileSelect($files)" 
+										data-classbutton="btn btn-default"
+										data-classinput="form-control inline v-middle input-s"
+										type="file">
+									<div class="bootstrap-filestyle input-group">
+										<input class="form-control " disabled="" type="text">
+										<span tabindex="0"
+											class="group-span-filestyle input-group-btn"><label
+											for="filestyle-0" class="btn btn-default "><span
+												class="glyphicon glyphicon-folder-open"></span> Examinar...</label></span>
+									</div>
+								</div>
+							</div> -->
+							<br> 
+								<div class="col-md-2"></div>
 								<img id="blah" class="hide" src="" alt="Imagen de portada" height="394" width="260" />
 						</form>
 						

@@ -10,6 +10,7 @@ angular.module('myApp', [
   'myApp.writting',
   'myApp.showWrittings',
   'myApp.invitation',
+  'myApp.viewWritting',
   'ui.grid'
 ])
 
