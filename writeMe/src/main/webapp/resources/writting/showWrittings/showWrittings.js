@@ -55,7 +55,9 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
     	        }
     
     $scope.$on('show-writtings', function(event, args) {
+
     	 $scope.init();
+
     });
     $scope.init();
 
