@@ -15,10 +15,10 @@
       <div class="list-group list-group-sm">
       <form id="form">
         <div class="list-group-item">
-          <input type="email" placeholder="Correo" class="form-control no-border" ng-model="user.email" required>
+          <input maxlength="35" type="email" placeholder="Correo" class="form-control no-border" ng-model="user.email" required>
         </div>
         <div class="list-group-item">
-           <input type="password"  placeholder="Contraseña" class="form-control no-border" ng-model="user.password" required>
+           <input maxlength="35" type="password"  placeholder="Contraseña" class="form-control no-border" ng-model="user.password" required>
         </div>
       </form>
       <p ng-show="accountInvalid" class="text-center text-danger"><small>El correo o la contraseña inválido</small></p>

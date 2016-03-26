@@ -59,11 +59,18 @@ angular.module('myApp.signup', ['ngRoute'])
 		
 	}
 	$scope.pConfirm = function(){
+		if($scope.password.length < 5){
+			$scope.ppassword = true;		
+		}else{
+			$scope.ppassword = false;
+		}
 		if($scope.password == $scope.passwordConfirm){
-			canCreate = true;
 			$scope.pconfirm = false;
 		}else{
 			$scope.pconfirm = true;
+		}
+		if($scope.password == $scope.passwordConfirm && $scope.password.length > 4){
+			canCreate = true;
 		}
 	}
 	
