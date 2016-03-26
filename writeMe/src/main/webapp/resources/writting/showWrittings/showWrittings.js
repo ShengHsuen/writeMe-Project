@@ -10,8 +10,9 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 
 	
 	// Mostrar
-var init = function(){
-
+	
+	
+	$scope.init = function(){
 	$scope.writting = [];
 	$scope.writting = {
 			"pageNumber" : 0,
@@ -49,13 +50,13 @@ var init = function(){
     	                method: 'DELETE', 
     	                params: {writtingId: writtingId}
     			  }).success(function() {
-    					init();
+    					$scope.init();
     			    });
     	        }
     
     $scope.$on('show-writtings', function(event, args) {
-  	  init();
+    	 $scope.init();
     });
-    init();
+    $scope.init();
 
 } ]);
