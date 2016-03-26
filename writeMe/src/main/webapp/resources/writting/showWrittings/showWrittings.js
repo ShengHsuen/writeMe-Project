@@ -26,15 +26,15 @@ var init = function(){
 	});
 }
 		
-		
-	$scope.saveData = function(wrid, name){
+	$scope.saveData = function(wrid, name, cantUsers){
 		params: {content : wrid}
 	    params: {name : name}
+		params: {cantUsers : cantUsers}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
-	    console.log("Aqui entra " + $localStorage.showContent);
-	    window.location.href = "app#/writting"
-	
+	    $localStorage.cantUsers = cantUsers;
+	    console.log("Aqui entra " + $localStorage.cantUsers);
+	    window.location.href = "app#/writting";
 	}
 
 	/*

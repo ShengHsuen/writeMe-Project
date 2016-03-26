@@ -47,7 +47,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			}else{
 				$scope.showCantUsers = false;
 				$scope.cantUsers = 0;
-				console.log($scope.cantUsers);
 			}
 		}
 		$scope.chkIfPersonal();
@@ -133,7 +132,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 					
 			};
 
-			
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});

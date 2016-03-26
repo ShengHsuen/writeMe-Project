@@ -77,6 +77,7 @@ public class UserController {
 		response.setCode(200);
 		response.setCodeMessage("obtiene bien los writtings");
 		response.setWrittings(usersService.getWrittingsByUser(currentSession));
+		System.out.println("saaaaaa"+response.getWrittings().get(8).getCantUsers());
 		return response;		
 	}
 	
