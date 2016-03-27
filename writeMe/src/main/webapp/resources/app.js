@@ -8,8 +8,10 @@ angular.module('myApp', [
   'myApp.acceptLegalEstablishment',
   'myApp.createWritting',
   'myApp.writting',
+  'myApp.writtingInvitation',
   'myApp.showWrittings',
   'myApp.invitation',
+  
   'ui.grid'
 ])
 
@@ -27,7 +29,9 @@ angular.module('myApp', [
 	
 	if($scope.user == null && $localStorage.data == null ){
 		var path = "/writeMe/#/signin";
-		  window.location.href = path;
+		window.location.href = path;
 	}
+	
+	
 }]);
 

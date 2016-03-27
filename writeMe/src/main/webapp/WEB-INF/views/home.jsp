@@ -229,6 +229,7 @@
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
   <script src="resources/writting/createWritting/createWritting.js"></script>
   <script src="resources/writting/writting/writting.js"></script>
+  <script src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
   <script src="resources/writting/showWrittings/showWrittings.js"></script>
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>

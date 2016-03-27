@@ -104,6 +104,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			     $rootScope.$broadcast('show-writtings');
 			     var path = "app#/showWrittings";
 			     window.location.href = path;
+
 			    }
 			   }).catch(function(error){
 			    console.log("Titulo no puede estar repetido");
