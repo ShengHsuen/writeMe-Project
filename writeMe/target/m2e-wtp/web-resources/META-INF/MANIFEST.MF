@@ -1,13 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: writeMe
 Implementation-Version: 0.0.1-SNAPSHOT
-<<<<<<< HEAD
 Built-By: Sheng hsuen
-=======
-Built-By: Dani
->>>>>>> e7981c519c39382a361ef2e5a673c02ab20922cc
 Implementation-Vendor-Id: com.mett
-Build-Jdk: 1.8.0_66
+Build-Jdk: 1.8.0_73
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 
