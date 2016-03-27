@@ -252,4 +252,13 @@ public class WrittingService implements WrittingServiceInterface{
 		
 		return (nWritting == null) ? false : true;
 	}
+
+	/* @author Mildred Guerra
+	 * Get writting by id
+	 * Return a Writting  Writting  
+	 */
+	@Override
+	public Writting getWrittingById(int idWritting) {
+		return writtingRepository.findOne(idWritting);
+	}
 }

@@ -36,16 +36,17 @@ angular.module('myApp.home', ['ngRoute'])
   
   $scope.init();
 	
-	$scope.viewWritting = function(wrid, name, categ, img){
-		params: {content : wrid}
+	$scope.viewWritting = function(id){
+		params: {idWritting : id}
+/*		params: {content : wrid}
 	    params: {name : name}
 	    params: {category : categ}
     	params: {imagen : img}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
 	    $localStorage.categoryWritting = categ;
-	    $localStorage.imgWritting = img;
-	    console.log("Aqui entra " + wrid);
+	    $localStorage.imgWritting = img;*/
+	    $localStorage.idWritting=id;
 	    window.location.href = "app#/viewWritting"
 	
 	}
