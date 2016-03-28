@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,8 +89,13 @@ public class WrittingController {
 		return us;		
 	}
 
+	/**author Sheng Hsuen Cheng
+	 * @param ur
+	 * @return
+	 */
 	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
-	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
+	public WrittingResponse editContent(@RequestBody WrittingRequest ur, HttpServletRequest servletRequest) {
+		HttpSession currentSession = servletRequest.getSession();
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
@@ -105,7 +112,7 @@ public class WrittingController {
 		}else{
 			wr.setContent(ur.getWritting().getContent());
 			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
-			Boolean state = WrittingService.editWrittingInvitation(wr);
+			Boolean state = WrittingService.editWrittingInvitation(wr, currentSession);
 
 			if (state) {
 				us.setCode(200);
