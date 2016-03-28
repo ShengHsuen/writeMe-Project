@@ -11,7 +11,7 @@ angular.module('myApp', [
   'myApp.writtingInvitation',
   'myApp.showWrittings',
   'myApp.invitation',
-  
+  'myApp.viewWritting',
   'ui.grid'
 ])
 

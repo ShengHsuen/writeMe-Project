@@ -4,7 +4,8 @@
 angular.module('myApp', [
   'ngStorage',
   'myApp.home',
-  'myApp.legalEstablishment'
+  'myApp.legalEstablishment',
+  'myApp.viewWritting'
 ])
 
 .config(['$routeProvider','$provide','$httpProvider', function($routeProvider,$provide,$httpProvider) {
