@@ -56,9 +56,9 @@
 <link rel="stylesheet" href="resources/writting/writting/css/froala_style.min.css" type="text/css" />
 
 <link rel="stylesheet" href="resources/html/css/imgEffect.css">
-
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -231,6 +231,9 @@
   <script src="resources/writting/writting/writting.js"></script>
   <script src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
   <script src="resources/writting/showWrittings/showWrittings.js"></script>
+  
+  <script src="resources/writting/showWrittingsInvitation/showWrittingsInvitation.js"></script>
+
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>

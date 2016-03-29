@@ -3,7 +3,7 @@
   <div id="content" class="app-content" role="main">
 
 	   
-     <div class="panel panel-default" ng-repeat="wr in writting | orderBy:'writtingId':true" >
+     <div class="panel panel-default" ng-repeat="wr in writting | orderBy:'writtingId':true" ng-show="wr.typeWritting == 'Personal'" >
      
        <div class="panel-heading font-bold">{{wr.name}}</div>
         <div class="panel-body">

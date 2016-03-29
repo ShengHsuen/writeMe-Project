@@ -1,0 +1,38 @@
+<meta charset="utf-8">
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+  <div class="panel panel-default">
+  
+    <div class="panel-heading">
+      Obras por invitación
+    </div>
+
+    
+    <div class="table-responsive" >
+      <table class="table table-striped b-t b-light">
+        <thead>
+          <tr>
+            <th>Nombre obra</th>
+            <th>Ultimo en editar</th>
+            <th>Estado</th>
+            <th style="width:30px;"></th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="wr in writting | orderBy:'writtingId':true" ng-show="wr.typeWritting == 'Por invitacion'">
+          <tr >
+            <td>{{wr.name}}</td>
+            
+            <td><span class="text-ellipsis">{{lastAuthor}}</span></td>
+            <td><span class="text-ellipsis" >{{textAvailable}}	</span></td>
+            <td> <button ng-click="enter()"  class="btn btn-sm btn-default">Entrar</button> </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    </div>
+  </div>
+
+	<!-- /content -->
