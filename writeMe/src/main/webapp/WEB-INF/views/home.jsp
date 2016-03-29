@@ -118,7 +118,7 @@
 
 		<ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+            <a href="" data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
               <span class="visible-xs-inline">Notifications</span>
               <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
@@ -296,6 +296,7 @@
 	<script src="resources/writting/createWritting/createWritting.js"></script>
 	<script src="resources/writting/writting/writting.js"></script>
 	<script src="resources/invitation/invitation.js"></script>
+	<script src="resources/writting/viewWritting/viewWritting.js"></script>
 
 	<script
 		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
