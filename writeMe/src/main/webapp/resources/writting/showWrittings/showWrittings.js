@@ -26,14 +26,16 @@ var init = function(){
 	});
 }
 		
-	$scope.saveData = function(wrid, name, cantUsers){
+	$scope.saveData = function(wrid, name, cantUsers, writtingId){
 		params: {content : wrid}
 	    params: {name : name}
 		params: {cantUsers : cantUsers}
+		params: {writtingId : writtingId}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
 	    $localStorage.cantUsers = cantUsers;
-	    console.log("Aqui entra " + $localStorage.cantUsers);
+	    $localStorage.writtingId = writtingId;
+	    console.log("Aqui entra " + $localStorage.writtingId);
 	    window.location.href = "app#/writting";
 	}
 

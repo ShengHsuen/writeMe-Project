@@ -17,10 +17,20 @@ public class UserHasWrittingPOJO {
 
 	private boolean invitationStatus;
 
-	private String linkInvitation;
+	private int linkInvitation;
 
 	private boolean statusColor;
 	
+	private boolean owner;
+	
+	public boolean getOwner() {
+		return owner;
+	}
+
+	public void setOwner(boolean owner) {
+		this.owner = owner;
+	}
+
 	private User user;
 	
 	private Writting writting;
@@ -81,11 +91,11 @@ public class UserHasWrittingPOJO {
 		this.invitationStatus = invitationStatus;
 	}
 
-	public String getLinkInvitation() {
+	public int getLinkInvitation() {
 		return linkInvitation;
 	}
 
-	public void setLinkInvitation(String linkInvitation) {
+	public void setLinkInvitation(int linkInvitation) {
 		this.linkInvitation = linkInvitation;
 	}
 

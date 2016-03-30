@@ -17,13 +17,13 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 	$scope.addGuest = function(item){
 		$scope.cantUsers --;
 		$scope.user.splice($scope.functiontofindIndexByKeyValue($scope.user, 'author', item.author), 1);
-	    $scope.guests.push({author:item.author});
+	    $scope.guests.push(item);
 	    console.log(item.author);
 	}
 	$scope.takeoutGuest = function(item){
 		$scope.cantUsers ++;
 		$scope.guests.splice($scope.functiontofindIndexByKeyValue($scope.guests, 'author', item.author), 1);
-	      $scope.user.push({author:item.author});
+	      $scope.user.push(item);
 	      console.log(item.author);
 	}
 	$scope.delSessionUser = function(){
@@ -33,6 +33,9 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			}
 		}
 	}
+	$scope.getInvitatedUsers = function(){
+		//Metodo que se trae los usuarios ya invitados, para asignarlos en la vista en invitados y no mostrarlos en el 
+	}
     $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
         for (var i = 0; i < arraytosearch.length; i++) {
           if (arraytosearch[i][key] == valuetosearch) {
@@ -41,14 +44,66 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
         }
           return null;
       }
+    $scope.sendInvitation = function(){
+    	console.log($scope.guests);
+		$scope.guestsRequest = {
+				  "pageNumber": 0,
+				  "pageSize": 0,
+				  "direction": "string",
+				  "sortBy": [
+				    "string"
+				  ],
+				  "searchColumn": "string",
+				  "searchTerm": "string",
+				  "user": {},
+				  "luser": $scope.guests,
+				  "email": "string"
+				}
+	     $http.post('rest/protected/invitation/sendInvitation', $scope.guestsRequest).success(function(response) {
+	    	 $scope.findWritting();
+	     });
+    }
+    $scope.findWritting = function(){
+		  $http({ url: 'rest/protected/invitation/findWritting', 
+              method: 'POST', 
+              params: {writtingId: $scope.writtingId}
+		  }).success(function() {
+			  $scope.createInvitation();
+		    });
+		  
+   }
+    $scope.createInvitation = function(){
+		$scope.userHasWritting={
+				  "pageNumber": 0,
+				  "pageSize": 0,
+				  "direction": "string",
+				  "sortBy": [
+				    "string"
+				  ],
+				  "searchColumn": "string",
+				  "userHasWritting": {
+				      "statusColor": false,
+				      "user_has_writtingId": 0,
+				      "linkInvitation": $scope.writtingId,
+				      "banned": false,
+				      "invitationStatus": false,
+				      "owner": false
+				}
+		};
+	    $http.post('rest/protected/invitation/createInvitation', $scope.userHasWritting).success(function(response) {
+	    	console.log("Success");
+	    });
+    }
 	$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
 			$scope.cantUsers = $localStorage.cantUsers;
 			$scope.sessionUser = $localStorage.data;
+			$scope.writtingId = $localStorage.writtingId;
 	}
 	$scope.loadData();
-	$scope.users = {"pageNumber": 0,
+	$scope.users = {
+				"pageNumber": 0,
 		        "pageSize": 0,
 		        "direction": "",
 		        "sortBy": [""],

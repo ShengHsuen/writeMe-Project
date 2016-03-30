@@ -2,6 +2,13 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.mett.writeMe.ejb.Comment;
+import com.mett.writeMe.ejb.Report;
+import com.mett.writeMe.ejb.Role;
+import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.ejb.Writting;
+
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +27,7 @@ public class UserHasWritting implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
 
-	private boolean banned;
+	private byte banned;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
@@ -30,7 +37,9 @@ public class UserHasWritting implements Serializable {
 
 	private boolean invitationStatus;
 
-	private String linkInvitation;
+	private int linkInvitation;
+
+	private boolean owner;
 
 	private boolean statusColor;
 
@@ -65,11 +74,11 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-	public boolean getBanned() {
+	public byte getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(boolean banned) {
+	public void setBanned(byte banned) {
 		this.banned = banned;
 	}
 
@@ -97,12 +106,20 @@ public class UserHasWritting implements Serializable {
 		this.invitationStatus = invitationStatus;
 	}
 
-	public String getLinkInvitation() {
+	public int getLinkInvitation() {
 		return this.linkInvitation;
 	}
 
-	public void setLinkInvitation(String linkInvitation) {
+	public void setLinkInvitation(int linkInvitation) {
 		this.linkInvitation = linkInvitation;
+	}
+
+	public boolean getOwner() {
+		return this.owner;
+	}
+
+	public void setOwner(boolean owner) {
+		this.owner = owner;
 	}
 
 	public boolean getStatusColor() {
