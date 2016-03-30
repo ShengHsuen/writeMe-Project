@@ -118,7 +118,7 @@
 
 		<ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="" data-toggle="dropdown" class="dropdown-toggle">
+            <a data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
               <span class="visible-xs-inline">Notifications</span>
               <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
