@@ -251,5 +251,18 @@ public class WrittingController {
 			response.setWritting(WrittingService.getAll());
 			return response;
 		}
-
+		
+		/**
+		 * @author Mildred Guerra
+		 * Get writtings with main
+		 * @param  int idwritting
+		 * @return WrittingResponse wr
+		 */
+		@RequestMapping(value = "/getByMain", method = RequestMethod.POST)
+		public  WrittingResponse getByMain(@RequestParam("writtingId") int idWritting) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			Writting w = WrittingService.getWrittingById(idWritting);
+			wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
+			return wrresponse;
+		}
 }

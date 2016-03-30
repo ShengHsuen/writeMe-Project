@@ -46,7 +46,7 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 		$scope.requestObject = {
 				"legal_establishmentId" : 0,
 				"description" : $scope.description,
-				"part" : 6,
+				"part" : 0,
 				"name" : $scope.name
 		}
 

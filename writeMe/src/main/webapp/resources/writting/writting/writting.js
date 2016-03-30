@@ -12,6 +12,9 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
+			$scope.cantUsers = $localStorage.cantUsers;
+			console.log($localStorage.cantUsers);
+			console.log($localStorage.nameWritting);
 		}
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
@@ -100,7 +103,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
             "writting": {
                 "name": $scope.name,
                 "description": "a",
-                "cantUsers": 0,
+                "cantUsers": $scope.cantUsers,
                 "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",
@@ -166,7 +169,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
             "writting": {
                 "name": $scope.name,
                 "description": "a",
-                "cantUsers": 0, // Pasarle cantUsers por parametro tambien porque sino le cae encima
+                "cantUsers": $scope.cantUsers,
                 "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",

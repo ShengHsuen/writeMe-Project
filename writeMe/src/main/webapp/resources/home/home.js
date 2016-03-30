@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope','$http','$rootScope', function($scope,$http,$rootScope) {
+.controller('HomeCtrl', ['$scope','$http','$rootScope', '$localStorage', function($scope,$http,$rootScope, $localStorage) {
 	
    $scope.init = function(){
 	  $scope.writting = [];
@@ -35,6 +35,20 @@ angular.module('myApp.home', ['ngRoute'])
   });
   
   $scope.init();
-  
+	
+	$scope.viewWritting = function(id){
+		params: {idWritting : id}
+/*		params: {content : wrid}
+	    params: {name : name}
+	    params: {category : categ}
+    	params: {imagen : img}
+	    $localStorage.showContent = wrid;
+	    $localStorage.nameWritting = name;
+	    $localStorage.categoryWritting = categ;
+	    $localStorage.imgWritting = img;*/
+	    $localStorage.idWritting=id;
+	    window.location.href = "app#/viewWritting"
+	
+	}
 
 }]);

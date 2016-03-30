@@ -11,7 +11,7 @@ angular.module('myApp', [
   'myApp.writtingInvitation',
   'myApp.showWrittings',
   'myApp.invitation',
-  
+  'myApp.viewWritting',
   'ui.grid'
 ])
 
@@ -25,7 +25,6 @@ angular.module('myApp', [
 		console.log($scope.user);
 	}
 	$scope.load();
-	
 	
 	if($scope.user == null && $localStorage.data == null ){
 		var path = "/writeMe/#/signin";

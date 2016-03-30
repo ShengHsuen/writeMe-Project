@@ -28,6 +28,6 @@ public interface WrittingServiceInterface {
 	Boolean editWritting(Writting wr);
 	Boolean publish(WrittingRequest ur);
 	Boolean editWrittingInvitation(Writting wr);
-
+	Writting getWrittingById(int idWritting);
 
 }

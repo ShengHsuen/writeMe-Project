@@ -36,7 +36,7 @@ public class UsersService implements UsersServiceInterface{
 	@Override
 	@Transactional
 	public List<UserPOJO> getAll() {
-		List<User> users =  userRepository.findAll();
+		List<User> users =  userRepository.findAllByOrderByAuthor();
 		return generateUserDtos(users);
 	}
 	

@@ -9,6 +9,7 @@ import com.mett.writeMe.ejb.User;
 public interface UserRepository extends CrudRepository<User,Integer> {
 	
 	User findByMailAndPassword(String mail,String password);
+	List<User> findAllByOrderByAuthor();
 	List<User> findAll();
 	List<User> findByNameContaining(String name);
 	User save(User user);

@@ -268,4 +268,10 @@ public class WrittingService implements WrittingServiceInterface{
 		
 		return (nWritting == null) ? false : true;
 	}
+	
+	@Override
+	@Transactional
+	public Writting getWrittingById(int idWritting) {
+		return writtingRepository.findOne(idWritting);
+	}
 }
