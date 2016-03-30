@@ -100,9 +100,9 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 			    createUserHasWritting();
 			    if($scope.prepit == false){
-			    $rootScope.$broadcast('show-writtings');
-			     var path = "app#/showWrittings";
-			     window.location.href = path; 
+			    	$rootScope.$broadcast('show-writtings');
+			    	var path = "app#/showWrittings";
+			    	window.location.href = path; 
 			    }
 			   }).catch(function(error){
 			    console.log("Titulo no puede estar repetido");
