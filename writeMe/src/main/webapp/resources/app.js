@@ -26,7 +26,6 @@ angular.module('myApp', [
 	}
 	$scope.load();
 	
-	
 	if($scope.user == null && $localStorage.data == null ){
 		var path = "/writeMe/#/signin";
 		window.location.href = path;

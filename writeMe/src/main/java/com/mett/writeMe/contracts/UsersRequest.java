@@ -1,12 +1,22 @@
 package com.mett.writeMe.contracts;
 
-import com.mett.writeMe.contracts.BaseRequest;
+import java.util.List;
+
 import com.mett.writeMe.pojo.UserPOJO;
 
 public class UsersRequest extends BaseRequest {
 	private String mail;
 	private UserPOJO user;
+	private List<UserPOJO> luser;
 	
+	public List<UserPOJO> getLuser() {
+		return luser;
+	}
+
+	public void setLuser(List<UserPOJO> luser) {
+		this.luser = luser;
+	}
+
 	public UsersRequest() {
 		super();
 	}
