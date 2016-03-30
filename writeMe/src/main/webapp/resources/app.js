@@ -10,6 +10,7 @@ angular.module('myApp', [
   'myApp.writting',
   'myApp.writtingInvitation',
   'myApp.showWrittings',
+  'myApp.showWrittingsInvitation',
   'myApp.invitation',
   'myApp.viewWritting',
   'ui.grid'
@@ -22,7 +23,6 @@ angular.module('myApp', [
 .controller('mainCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
 	$scope.load = function(){
 		$scope.user = $localStorage.data;
-		console.log($scope.user);
 	}
 	$scope.load();
 	

@@ -266,4 +266,18 @@ public class WrittingController {
 			wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
 			return wrresponse;
 		}
+		
+		/**
+		 * @author Mario Villalobos 
+		 * @param idWritting
+		 * @return String content 
+		 */
+		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
+		public String getContentLastWrittingByMain(@RequestParam("writtingId") int idWritting) {
+			Writting w = WrittingService.getWrittingById(idWritting);
+			String content = WrittingService.getContentLastWrittingByMainWritting(w);
+			System.out.println("VAMOS A PROBAR " + content);
+			return content;
+		}
+		
 }

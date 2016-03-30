@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Iterables;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
@@ -276,4 +277,38 @@ public class WrittingService implements WrittingServiceInterface{
 	public Writting getWrittingById(int idWritting) {
 		return writtingRepository.findOne(idWritting);
 	}
+	
+	
+	
+	/**
+	 * @author Mario Villalobos
+	 * Get the content of the last writting 
+	 * @return a String content 
+	 */
+	@Override
+	public String getContentLastWrittingByMainWritting(Writting wr){
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
+		List<Writting> Writtings = writtingRepository.findAll();
+		WrittingPOJO dto = new WrittingPOJO();
+		BeanUtils.copyProperties(Writting.get(0), dto);
+		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
+		WrittingPOJO.add(dto);
+		
+		for(int i=0; i <= Writtings.size()-1; i++){
+			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
+			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
+			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
+				BeanUtils.copyProperties(Writtings.get(i), dto);
+				WrittingPOJO.add(dto);
+				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
+			}
+		}
+		String content;
+		content = WrittingPOJO.get(WrittingPOJO.size()-1).getContent();
+		System.out.println("aqui va la cosa de todo " + content);
+		return content;
+	}
+	
+
 }

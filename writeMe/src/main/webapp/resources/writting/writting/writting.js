@@ -19,12 +19,16 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
 
+
+		
+		//$('.fr-view').froalaEditor('html.set', $scope.contentWithoutTags);
+
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
 		var dia = $scope.date.getDate();
 		var fecha = anno.toString() + "-" + mes.toString() + "-" + dia.toString();
-		
+
 		var publish = false;
 		
 	    $scope.ppublish = false;
@@ -85,6 +89,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
     	$rootScope.$broadcast('home-started');
         var path = "app#/home";
         window.location.href = path;
+
     };
     
     $scope.navInvitation = function(){
