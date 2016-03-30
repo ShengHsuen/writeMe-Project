@@ -1,5 +1,9 @@
 package com.mett.writeMe.controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +28,7 @@ import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
+import com.mett.writeMe.services.GeneratePDFService;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.WrittingServiceInterface;
@@ -220,6 +225,15 @@ public class WrittingController {
 
 				//eliminar el main
 				WrittingService.deletewritting(writtingMainId);
+				/* elimina la imagen del fichero
+				File fichero = new File(wrt.getImage());
+				System.out.println(fichero.getAbsolutePath());
+				String absolutePath = "resources/writtingImages/" + fichero.getName();
+				fichero = new File(absolutePath);
+				if (fichero.delete())
+					System.out.println("El fichero ha sido borrado satisfactoriamente");
+				else
+					System.out.println("El fichero no puede ser borrado");*/
 			}
 
 		});
@@ -265,5 +279,17 @@ public class WrittingController {
 			Writting w = WrittingService.getWrittingById(idWritting);
 			wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
 			return wrresponse;
+		}
+		/**
+		 * @author Mildred Guerra
+		 * Generate pdf
+		 * @throws Exception 
+		 */
+		@RequestMapping(value = "/generatePDF", method = RequestMethod.POST)
+		public  void generatePDF(@RequestParam("writtingId") int idWritting) throws Exception {
+			Writting w = WrittingService.getWrittingById(idWritting);
+			GeneratePDFService pdfService=new GeneratePDFService();
+			//pdfService.generatepdf(w);
+			pdfService.ITextHelloWorld(w);
 		}
 }
