@@ -74,8 +74,8 @@
 					<i class="glyphicon glyphicon-align-justify"></i>
 				</button>
 				<!-- brand -->
-				<a href="#/" class="navbar-brand text-lt">
-					<span class="hidden-folded m-l-xs">WriteMe</span>
+				<a href="#/" class="navbar-brand text-lt"> <span
+					class="hidden-folded m-l-xs">WriteMe</span>
 				</a>
 				<!-- / brand -->
 			</div>
@@ -107,54 +107,54 @@
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
 					ui-shift="prependTo" data-target=".navbar-collapse" role="search">
-<!-- 					ng-controller="HomeCtrl" -->
-					
+					<!-- 					ng-controller="HomeCtrl" -->
+
 				</form>
 				<!-- / search form -->
 
-		<ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-              <i class="icon-bell fa-fw"></i>
-              <span class="visible-xs-inline">Notifications</span>
-              <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
-            </a>
-            <!-- dropdown -->
-            <div class="dropdown-menu w-xl animated fadeInUp">
-              <div class="panel bg-white">
-                <div class="panel-heading b-light bg-light">
-                  <strong>Notificaciones</strong>
-                </div>
-                <div class="list-group">
-                  <a href class="list-group-item">
-                    <span class="clear block m-b-none">El usuario {{user.name}} te ha invitado a la obra {{writting.name}}<br>
-                    </span>
-                  </a>
-                </div>
-                <div class="panel-footer text-sm">
-                  <a href class="pull-right"><i class="fa fa-cog"></i></a>
-                  <a href="#notes" data-toggle="class:show animated fadeInRight">Ver todas las notificaciones</a>
-                </div>
-              </div>
-            </div>
-            <!-- / dropdown -->
-          </li>
-          <li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
-			<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
-			<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span> 
-			<b class="caret"></b>
-			</a> <!-- dropdown -->
-			<ul class="dropdown-menu animated fadeInRight w">
-				<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
-			</ul> <!-- / dropdown --></li>
-        </ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" data-toggle="dropdown"
+						class="dropdown-toggle"> <i class="icon-bell fa-fw"></i> <span
+							class="visible-xs-inline">Notifications</span> <span
+							class="badge badge-sm up bg-danger pull-right-xs">1</span>
+					</a> <!-- dropdown -->
+						<div class="dropdown-menu w-xl animated fadeInUp">
+							<div class="panel bg-white">
+								<div class="panel-heading b-light bg-light">
+									<strong>Notificaciones</strong>
+								</div>
+								<div class="list-group">
+									<a href class="list-group-item"> <span
+										class="clear block m-b-none">El usuario {{user.name}}
+											te ha invitado a la obra {{writting.name}}<br>
+									</span>
+									</a>
+								</div>
+								<div class="panel-footer text-sm">
+									<a href class="pull-right"><i class="fa fa-cog"></i></a> <a
+										href="#notes" data-toggle="class:show animated fadeInRight">Ver
+										todas las notificaciones</a>
+								</div>
+							</div>
+						</div> <!-- / dropdown --></li>
+					<li class="dropdown"><a href="" data-toggle="dropdown"
+						class="dropdown-toggle clear" data-toggle="dropdown"> <span
+							class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"
+							style="padding-top: 26px;"><i class="on md b-white bottom"></i></span>
+							<span class="hidden-sm hidden-md">Bienvenido
+								{{user.author}}</span> <b class="caret"></b>
+					</a> <!-- dropdown -->
+						<ul class="dropdown-menu animated fadeInRight w">
+							<li><a href="/writeMe/#/signin">Cerrar sesión</a></li>
+						</ul> <!-- / dropdown --></li>
+				</ul>
 		</header>
 		<!-- / header -->
 
 
 		<!-- aside -->
 		<aside id="aside" class="app-aside hidden-xs bg-dark">
-			<div class="aside-wrap" >
+			<div class="aside-wrap">
 				<div class="navi-wrap">
 
 					<!-- nav -->
@@ -164,17 +164,31 @@
 								<span></span>
 							</li>
 							<li><a href="#/" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></li>
+									class="pull-right text-muted"></span> <i
+									class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></a></li>
+
+							<li><a href="" class="auto"> <span
+									class="pull-right text-muted"> <i
+										class="fa fa-fw fa-angle-right text"></i> <i
+										class="fa fa-fw fa-angle-down text-active"></i>
+								</span> <i class="glyphicon glyphicon-book icon"></i> <span
+									class="font-bold">Mi biblioteca</span>
 							</a>
+								<ul class="nav nav-sub dk">
+									<li class="nav-sub-header">
+									<a href> 
+									<span>Mi biblioteca</span>
+									</a></li>
+									
+									<li><a href="index.html"> 
+									<span>Personal</span>
+									</a></li>
+									
+									<li><a href="dashboard.html">  
+									<span>Compartido</span>
+									</a></li>
+								</ul>
 							</li>
-							<li class="line dk"></li>
-							<li><a href="app#/showWrittings" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-book icon"></i><span
-									class="font-bold" >Mi biblioteca </span>
-							</a>
-						</ul>
 					</nav>
 					<!-- nav -->
 
@@ -196,61 +210,82 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
 
-  
-  <!-- Del bower y home -->
-  <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="resources/bower_components/angular/angular.js"></script>
-  <script src="resources/bower_components/angular-route/angular-route.js"></script>
-  
-  <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
-  
-  <script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
-  <script src="resources/non_bower_components/angular-file-upload.min.js"></script>
-  
-  <script src="resources/app.js"></script>
-  
-  <!-- Del template -->
-  <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
-  <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
-  <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
-  
-  <script src="resources/html/js/ui-load.js"></script>
-  <script src="resources/html/js/ui-jp.config.js"></script>
-  <script src="resources/html/js/ui-jp.js"></script>
-  <script src="resources/html/js/ui-nav.js"></script>
-  <script src="resources/html/js/ui-toggle.js"></script>
-  <script src="resources/html/js/ui-client.js"></script>
-  
-  <script src="resources/legalEstablishment/legalEstablishment.js"></script>
-  <script src="resources/writting/createWritting/createWritting.js"></script>
-  <script src="resources/writting/writting/writting.js"></script>
-  <script src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
-  <script src="resources/writting/showWrittings/showWrittings.js"></script>
-  
-  <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
-  <script src="resources/legalEstablishment/legalEstablishment.js"></script>
-  <script src="resources/home/home.js"></script>
-  
-  <!-- DEL WYSWYG(TEXTAREA) -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/froala_editor.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/align.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/code_beautifier.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/code_view.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/draggable.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/image.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/image_manager.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/link.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/lists.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/paragraph_format.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/paragraph_style.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/table.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/video.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/url.min.js"></script>
-  <script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
+
+	<!-- Del bower y home -->
+	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="resources/bower_components/angular/angular.js"></script>
+	<script src="resources/bower_components/angular-route/angular-route.js"></script>
+
+	<script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
+
+	<script
+		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+	<script src="resources/non_bower_components/angular-file-upload.min.js"></script>
+
+	<script src="resources/app.js"></script>
+
+	<!-- Del template -->
+	<script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
+	<script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
+	<script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+
+	<script src="resources/html/js/ui-load.js"></script>
+	<script src="resources/html/js/ui-jp.config.js"></script>
+	<script src="resources/html/js/ui-jp.js"></script>
+	<script src="resources/html/js/ui-nav.js"></script>
+	<script src="resources/html/js/ui-toggle.js"></script>
+	<script src="resources/html/js/ui-client.js"></script>
+
+	<script src="resources/legalEstablishment/legalEstablishment.js"></script>
+	<script src="resources/writting/createWritting/createWritting.js"></script>
+	<script src="resources/writting/writting/writting.js"></script>
+	<script
+		src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
+	<script src="resources/writting/showWrittings/showWrittings.js"></script>
+
+	<script
+		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
+	<script src="resources/legalEstablishment/legalEstablishment.js"></script>
+	<script src="resources/home/home.js"></script>
+
+	<!-- DEL WYSWYG(TEXTAREA) -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/froala_editor.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/align.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/code_beautifier.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/code_view.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/draggable.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/image.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/image_manager.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/link.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/lists.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/paragraph_format.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/paragraph_style.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/table.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/video.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/url.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/entities.min.js"></script>
 
 
 
@@ -259,16 +294,17 @@
 
 	<script
 		src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		
+
 	<script
 		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
-		
-	<script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+
+	<script
+		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
 	<script src="resources/bower_components/angular/angular.js"></script>
 	<script src="resources/bower_components/angular-route/angular-route.js"></script>
 
-    <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
-    
+	<script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
+
 	<script src="resources/non_bower_components/angular-file-upload.min.js"></script>
 	<script src="resources/app.js"></script>
 
@@ -333,7 +369,9 @@
 		src="resources/writting/writting/js/plugins/video.min.js"></script>
 	<script type="text/javascript"
 		src="resources/writting/writting/js/plugins/url.min.js"></script>
-	<script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
-	<script type="text/javascript" src="resources/writting/writting/js/plugins/fullscreen.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/entities.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/fullscreen.min.js"></script>
 </body>
 </html>

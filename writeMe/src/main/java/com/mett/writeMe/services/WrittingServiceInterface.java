@@ -27,7 +27,7 @@ public interface WrittingServiceInterface {
 	Boolean saveWritting(WrittingRequest ur);
 	Boolean editWritting(Writting wr);
 	Boolean publish(WrittingRequest ur);
-	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
+	Boolean editWrittingInvitation(Writting wr);
 
 
 }

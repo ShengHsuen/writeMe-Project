@@ -230,9 +230,7 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
-		int idUser = (int)currentSession.getAttribute("idUser");
-		User user = userRepository.findOne(idUser);
+	public Boolean editWrittingInvitation(Writting wr) {
 		
 		List<WrittingPOJO> wrPojos = getWrittingsByMainWritting(wr);
 		List<Writting> writtings = new ArrayList<Writting>();
