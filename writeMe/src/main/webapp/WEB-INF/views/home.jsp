@@ -78,8 +78,8 @@
 					<i class="glyphicon glyphicon-align-justify"></i>
 				</button>
 				<!-- brand -->
-				<a href="#/" class="navbar-brand text-lt">
-					<span class="hidden-folded m-l-xs">WriteMe</span>
+				<a href="#/" class="navbar-brand text-lt"> <span
+					class="hidden-folded m-l-xs">WriteMe</span>
 				</a>
 				<!-- / brand -->
 			</div>
@@ -111,11 +111,10 @@
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
 					ui-shift="prependTo" data-target=".navbar-collapse" role="search">
-<!-- 					ng-controller="HomeCtrl" -->
-					
+					<!-- 					ng-controller="HomeCtrl" -->
+
 				</form>
 				<!-- / search form -->
-
 		<ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle">
@@ -158,7 +157,7 @@
 
 		<!-- aside -->
 		<aside id="aside" class="app-aside hidden-xs bg-dark">
-			<div class="aside-wrap" >
+			<div class="aside-wrap">
 				<div class="navi-wrap">
 
 					<!-- nav -->
@@ -168,17 +167,31 @@
 								<span></span>
 							</li>
 							<li><a href="#/" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></li>
+									class="pull-right text-muted"></span> <i
+									class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></a></li>
+
+							<li><a href="" class="auto"> <span
+									class="pull-right text-muted"> <i
+										class="fa fa-fw fa-angle-right text"></i> <i
+										class="fa fa-fw fa-angle-down text-active"></i>
+								</span> <i class="glyphicon glyphicon-book icon"></i> <span
+									class="font-bold">Mi biblioteca</span>
 							</a>
+								<ul class="nav nav-sub dk">
+									<li class="nav-sub-header">
+									<a href> 
+									<span>Mi biblioteca</span>
+									</a></li>
+									
+									<li><a href="index.html"> 
+									<span>Personal</span>
+									</a></li>
+									
+									<li><a href="dashboard.html">  
+									<span>Compartido</span>
+									</a></li>
+								</ul>
 							</li>
-							<li class="line dk"></li>
-							<li><a href="app#/showWrittings" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-book icon"></i><span
-									class="font-bold" >Mi biblioteca </span>
-							</a>
-						</ul>
 					</nav>
 					<!-- nav -->
 
@@ -199,7 +212,6 @@
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-
   
   <!-- Del bower y home -->
   <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
@@ -259,23 +271,22 @@
   <script type="text/javascript" src="resources/writting/writting/js/plugins/url.min.js"></script>
   <script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
 
-
-
 	<!-- Del bower y home -->
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 
 	<script
 		src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		
+
 	<script
 		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
-		
-	<script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+
+	<script
+		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
 	<script src="resources/bower_components/angular/angular.js"></script>
 	<script src="resources/bower_components/angular-route/angular-route.js"></script>
 
-    <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
-    
+	<script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
+
 	<script src="resources/non_bower_components/angular-file-upload.min.js"></script>
 	<script src="resources/app.js"></script>
 
@@ -341,7 +352,9 @@
 		src="resources/writting/writting/js/plugins/video.min.js"></script>
 	<script type="text/javascript"
 		src="resources/writting/writting/js/plugins/url.min.js"></script>
-	<script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
-	<script type="text/javascript" src="resources/writting/writting/js/plugins/fullscreen.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/entities.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/fullscreen.min.js"></script>
 </body>
 </html>

@@ -15,13 +15,13 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	console.log("Ava "+availability)
 	var available="";
 
-	if(availability == null){
-	   available = 'Disponible';
-	}else if(availability == true){
+	if(availability == true){
 		available = 'Disponible';
 	}else{
 		available = 'Ocupado';
 	}
+	
+	$localStorage.available = available;
 
 	$scope.textAvailable = available;
 
