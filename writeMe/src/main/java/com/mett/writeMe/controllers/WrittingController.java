@@ -276,7 +276,6 @@ public class WrittingController {
 		public String getContentLastWrittingByMain(@RequestParam("writtingId") int idWritting) {
 			Writting w = WrittingService.getWrittingById(idWritting);
 			String content = WrittingService.getContentLastWrittingByMainWritting(w);
-			System.out.println("VAMOS A PROBAR " + content);
 			return content;
 		}
 		
