@@ -91,6 +91,32 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         window.location.href = path;
     }
     
+    var createWritting = function() {
+        $scope.writting = {
+            "pageNumber": 0,
+            "pageSize": 0,
+            "direction": "",
+            "sortBy": [""],
+            "searchColumn": "string",
+            "searchTerm": $scope.name,
+            "writting": {
+                "name": $scope.name,
+                "description": "a",
+                "cantUsers": 0,
+                "date": fecha,
+                "likes": 0,
+                "limit time": "2100-01-01",
+                "numMaxCharacters": 10000,
+                "numMinCharacters": 30,
+                "published": publish,
+                "content": $scope.content
+            }
+        };
+        $http.post('rest/protected/writting/createWrittingInvitation', $scope.writting).success(function(response) {
+				createUserHasWritting();
+        });
+    }
+    
     var update = function() {
         $scope.writting = {
             "pageNumber": 0,
@@ -113,12 +139,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
             }
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
-//        	if($scope.writting.getTypeWritting.equals("Personal")){
-//				console.log("NO CREA UN USERHASWRITTING");
-//			}else{
-//				console.log("SI CREA EL USERHASWRITTING");
-//				createUserHasWritting();
-//			}
+				
         });
     }
 
@@ -200,20 +221,26 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     var actualAuthor = $localStorage.data;
     
     $scope.check = function(){
-    	   if($localStorage.availability == true){
-    	    	authorInside = actualAuthor.author;
-    	    	availability = false;
-    	    	$localStorage.authorInside = authorInside;
-    	    	$localStorage.availability = availability;
-    	    	console.log(authorInside);
-    	      	console.log(availability);
-    	      	document.getElementById("send").disabled = false;
-    	    	document.getElementById("finish").disabled = false;
-    	    }else{
-    	    	console.log("No esta habilidado");
-    	      	document.getElementById("send").disabled = true;
-    	    	document.getElementById("finish").disabled = true;
-    	    }
+    	var estado = $localStorage.available;
+    	if(estado.equals("Disponible")){
+    		createWritting();
+    	}else{
+    		
+    	}
+//    	   if($localStorage.availability == true){
+//    	    	authorInside = actualAuthor.author;
+//    	    	availability = false;
+//    	    	$localStorage.authorInside = authorInside;
+//    	    	$localStorage.availability = availability;
+//    	    	console.log(authorInside);
+//    	      	console.log(availability);
+//    	      	document.getElementById("send").disabled = false;
+//    	    	document.getElementById("finish").disabled = false;
+//    	    }else{
+//    	    	console.log("No esta habilidado");
+//    	      	document.getElementById("send").disabled = true;
+//    	    	document.getElementById("finish").disabled = true;
+//    	    }
     }
     $scope.check();
     
