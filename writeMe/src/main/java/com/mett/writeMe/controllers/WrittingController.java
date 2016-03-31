@@ -88,37 +88,48 @@ public class WrittingController {
 		//us.setUser(WrittingService.getUsersPublished());
 		return us;		
 	}
+	
+	
+	/*@author Sheng Hsuen
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/createWrittingInvitation", method = RequestMethod.POST)
+	public WrittingResponse createInvitation(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+			
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			u = LoginService.getUser();
+			BeanUtils.copyProperties(w, wr);
+
+			Boolean state = WrittingService.createWrittingInvitation(wr);
+			
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}	
+		return us;
+	}
+	
 
 	/**author Sheng Hsuen Cheng
 	 * @param ur
 	 * @return
 	 */
 	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
-	public WrittingResponse editContent(@RequestBody WrittingRequest ur, HttpServletRequest servletRequest) {
-		HttpSession currentSession = servletRequest.getSession();
+	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
 
 		System.out.print("EDIT CONTENT IMPRIMIR EL POJO" + w.getName());
 
-		if(wr.getTypeWritting().equals("Personal")){
 			wr.setContent(ur.getWritting().getContent());
 			Boolean state = WrittingService.editWritting(wr);
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
 			}
-		}else{
-			wr.setContent(ur.getWritting().getContent());
-			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
-			Boolean state = WrittingService.editWrittingInvitation(wr, currentSession);
-
-			if (state) {
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-		}
 		return us;
 	}
 

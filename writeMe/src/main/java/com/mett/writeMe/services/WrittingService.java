@@ -85,6 +85,9 @@ public class WrittingService implements WrittingServiceInterface{
 		  return generateWrittingDtos(Writtings);
 	}
 	
+	/* author Sheng Hsuen
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getWrittingsByMainWritting(com.mett.writeMe.ejb.Writting)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByMainWritting(Writting wr){
@@ -194,12 +197,24 @@ public class WrittingService implements WrittingServiceInterface{
 		return (nWritting == null) ? false : true;
 	}
 	
-	/* (non-Javadoc)
+	/* @author Sheng Hsuen
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.writeMe.ejb.Writting)
 	 */
 	@Override
 	@Transactional
 	public Boolean editWritting(Writting wr) {
+		Writting nwritting = writtingRepository.save(wr);
+
+		return (nwritting == null) ? false : true;
+	}
+	
+	/* @Sheng Hsuen
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#finishWritting(com.mett.writeMe.ejb.Writting)
+	 */
+	@Override
+	@Transactional
+	public Boolean finishWritting(Writting wr) {
+		wr.setParticipation(false);
 		Writting nwritting = writtingRepository.save(wr);
 
 		return (nwritting == null) ? false : true;
@@ -231,9 +246,7 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
-		int idUser = (int)currentSession.getAttribute("idUser");
-		User user = userRepository.findOne(idUser);
+	public Boolean createWrittingInvitation(Writting wr) {
 		
 		List<WrittingPOJO> wrPojos = getWrittingsByMainWritting(wr);
 		List<Writting> writtings = new ArrayList<Writting>();
@@ -241,18 +254,15 @@ public class WrittingService implements WrittingServiceInterface{
 		BeanUtils.copyProperties(wrPojos, writtings);
 		int idFather = 0;
 		int getIdFather = 0;
-		
-		
+	
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
 		for(int i=0;i<=UserHasWrittings.size()-1;i++){
 			if(wr.getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
-//				if(user.getUserId() == ){
-//					
-//				}
 				
 				wr.setWrittingId(0);
 				wr.setName(null);
 				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
+				wr.setParticipation(true);
 				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
 				
 				
@@ -309,6 +319,6 @@ public class WrittingService implements WrittingServiceInterface{
 		System.out.println("aqui va la cosa de todo " + content);
 		return content;
 	}
-	
+
 
 }
