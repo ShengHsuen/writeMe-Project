@@ -8,8 +8,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
     controller: 'Create_WrittingCtrl'
   });
 }])
+.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage','$rootScope', function($scope,$http,$location,$upload, $localStorage,$rootScope ) {
 
-.controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage','$rootScope', function($scope,$http,$location,$upload, $localStorage,$rootScope) {
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
@@ -47,7 +47,6 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			}else{
 				$scope.showCantUsers = false;
 				$scope.cantUsers = 0;
-				console.log($scope.cantUsers);
 			}
 		}
 		$scope.chkIfPersonal();
@@ -101,9 +100,10 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
 			    createUserHasWritting();
 			    if($scope.prepit == false){
-			    	$rootScope.$broadcast('show-writtings');
-			    	var path = "app#/showWrittings";
-			    	window.location.href = path; 
+			     $rootScope.$broadcast('show-writtings');
+			     var path = "app#/showWrittings";
+			     window.location.href = path;
+
 			    }
 			   }).catch(function(error){
 			    console.log("Titulo no puede estar repetido");
@@ -125,15 +125,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 						  "dateModifie": fecha,
 					      "statusColor": false,
 					      "user_has_writtingId": 0,
-					      "linkInvitation": "string",
+					      "linkInvitation": 0,
 					      "banned": false,
 					      "dateCreate": fecha,
-					      "invitationStatus": false
-					}
-					
+					      "invitationStatus": true,
+					      "owner": true
+					}	
 			};
 
-			
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
 			});

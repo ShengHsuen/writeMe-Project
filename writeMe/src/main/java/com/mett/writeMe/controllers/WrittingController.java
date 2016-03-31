@@ -290,6 +290,19 @@ public class WrittingController {
 			Writting w = WrittingService.getWrittingById(idWritting);
 			GeneratePDFService pdfService=new GeneratePDFService();
 			//pdfService.generatepdf(w);
-			pdfService.ITextHelloWorld(w);
+			//pdfService.ITextHelloWorld(w);
+			pdfService.pdf(w);
+		}		
+		/**
+		 * @author Mario Villalobos 
+		 * @param idWritting
+		 * @return String content 
+		 */
+		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
+		public String getContentLastWrittingByMain(@RequestParam("writtingId") int idWritting) {
+			Writting w = WrittingService.getWrittingById(idWritting);
+			String content = WrittingService.getContentLastWrittingByMainWritting(w);
+			System.out.println("VAMOS A PROBAR " + content);
+			return content;
 		}
 }

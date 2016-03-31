@@ -188,4 +188,42 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         })
     }
     
+    
+
+    /* Mandar el habilitado, el actor actual, y revisar si hay un actor adentro
+     * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
+     * 
+     * */
+    
+    var availability = true;
+    var authorInside ="";
+    var actualAuthor = $localStorage.data;
+    
+    $scope.check = function(){
+    	   if($localStorage.availability == true){
+    	    	authorInside = actualAuthor.author;
+    	    	availability = false;
+    	    	$localStorage.authorInside = authorInside;
+    	    	$localStorage.availability = availability;
+    	    	console.log(authorInside);
+    	      	console.log(availability);
+    	      	document.getElementById("send").disabled = false;
+    	    	document.getElementById("finish").disabled = false;
+    	    }else{
+    	    	console.log("No esta habilidado");
+    	      	document.getElementById("send").disabled = true;
+    	    	document.getElementById("finish").disabled = true;
+    	    }
+    }
+    $scope.check();
+    
+    $scope.finish = function(){
+    	    $localStorage.lastUser = authorInside;
+    	    authorInside = "";
+    	    
+    	    availability = true;
+    		$localStorage.availability = availability;
+    		window.location.href = "app#/showWrittingsInvitation"
+    }
+    
 }]);

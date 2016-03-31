@@ -30,5 +30,6 @@ public interface WrittingServiceInterface {
 	Writting getWrittingById(int idWritting);
 	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
 
+	String getContentLastWrittingByMainWritting(Writting wr);
 
 }
