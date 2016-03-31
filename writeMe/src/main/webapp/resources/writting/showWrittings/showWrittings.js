@@ -6,10 +6,13 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 		templateUrl : 'resources/writting/showWrittings/showWrittings.html',
 		controller : 'showWrittingsCtrl'
 	});
-} ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage',function($scope, $http, $localStorage) {
+} ]).controller('showWrittingsCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
+
 	
 	// Mostrar
-var init = function(){
+	
+	
+	$scope.init = function(){
 	$scope.writting = [];
 	$scope.writting = {
 			"pageNumber" : 0,
@@ -49,14 +52,15 @@ var init = function(){
     	                method: 'DELETE', 
     	                params: {writtingId: writtingId}
     			  }).success(function() {
-    					init();
+    					$scope.init();
     			    });
     	        }
     
     $scope.$on('show-writtings', function(event, args) {
-      setTimeout(myFunction, 3000);
-  	  init();
+
+    	 $scope.init();
+
     });
-    init();
+    $scope.init();
 
 } ]);

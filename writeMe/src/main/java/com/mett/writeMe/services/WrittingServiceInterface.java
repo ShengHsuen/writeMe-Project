@@ -27,7 +27,9 @@ public interface WrittingServiceInterface {
 	Boolean saveWritting(WrittingRequest ur);
 	Boolean editWritting(Writting wr);
 	Boolean publish(WrittingRequest ur);
-	Boolean editWrittingInvitation(Writting wr);
+	Boolean createWrittingInvitation(Writting wr);
 	Writting getWrittingById(int idWritting);
+	String getContentLastWrittingByMainWritting(Writting wr);
+	Boolean finishWritting(Writting wr);
 
 }

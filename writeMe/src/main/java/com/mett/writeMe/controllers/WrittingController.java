@@ -88,6 +88,29 @@ public class WrittingController {
 		//us.setUser(WrittingService.getUsersPublished());
 		return us;		
 	}
+	
+	
+	/*@author Sheng Hsuen
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/createWrittingInvitation", method = RequestMethod.POST)
+	public WrittingResponse createInvitation(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+			
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			u = LoginService.getUser();
+			BeanUtils.copyProperties(w, wr);
+
+			Boolean state = WrittingService.createWrittingInvitation(wr);
+			
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}	
+		return us;
+	}
+	
 
 	/**author Sheng Hsuen Cheng
 	 * @param ur
@@ -101,23 +124,12 @@ public class WrittingController {
 
 		System.out.print("EDIT CONTENT IMPRIMIR EL POJO" + w.getName());
 
-		if(wr.getTypeWritting().equals("Personal")){
 			wr.setContent(ur.getWritting().getContent());
 			Boolean state = WrittingService.editWritting(wr);
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
 			}
-		}else{
-			wr.setContent(ur.getWritting().getContent());
-			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
-			Boolean state = WrittingService.editWrittingInvitation(wr);
-
-			if (state) {
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-		}
 		return us;
 	}
 
@@ -265,4 +277,18 @@ public class WrittingController {
 			wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
 			return wrresponse;
 		}
+		
+		/**
+		 * @author Mario Villalobos 
+		 * @param idWritting
+		 * @return String content 
+		 */
+		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
+		public String getContentLastWrittingByMain(@RequestParam("writtingId") int idWritting) {
+			Writting w = WrittingService.getWrittingById(idWritting);
+			String content = WrittingService.getContentLastWrittingByMainWritting(w);
+			System.out.println("VAMOS A PROBAR " + content);
+			return content;
+		}
+		
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Iterables;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
@@ -84,6 +85,9 @@ public class WrittingService implements WrittingServiceInterface{
 		  return generateWrittingDtos(Writtings);
 	}
 	
+	/* author Sheng Hsuen
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#getWrittingsByMainWritting(com.mett.writeMe.ejb.Writting)
+	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByMainWritting(Writting wr){
@@ -193,12 +197,24 @@ public class WrittingService implements WrittingServiceInterface{
 		return (nWritting == null) ? false : true;
 	}
 	
-	/* (non-Javadoc)
+	/* @author Sheng Hsuen
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#editWritting(com.mett.writeMe.ejb.Writting)
 	 */
 	@Override
 	@Transactional
 	public Boolean editWritting(Writting wr) {
+		Writting nwritting = writtingRepository.save(wr);
+
+		return (nwritting == null) ? false : true;
+	}
+	
+	/* @Sheng Hsuen
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#finishWritting(com.mett.writeMe.ejb.Writting)
+	 */
+	@Override
+	@Transactional
+	public Boolean finishWritting(Writting wr) {
+		wr.setParticipation(false);
 		Writting nwritting = writtingRepository.save(wr);
 
 		return (nwritting == null) ? false : true;
@@ -230,7 +246,7 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public Boolean editWrittingInvitation(Writting wr) {
+	public Boolean createWrittingInvitation(Writting wr) {
 		
 		List<WrittingPOJO> wrPojos = getWrittingsByMainWritting(wr);
 		List<Writting> writtings = new ArrayList<Writting>();
@@ -238,18 +254,15 @@ public class WrittingService implements WrittingServiceInterface{
 		BeanUtils.copyProperties(wrPojos, writtings);
 		int idFather = 0;
 		int getIdFather = 0;
-		
-		
+	
 		List<UserHasWritting> UserHasWrittings = userHasWrittingRepository.findAll();
 		for(int i=0;i<=UserHasWrittings.size()-1;i++){
 			if(wr.getWrittingId() == UserHasWrittings.get(i).getWritting().getWrittingId()){
-//				if(user.getUserId() == ){
-//					
-//				}
 				
 				wr.setWrittingId(0);
 				wr.setName(null);
 				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
+				wr.setParticipation(true);
 				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
 				
 				
@@ -274,4 +287,38 @@ public class WrittingService implements WrittingServiceInterface{
 	public Writting getWrittingById(int idWritting) {
 		return writtingRepository.findOne(idWritting);
 	}
+	
+	
+	
+	/**
+	 * @author Mario Villalobos
+	 * Get the content of the last writting 
+	 * @return a String content 
+	 */
+	@Override
+	public String getContentLastWrittingByMainWritting(Writting wr){
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
+		List<Writting> Writtings = writtingRepository.findAll();
+		WrittingPOJO dto = new WrittingPOJO();
+		BeanUtils.copyProperties(Writting.get(0), dto);
+		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
+		WrittingPOJO.add(dto);
+		
+		for(int i=0; i <= Writtings.size()-1; i++){
+			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
+			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
+			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
+				BeanUtils.copyProperties(Writtings.get(i), dto);
+				WrittingPOJO.add(dto);
+				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
+			}
+		}
+		String content;
+		content = WrittingPOJO.get(WrittingPOJO.size()-1).getContent();
+		System.out.println("aqui va la cosa de todo " + content);
+		return content;
+	}
+	
+
 }
