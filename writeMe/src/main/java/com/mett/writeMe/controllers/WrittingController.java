@@ -297,12 +297,12 @@ public class WrittingController {
 		 * @throws Exception 
 		 */
 		@RequestMapping(value = "/generatePDF", method = RequestMethod.POST)
-		public  void generatePDF(@RequestParam("writtingId") int idWritting) throws Exception {
+		public  WrittingResponse generatePDF(@RequestParam("writtingId") int idWritting) throws Exception {
 			Writting w = WrittingService.getWrittingById(idWritting);
 			GeneratePDFService pdfService=new GeneratePDFService();
-			//pdfService.generatepdf(w);
-			//pdfService.ITextHelloWorld(w);
-			pdfService.pdf(w);
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			wrresponse.setName( pdfService.pdf(w,servletContext));
+			return wrresponse;
 		}		
 		/**
 		 * @author Mario Villalobos 

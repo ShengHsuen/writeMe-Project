@@ -11,7 +11,7 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 		controller : 'viewWrittingCtrl'
 	});
 } ]).controller('viewWrittingCtrl',['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
-
+	var id;
 	/*
 	 * @author Mildred Guerra
 	 *'getwrittingByMain':
@@ -36,6 +36,7 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 					  $scope.name =  $scope.writting[0].name;
 					  $scope.img=$scope.writting[0].image;
 					  $scope.category=$scope.writting[0].category;
+					  $scope.description=$scope.writting[0].description;
 					  for (i = 0; i < length; i++) {
 						  $('#preview').html($scope.writting[i].content);
 					  }
@@ -52,5 +53,24 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 			init();
 		}
 		$scope.loadData();
+		$scope.generatePDF = function() {
+			console.log("el is es " + $scope.idWritting);
+			$http({
+				url : 'rest/protected/writting/generatePDF',
+				method : 'POST',
+				params : {
+					writtingId : $scope.idWritting
+				}
+			}).success(function(response) {
+				console.log("hacee esto"+ response.name);
+				var path = response.name;
+				window.open(path);
+			});
+		}
+
+		$scope.downloadPDF = function(){
+			var path = "/writeMe/#/signin";
+			window.location.href = path;
+		}
 }
  ]);
