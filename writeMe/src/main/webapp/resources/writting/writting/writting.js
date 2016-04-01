@@ -119,37 +119,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
             }
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
-//        	if($scope.writting.getTypeWritting.equals("Personal")){
-//				console.log("NO CREA UN USERHASWRITTING");
-//			}else{
-//				console.log("SI CREA EL USERHASWRITTING");
-//				createUserHasWritting();
-//			}
-        });
-    }
-
-    var createUserHasWritting = function() {
-        $scope.userHasWritting = {
-            "pageNumber": 0,
-            "pageSize": 0,
-            "direction": "string",
-            "sortBy": [
-                "string"
-            ],
-            "searchColumn": "string",
-            "searchTerm": "string",
-            "userHasWritting": {
-                "dateModifie": fecha,
-                "statusColor": false,
-                "user_has_writtingId": 0,
-                "linkInvitation": "string",
-                "banned": false,
-                "dateCreate": fecha,
-                "invitationStatus": false
-            }
-        };
-        
-        $http.post('rest/protected/writting/createUserHasWritting', $scope.userHasWritting).success(function(response) {
 
         });
     }

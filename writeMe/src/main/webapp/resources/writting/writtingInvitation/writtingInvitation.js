@@ -219,28 +219,29 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     var availability = true;
     var authorInside ="";
     var actualAuthor = $localStorage.data;
+    var estado = $localStorage.available;
     
     $scope.check = function(){
-    	var estado = $localStorage.available;
-    	if(estado.equals("Disponible")){
-    		createWritting();
-    	}else{
-    		
-    	}
-//    	   if($localStorage.availability == true){
-//    	    	authorInside = actualAuthor.author;
-//    	    	availability = false;
-//    	    	$localStorage.authorInside = authorInside;
-//    	    	$localStorage.availability = availability;
-//    	    	console.log(authorInside);
-//    	      	console.log(availability);
-//    	      	document.getElementById("send").disabled = false;
-//    	    	document.getElementById("finish").disabled = false;
-//    	    }else{
-//    	    	console.log("No esta habilidado");
-//    	      	document.getElementById("send").disabled = true;
-//    	    	document.getElementById("finish").disabled = true;
-//    	    }
+    	
+//    	if(estado.equals("Disponible")){
+//    		createWritting();
+//    	}else{
+//    		
+//    	}
+    	   if($localStorage.availability == true){
+    	    	authorInside = actualAuthor.author;
+    	    	availability = false;
+    	    	$localStorage.authorInside = authorInside;
+    	    	$localStorage.availability = availability;
+    	    	console.log(authorInside);
+    	      	console.log(availability);
+    	      	document.getElementById("send").disabled = false;
+    	    	document.getElementById("finish").disabled = false;
+    	    }else{
+    	    	console.log("No esta habilidado");
+    	      	document.getElementById("send").disabled = true;
+    	    	document.getElementById("finish").disabled = true;
+    	    }
     }
     $scope.check();
     

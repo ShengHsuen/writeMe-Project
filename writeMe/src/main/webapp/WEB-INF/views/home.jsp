@@ -86,8 +86,7 @@
 			<!-- / navbar header -->
 
 			<!-- navbar collapse -->
-			<div
-				class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+			<div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
 				<!-- buttons -->
 				<div class="nav navbar-nav hidden-xs hide">
 					<a href="" class="btn no-shadow navbar-btn"
@@ -99,6 +98,17 @@
 					</a>
 				</div>
 				<!-- / buttons -->
+				
+
+				<!-- SERVIDOR CAIDO -->
+				
+				<span ng-controller="ModalDemoCtrl">
+          			<script type="text/ng-template" id="myModalContent.html">
+            			<div ng-include="'resources/modals/modal.form.html'"></div>
+          			</script>
+          			<button class="btn btn-success" ng-click="open('lg')">Form in a modal</button>
+        		</span>	
+        		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
 				<ul class="nav navbar-nav hidden-sm">
@@ -161,7 +171,7 @@
 				<div class="navi-wrap">
 
 					<!-- nav -->
-					<nav ui-nav class="navi clearfix">
+					<nav class="navi clearfix" ui-nav="">
 						<ul class="nav">
 							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
 								<span></span>
@@ -170,28 +180,35 @@
 									class="pull-right text-muted"></span> <i
 									class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></a></li>
 
-							<li><a href="" class="auto"> <span
-									class="pull-right text-muted"> <i
-										class="fa fa-fw fa-angle-right text"></i> <i
-										class="fa fa-fw fa-angle-down text-active"></i>
-								</span> <i class="glyphicon glyphicon-book icon"></i> <span
-									class="font-bold">Mi biblioteca</span>
+							<li class="active">
+							<a href="" class="auto"> 
+							<span class="pull-right text-muted"> 
+								<i class="fa fa-fw fa-angle-right text"></i> 
+								<i class="fa fa-fw fa-angle-down text-active"></i>
+							</span> 
+								<i class="glyphicon glyphicon-book icon"></i> 
+								<span class="font-bold">Mi biblioteca</span>
 							</a>
-								<ul class="nav nav-sub dk">
+								<ul class="nav nav-sub dk"  style="display: none;">
 									<li class="nav-sub-header">
 									<a href> 
 									<span>Mi biblioteca</span>
 									</a></li>
 									
-									<li><a href="index.html"> 
+									<li><a href="/writeMe/app#/showWrittings"> 
 									<span>Personal</span>
 									</a></li>
 									
-									<li><a href="dashboard.html">  
-									<span>Compartido</span>
+									<li><a href="/writeMe/app#/showWrittingsInvitation">  
+									<span>Por invitación</span>
+									</a></li>
+									
+									<li><a href="/writeMe/app#/showWrittingsPublic">  
+									<span>Pública</span>
 									</a></li>
 								</ul>
 							</li>
+						</ul>
 					</nav>
 					<!-- nav -->
 
@@ -230,6 +247,7 @@
   <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="resources/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   
   <script src="resources/html/js/ui-load.js"></script>
   <script src="resources/html/js/ui-jp.config.js"></script>

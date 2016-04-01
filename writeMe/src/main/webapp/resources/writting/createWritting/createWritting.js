@@ -37,7 +37,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		                   "Religión y Espiritualidad","Salud y Bienestar","Tecnología","Transporte","Tweens Fiction","Tweens Nonfiction",
 		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction","Otros"
 		                  ];
-		$scope.types =["Personal","Por invitacion","Pública"];
+		$scope.types =["Personal","Por invitación","Pública"];
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
@@ -101,11 +101,19 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			    createUserHasWritting();
 			    if($scope.prepit == false){
 			     $rootScope.$broadcast('show-writtings');
-			     var path = "app#/showWrittings";
+			     var path = "";
+			     if($scope.typeSelected == "Personal"){
+			    	 path = "app#/showWrittings";
+			     }else if($scope.typeSelected == "Por invitación"){
+			    	 path = "app#/showWrittingsInvitation";
+			     }else{
+			    	 path = "app#/showWrittingsPublic";
+			     }
 			     window.location.href = path;
 
 			    }
 			   }).catch(function(error){
+				   
 			    console.log("Titulo no puede estar repetido");
 			    $scope.prepit = true;
 			   });
