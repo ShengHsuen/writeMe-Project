@@ -8,27 +8,6 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('showWrittingsInvitationCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
 	
-    var lastAuthor = $localStorage.lastUser;
-	var actualAuthor = $localStorage.data;
-
-	var availability = $localStorage.availability;
-	console.log("Ava "+availability)
-	var available="";
-
-	if(availability == true){
-		available = 'Disponible';
-	}else{
-		available = 'Ocupado';
-	}
-	
-	$localStorage.available = available;
-
-	$scope.textAvailable = available;
-
-	$scope.lastAuthor =  $localStorage.lastUser;
-
-
-	
 	
 	// Mostrar
 	$scope.init = function(){
@@ -50,13 +29,28 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	$scope.init();
 	
 	
-	$scope.enter = function(wrid, name){
-		 window.location.href = "app#/writtingInvitation"
+	$scope.saveData = function(mainWr, name, cantUsers, writtingId){
+		params: {mainWritting : mainWr}
+	    params: {name : name}
+		params: {cantUsers : cantUsers}
+		params: {writtingId : writtingId}
+	    $localStorage.mainWritting = mainWr;
+	    $localStorage.nameWritting = name;
+	    $localStorage.cantUsers = cantUsers;
+	    $localStorage.writtingId = writtingId;
+	    window.location.href = "app#/writtingInvitation"
 	}
 	
-
 	
+	   $scope.checkParticipation = function(mainWr){
+				  $http({ url:'rest/protected/writting/getContentLastWrittingByMain', 
+					  method: 'POST' ,
+					  params: {mainWritting : mainWr}
+				  }).success(function(response) {
+					  $scope.textAvailable = response.participation;
+					  console.log($scope.textAvailable);
+				    });
+		    };
 	
-	
-	
+		  //  $scope.checkParticipation();
 } ]);

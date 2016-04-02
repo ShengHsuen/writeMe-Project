@@ -307,13 +307,17 @@ public class WrittingController {
 		/**
 		 * @author Mario Villalobos 
 		 * @param idWritting
-		 * @return String content 
+		 * @return WrittingResponse  
 		 */
 		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
-		public String getContentLastWrittingByMain(@RequestParam("writtingId") int idWritting) {
-			Writting w = WrittingService.getWrittingById(idWritting);
+		public WrittingResponse getContentLastWrittingByMain(@RequestParam("mainWritting") int mainWritting) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			Writting w = WrittingService.getWrittingById(mainWritting);
 			String content = WrittingService.getContentLastWrittingByMainWritting(w);
-			System.out.println("VAMOS A PROBAR " + content);
-			return content;
+			boolean participation = WrittingService.getParticipationLastWrittingByMainWritting(w);
+			wrresponse.setContent(content);
+			wrresponse.setParticipation(participation);
+			return wrresponse;
 		}
+
 }
