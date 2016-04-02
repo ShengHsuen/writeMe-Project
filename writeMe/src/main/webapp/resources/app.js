@@ -12,7 +12,7 @@ angular.module('myApp', [
   'myApp.showWrittings',
   'myApp.showWrittingsInvitation',
   'myApp.invitation',
-  'myApp.viewWritting',,
+  'myApp.viewWritting',
   'ui.bootstrap',
   'ui.grid'
 ])
