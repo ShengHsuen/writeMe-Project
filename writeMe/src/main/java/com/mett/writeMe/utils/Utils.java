@@ -10,6 +10,8 @@ import javax.servlet.ServletContext;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mett.writeMe.ejb.Writting;
+
 public class Utils {
 	private static String RESOURCES_PATH = "resources/writtingImages/";
 	private static String HOST_PATH = "http://localhost:8080";
@@ -42,6 +44,12 @@ public class Utils {
 	private static String getExtension(String filename, String extensionSeparator) {
 	    int dot = filename.lastIndexOf(extensionSeparator);
 	    return "."+filename.substring(dot + 1);
+	}
+	
+	public static String  pdfFile(ServletContext servletContext, Writting w, String PDF_PATH){
+		String databaseFileName = HOST_PATH  + servletContext.getContextPath()+"/"+PDF_PATH+ w.getName()+ ".pdf";
+		return databaseFileName;
+		
 	}
 
 }
