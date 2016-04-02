@@ -103,6 +103,15 @@
 					</a>
 				</div>
 				<!-- / buttons -->
+				
+				
+				<!-- SERVIDOR CAIDO -->
+				<span ng-controller="ModalDemoCtrl">
+          			<script type="text/ng-template" id="myModalContent.html">
+            			<div ng-include="'resources/modals/modal.form.html'"></div>
+          			</script>
+        		</span>	
+        		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
 				<!-- <ul class="nav navbar-nav hidden-sm">
@@ -152,7 +161,7 @@
 							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
 								<span></span>
 							</li>
-							<li><a href="#/" class="auto"> <span
+							<li><a href="/writeMe/app#/homeAdmin" class="auto"> <span
 									class="pull-right text-muted">
 								</span> <i class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></li>
 							</a>
@@ -200,6 +209,7 @@
 	<script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
 	<script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
 	<script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="resources/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
 	<script src="resources/html/js/ui-load.js"></script>
 	<script src="resources/html/js/ui-jp.config.js"></script>

@@ -26,21 +26,27 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
-	});
-}
+	}).catch(function(error){
+		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+	}
 		
 	$scope.saveData = function(wrid, name, cantUsers, writtingId){
-		params: {content : wrid}
-	    params: {name : name}
-		params: {cantUsers : cantUsers}
+		params: {content : wrid};
+	    params: {name : name};
+		params: {cantUsers : cantUsers};
 		params: {writtingId : writtingId}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
 	    $localStorage.cantUsers = cantUsers;
 	    $localStorage.writtingId = writtingId;
 	    console.log("Aqui entra " + $localStorage.writtingId);
-	    window.location.href = "app#/writting";
-	}
+	    window.location.href = "app#/writting"
+	};
 
 	/*
 	 * @author Mildred Guerra
@@ -54,11 +60,10 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
     			  }).success(function() {
     					$scope.init();
     			    });
-    	        }
+   }
     
     $scope.$on('show-writtings', function(event, args) {
     	 $scope.init();
     });
     $scope.init();
-
-} ]);
+}]);

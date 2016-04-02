@@ -46,14 +46,23 @@ angular.module('myApp.signup', ['ngRoute'])
 					}else{
 						alert("invalido");
 					}
-				});
+				}).catch(function(error){
+					   $scope.serverDown = function()
+						{
+						   $rootScope.$broadcast('serverDown');
+						}
+					   $scope.serverDown();
+				   });
 			    if($scope.prepit == false){
 			        $scope.navSignin();
 			       }
 			      }).catch(function(error){
-			       console.log("Correo o Nick invalido");
-			       $scope.prepit = true;
-			      });
+					   $scope.serverDown = function()
+						{
+						   $rootScope.$broadcast('serverDown');
+						}
+					   $scope.serverDown();
+				   });
 		      }else{	
 		}
 		

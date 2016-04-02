@@ -36,11 +36,18 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 					  $scope.name =  $scope.writting[0].name;
 					  $scope.img=$scope.writting[0].image;
 					  $scope.category=$scope.writting[0].category;
+
 					  $scope.description=$scope.writting[0].description;
 					  //for (i = 0; i < length; i++) {
 						  $('#preview').html($scope.writting[0].content);
 					 // }
-				    });
+				    }).catch(function(error){
+						   $scope.serverDown = function()
+							{
+							   $rootScope.$broadcast('serverDown');
+							}
+						   $scope.serverDown();
+					   });
 		        }
 	
 		$scope.loadData = function(){
@@ -51,7 +58,7 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 		      $('#preview').html($scope.contentWithoutTags);*/
 			$scope.idWritting = $localStorage.idWritting;
 			init();
-		}
+		};
 		$scope.loadData();
 		$scope.generatePDF = function() {
 			console.log("el is es " + $scope.idWritting);

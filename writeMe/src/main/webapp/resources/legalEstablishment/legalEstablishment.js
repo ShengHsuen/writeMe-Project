@@ -56,7 +56,13 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 							$scope.toggle();
 							$scope.init();
 							$scope.clean();
-						});
+						}).catch(function(error){
+							   $scope.serverDown = function()
+								{
+								   $rootScope.$broadcast('serverDown');
+								}
+							   $scope.serverDown();
+						   });
 	};
 	$scope.clean = function() {
 		$scope.description="";
