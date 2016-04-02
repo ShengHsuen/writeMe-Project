@@ -120,7 +120,13 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
 
-        });
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
     }
 
     $scope.showPublish = function(){
@@ -130,7 +136,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
     	}else{
     		$scope.ppublish = false;
     	}	
-    }
+    };
     
     $scope.publish = function() {
         $scope.writting = {
@@ -160,7 +166,13 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
             console.log("writting/publish");
-        })
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
     }
     
 }]);

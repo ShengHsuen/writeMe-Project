@@ -45,18 +45,16 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	//hay que agregar un catch() aca
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
-	});
-}
+	}).catch(function(error){
+		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+	}
 	$scope.init();
-	
-	
 	$scope.enter = function(wrid, name){
 		 window.location.href = "app#/writtingInvitation"
-	}
-	
-
-	
-	
-	
-	
+	};	
 } ]);

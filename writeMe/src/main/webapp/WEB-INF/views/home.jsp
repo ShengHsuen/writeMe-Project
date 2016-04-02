@@ -106,7 +106,6 @@
           			<script type="text/ng-template" id="myModalContent.html">
             			<div ng-include="'resources/modals/modal.form.html'"></div>
           			</script>
-          			<button class="btn btn-success" ng-click="open('lg')">Form in a modal</button>
         		</span>	
         		<!-- /SERVIDOR CAIDO -->
 
@@ -173,42 +172,33 @@
 					<!-- nav -->
 					<nav class="navi clearfix" ui-nav="">
 						<ul class="nav">
-							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-								<span></span>
-							</li>
-							<li><a href="#/" class="auto"> <span
+							<li><a href="/writeMe/app#/home" class="auto"> <span
 									class="pull-right text-muted"></span> <i
 									class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></a></li>
 
-							<li class="active">
-							<a href="" class="auto"> 
-							<span class="pull-right text-muted"> 
-								<i class="fa fa-fw fa-angle-right text"></i> 
-								<i class="fa fa-fw fa-angle-down text-active"></i>
-							</span> 
-								<i class="glyphicon glyphicon-book icon"></i> 
-								<span class="font-bold">Mi biblioteca</span>
-							</a>
-								<ul class="nav nav-sub dk"  style="display: none;">
+							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs" >
+								<span>Mi biblioteca</span>
+							</li>
 									<li class="nav-sub-header">
 									<a href> 
 									<span>Mi biblioteca</span>
 									</a></li>
 									
 									<li><a href="/writeMe/app#/showWrittings"> 
+									<i class="glyphicon glyphicon-book icon"></i>
 									<span>Personal</span>
 									</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittingsInvitation">  
+									<li><a href="/writeMe/app#/showWrittingsInvitation">
+									<i class="glyphicon glyphicon-book icon"></i>  
 									<span>Por invitación</span>
 									</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittingsPublic">  
+									<li><a href="/writeMe/app#/showWrittingsPublic">
+									<i class="glyphicon glyphicon-book icon"></i>
 									<span>Pública</span>
 									</a></li>
-								</ul>
-							</li>
-						</ul>
+					</ul>
 					</nav>
 					<!-- nav -->
 
@@ -247,7 +237,7 @@
   <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="resources/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="resources/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   
   <script src="resources/html/js/ui-load.js"></script>
   <script src="resources/html/js/ui-jp.config.js"></script>

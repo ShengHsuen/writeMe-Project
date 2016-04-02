@@ -9,7 +9,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
   });
 }])
 .controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage','$rootScope', function($scope,$http,$location,$upload, $localStorage,$rootScope ) {
-
+	
+	
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
@@ -113,9 +114,11 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 
 			    }
 			   }).catch(function(error){
-				   
-			    console.log("Titulo no puede estar repetido");
-			    $scope.prepit = true;
+				   $scope.serverDown = function()
+					{
+					   $rootScope.$broadcast('serverDown');
+					}
+				   $scope.serverDown();
 			   });
 
 		}
@@ -143,8 +146,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
-			});
-		}
+			}).catch(function(error){
+				   $scope.serverDown = function()
+					{
+					   $rootScope.$broadcast('serverDown');
+					}
+				   $scope.serverDown();
+			   });
+		};
 		 $scope.onFileSelect = function($files) {
 		    	$scope.files = $files;
 				for ( var i = 0; i < $scope.files.length; i++) {

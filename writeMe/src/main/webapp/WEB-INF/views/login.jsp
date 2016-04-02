@@ -39,6 +39,16 @@
 
 </head>
 <body>
+
+	<!-- SERVIDOR CAIDO -->
+				
+				<span ng-controller="ModalDemoCtrl">
+          			<script type="text/ng-template" id="myModalContent.html">
+            			<div ng-include="'resources/modals/modal.form.html'"></div>
+          			</script>
+        		</span>	
+        		<!-- /SERVIDOR CAIDO -->
+	
 	<!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
@@ -69,6 +79,7 @@
 	<script src="resources/html/js/ui-nav.js"></script>
 	<script src="resources/html/js/ui-toggle.js"></script>
 	<script src="resources/html/js/ui-client.js"></script>
+	<script src="resources/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
 </body>
 </html>
