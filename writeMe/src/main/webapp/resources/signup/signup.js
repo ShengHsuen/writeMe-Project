@@ -9,7 +9,7 @@ angular.module('myApp.signup', ['ngRoute'])
   });
 }])
 
-.controller('SignUpCtrl', ['$scope','$http',function($scope,$http) {
+.controller('SignUpCtrl', ['$scope','$http','$rootScope',function($scope,$http,$rootScope) {
 
 	var canCreate = false; // Verificar si se puede crear
 
@@ -46,14 +46,23 @@ angular.module('myApp.signup', ['ngRoute'])
 					}else{
 						alert("invalido");
 					}
-				});
+				}).catch(function(error){
+					   $scope.serverDown = function()
+						{
+						   $rootScope.$broadcast('serverDown');
+						}
+					   $scope.serverDown();
+				   });
 			    if($scope.prepit == false){
 			        $scope.navSignin();
 			       }
 			      }).catch(function(error){
-			       console.log("Correo o Nick invalido");
-			       $scope.prepit = true;
-			      });
+					   $scope.serverDown = function()
+						{
+						   $rootScope.$broadcast('serverDown');
+						}
+					   $scope.serverDown();
+				   });
 		      }else{	
 		}
 		

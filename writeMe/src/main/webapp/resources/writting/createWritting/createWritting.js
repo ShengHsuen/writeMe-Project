@@ -9,7 +9,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
   });
 }])
 .controller('Create_WrittingCtrl', ['$scope','$http','$location','$upload', '$localStorage','$rootScope', function($scope,$http,$location,$upload, $localStorage,$rootScope ) {
-
+	
+	
 	$scope.date = new Date();
 	var anno = $scope.date.getFullYear();
 	var mes = $scope.date.getMonth() + 1;
@@ -37,7 +38,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 		                   "Religión y Espiritualidad","Salud y Bienestar","Tecnología","Transporte","Tweens Fiction","Tweens Nonfiction",
 		                   "Viajes","Video y DVD","Young Adult Fiction","Young Adult Nonfiction","Otros"
 		                  ];
-		$scope.types =["Personal","Por invitacion","Pública"];
+		$scope.types =["Personal","Por invitación","Pública"];
 		
 		//Funciones
 		$scope.chkIfPersonal = function(){
@@ -101,13 +102,23 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			    createUserHasWritting();
 			    if($scope.prepit == false){
 			     $rootScope.$broadcast('show-writtings');
-			     var path = "app#/showWrittings";
+			     var path = "";
+			     if($scope.typeSelected == "Personal"){
+			    	 path = "app#/showWrittings";
+			     }else if($scope.typeSelected == "Por invitación"){
+			    	 path = "app#/showWrittingsInvitation";
+			     }else{
+			    	 path = "app#/showWrittingsPublic";
+			     }
 			     window.location.href = path;
 
 			    }
 			   }).catch(function(error){
-			    console.log("Titulo no puede estar repetido");
-			    $scope.prepit = true;
+				   $scope.serverDown = function()
+					{
+					   $rootScope.$broadcast('serverDown');
+					}
+				   $scope.serverDown();
 			   });
 
 		}
@@ -135,8 +146,14 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
-			});
-		}
+			}).catch(function(error){
+				   $scope.serverDown = function()
+					{
+					   $rootScope.$broadcast('serverDown');
+					}
+				   $scope.serverDown();
+			   });
+		};
 		 $scope.onFileSelect = function($files) {
 		    	$scope.files = $files;
 				for ( var i = 0; i < $scope.files.length; i++) {
