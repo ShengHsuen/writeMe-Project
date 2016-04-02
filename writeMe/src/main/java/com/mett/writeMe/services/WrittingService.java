@@ -320,5 +320,29 @@ public class WrittingService implements WrittingServiceInterface{
 		return content;
 	}
 
+	
+	@Override
+	public boolean getParticipationLastWrittingByMainWritting(Writting wr){
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
+		List<Writting> Writtings = writtingRepository.findAll();
+		WrittingPOJO dto = new WrittingPOJO();
+		BeanUtils.copyProperties(Writting.get(0), dto);
+		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
+		WrittingPOJO.add(dto);
+		
+		for(int i=0; i <= Writtings.size()-1; i++){
+			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
+			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
+			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
+				BeanUtils.copyProperties(Writtings.get(i), dto);
+				WrittingPOJO.add(dto);
+				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
+			}
+		}
+		boolean participation;
+		participation = WrittingPOJO.get(WrittingPOJO.size()-1).isParticipation();
+		return participation;
+	}
 
 }

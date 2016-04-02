@@ -31,5 +31,6 @@ public interface WrittingServiceInterface {
 	Writting getWrittingById(int idWritting);
 	String getContentLastWrittingByMainWritting(Writting wr);
 	Boolean finishWritting(Writting wr);
+	boolean getParticipationLastWrittingByMainWritting(Writting wr);
 
 }
