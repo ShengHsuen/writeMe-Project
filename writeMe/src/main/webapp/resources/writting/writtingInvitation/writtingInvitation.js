@@ -88,7 +88,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     }
     
     var createWritting = function() {
-    	console.log("FUNCAA ACAAAA");
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -238,11 +237,11 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		     $('#preview').html(content);
 		     
 		     if($scope.participation == true){
+		    	 $scope.divShow = false;
+		    	 
+		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
-		     }else{
-		    	 $scope.divShow = false;
-		    
 		     }
 		    })
 		   
