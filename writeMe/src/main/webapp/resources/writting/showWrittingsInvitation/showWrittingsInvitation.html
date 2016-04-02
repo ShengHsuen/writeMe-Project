@@ -8,7 +8,7 @@
     </div>
 
     
-    <div class="table-responsive" >
+    <div class="table-responsive"  >
       <table class="table table-striped b-t b-light">
         <thead>
           <tr>
@@ -19,12 +19,13 @@
           </tr>
         </thead>
         <tbody ng-repeat="wr in writting | orderBy:'writtingId':true" ng-show="wr.typeWritting == 'Por invitación'">
+
           <tr >
             <td>{{wr.name}}</td>
             
             <td><span class="text-ellipsis">{{lastAuthor}}</span></td>
-            <td><span class="text-ellipsis">{{textAvailable}}</span></td>
-            <td> <button ng-click="enter()"  class="btn btn-sm btn-default">Entrar</button> </td>
+            <td><span class="text-ellipsis" >{{textAvailable}}</span></td>
+            <td> <button ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId)"  class="btn btn-sm btn-default">Entrar</button> </td>
           </tr>
 
         </tbody>
@@ -34,5 +35,3 @@
 
     </div>
   </div>
-
-	<!-- /content -->

@@ -9,14 +9,10 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     });
  }]).controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
 
-	 
-	 
 		$scope.loadData = function(){
-			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
 		}
-		$scope.loadData();
-		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
+		$scope.loadData();	
 
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -92,6 +88,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     }
     
     var createWritting = function() {
+    	console.log("FUNCAA ACAAAA");
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -169,7 +166,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "dateModifie": fecha,
                 "statusColor": false,
                 "user_has_writtingId": 0,
-                "linkInvitation": "string",
+                "linkInvitation": 1,
                 "banned": false,
                 "dateCreate": fecha,
                 "invitationStatus": false
@@ -239,43 +236,44 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
      * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
      * 
      * */
-    
-    var availability = true;
-    var authorInside ="";
-    var actualAuthor = $localStorage.data;
-    var estado = $localStorage.available;
-    
-    $scope.check = function(){
-    	
-//    	if(estado.equals("Disponible")){
-//    		createWritting();
-//    	}else{
-//    		
-//    	}
-    	   if($localStorage.availability == true){
-    	    	authorInside = actualAuthor.author;
-    	    	availability = false;
-    	    	$localStorage.authorInside = authorInside;
-    	    	$localStorage.availability = availability;
-    	    	console.log(authorInside);
-    	      	console.log(availability);
-    	      	document.getElementById("send").disabled = false;
-    	    	document.getElementById("finish").disabled = false;
-    	    }else{
-    	    	console.log("No esta habilidado");
-    	      	document.getElementById("send").disabled = true;
-    	    	document.getElementById("finish").disabled = true;
-    	    }
-    }
-    $scope.check();
+
     
     $scope.finish = function(){
-    	    $localStorage.lastUser = authorInside;
-    	    authorInside = "";
-    	    
-    	    availability = true;
-    		$localStorage.availability = availability;
-    		window.location.href = "app#/showWrittingsInvitation"
-    };
+    }
     
+    
+    var content = "";
+    $scope.participation;
+    var mainWr= "";
+    
+	$scope.loadData = function(){
+		mainWr = $localStorage.mainWritting;
+	}
+	$scope.loadData();
+
+    $scope.contentLastWritting = function(){
+		  $http({ url:'rest/protected/writting/getContentLastWrittingByMain', 
+			  method: 'POST' ,
+			  params: {mainWritting : mainWr}
+		  }).success(function(response) {
+		     content = response.content;
+		     $scope.participation = response.participation;
+		     
+		     $('#preview').html(content);
+		     
+		     if($scope.participation == true){
+		    	 $scope.divShow = true;
+		    	 createWritting();
+		     }else{
+		    	 $scope.divShow = false;
+		    
+		     }
+		    })
+		   
+    };
+
+    $scope.contentLastWritting();
+
+   
+
 }]);

@@ -26,13 +26,19 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
 	
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
-	});
+	}).catch(function(error){
+		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
 	}
 		
 	$scope.saveData = function(wrid, name, cantUsers, writtingId){
-		params: {content : wrid}
-	    params: {name : name}
-		params: {cantUsers : cantUsers}
+		params: {content : wrid};
+	    params: {name : name};
+		params: {cantUsers : cantUsers};
 		params: {writtingId : writtingId}
 	    $localStorage.showContent = wrid;
 	    $localStorage.nameWritting = name;
