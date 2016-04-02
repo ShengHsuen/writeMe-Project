@@ -61,7 +61,13 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 				}
 	     $http.post('rest/protected/invitation/sendInvitation', $scope.guestsRequest).success(function(response) {
 	    	 $scope.findWritting();
-	     });
+	     }).catch(function(error){
+			   $scope.serverDown = function()
+				{
+				   $rootScope.$broadcast('serverDown');
+				}
+			   $scope.serverDown();
+		   });
     }
     $scope.findWritting = function(){
 		  $http({ url: 'rest/protected/invitation/findWritting', 
@@ -92,7 +98,13 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 		};
 	    $http.post('rest/protected/invitation/createInvitation', $scope.userHasWritting).success(function(response) {
 	    	console.log("Success");
-	    });
+	    }).catch(function(error){
+			   $scope.serverDown = function()
+				{
+				   $rootScope.$broadcast('serverDown');
+				}
+			   $scope.serverDown();
+		   });
     }
 	$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
@@ -114,5 +126,11 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
      $http.post('rest/protected/invitation/getAll', $scope.users).success(function(response) {
     	 $scope.user = response.users;
     	 $scope.delSessionUser();
-     });
+     }).catch(function(error){
+		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
  }]);

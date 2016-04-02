@@ -39,7 +39,13 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 					  for (i = 0; i < length; i++) {
 						  $('#preview').html($scope.writting[i].content);
 					  }
-				    });
+				    }).catch(function(error){
+						   $scope.serverDown = function()
+							{
+							   $rootScope.$broadcast('serverDown');
+							}
+						   $scope.serverDown();
+					   });
 		        }
 	
 		$scope.loadData = function(){
@@ -50,7 +56,6 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 		      $('#preview').html($scope.contentWithoutTags);*/
 			$scope.idWritting = $localStorage.idWritting;
 			init();
-		}
+		};
 		$scope.loadData();
-}
- ]);
+}]);

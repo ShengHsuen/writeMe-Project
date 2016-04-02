@@ -9,7 +9,7 @@ angular.module('myApp.signin', ['ngRoute', 'ngStorage'])
   });
 }])
 
-.controller('SignInCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+.controller('SignInCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
 	$scope.accountInvalid = false;
 	
 	var userNull = function(){
@@ -52,7 +52,13 @@ angular.module('myApp.signin', ['ngRoute', 'ngStorage'])
     		}else{
     			$scope.accountInvalid = true;
     		}
-    	});
+    	}).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
 	}
 	
 }]);

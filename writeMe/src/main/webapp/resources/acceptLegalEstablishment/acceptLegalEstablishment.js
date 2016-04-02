@@ -22,7 +22,13 @@ angular.module('myApp.acceptLegalEstablishment', ['ngRoute'])
 			$scope.requestObject).success(
 					function(response) {
 						$scope.legalList = response.legalList;
-					});
+					}).catch(function(error){
+						   $scope.serverDown = function()
+							{
+							   $rootScope.$broadcast('serverDown');
+							}
+						   $scope.serverDown();
+					   });
 	$scope.currentPage = 0;
 	$scope.pageSize = 5; // Esta la cantidad de registros que deseamos mostrar por página
 	$scope.pages = [];
