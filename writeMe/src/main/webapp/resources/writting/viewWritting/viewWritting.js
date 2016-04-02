@@ -37,9 +37,9 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 					  $scope.img=$scope.writting[0].image;
 					  $scope.category=$scope.writting[0].category;
 					  $scope.description=$scope.writting[0].description;
-					  for (i = 0; i < length; i++) {
-						  $('#preview').html($scope.writting[i].content);
-					  }
+					  //for (i = 0; i < length; i++) {
+						  $('#preview').html($scope.writting[0].content);
+					 // }
 				    });
 		        }
 	
