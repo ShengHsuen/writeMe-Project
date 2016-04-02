@@ -276,4 +276,21 @@ public class WrittingService implements WrittingServiceInterface{
 	public Writting getWrittingById(int idWritting) {
 		return writtingRepository.findOne(idWritting);
 	}
+	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur) {
+		List<User> user = userRepository.findByAuthorContaining(ur.getSearchTerm()); //Siempre sera un usuario el que recibe
+		//System.out.println("1- User: "+ user.get(0).getAuthor());
+		List<Writting> wr = new ArrayList<Writting>();
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		//System.out.println("2- Writting: "+ uhw.get(0).getWritting().getWrittingId());
+		for(int i=0;i<=uhw.size()-1;i++){
+			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == false && uhw.get(i).getOwner() == false){
+				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+			}
+		}
+		return generateWrittingDtos(wr);
+	}
+
 }

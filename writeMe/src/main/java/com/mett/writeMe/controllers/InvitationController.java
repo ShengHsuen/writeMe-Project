@@ -15,12 +15,14 @@ import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.contracts.UsersResponse;
+import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.repositories.UserRepository;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.UsersServiceInterface;
+import com.mett.writeMe.services.WrittingService;
 import com.mett.writeMe.services.WrittingServiceInterface;
 
 /**
@@ -65,7 +67,7 @@ public class InvitationController {
 		Boolean state = null;
 		for(int i=0;i<luser.size();i++){
 			uhw.getUserHasWritting().setUser(luser.get(i));
-			uhw.getUserHasWritting().setWritting(wri);
+			uhw.getUserHasWritting().setWritting(writtingService.getWrittingById(uhw.getUserHasWritting().getLinkInvitation()));
 			state = userHasWrittingService.save(uhw);
 		}
 		if (state) {
@@ -81,6 +83,40 @@ public class InvitationController {
 		Writting wr = writtingService.getWrittingById(writtingId);
 		wri = wr;
 		return rs;
+	}
+	
+	@RequestMapping(value = "/getInvitationByUser", method = RequestMethod.POST)
+	public WrittingResponse getInvitationByUser(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		us.setWritting(writtingService.getWrittingsInvitationByUser(ur));
+		us.setOwner(usersService.getUsersOwner(writtingService.getWrittingsInvitationByUser(ur),ur.getSearchTerm()));
+		return us;
+	}
+	
+	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.POST)
+	public WrittingResponse acceptInvitation(@RequestBody UserHasWrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		ur.getUserHasWritting().setInvitationStatus(true);
+		Boolean state = userHasWrittingService.save(ur);
+		return us;
+	}
+	
+	@RequestMapping(value = "/refuseInvitation", method = RequestMethod.POST)
+	public WrittingResponse refuseInvitation(@RequestBody WrittingRequest ur) {
+		System.out.println("refuse writting: " + ur.getUser().getAuthor());
+		Writting wr = new Writting();
+		User user = new User();
+		BeanUtils.copyProperties(ur.getWritting(), wr);
+		BeanUtils.copyProperties(ur.getUser(), user);
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		Boolean state = userHasWrittingService.deleteUserHasWritting(wr, user);
+		return us;
 	}
 
 }

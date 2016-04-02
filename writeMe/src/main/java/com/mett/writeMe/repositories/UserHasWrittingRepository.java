@@ -10,4 +10,6 @@ import com.mett.writeMe.ejb.Writting;
 public interface UserHasWrittingRepository extends CrudRepository<UserHasWritting,Integer>{
 	UserHasWritting save(UserHasWritting userHasWritting);
 	List<UserHasWritting> findAll();
+	List<UserHasWritting> findAllByOwnerTrue();
+	List<UserHasWritting> findAllBylinkInvitation(int p);
 }

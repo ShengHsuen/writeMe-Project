@@ -13,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mett.writeMe.contracts.UsersRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
+import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.UserRepository;
+import com.mett.writeMe.repositories.WrittingRepository;
 
 
 /**
@@ -28,7 +30,9 @@ public class UsersService implements UsersServiceInterface{
 	@Autowired 
 	private UserRepository userRepository;
 	@Autowired 
-	private UserHasWrittingRepository userHasWrittingRepository;
+	private UserHasWrittingRepository userHasWrittingRepository;	
+	@Autowired 
+	private WrittingRepository writtingRepository;
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UsersServiceInterface#getAll(com.mett.writeMe.contracts.UsersRequest)
@@ -122,6 +126,40 @@ public class UsersService implements UsersServiceInterface{
 			}
 		}
 		return writtings;
+	}
+	
+	@Override
+	@Transactional
+	public List<String> getUsersOwner(List<WrittingPOJO> wpojo, String userTerm) {
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
+		System.out.println("userrr: " + user.get(0).getAuthor());
+		List<String> us = new ArrayList<String>();
+		List<UserHasWritting> uhowner = userHasWrittingRepository.findAllByOwnerTrue();
+		
+		//List<UserHasWritting> uh = userHasWrittingRepository.findAllBylinkInvitation(wpojo.get(0).getWrittingId());
+		
+		/*for(int i=0;i<=wpojo.size()-1;i++){
+			if(uhowner.get(i).getUser() == uh.get(i).getUser()){
+				System.out.println("IF ");
+			}
+		}*/
+		
+		int j=0;
+		for(int i=0;i<=uhw.size()-1;i++){
+			System.out.println("1 Author Us: " + user.get(0).getAuthor());
+			System.out.println("2 Author UHW: " + uhw.get(i).getUser().getAuthor());
+			//uhw.get(i).getLinkInvitation() == wpojo.get(j).getWrittingId() && 
+			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor())){
+				System.out.println("getUsersOwner entre al if");
+				us.add(uhowner.get(j).getUser().getAuthor());
+				System.out.println("J: " + j);
+				j++;
+			}
+			System.out.println("i: " + i);
+		}
+		
+		return us;
 	}
 
 }

@@ -117,7 +117,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
               <span class="visible-xs-inline">Notifications</span>
-              <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">{{cantInvitations}}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu w-xl animated fadeInUp">
@@ -126,8 +126,10 @@
                   <strong>Notificaciones</strong>
                 </div>
                 <div class="list-group">
-                  <a href class="list-group-item">
-                    <span class="clear block m-b-none">El usuario {{user.name}} te ha invitado a la obra {{writting.name}}<br>
+                  <a ng-repeat="wr in writting" class="list-group-item">
+                    <span class="clear block m-b-none">El usuario {{hoster[$index]}} te ha invitado a la obra {{wr.name}}<br>
+                    <button class="btn-success" ng-click="accept(writting[$index])">Aceptar</button>
+                    <button class="btn-danger" ng-click="refuse(writting[$index])">Rechazar</button>
                     </span>
                   </a>
                 </div>
