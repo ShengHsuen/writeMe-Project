@@ -9,7 +9,7 @@ angular.module('myApp.legalEstablishment', [ 'ngRoute' ])
 		templateUrl : 'resources/legalEstablishment/legalEstablishment.html',
 		controller : 'legalEstablishmentCtrl'
 	});
-} ]).controller('legalEstablishmentCtrl',['$scope','$http',function($scope, $http) {
+} ]).controller('legalEstablishmentCtrl',['$scope','$http','$rootScope',function($scope, $http,$rootScope) {
 
 	$scope.legalList = {};
 	$scope.requestObject = []
