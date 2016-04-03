@@ -9,7 +9,7 @@ angular.module('myApp.signup', ['ngRoute'])
   });
 }])
 
-.controller('SignUpCtrl', ['$scope','$http',function($scope,$http) {
+.controller('SignUpCtrl', ['$scope','$http','$rootScope',function($scope,$http,$rootScope) {
 
 	var canCreate = false; // Verificar si se puede crear
 

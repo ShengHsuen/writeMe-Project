@@ -310,13 +310,12 @@ public class WrittingController {
 		 * @return WrittingResponse  
 		 */
 		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
-		public WrittingResponse getContentLastWrittingByMain(@RequestParam("mainWritting") int mainWritting) {
+		public WrittingResponse getContentLastWrittingByMain(@RequestBody WrittingRequest ur) {
 			WrittingResponse wrresponse= new WrittingResponse(); 
-			Writting w = WrittingService.getWrittingById(mainWritting);
-			String content = WrittingService.getContentLastWrittingByMainWritting(w);
-			boolean participation = WrittingService.getParticipationLastWrittingByMainWritting(w);
-			wrresponse.setContent(content);
-			wrresponse.setParticipation(participation);
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			WrittingPOJO wrpojo = WrittingService.getContentLastWrittingByMainWritting(w);
+			wrresponse.setContent(wrpojo.getContent());
+			wrresponse.setParticipation(wrpojo.isParticipation());
 			return wrresponse;
 		}
 
