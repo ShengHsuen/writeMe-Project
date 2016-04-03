@@ -29,8 +29,10 @@ public interface WrittingServiceInterface {
 	Boolean publish(WrittingRequest ur);
 	Boolean createWrittingInvitation(Writting wr);
 	Writting getWrittingById(int idWritting);
-	String getContentLastWrittingByMainWritting(Writting wr);
+	WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO wr);
 	Boolean finishWritting(Writting wr);
-	boolean getParticipationLastWrittingByMainWritting(Writting wr);
+	
+
+
 
 }

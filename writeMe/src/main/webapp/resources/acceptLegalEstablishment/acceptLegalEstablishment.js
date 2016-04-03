@@ -9,7 +9,7 @@ angular.module('myApp.acceptLegalEstablishment', ['ngRoute'])
 		controller : 'acceptLegalCtrl'
 	});
 }])
-.controller('acceptLegalCtrl',['$scope','$http',function($scope, $http) {
+.controller('acceptLegalCtrl',['$scope','$http','$rootScope',function($scope, $http,$rootScope) {
 
 	$scope.navSignup = function(){
 		var path = "/writeMe/#/signup";

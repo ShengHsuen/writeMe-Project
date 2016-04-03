@@ -9,7 +9,7 @@ angular.module('myApp.resetPassword', ['ngRoute'])
 		controller: 'resetPasswordCtrl'
 	});
 }])
-.controller('resetPasswordCtrl', ['$scope','$http',function($scope,$http) {
+.controller('resetPasswordCtrl', ['$scope','$http','$rootScope',function($scope,$http,$rootScope) {
 	var canCreate = false; // Verificar si se puede crear
 	$scope.navSignin = function(){
 		var path = "/writeMe/#/signin";
