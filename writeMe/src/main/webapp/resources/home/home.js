@@ -27,8 +27,14 @@ angular.module('myApp.home', ['ngRoute'])
 	   console.log("home.js");
 	   $scope.writting = response.writting;
 	  // $scope.user = response.user;
-	  });
-  };
+	  }).catch(function(error){
+		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+  }
   
   $scope.$on('home-started', function(event, args) {
 	  $scope.init();
@@ -49,6 +55,6 @@ angular.module('myApp.home', ['ngRoute'])
 	    $localStorage.idWritting=id;
 	    window.location.href = "app#/viewWritting"
 	
-	}
+	};
 
 }]);

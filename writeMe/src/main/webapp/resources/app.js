@@ -10,8 +10,10 @@ angular.module('myApp', [
   'myApp.writting',
   'myApp.writtingInvitation',
   'myApp.showWrittings',
+  'myApp.showWrittingsInvitation',
   'myApp.invitation',
   'myApp.viewWritting',
+  'ui.bootstrap',
   'ui.grid'
 ])
 
@@ -20,6 +22,7 @@ angular.module('myApp', [
 }])
 
 .controller('mainCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+	
 	$scope.load = function(){
 		$scope.user = $localStorage.data;
 		$scope.hoster = $localStorage.hoster;
@@ -97,8 +100,45 @@ angular.module('myApp', [
 	if($scope.user == null && $localStorage.data == null ){
 		var path = "/writeMe/#/signin";
 		window.location.href = path;
-	}
-	
-	
-}]);
+	}	
+}])
 
+.controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'items', function($scope, $modalInstance, items) {
+    $scope.items = items;
+    $scope.selected = {
+      item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+      $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  }])
+
+.controller('ModalDemoCtrl', ['$scope', '$modal', '$log', function($scope, $modal, $log) {
+    $scope.items = ['item1', 'item2', 'item3'];
+    
+    $scope.$on('serverDown', function(event){
+    	console.log("SI ENTRAA AL ON");
+    	
+    	var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            size: 0,
+            resolve: {
+              items: function () {
+                return $scope.items;
+              }
+            }
+          });
+
+          modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+          }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          });
+    });
+}]); 

@@ -9,14 +9,10 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     });
  }]).controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
 
-	 
-	 
 		$scope.loadData = function(){
-			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
 		}
-		$scope.loadData();
-		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
+		$scope.loadData();	
 
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
@@ -91,6 +87,39 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         window.location.href = path;
     }
     
+    var createWritting = function() {
+    	console.log("FUNCAA ACAAAA");
+        $scope.writting = {
+            "pageNumber": 0,
+            "pageSize": 0,
+            "direction": "",
+            "sortBy": [""],
+            "searchColumn": "string",
+            "searchTerm": $scope.name,
+            "writting": {
+                "name": $scope.name,
+                "description": "a",
+                "cantUsers": 0,
+                "date": fecha,
+                "likes": 0,
+                "limit time": "2100-01-01",
+                "numMaxCharacters": 10000,
+                "numMinCharacters": 30,
+                "published": publish,
+                "content": $scope.content
+            }
+        };
+        $http.post('rest/protected/writting/createWrittingInvitation', $scope.writting).success(function(response) {
+				createUserHasWritting();
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+    }
+    
     var update = function() {
         $scope.writting = {
             "pageNumber": 0,
@@ -113,13 +142,14 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
             }
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
-//        	if($scope.writting.getTypeWritting.equals("Personal")){
-//				console.log("NO CREA UN USERHASWRITTING");
-//			}else{
-//				console.log("SI CREA EL USERHASWRITTING");
-//				createUserHasWritting();
-//			}
-        });
+				
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
     }
 
     var createUserHasWritting = function() {
@@ -136,7 +166,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "dateModifie": fecha,
                 "statusColor": false,
                 "user_has_writtingId": 0,
-                "linkInvitation": "string",
+                "linkInvitation": 1,
                 "banned": false,
                 "dateCreate": fecha,
                 "invitationStatus": false
@@ -145,7 +175,13 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         
         $http.post('rest/protected/writting/createUserHasWritting', $scope.userHasWritting).success(function(response) {
 
-        });
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
     }
 
     $scope.showPublish = function(){
@@ -155,7 +191,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     	}else{
     		$scope.ppublish = false;
     	}	
-    }
+    };
     
     $scope.publish = function() {
         $scope.writting = {
@@ -185,7 +221,59 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
             console.log("writting/publish");
-        })
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
     }
     
+    
+
+    /* Mandar el habilitado, el actor actual, y revisar si hay un actor adentro
+     * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
+     * 
+     * */
+
+    
+    $scope.finish = function(){
+    }
+    
+    
+    var content = "";
+    $scope.participation;
+    var mainWr= "";
+    
+	$scope.loadData = function(){
+		mainWr = $localStorage.mainWritting;
+	}
+	$scope.loadData();
+
+    $scope.contentLastWritting = function(){
+		  $http({ url:'rest/protected/writting/getContentLastWrittingByMain', 
+			  method: 'POST' ,
+			  params: {mainWritting : mainWr}
+		  }).success(function(response) {
+		     content = response.content;
+		     $scope.participation = response.participation;
+		     
+		     $('#preview').html(content);
+		     
+		     if($scope.participation == true){
+		    	 $scope.divShow = true;
+		    	 createWritting();
+		     }else{
+		    	 $scope.divShow = false;
+		    
+		     }
+		    })
+		   
+    };
+
+    $scope.contentLastWritting();
+
+   
+
 }]);

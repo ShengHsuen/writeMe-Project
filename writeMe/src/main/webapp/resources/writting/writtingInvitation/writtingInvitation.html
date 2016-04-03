@@ -16,19 +16,30 @@
 				</p>
 			</div>
 		</div> 	
+		
+		<!-- Aqui va la obra anterior  -->
+		<div class="col-xs-1"></div>
+    <div class="padder text-justify fr-viewx col-xs-12 bg-white "  id="preview" style="-webkit-user-select:
+		none; -moz-user-select: none;  user-select: none; padding: 20px;">
+		<p ></p>
+	 </div>
+	
+	<div ng-show="divShow">
+		
 		<p ng-show="modifiedDate" class="text-center"><small>Ultima modificación: {{modified}}</small></p>
 		<p ng-hide="notModified" class="text-center"><small>No se han guardado los cambios</small></p>
 
-		<div id="froala-editor" class="froala-editor">
+		<div id="froala-editor" class="froala-editor" >
 			<form id="froala-form" >
 				<textarea  class="selector" style="margin-top: 30px;" placeholder="Type some text" ng-model="content" id='edit' >
 
 				</textarea>
 			</form>
 		</div>
-		<button type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">Guardar</button>
-		<button ng-click="showPublish()" class="btn btn-lg btn-default btn-block" ng-messages="expression" data-toggle="modal" data-target="#myModal" class="btn btn-default">Publicar</button>
-
+		<button id="send" type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">Guardar</button>
+		<button id="finish" type="submit" ng-click="finish()" class="btn btn-lg btn-default btn-block" class="btn btn-default">terminar</button>
+		<button ng-show="isAdmin" ng-click="showPublish()" class="btn btn-lg btn-default btn-block" ng-messages="expression" data-toggle="modal" data-target="#myModal" class="btn btn-default">Publicar</button>
+    </div>
 		<script>
 			$(function() {
 				$('#edit').on('froalaEditor.initialized', function(e, editor) {

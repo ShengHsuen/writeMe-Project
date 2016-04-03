@@ -1,5 +1,9 @@
 package com.mett.writeMe.controllers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +28,7 @@ import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
+import com.mett.writeMe.services.GeneratePDFService;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.WrittingServiceInterface;
@@ -88,37 +93,48 @@ public class WrittingController {
 		//us.setUser(WrittingService.getUsersPublished());
 		return us;		
 	}
+	
+	
+	/*@author Sheng Hsuen
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/createWrittingInvitation", method = RequestMethod.POST)
+	public WrittingResponse createInvitation(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+			
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			u = LoginService.getUser();
+			BeanUtils.copyProperties(w, wr);
+
+			Boolean state = WrittingService.createWrittingInvitation(wr);
+			
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}	
+		return us;
+	}
+	
 
 	/**author Sheng Hsuen Cheng
 	 * @param ur
 	 * @return
 	 */
 	@RequestMapping(value = "/editContent", method = RequestMethod.POST)
-	public WrittingResponse editContent(@RequestBody WrittingRequest ur, HttpServletRequest servletRequest) {
-		HttpSession currentSession = servletRequest.getSession();
+	public WrittingResponse editContent(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
 
 		System.out.print("EDIT CONTENT IMPRIMIR EL POJO" + w.getName());
 
-		if(wr.getTypeWritting().equals("Personal")){
 			wr.setContent(ur.getWritting().getContent());
 			Boolean state = WrittingService.editWritting(wr);
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
 			}
-		}else{
-			wr.setContent(ur.getWritting().getContent());
-			System.out.print("EDIT CONTENT ELSE"+ wr.getName());
-			Boolean state = WrittingService.editWrittingInvitation(wr, currentSession);
-
-			if (state) {
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-		}
 		return us;
 	}
 
@@ -220,6 +236,15 @@ public class WrittingController {
 
 				//eliminar el main
 				WrittingService.deletewritting(writtingMainId);
+				/* elimina la imagen del fichero
+				File fichero = new File(wrt.getImage());
+				System.out.println(fichero.getAbsolutePath());
+				String absolutePath = "resources/writtingImages/" + fichero.getName();
+				fichero = new File(absolutePath);
+				if (fichero.delete())
+					System.out.println("El fichero ha sido borrado satisfactoriamente");
+				else
+					System.out.println("El fichero no puede ser borrado");*/
 			}
 
 		});
@@ -266,4 +291,33 @@ public class WrittingController {
 			wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
 			return wrresponse;
 		}
+		/**
+		 * @author Mildred Guerra
+		 * Generate pdf
+		 * @throws Exception 
+		 */
+		@RequestMapping(value = "/generatePDF", method = RequestMethod.POST)
+		public  WrittingResponse generatePDF(@RequestParam("writtingId") int idWritting) throws Exception {
+			Writting w = WrittingService.getWrittingById(idWritting);
+			GeneratePDFService pdfService=new GeneratePDFService();
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			wrresponse.setName( pdfService.pdf(w,servletContext));
+			return wrresponse;
+		}		
+		/**
+		 * @author Mario Villalobos 
+		 * @param idWritting
+		 * @return WrittingResponse  
+		 */
+		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
+		public WrittingResponse getContentLastWrittingByMain(@RequestParam("mainWritting") int mainWritting) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			Writting w = WrittingService.getWrittingById(mainWritting);
+			String content = WrittingService.getContentLastWrittingByMainWritting(w);
+			boolean participation = WrittingService.getParticipationLastWrittingByMainWritting(w);
+			wrresponse.setContent(content);
+			wrresponse.setParticipation(participation);
+			return wrresponse;
+		}
+
 }

@@ -33,6 +33,8 @@ public class WrittingResponse extends BaseResponse{
 	private List<UserHasWrittingPOJO> userHasWritting;
 	private int idWritting;
 	private String name;
+	private boolean participation;
+	private String content;
 	
 	public int getIdWritting() {
 		return idWritting;
@@ -70,4 +72,21 @@ public class WrittingResponse extends BaseResponse{
 		this.userHasWritting = userHasWritting;
 	}
 
+	public boolean isParticipation() {
+		return participation;
+	}
+
+	public void setParticipation(boolean participation) {
+		this.participation = participation;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	
 }

@@ -136,7 +136,7 @@ public class UsersService implements UsersServiceInterface{
 		List<String> us = new ArrayList<String>();
 		int j=0;
 		for(int i=0;i<=uhw.size()-1;i++){
-			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false){
+			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false && uhw.get(i).getInvitationStatus() == false){
 				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
 				j++;
 			}

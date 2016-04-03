@@ -52,9 +52,13 @@
 <link rel="stylesheet" href="resources/writting/writting/css/plugins/code_view.css">
 <link rel="stylesheet" href="resources/writting/writting/css/plugins/code_view.css">
 <link rel="stylesheet" href="resources/writting/writting/css/plugins/fullscreen.min.css">
-<link rel="stylesheet" href="resources/html/css/imgEffect.css">
 
+<link rel="stylesheet" href="resources/writting/writting/css/froala_style.min.css" type="text/css" />
+
+<link rel="stylesheet" href="resources/html/css/imgEffect.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -74,16 +78,15 @@
 					<i class="glyphicon glyphicon-align-justify"></i>
 				</button>
 				<!-- brand -->
-				<a href="#/" class="navbar-brand text-lt">
-					<span class="hidden-folded m-l-xs">WriteMe</span>
+				<a href="#/" class="navbar-brand text-lt"> <span
+					class="hidden-folded m-l-xs">WriteMe</span>
 				</a>
 				<!-- / brand -->
 			</div>
 			<!-- / navbar header -->
 
 			<!-- navbar collapse -->
-			<div
-				class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+			<div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
 				<!-- buttons -->
 				<div class="nav navbar-nav hidden-xs hide">
 					<a href="" class="btn no-shadow navbar-btn"
@@ -95,6 +98,16 @@
 					</a>
 				</div>
 				<!-- / buttons -->
+				
+
+				<!-- SERVIDOR CAIDO -->
+				
+				<span ng-controller="ModalDemoCtrl">
+          			<script type="text/ng-template" id="myModalContent.html">
+            			<div ng-include="'resources/modals/modal.form.html'"></div>
+          			</script>
+        		</span>	
+        		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
 				<ul class="nav navbar-nav hidden-sm">
@@ -107,11 +120,10 @@
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
 					ui-shift="prependTo" data-target=".navbar-collapse" role="search">
-<!-- 					ng-controller="HomeCtrl" -->
-					
+					<!-- 					ng-controller="HomeCtrl" -->
+
 				</form>
 				<!-- / search form -->
-
 		<ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle">
@@ -156,27 +168,39 @@
 
 		<!-- aside -->
 		<aside id="aside" class="app-aside hidden-xs bg-dark">
-			<div class="aside-wrap" >
+			<div class="aside-wrap">
 				<div class="navi-wrap">
 
 					<!-- nav -->
-					<nav ui-nav class="navi clearfix">
+					<nav class="navi clearfix" ui-nav="">
 						<ul class="nav">
-							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-								<span></span>
+							<li><a href="/writeMe/app#/home" class="auto"> <span
+									class="pull-right text-muted"></span> <i
+									class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></a></li>
+
+							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs" >
+								<span>Mi biblioteca</span>
 							</li>
-							<li><a href="#/" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></li>
-							</a>
-							</li>
-							<li class="line dk"></li>
-							<li><a href="app#/showWrittings" class="auto"> <span
-									class="pull-right text-muted">
-								</span> <i class="glyphicon glyphicon-book icon"></i><span
-									class="font-bold" >Mi biblioteca </span>
-							</a>
-						</ul>
+									<li class="nav-sub-header">
+									<a href> 
+									<span>Mi biblioteca</span>
+									</a></li>
+									
+									<li><a href="/writeMe/app#/showWrittings"> 
+									<i class="glyphicon glyphicon-book icon"></i>
+									<span>Personal</span>
+									</a></li>
+									
+									<li><a href="/writeMe/app#/showWrittingsInvitation">
+									<i class="glyphicon glyphicon-book icon"></i>  
+									<span>Por invitación</span>
+									</a></li>
+									
+									<li><a href="/writeMe/app#/showWrittingsPublic">
+									<i class="glyphicon glyphicon-book icon"></i>
+									<span>Pública</span>
+									</a></li>
+					</ul>
 					</nav>
 					<!-- nav -->
 
@@ -197,7 +221,6 @@
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-
   
   <!-- Del bower y home -->
   <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
@@ -216,6 +239,7 @@
   <script src="resources/bower_components/angular-ui-grid/ui-grid.min.js"></script>
   <script src="resources/libs/jquery/jquery/dist/jquery.js"></script>
   <script src="resources/libs/jquery/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="resources/libs/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   
   <script src="resources/html/js/ui-load.js"></script>
   <script src="resources/html/js/ui-jp.config.js"></script>
@@ -229,6 +253,9 @@
   <script src="resources/writting/writting/writting.js"></script>
   <script src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
   <script src="resources/writting/showWrittings/showWrittings.js"></script>
+  
+  <script src="resources/writting/showWrittingsInvitation/showWrittingsInvitation.js"></script>
+
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
   <script src="resources/legalEstablishment/legalEstablishment.js"></script>
@@ -254,23 +281,22 @@
   <script type="text/javascript" src="resources/writting/writting/js/plugins/url.min.js"></script>
   <script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
 
-
-
 	<!-- Del bower y home -->
 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 
 	<script
 		src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		
+
 	<script
 		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
-		
-	<script src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
+
+	<script
+		src="resources/non_bower_components/angular-file-upload-shim.min.js"></script>
 	<script src="resources/bower_components/angular/angular.js"></script>
 	<script src="resources/bower_components/angular-route/angular-route.js"></script>
 
-    <script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
-    
+	<script src="resources/bower_components/ngstorage/ngStorage.min.js"></script>
+
 	<script src="resources/non_bower_components/angular-file-upload.min.js"></script>
 	<script src="resources/app.js"></script>
 
@@ -336,7 +362,9 @@
 		src="resources/writting/writting/js/plugins/video.min.js"></script>
 	<script type="text/javascript"
 		src="resources/writting/writting/js/plugins/url.min.js"></script>
-	<script type="text/javascript" src="resources/writting/writting/js/plugins/entities.min.js"></script>
-	<script type="text/javascript" src="resources/writting/writting/js/plugins/fullscreen.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/entities.min.js"></script>
+	<script type="text/javascript"
+		src="resources/writting/writting/js/plugins/fullscreen.min.js"></script>
 </body>
 </html>
