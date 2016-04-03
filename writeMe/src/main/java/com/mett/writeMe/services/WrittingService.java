@@ -324,5 +324,7 @@ public class WrittingService implements WrittingServiceInterface{
 		return wrpojo;
 	}
 
+	
+
 
 }
