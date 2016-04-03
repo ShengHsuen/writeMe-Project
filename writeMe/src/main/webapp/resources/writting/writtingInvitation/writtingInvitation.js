@@ -274,13 +274,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		    	 $scope.divShow = true;
 		    	 createWritting();
 		     }
-		    }).catch(function(error){
-				   $scope.serverDown = function()
-					{
-					   $rootScope.$broadcast('serverDown');
-					}
-				   $scope.serverDown();
-			   });
+		    })
 		   
     };
 

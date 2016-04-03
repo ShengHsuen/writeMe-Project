@@ -31,9 +31,7 @@ public class WrittingService implements WrittingServiceInterface{
 	@Autowired 
 	private WrittingRepository writtingRepository;
 	@Autowired 
-	private UserHasWrittingRepository userHasWrittingRepository;
-	@Autowired
-	private UserRepository userRepository; 
+	private UserHasWrittingRepository userHasWrittingRepository; 
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
@@ -203,6 +201,12 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean editWritting(Writting wr) {
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		int index = 0;
+		WrittingPOJO = getWrittingsByMainWritting(wr);
+		index = WrittingPOJO.lastIndexOf(wr);
+		
+		wr.setWrittingId(index);
 		Writting nwritting = writtingRepository.save(wr);
 
 		return (nwritting == null) ? false : true;
@@ -319,6 +323,8 @@ public class WrittingService implements WrittingServiceInterface{
 		wrpojo = WrittingPOJO.get(WrittingPOJO.size()-1);
 		return wrpojo;
 	}
+
+	
 
 
 }
