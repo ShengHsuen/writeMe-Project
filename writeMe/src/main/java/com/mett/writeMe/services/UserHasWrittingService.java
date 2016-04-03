@@ -41,6 +41,18 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	
 	@Override
 	@Transactional
+	public Boolean edit(UserHasWrittingRequest ur) {
+		UserHasWritting userHasWritting = new UserHasWritting();
+		
+		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+
+		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
+		
+		return (nWritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
 	public List<UserHasWrittingPOJO> getAll(UserHasWrittingRequest ur) {
 		List<UserHasWritting> UserHasWrittings =  userHasWrittingRepository.findAll();
 		return generateUserHasWrittingDtos(UserHasWrittings);
@@ -78,6 +90,9 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean editUserHasWritting(UserHasWritting uhw) {
+		uhw = userHasWrittingRepository.findByUserAndWritting(uhw.getUser(),uhw.getWritting());
+		System.out.println("!!!!!!!id: " + uhw.getUser_has_writtingId());
+		uhw.setInvitationStatus(true);
 		UserHasWritting uhwritting = userHasWrittingRepository.save(uhw);
 		return (uhwritting == null) ? false : true;
 	}

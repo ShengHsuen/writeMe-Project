@@ -68,7 +68,9 @@ angular.module('myApp', [
 					      "banned": false,
 					      "invitationStatus": true,
 					      "owner": false
-					}	
+					},
+	        		"user": $scope.user,
+	        		"writting": writting
 			};
 		  $http.post('rest/protected/invitation/acceptInvitation', $scope.userHasWritting).success(function(response) {
 			  console.log("Success");

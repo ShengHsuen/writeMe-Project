@@ -133,27 +133,11 @@ public class UsersService implements UsersServiceInterface{
 	public List<String> getUsersOwner(List<WrittingPOJO> wpojo, String userTerm) {
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
 		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
-		System.out.println("userrr: " + user.get(0).getAuthor());
 		List<String> us = new ArrayList<String>();
-		List<UserHasWritting> uhowner = userHasWrittingRepository.findAllByOwnerTrue();
-		
-		//List<UserHasWritting> uh = userHasWrittingRepository.findAllBylinkInvitation(wpojo.get(0).getWrittingId());
-		
-		/*for(int i=0;i<=wpojo.size()-1;i++){
-			if(uhowner.get(i).getUser() == uh.get(i).getUser()){
-				System.out.println("IF ");
-			}
-		}*/
-		
 		int j=0;
 		for(int i=0;i<=uhw.size()-1;i++){
-			System.out.println("1 Author Us: " + user.get(0).getAuthor());
-			System.out.println("2 Author UHW: " + uhw.get(i).getUser().getAuthor());
-			//uhw.get(i).getLinkInvitation() == wpojo.get(j).getWrittingId() && 
-			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor())){
-				System.out.println("getUsersOwner entre al if");
-				us.add(uhowner.get(j).getUser().getAuthor());
-				System.out.println("J: " + j);
+			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false){
+				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
 				j++;
 			}
 			System.out.println("i: " + i);

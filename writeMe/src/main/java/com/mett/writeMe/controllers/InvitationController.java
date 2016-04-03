@@ -18,11 +18,11 @@ import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.repositories.UserRepository;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.UsersServiceInterface;
-import com.mett.writeMe.services.WrittingService;
 import com.mett.writeMe.services.WrittingServiceInterface;
 
 /**
@@ -98,10 +98,20 @@ public class InvitationController {
 	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.POST)
 	public WrittingResponse acceptInvitation(@RequestBody UserHasWrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
+		User user = new User();
+		Writting wr = new Writting();
+		UserHasWritting uhw = new UserHasWritting();
+		BeanUtils.copyProperties(ur.getWritting(), wr);
+		BeanUtils.copyProperties(ur.getUser(), user);
+		System.out.println("acceptInvitation user: "+user.getAuthor());
+		System.out.println("acceptInvitation user: "+wr.getName());
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		ur.getUserHasWritting().setInvitationStatus(true);
-		Boolean state = userHasWrittingService.save(ur);
+		ur.getUserHasWritting().setUser(user);
+		ur.getUserHasWritting().setWritting(wr);
+		BeanUtils.copyProperties(ur.getUserHasWritting(), uhw);
+		Boolean state = userHasWrittingService.editUserHasWritting(uhw);
 		return us;
 	}
 	

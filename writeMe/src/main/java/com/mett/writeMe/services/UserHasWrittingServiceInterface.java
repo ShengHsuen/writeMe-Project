@@ -15,4 +15,5 @@ public interface UserHasWrittingServiceInterface {
 	List<UserHasWrittingPOJO> getAll();
 	Boolean editUserHasWritting(UserHasWritting uhw);
 	Boolean deleteUserHasWritting(Writting wr, User us);
+	Boolean edit(UserHasWrittingRequest ur);
 }
