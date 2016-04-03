@@ -202,21 +202,18 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public Boolean editWritting(Writting wr) {
 		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		Writting writting = new Writting();
 		int index = 0;
 		int edit = 0;
 		WrittingPOJO = getWrittingsByMainWritting(wr);
 		index = WrittingPOJO.size()-1;
 		edit = WrittingPOJO.get(index).getWrittingId();
-			
-		System.out.print("ESTE ES EL ID DEL WRITTING QUE SE EDITA" + edit);
 		
-		wr.setWrittingId(edit);
-		if(wr.getTypeWritting().equals("Personal")){
-			
-		}else{
-			wr.setName(null);
-		}
-		Writting nwritting = writtingRepository.save(wr);
+		System.out.print("ESTE ES EL ID DEL WRITTING QUE SE EDITA" + edit);
+		writting = getWrittingById(edit);
+		writting.setContent(wr.getContent());
+		
+		Writting nwritting = writtingRepository.save(writting);
 
 		return (nwritting == null) ? false : true;
 	}
@@ -227,10 +224,23 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean finishWritting(Writting wr) {
-		wr.setParticipation(false);
-		Writting nwritting = writtingRepository.save(wr);
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		Writting writting = new Writting();
+		int index = 0;
+		int edit = 0;
+		WrittingPOJO = getWrittingsByMainWritting(wr);
+		index = WrittingPOJO.size()-1;
+		edit = WrittingPOJO.get(index).getWrittingId();
+		
+		writting = getWrittingById(edit);
+		writting.setContent(wr.getContent());
+		writting.setParticipation(false);
+		System.out.print("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
+		
+		Writting nwritting = writtingRepository.save(writting);
 
 		return (nwritting == null) ? false : true;
+		
 	}
 	
 	@Override

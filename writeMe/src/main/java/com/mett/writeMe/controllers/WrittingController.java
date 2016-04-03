@@ -116,6 +116,27 @@ public class WrittingController {
 		return us;
 	}
 	
+	
+	/**author Sheng Hsuen Cheng
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/editContentFinish", method = RequestMethod.POST)
+	public WrittingResponse editContentFinish(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		BeanUtils.copyProperties(w, wr);
+
+			wr.setContent(ur.getWritting().getContent());
+			Boolean state = WrittingService.finishWritting(wr);
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
+		return us;
+	}
+	
+	
 
 	/**author Sheng Hsuen Cheng
 	 * @param ur
