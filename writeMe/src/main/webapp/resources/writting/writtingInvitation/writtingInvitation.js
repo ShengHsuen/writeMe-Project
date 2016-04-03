@@ -24,9 +24,11 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		
 	    $scope.ppublish = false;
 		
-		$scope.send = function(){
+		$scope.finish = function(){
 			$scope.content = $('#edit').val();
-			update();
+			updateFinish();
+			var path = "/writeMe/app#/showWrittingsInvitation";
+			  window.location.href = path;
 		}
 
 		$('#btnYes').click(function() {
@@ -110,6 +112,38 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         };
         $http.post('rest/protected/writting/createWrittingInvitation', $scope.writting).success(function(response) {
 				createUserHasWritting();
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+    }
+    
+    var updateFinish = function() {
+        $scope.writting = {
+            "pageNumber": 0,
+            "pageSize": 0,
+            "direction": "",
+            "sortBy": [""],
+            "searchColumn": "string",
+            "searchTerm": $scope.name,
+            "writting": {
+                "name": $scope.name,
+                "description": "a",
+                "cantUsers": 0,
+                "date": fecha,
+                "likes": 0,
+                "limit time": "2100-01-01",
+                "numMaxCharacters": 10000,
+                "numMinCharacters": 30,
+                "published": publish,
+                "content": $scope.content
+            }
+        };
+        $http.post('rest/protected/writting/editContentFinish', $scope.writting).success(function(response) {
+				
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
@@ -235,10 +269,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
      * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
      * 
      * */
-
-    
-    $scope.finish = function(){
-    }
     
     
     var content = "";
