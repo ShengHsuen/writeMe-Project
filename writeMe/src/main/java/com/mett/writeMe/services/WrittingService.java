@@ -203,10 +203,19 @@ public class WrittingService implements WrittingServiceInterface{
 	public Boolean editWritting(Writting wr) {
 		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
 		int index = 0;
+		int edit = 0;
 		WrittingPOJO = getWrittingsByMainWritting(wr);
-		index = WrittingPOJO.lastIndexOf(wr);
+		index = WrittingPOJO.size()-1;
+		edit = WrittingPOJO.get(index).getWrittingId();
+			
+		System.out.print("ESTE ES EL ID DEL WRITTING QUE SE EDITA" + edit);
 		
-		wr.setWrittingId(index);
+		wr.setWrittingId(edit);
+		if(wr.getTypeWritting().equals("Personal")){
+			
+		}else{
+			wr.setName(null);
+		}
 		Writting nwritting = writtingRepository.save(wr);
 
 		return (nwritting == null) ? false : true;
