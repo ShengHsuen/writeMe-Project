@@ -81,7 +81,7 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 					"searchTerm": $scope.name,
 					"writting": {
 					      "date": fecha,
-					      "participation": true,
+					      "participation": false,
 					      "image": "",
 					      "cantUsers": $scope.cantUsers,
 					      "description": $scope.description,

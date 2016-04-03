@@ -243,18 +243,25 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     
     var content = "";
     $scope.participation;
-    var mainWr= "";
+    var name= "";
     
 	$scope.loadData = function(){
-		mainWr = $localStorage.mainWritting;
+		name = $localStorage.nameWritting;
 	}
 	$scope.loadData();
 
     $scope.contentLastWritting = function(){
-		  $http({ url:'rest/protected/writting/getContentLastWrittingByMain', 
-			  method: 'POST' ,
-			  params: {mainWritting : mainWr}
-		  }).success(function(response) {
+    	$scope.writting = {
+    			"pageNumber" : 0,
+    			"pageSize" : 0,
+    			"direction" : "",
+    			"sortBy" : [ "" ],
+    			"searchColumn" : "string",
+    			"searchTerm" : name,
+    			"writting" : {}
+    	};
+    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.writting
+		  ).success(function(response) {
 		     content = response.content;
 		     $scope.participation = response.participation;
 		     

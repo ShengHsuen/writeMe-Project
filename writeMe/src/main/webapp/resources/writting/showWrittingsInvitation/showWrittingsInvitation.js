@@ -20,7 +20,6 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			"searchTerm" : "",
 			"writting" : {}
 	};
-	//hay que agregar un catch() aca
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
 	}).catch(function(error){
