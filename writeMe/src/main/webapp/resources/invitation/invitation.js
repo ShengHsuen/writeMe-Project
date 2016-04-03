@@ -33,9 +33,27 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			}
 		}
 	}
-	$scope.getInvitatedUsers = function(){
-		//Metodo que se trae los usuarios ya invitados, para asignarlos en la vista en invitados y no mostrarlos en el 
-	}
+	/*$scope.getInvitatedUsers = function(){
+		  $scope.invitation = {"pageNumber": 0,
+			        "pageSize": 0,
+			        "direction": "",
+			        "sortBy": [""],
+			        "searchColumn": "string",
+			        "searchTerm": $scope.user.author,
+			        "user": {},
+			        "owner": {},
+			        "writting": {} 
+			        };
+		     $http.post('rest/protected/invitation/getInvitationByUser', $scope.invitation).success(function(response) {
+		    	   console.log("Invitation Success");
+			  	   $scope.writting = response.writting;
+			 	   $scope.hoster = response.owner;
+			 	   $scope.cantInvitations = $scope.writting.length;
+			  	   console.log($scope.writting);
+			  	   console.log($scope.hoster);
+		     });
+	}*/
+	
     $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
         for (var i = 0; i < arraytosearch.length; i++) {
           if (arraytosearch[i][key] == valuetosearch) {

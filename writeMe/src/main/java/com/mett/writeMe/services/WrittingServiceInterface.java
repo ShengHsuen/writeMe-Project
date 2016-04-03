@@ -34,4 +34,5 @@ public interface WrittingServiceInterface {
 	String getContentLastWrittingByMainWritting(Writting wr);
 	Boolean finishWritting(Writting wr);
 	boolean getParticipationLastWrittingByMainWritting(Writting wr);
+	List<String> getUsersInvited(WrittingRequest ur, String s);
 }

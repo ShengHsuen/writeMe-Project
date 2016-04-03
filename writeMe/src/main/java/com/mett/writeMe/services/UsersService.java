@@ -140,9 +140,7 @@ public class UsersService implements UsersServiceInterface{
 				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
 				j++;
 			}
-			System.out.println("i: " + i);
 		}
-		
 		return us;
 	}
 

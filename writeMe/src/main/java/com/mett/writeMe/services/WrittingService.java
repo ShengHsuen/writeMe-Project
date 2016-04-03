@@ -292,10 +292,8 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur) {
 		List<User> user = userRepository.findByAuthorContaining(ur.getSearchTerm()); //Siempre sera un usuario el que recibe
-		//System.out.println("1- User: "+ user.get(0).getAuthor());
 		List<Writting> wr = new ArrayList<Writting>();
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-		//System.out.println("2- Writting: "+ uhw.get(0).getWritting().getWrittingId());
 		for(int i=0;i<=uhw.size()-1;i++){
 			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == false && uhw.get(i).getOwner() == false){
 				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
@@ -303,6 +301,23 @@ public class WrittingService implements WrittingServiceInterface{
 		}
 		return generateWrittingDtos(wr);
 	}
+	
+	@Override
+	@Transactional
+	public List<String> getUsersInvited(WrittingRequest ur, String userTerm) {
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
+		List<String> us = new ArrayList<String>();
+		int j=0;
+		for(int i=0;i<=uhw.size()-1;i++){
+			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false && uhw.get(i).getInvitationStatus() == false){
+				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
+				j++;
+			}
+		}
+		return us;
+	}
+	
 	
 	/**
 	 * @author Mario Villalobos

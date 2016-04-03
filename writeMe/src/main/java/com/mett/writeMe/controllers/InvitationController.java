@@ -92,8 +92,18 @@ public class InvitationController {
 		us.setCodeMessage("users fetch success");
 		us.setWritting(writtingService.getWrittingsInvitationByUser(ur));
 		us.setOwner(usersService.getUsersOwner(writtingService.getWrittingsInvitationByUser(ur),ur.getSearchTerm()));
+		//us.setUsersInvited(usersService.getUsersInvited(writtingService.getUsersInvited(ur),ur.getSearchTerm()));
 		return us;
 	}
+	
+	/*@RequestMapping(value = "/getUsersInvited", method = RequestMethod.POST)
+	public WrittingResponse getUsersInvited(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		us.setUsersInvited(usersService.getUsersInvited(writtingService.getUsersInvited(ur),ur.getSearchTerm()));
+		return us;
+	}*/
 	
 	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.POST)
 	public WrittingResponse acceptInvitation(@RequestBody UserHasWrittingRequest ur) {
