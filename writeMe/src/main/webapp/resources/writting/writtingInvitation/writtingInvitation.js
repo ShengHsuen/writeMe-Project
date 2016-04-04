@@ -9,6 +9,11 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     });
  }]).controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
 
+	 	$scope.disableButtons = function() {
+	    	$rootScope.$broadcast('disableButtons');
+	    };
+	 	$scope.disableButtons();
+	 
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
 			$scope.writtingload = $localStorage.writting;
@@ -30,6 +35,8 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		$scope.finish = function(){
 			$scope.content = $('#edit').val();
 			updateFinish();
+			$rootScope.$broadcast('disableButtonsTrue');
+			
 			var path = "/writeMe/app#/showWrittingsInvitation";
 			  window.location.href = path;
 		}
