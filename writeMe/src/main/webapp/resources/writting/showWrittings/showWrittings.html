@@ -3,27 +3,26 @@
   <div id="content" class="app-content" role="main">
 
 	   
-     <div class="panel panel-default" ng-repeat="wr in writting  | orderBy:'writtingId':true" ng-show="wr.typeWritting == 'Personal'" >
-     
-       <div class="panel-heading font-bold">{{wr.name}}</div>
-        <div class="panel-body">
+     <div class="col-sm-3  col-sm-offset-1 text-center" ng-repeat="wr in writting  | orderBy:'writtingId':true" ng-show="wr.typeWritting == 'Personal'" >
+          <div class="panel-body">
           <form role="form">
-            <div class="form-group">
-              <label>Categoría: {{wr.category}}</label>
+           <div class="form-group">
+           <h4 >{{wr.name}}</h4>
+              <label>{{wr.category}}</label>
             </div>
-            <div class="form-group">
-              <label>Descripción: {{wr.description}}</label>
-            </div>
-		        <div class="hovereffect form-group overlay info">
-		        	<img ng-src="{{wr.image}}" width="260" height="394" ng-click="saveData(wr.content, wr.name, wr.cantUsers, wr.writtingId)"></img>
+<!--             <div class="form-group">
+              <label> {{wr.description}}</label>
+            </div> -->
+		        <div class="form-group overlay info">
+		        	<img ng-src="{{wr.image}}" width="130" height="194" ng-click="saveData(wr.content, wr.name, wr.cantUsers, wr.writtingId)" style="cursor: pointer;"></img>
 		        </div>
 		        <div ng-show="ppublish" class="row bg-light lter b-b wrapper-sm hidden-print">
-					<h5 class="text-center" class="m-n font-thin h5">Seguro que deseas eliminar la obra {{wr.name}} ?</h5>
-					<div class="btn-group col-md-2 col-md-offset-5 text-center">
+					<h5 class="text-center" class="m-n font-thin h5">¿Desea eliminar la obra {{wr.name}} ?</h5>
+					<div class="btn-group  col-md-8 col-md-offset-2 text-center">
 						<p>
 							<button ng-click="deleteWritting(wr.writtingId)"  class="btn btn-sm btn-default">Sí</button>
 							<button class="btn btn-sm btn-default" ng-click="ppublish = !ppublish"   ng-messages="expression" data-toggle="modal" data-target="#myModal">No</button>
-						</p>
+						</p>	
 					</div>
 		       </div>	
 		        <button class="btn btn-sm btn-primary" ng-click="ppublish = !ppublish"  ng-messages="expression" data-toggle="modal" data-target="#myModal" >Eliminar</button> 

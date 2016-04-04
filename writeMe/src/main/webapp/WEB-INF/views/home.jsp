@@ -110,7 +110,7 @@
         		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
-				<ul class="nav navbar-nav hidden-sm">
+				<ul class="nav navbar-nav ">
 					<li><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> <a
 						href="app#/createWritting"> <span
 							translate="header.navbar.new.NEW">Crear obra</span></a> </span></li>
@@ -153,13 +153,14 @@
           </li>
           <li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
 			<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
-			<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span> 
+			<span >Bienvenido {{user.author}}</span> 
 			<b class="caret"></b>
 			</a> <!-- dropdown -->
 			<ul class="dropdown-menu animated fadeInRight w">
 				<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
 			</ul> <!-- / dropdown --></li>
         </ul>
+        </div>
 		</header>
 		<!-- / header -->
 
@@ -194,7 +195,7 @@
 									<span>Por invitación</span>
 									</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittingsPublic">
+									<li class="hidden"><a href="/writeMe/app#/showWrittingsPublic">
 									<i class="glyphicon glyphicon-book icon"></i>
 									<span>Pública</span>
 									</a></li>
