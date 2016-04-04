@@ -362,11 +362,19 @@ public class WrittingService implements WrittingServiceInterface{
 	public Boolean getOwner(String userTerm, Writting w) {
 		List<User> us = new ArrayList<User>();
 		us = userRepository.findByAuthorContaining(userTerm);
-		List<User> user = userHasWrittingRepository.findUserByUserUserIdContainingAndWrittingAndOwnerTrue(us.get(0).getUserId(), w); //Siempre sera un usuario el que recibe
-		Boolean resul = false;
-		if(user != null){
-			resul = true;
-		}else{
+		User u = new User();
+		u = us.get(0);
+		System.out.println("wwwwwww "+us.get(0).getUserId() + "qqqqqqq " +w.getName());
+		UserHasWritting uhw = new UserHasWritting();
+		Boolean resul;
+		uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndOwnerTrue(w.getWrittingId(),u.getUserId()); //Siempre sera un usuario el que recibe
+		try{
+			if(uhw != null){
+				resul = true;
+			}else{
+				resul = false;
+			}
+		}catch(Exception e){
 			resul = false;
 		}
 		return resul;

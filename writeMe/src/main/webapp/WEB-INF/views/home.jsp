@@ -188,7 +188,7 @@
 									</a></li>
 									
 									<li><a href="/writeMe/app#/showWrittings"> 
-									<i class="glyphicon glyphicon-book icon"></i>
+									<i class="glyphicon glyphicon-user icon"></i>
 									<span>Personal</span>
 									</a></li>
 									

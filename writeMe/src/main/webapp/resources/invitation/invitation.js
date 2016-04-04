@@ -21,6 +21,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 		$scope.cantUsers = $localStorage.cantUsers;
 		$scope.sessionUser = $localStorage.data;
 		$scope.writtingId = $localStorage.writtingId;
+		$scope.writting = $localStorage.writting;
 	}
 	$scope.loadData();
 	
