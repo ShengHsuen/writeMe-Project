@@ -25,6 +25,19 @@ angular.module('myApp', [
 	$scope.disableMenu = true;
 	$scope.disableMessage = false;
 	
+	$scope.load = function(){
+		$scope.user = $localStorage.data;
+		$scope.hoster = $localStorage.hoster;
+		$scope.writting = $localStorage.writting;
+		console.log($scope.writting);
+	}
+	$scope.load();
+	
+	if($scope.user == null && $localStorage.data == null ){
+		var path = "/writeMe/#/signin";
+		window.location.href = path;
+	}	
+	
 	
 	$scope.$on('disableButtons', function(event){
 		console.log("ENTRA AL DISABLEBUTTONS");
@@ -41,16 +54,8 @@ angular.module('myApp', [
 		$scope.message = true;
 	}
 	
+	
 	$scope.init = function(){
-		
-		$scope.load = function(){
-			$scope.user = $localStorage.data;
-			$scope.hoster = $localStorage.hoster;
-			$scope.writting = $localStorage.writting;
-			console.log($scope.writting);
-		}
-		$scope.load();
-		
 		$scope.findInvitations = function(){
 			  $scope.invitation = {"pageNumber": 0,
 				        "pageSize": 0,
@@ -72,11 +77,6 @@ angular.module('myApp', [
 			     });
 		}
 		$scope.findInvitations();
-		
-		if($scope.user == null && $localStorage.data == null ){
-			var path = "/writeMe/#/signin";
-			window.location.href = path;
-		}	
 	}
 
 	$scope.init();
