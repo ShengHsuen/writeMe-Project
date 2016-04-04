@@ -185,6 +185,7 @@ public class WrittingController {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 		ur.getUserHasWritting().setUser(u);
 		ur.getUserHasWritting().setWritting(wr);
+		ur.getUserHasWritting().setInvitationStatus(true);
 		System.out.println("Obra a la que estoy seteando: " + ur.getUserHasWritting().getWritting().getWrittingId());
 		Boolean state = UserHasWrittingService.save(ur);
 

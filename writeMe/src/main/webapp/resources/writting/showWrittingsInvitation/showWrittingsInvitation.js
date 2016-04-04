@@ -31,8 +31,6 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	   });
 	}
 	$scope.init();
-
-	
 	
 	$scope.saveData = function(mainWr, name, cantUsers, writtingId){
 		params: {mainWritting : mainWr};

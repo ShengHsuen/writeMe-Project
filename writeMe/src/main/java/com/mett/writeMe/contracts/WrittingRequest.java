@@ -1,5 +1,6 @@
 package com.mett.writeMe.contracts;
 
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 
 /**
@@ -9,7 +10,16 @@ import com.mett.writeMe.pojo.WrittingPOJO;
 public class WrittingRequest extends BaseRequest {
 	
 	private WrittingPOJO writting;
+	private UserPOJO user;
 	
+	public UserPOJO getUser() {
+		return user;
+	}
+
+	public void setUser(UserPOJO user) {
+		this.user = user;
+	}
+
 	public WrittingRequest() {
 		super();
 	}

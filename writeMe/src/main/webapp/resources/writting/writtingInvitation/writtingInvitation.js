@@ -202,7 +202,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "linkInvitation": 1,
                 "banned": false,
                 "dateCreate": fecha,
-                "invitationStatus": false
+                "invitationStatus": true
             }
         };
         
