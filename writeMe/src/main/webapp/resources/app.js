@@ -22,8 +22,24 @@ angular.module('myApp', [
 }])
 
 .controller('mainCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
+	$scope.disableMenu = true;
+	$scope.disableMessage = false;
 	
-
+	
+	$scope.$on('disableButtons', function(event){
+		console.log("ENTRA AL DISABLEBUTTONS");
+		$scope.disableMenu = false;
+		$scope.disableMessage = true;
+	})
+	
+	$scope.$on('disableButtonsTrue', function(event){
+		$scope.disableMenu = true;
+		$scope.disableMessage = false;
+	})
+			
+	$scope.showMessage = function(){
+		$scope.message = true;
+	}
 	
 	$scope.init = function(){
 		
