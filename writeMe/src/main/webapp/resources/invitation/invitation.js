@@ -46,13 +46,11 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			        };
 		     $http.post('rest/protected/invitation/getInvitationByUser', $scope.invitation).success(function(response) {
 		    	   console.log("Invitation Success");
-			  	   $scope.writting = response.writting;
-			 	   $scope.hoster = response.owner;
-			 	   $scope.cantInvitations = $scope.writting.length;
-			  	   console.log($scope.writting);
-			  	   console.log($scope.hoster);
+			  	   $scope.usersInvited = response.usersInvited;
+			  	   console.log($scope.usersInvited);
 		     });
 	}*/
+	//$scope.getInvitatedUsers();
 	
     $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
         for (var i = 0; i < arraytosearch.length; i++) {

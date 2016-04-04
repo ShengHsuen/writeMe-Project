@@ -59,7 +59,13 @@ angular.module('myApp.showWrittings', [ 'ngRoute' , 'ngStorage'])
     	                params: {writtingId: writtingId}
     			  }).success(function() {
     					$scope.init();
-    			    });
+    			    }).catch(function(error){
+    					   $scope.serverDown = function()
+    						{
+    						   $rootScope.$broadcast('serverDown');
+    						}
+    					   $scope.serverDown();
+    				   });
    }
     
     $scope.$on('show-writtings', function(event, args) {

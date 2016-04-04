@@ -116,6 +116,27 @@ public class WrittingController {
 		return us;
 	}
 	
+	
+	/**author Sheng Hsuen Cheng
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/editContentFinish", method = RequestMethod.POST)
+	public WrittingResponse editContentFinish(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		BeanUtils.copyProperties(w, wr);
+
+			wr.setContent(ur.getWritting().getContent());
+			Boolean state = WrittingService.finishWritting(wr);
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
+		return us;
+	}
+	
+	
 
 	/**author Sheng Hsuen Cheng
 	 * @param ur
@@ -164,6 +185,7 @@ public class WrittingController {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 		ur.getUserHasWritting().setUser(u);
 		ur.getUserHasWritting().setWritting(wr);
+		ur.getUserHasWritting().setInvitationStatus(true);
 		System.out.println("Obra a la que estoy seteando: " + ur.getUserHasWritting().getWritting().getWrittingId());
 		Boolean state = UserHasWrittingService.save(ur);
 
@@ -310,13 +332,12 @@ public class WrittingController {
 		 * @return WrittingResponse  
 		 */
 		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
-		public WrittingResponse getContentLastWrittingByMain(@RequestParam("mainWritting") int mainWritting) {
+		public WrittingResponse getContentLastWrittingByMain(@RequestBody WrittingRequest ur) {
 			WrittingResponse wrresponse= new WrittingResponse(); 
-			Writting w = WrittingService.getWrittingById(mainWritting);
-			String content = WrittingService.getContentLastWrittingByMainWritting(w);
-			boolean participation = WrittingService.getParticipationLastWrittingByMainWritting(w);
-			wrresponse.setContent(content);
-			wrresponse.setParticipation(participation);
+			WrittingPOJO w = WrittingService.getWrittingByName(ur);
+			WrittingPOJO wrpojo = WrittingService.getContentLastWrittingByMainWritting(w);
+			wrresponse.setContent(wrpojo.getContent());
+			wrresponse.setParticipation(wrpojo.isParticipation());
 			return wrresponse;
 		}
 

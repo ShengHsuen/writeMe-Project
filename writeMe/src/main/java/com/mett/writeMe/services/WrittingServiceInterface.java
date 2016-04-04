@@ -32,7 +32,8 @@ public interface WrittingServiceInterface {
 	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
 	List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur);
 	String getContentLastWrittingByMainWritting(Writting wr);
-	Boolean finishWritting(Writting wr);
 	boolean getParticipationLastWrittingByMainWritting(Writting wr);
 	List<String> getUsersInvited(WrittingRequest ur, String s);
+	WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO wr);
+	Boolean finishWritting(Writting wr);
 }

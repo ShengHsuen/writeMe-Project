@@ -8,7 +8,6 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('showWrittingsInvitationCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
 	
-	
 	// Mostrar
 	$scope.init = function(){
 	$scope.writting = [];
@@ -21,7 +20,6 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			"searchTerm" : "",
 			"writting" : {}
 	};
-	//hay que agregar un catch() aca
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
 	}).catch(function(error){
@@ -33,8 +31,6 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	   });
 	}
 	$scope.init();
-
-	
 	
 	$scope.saveData = function(mainWr, name, cantUsers, writtingId){
 		params: {mainWritting : mainWr};

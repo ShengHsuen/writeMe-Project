@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.UsersRequest;
+import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
@@ -113,7 +114,7 @@ public class UsersService implements UsersServiceInterface{
 	public List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession){
 		int idUser = (int)currentSession.getAttribute("idUser");
 		User user = userRepository.findOne(idUser);
-		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAll();
+		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAllByInvitationStatusTrue();
 		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
 	
 		for (int i=0; i<= userHasWrittings.size()-1; i++){
@@ -131,6 +132,22 @@ public class UsersService implements UsersServiceInterface{
 	@Override
 	@Transactional
 	public List<String> getUsersOwner(List<WrittingPOJO> wpojo, String userTerm) {
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
+		List<String> us = new ArrayList<String>();
+		int j=0;
+		for(int i=0;i<=uhw.size()-1;i++){
+			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false && uhw.get(i).getInvitationStatus() == false){
+				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
+				j++;
+			}
+		}
+		return us;
+	}
+	
+	@Override
+	@Transactional
+	public List<String> getUsersInvited(WrittingRequest ur, String userTerm) {
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
 		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
 		List<String> us = new ArrayList<String>();

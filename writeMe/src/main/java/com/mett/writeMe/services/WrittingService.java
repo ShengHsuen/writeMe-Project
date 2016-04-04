@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Iterables;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
@@ -31,9 +30,9 @@ public class WrittingService implements WrittingServiceInterface{
 	@Autowired 
 	private WrittingRepository writtingRepository;
 	@Autowired 
-	private UserHasWrittingRepository userHasWrittingRepository;
-	@Autowired
-	private UserRepository userRepository; 
+	private UserHasWrittingRepository userHasWrittingRepository; 
+	@Autowired 
+	private UserRepository userRepository;
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
@@ -203,7 +202,19 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean editWritting(Writting wr) {
-		Writting nwritting = writtingRepository.save(wr);
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		Writting writting = new Writting();
+		int index = 0;
+		int edit = 0;
+		WrittingPOJO = getWrittingsByMainWritting(wr);
+		index = WrittingPOJO.size()-1;
+		edit = WrittingPOJO.get(index).getWrittingId();
+		
+		System.out.print("ESTE ES EL ID DEL WRITTING QUE SE EDITA" + edit);
+		writting = getWrittingById(edit);
+		writting.setContent(wr.getContent());
+		
+		Writting nwritting = writtingRepository.save(writting);
 
 		return (nwritting == null) ? false : true;
 	}
@@ -214,10 +225,23 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean finishWritting(Writting wr) {
-		wr.setParticipation(false);
-		Writting nwritting = writtingRepository.save(wr);
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		Writting writting = new Writting();
+		int index = 0;
+		int edit = 0;
+		WrittingPOJO = getWrittingsByMainWritting(wr);
+		index = WrittingPOJO.size()-1;
+		edit = WrittingPOJO.get(index).getWrittingId();
+		
+		writting = getWrittingById(edit);
+		writting.setContent(wr.getContent());
+		writting.setParticipation(false);
+		System.out.print("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
+		
+		Writting nwritting = writtingRepository.save(writting);
 
 		return (nwritting == null) ? false : true;
+		
 	}
 	
 	@Override
@@ -302,22 +326,6 @@ public class WrittingService implements WrittingServiceInterface{
 		return generateWrittingDtos(wr);
 	}
 	
-	@Override
-	@Transactional
-	public List<String> getUsersInvited(WrittingRequest ur, String userTerm) {
-		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
-		List<String> us = new ArrayList<String>();
-		int j=0;
-		for(int i=0;i<=uhw.size()-1;i++){
-			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false && uhw.get(i).getInvitationStatus() == false){
-				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
-				j++;
-			}
-		}
-		return us;
-	}
-	
 	
 	/**
 	 * @author Mario Villalobos
@@ -325,9 +333,9 @@ public class WrittingService implements WrittingServiceInterface{
 	 * @return a String content 
 	 */
 	@Override
-	public String getContentLastWrittingByMainWritting(Writting wr){
+	public WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO ws){
 		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
-		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
+		List<Writting> Writting = writtingRepository.findByNameContaining(ws.getName());
 		List<Writting> Writtings = writtingRepository.findAll();
 		WrittingPOJO dto = new WrittingPOJO();
 		BeanUtils.copyProperties(Writting.get(0), dto);
@@ -344,38 +352,31 @@ public class WrittingService implements WrittingServiceInterface{
 			}
 		}
 		String content;
-		content = WrittingPOJO.get(WrittingPOJO.size()-1).getContent();
-		System.out.println("aqui va la cosa de todo " + content);
-		return content;
-	}
-
-	
-	@Override
-	public boolean getParticipationLastWrittingByMainWritting(Writting wr){
-		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
-		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
-		List<Writting> Writtings = writtingRepository.findAll();
-		WrittingPOJO dto = new WrittingPOJO();
-		BeanUtils.copyProperties(Writting.get(0), dto);
-		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
-		WrittingPOJO.add(dto);
-		
-		for(int i=0; i <= Writtings.size()-1; i++){
-			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
-			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
-			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
-				BeanUtils.copyProperties(Writtings.get(i), dto);
-				WrittingPOJO.add(dto);
-				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
-			}
-		}
-		boolean participation;
-		participation = WrittingPOJO.get(WrittingPOJO.size()-1).isParticipation();
-		return participation;
+		WrittingPOJO wrpojo = new WrittingPOJO();
+		wrpojo = WrittingPOJO.get(WrittingPOJO.size()-1);
+		return wrpojo;
 	}
 
 	@Override
 	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getContentLastWrittingByMainWritting(Writting wr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getParticipationLastWrittingByMainWritting(Writting wr) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<String> getUsersInvited(WrittingRequest ur, String s) {
 		// TODO Auto-generated method stub
 		return null;
 	}
