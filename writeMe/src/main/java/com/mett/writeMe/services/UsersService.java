@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.UsersRequest;
-import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
@@ -147,20 +146,14 @@ public class UsersService implements UsersServiceInterface{
 	
 	@Override
 	@Transactional
-	public List<String> getUsersInvited(WrittingRequest ur, String userTerm) {
+	public List<String> getUsersInvited(Writting wr, String userTerm) {
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
 		List<User> user = userRepository.findByAuthorContaining(userTerm); //Siempre sera un usuario el que recibe
 		List<String> us = new ArrayList<String>();
-		int j=0;
-		for(int i=0;i<=uhw.size()-1;i++){
-			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false && uhw.get(i).getInvitationStatus() == false){
-				//us.addAll((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerFalse(uhw.get(i).getWritting().getWrittingId())).get(j).getUser().getAuthor());
-				
-				System.out.println("iiiiiii " + i);
-				System.out.println("usuario>>> "+us.get(0));
-				j++;
-			}
-		}
+				for(int j=0;j<=userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerFalse(wr.getWrittingId()).size()-1;j++){
+					us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerFalse(wr.getWrittingId())).get(j).getUser().getAuthor());
+					System.out.println("usuario>>> "+us.get(j));
+				}
 		return us;
 	}
 
