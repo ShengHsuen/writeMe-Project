@@ -89,6 +89,7 @@ angular.module('myApp', [
 			};
 		  $http.post('rest/protected/invitation/acceptInvitation', $scope.userHasWritting).success(function(response) {
 			  console.log("Success");
+			  $scope.init();
 			  $scope.navShowWrittingInvitation();
 		  });
 		    $scope.navShowWrittingInvitation = function() {
