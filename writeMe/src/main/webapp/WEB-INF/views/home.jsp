@@ -110,21 +110,33 @@
         		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
-				<ul class="nav navbar-nav ">
-					<li><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> <a
-						href="app#/createWritting"> <span
-							translate="header.navbar.new.NEW">Crear obra</span></a> </span></li>
+				<ul class="nav navbar-nav" ng-show="disableMenu">
+					<li><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> 
+					<a href="app#/createWritting"> 
+						<span translate="header.navbar.new.NEW">Crear obra</span>
+					</a>
+					</li>
+				</ul>
+				<!-- / link and dropdown -->
+				
+				<!-- link and dropdown -->
+				<ul class="nav navbar-nav" ng-show="disableMessage">
+					<li ng-click="showMessage()"><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> 
+					<a href=""> 
+						<span translate="header.navbar.new.NEW">Crear obra</span>
+					</a>
+					</li>
 				</ul>
 				<!-- / link and dropdown -->
 
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
 					ui-shift="prependTo" data-target=".navbar-collapse" role="search">
-					<!-- 					ng-controller="HomeCtrl" -->
+					<!--ng-controller="HomeCtrl"-->
 
 				</form>
 				<!-- / search form -->
-		<ul class="nav navbar-nav navbar-right">
+		<ul class="nav navbar-nav navbar-right" ng-show="disableMenu">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
@@ -162,6 +174,27 @@
 				<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
 			</ul> <!-- / dropdown --></li>
         </ul>
+        
+        
+        <ul class="nav navbar-nav navbar-right" ng-show="disableMessage">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle">
+              <i class="icon-bell fa-fw" ng-click="showMessage()"></i>
+              <span class="visible-xs-inline">Notifications</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">{{cantInvitations}}</span>
+            </a>
+          </li>
+          <li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
+			<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
+			<span >Bienvenido {{user.author}}</span> 
+			<b class="caret"></b>
+			</a> <!-- dropdown -->
+			<ul class="dropdown-menu animated fadeInRight w">
+				<li ng-click="showMessage()"><a href ="">Cerrar sesión</a></li>
+			</ul> <!-- / dropdown --></li>
+        </ul>
+        
+        
         </div>
 		</header>
 		<!-- / header -->
