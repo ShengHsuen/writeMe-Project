@@ -154,7 +154,10 @@ public class UsersService implements UsersServiceInterface{
 		int j=0;
 		for(int i=0;i<=uhw.size()-1;i++){
 			if(user.get(0).getAuthor().equals(uhw.get(i).getUser().getAuthor()) && uhw.get(i).getOwner() == false && uhw.get(i).getInvitationStatus() == false){
-				us.add((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(uhw.get(i).getWritting().getWrittingId())).getUser().getAuthor());
+				//us.addAll((userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndOwnerFalse(uhw.get(i).getWritting().getWrittingId())).get(j).getUser().getAuthor());
+				
+				System.out.println("iiiiiii " + i);
+				System.out.println("usuario>>> "+us.get(0));
 				j++;
 			}
 		}

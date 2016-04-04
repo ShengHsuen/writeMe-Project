@@ -14,6 +14,16 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 	$scope.guests = [];
 	$scope.user = [];
 	$scope.required = false;
+	
+	$scope.loadData = function(){
+		$scope.contentWithoutTags = $localStorage.showContent;
+		$scope.name = $localStorage.nameWritting;
+		$scope.cantUsers = $localStorage.cantUsers;
+		$scope.sessionUser = $localStorage.data;
+		$scope.writtingId = $localStorage.writtingId;
+	}
+	$scope.loadData();
+	
 	$scope.addGuest = function(item){
 		$scope.cantUsers --;
 		$scope.user.splice($scope.functiontofindIndexByKeyValue($scope.user, 'author', item.author), 1);
@@ -33,24 +43,24 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			}
 		}
 	}
-	/*$scope.getInvitatedUsers = function(){
+	$scope.getInvitatedUsers = function(){
 		  $scope.invitation = {"pageNumber": 0,
 			        "pageSize": 0,
 			        "direction": "",
 			        "sortBy": [""],
 			        "searchColumn": "string",
-			        "searchTerm": $scope.user.author,
+			        "searchTerm": $scope.sessionUser.author,
 			        "user": {},
 			        "owner": {},
 			        "writting": {} 
 			        };
-		     $http.post('rest/protected/invitation/getInvitationByUser', $scope.invitation).success(function(response) {
-		    	   console.log("Invitation Success");
+		     $http.post('rest/protected/invitation/getUsersInvited', $scope.invitation).success(function(response) { 
+				   console.log("Invitation Success" + $scope.sessionUser.author);
 			  	   $scope.usersInvited = response.usersInvited;
 			  	   console.log($scope.usersInvited);
 		     });
-	}*/
-	//$scope.getInvitatedUsers();
+	}
+	$scope.getInvitatedUsers();
 	
     $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
         for (var i = 0; i < arraytosearch.length; i++) {
@@ -122,14 +132,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			   $scope.serverDown();
 		   });
     }
-	$scope.loadData = function(){
-			$scope.contentWithoutTags = $localStorage.showContent;
-			$scope.name = $localStorage.nameWritting;
-			$scope.cantUsers = $localStorage.cantUsers;
-			$scope.sessionUser = $localStorage.data;
-			$scope.writtingId = $localStorage.writtingId;
-	}
-	$scope.loadData();
+	
 	$scope.users = {
 				"pageNumber": 0,
 		        "pageSize": 0,

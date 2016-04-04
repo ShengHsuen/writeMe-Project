@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.ejb.Writting;
 
 public interface UserRepository extends CrudRepository<User,Integer> {
 	
