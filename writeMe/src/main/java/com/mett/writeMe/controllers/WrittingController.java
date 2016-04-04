@@ -349,4 +349,14 @@ public class WrittingController {
 			return response;		
 		}
 
+		
+		
+		@RequestMapping(value = "/getWrittingInviContent", method = RequestMethod.POST)
+		public WrittingResponse getWrittingInviContent(@RequestBody WrittingRequest ur) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			WrittingPOJO wr = WrittingService.getWrittingByName(ur);
+			WrittingPOJO wrpojo = WrittingService.getWrittingInviContent(wr);
+	        wrresponse.setContent(wrpojo.getContent());
+			return wrresponse;
+		}
 }
