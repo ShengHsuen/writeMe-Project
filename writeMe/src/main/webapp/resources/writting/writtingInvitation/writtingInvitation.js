@@ -13,7 +13,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 			$scope.name = $localStorage.nameWritting;
 		}
 		$scope.loadData();	
-
+        var parti = 1;
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -24,10 +24,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		
 	    $scope.ppublish = false;
 		
-		$scope.send = function(){
-			$scope.content = $('#edit').val();
-			update();
-		}
+
 
 		$('#btnYes').click(function() {
 		    // handle deletion here
@@ -53,7 +50,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 			$scope.notModified = true;
 			
 			$scope.content = $('#edit').val();
-			console.log("ENTRA TODOS LOS DATOS?" + $scope.writting);
 			update();
 		}
 
@@ -99,6 +95,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "name": $scope.name,
                 "description": "a",
                 "cantUsers": 0,
+                "participation": parti,
                 "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",
@@ -120,6 +117,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     }
     
     var update = function() {
+    	console.log("QUE IMPREME"+parti)
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -131,6 +129,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "name": $scope.name,
                 "description": "a",
                 "cantUsers": 0,
+                "participation": parti,
                 "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",
@@ -139,6 +138,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "published": publish,
                 "content": $scope.content
             }
+     
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
 				
@@ -238,6 +238,10 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 
     
     $scope.finish = function(){
+    	parti = 0;
+    	$scope.content = $('#edit').val();
+		update();
+		window.location.href ="/writeMe/app#/showWrittingsInvitation";
     }
     
     
