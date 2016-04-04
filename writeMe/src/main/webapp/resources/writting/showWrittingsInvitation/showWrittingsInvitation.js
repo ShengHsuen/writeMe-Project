@@ -32,19 +32,24 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	}
 	$scope.init();
 	
-	$scope.saveData = function(mainWr, name, cantUsers, writtingId){
+	$scope.saveData = function(mainWr, name, cantUsers, writtingId, writting){
 		params: {mainWritting : mainWr};
 	    params: {name : name};
 		params: {cantUsers : cantUsers};
-		params: {writtingId : writtingId}
+		params: {writtingId : writtingId};
+		params: {writting : writting};
 	    $localStorage.mainWritting = mainWr;
 	    $localStorage.nameWritting = name;
 	    $localStorage.cantUsers = cantUsers;
 	    $localStorage.writtingId = writtingId;
+	    $localStorage.writting = writting;
 	    window.location.href = "app#/writtingInvitation"
 	};
 	
-	
+	  $scope.$on('invitation-started', function(event, args) {
+		  $scope.init();
+	  });
+	  
 	   $scope.checkParticipation = function(mainWr){
 				  $http({ url:'rest/protected/writting/getContentLastWrittingByMain', 
 					  method: 'POST' ,

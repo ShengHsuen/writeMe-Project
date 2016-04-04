@@ -2,7 +2,7 @@
 <div class="form-group">
     <div class="bg-light lter b-b wrapper-md hidden-print">
  		 <h1 class="m-n font-thin h3 inline">{{"&nbsp" + "&nbsp" + "&nbsp" +"&nbsp" + name}}</h1>
- 		 <button ng-click="navInvitation()" class="btn btn-lg btn-default pull-right" class="btn btn-default">Invitar colaboradores</button>
+ 		 <button ng-show="isOwner" ng-click="navInvitation()" class="btn btn-lg btn-default pull-right" class="btn btn-default">Invitar colaboradores</button>
 	</div>
 	
 <div class="form-group">
@@ -38,7 +38,7 @@
 		</div>
 		<button id="send" type="submit" ng-click="send()" class="btn btn-lg btn-default btn-block" class="btn btn-default">Guardar</button>
 		<button id="finish" type="submit" ng-click="finish()" class="btn btn-lg btn-default btn-block" class="btn btn-default">Guardar y salir</button>
-		<button ng-show="isAdmin" ng-click="showPublish()" class="btn btn-lg btn-default btn-block" ng-messages="expression" data-toggle="modal" data-target="#myModal" class="btn btn-default">Publicar</button>
+		<button ng-show="isOwner" ng-click="showPublish()" class="btn btn-lg btn-default btn-block" ng-messages="expression" data-toggle="modal" data-target="#myModal" class="btn btn-default">Publicar</button>
     </div>
 		<script>
 			$(function() {
