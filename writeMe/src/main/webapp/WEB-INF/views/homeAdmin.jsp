@@ -114,7 +114,7 @@
         		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
-				<!-- <ul class="nav navbar-nav hidden-sm">
+				<!-- <ul class="nav navbar-nav ">
 					<li><a ng-click="navCreate_Writting()"> <i
 							class="fa fa-fw fa-plus visible-xs-inline-block"></i> <span
 							translate="header.navbar.new.NEW">Crear obra</span> </span>
@@ -135,7 +135,7 @@
 					<li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
 						<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"> <i
 								class="on md b-white bottom"></i></span> 
-						<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span>  
+						<span class="">Bienvenido {{user.author}}</span>  
 						<b class="caret"></b>
 					</a> <!-- dropdown -->
 						<ul class="dropdown-menu animated fadeInRight w">
