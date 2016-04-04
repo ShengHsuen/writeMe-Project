@@ -1,15 +1,9 @@
 package com.mett.writeMe.controllers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
+import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
-import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.GeneratePDFService;
@@ -339,6 +334,17 @@ public class WrittingController {
 			wrresponse.setContent(wrpojo.getContent());
 			wrresponse.setParticipation(wrpojo.isParticipation());
 			return wrresponse;
+		}
+		
+		@RequestMapping(value ="/getOwner", method = RequestMethod.POST)
+		public UsersResponse getOwner(@RequestBody WrittingRequest ur){	
+			UsersResponse response = new UsersResponse();
+			Writting wr = new Writting();
+			BeanUtils.copyProperties(ur.getWritting() , wr);
+			response.setCode(200);
+			response.setCodeMessage("obtiene bien los writtings");
+			Boolean isOwner = WrittingService.getOwner(ur.getSearchTerm(), wr);
+			return response;		
 		}
 
 }

@@ -36,4 +36,5 @@ public interface WrittingServiceInterface {
 	List<String> getUsersInvited(WrittingRequest ur, String s);
 	WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO wr);
 	Boolean finishWritting(Writting wr);
+	Boolean getOwner(String userTerm, Writting w);
 }

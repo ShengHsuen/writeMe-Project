@@ -356,6 +356,21 @@ public class WrittingService implements WrittingServiceInterface{
 		wrpojo = WrittingPOJO.get(WrittingPOJO.size()-1);
 		return wrpojo;
 	}
+	
+	@Override
+	@Transactional
+	public Boolean getOwner(String userTerm, Writting w) {
+		List<User> us = new ArrayList<User>();
+		us = userRepository.findByAuthorContaining(userTerm);
+		List<User> user = userHasWrittingRepository.findUserByUserUserIdContainingAndWrittingAndOwnerTrue(us.get(0).getUserId(), w); //Siempre sera un usuario el que recibe
+		Boolean resul = false;
+		if(user != null){
+			resul = true;
+		}else{
+			resul = false;
+		}
+		return resul;
+	}
 
 	@Override
 	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
