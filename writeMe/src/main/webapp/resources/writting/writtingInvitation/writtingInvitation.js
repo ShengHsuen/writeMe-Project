@@ -11,6 +11,9 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
+			$scope.writtingload = $localStorage.writting;
+			$scope.user = $localStorage.data;
+			console.log("WRITTING QUE ME PASARON "+ $scope.writting.name);
 		}
 		$scope.loadData();	
         var parti = 1;
@@ -24,6 +27,12 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		
 	    $scope.ppublish = false;
 		
+		$scope.finish = function(){
+			$scope.content = $('#edit').val();
+			updateFinish();
+			var path = "/writeMe/app#/showWrittingsInvitation";
+			  window.location.href = path;
+		}
 
 
 		$('#btnYes').click(function() {
@@ -116,6 +125,38 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 	   });
     }
     
+    var updateFinish = function() {
+        $scope.writting = {
+            "pageNumber": 0,
+            "pageSize": 0,
+            "direction": "",
+            "sortBy": [""],
+            "searchColumn": "string",
+            "searchTerm": $scope.name,
+            "writting": {
+                "name": $scope.name,
+                "description": "a",
+                "cantUsers": 0,
+                "date": fecha,
+                "likes": 0,
+                "limit time": "2100-01-01",
+                "numMaxCharacters": 10000,
+                "numMinCharacters": 30,
+                "published": publish,
+                "content": $scope.content
+            }
+        };
+        $http.post('rest/protected/writting/editContentFinish', $scope.writting).success(function(response) {
+				
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+    }
+    
     var update = function() {
     	console.log("QUE IMPREME"+parti)
         $scope.writting = {
@@ -168,7 +209,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "linkInvitation": 1,
                 "banned": false,
                 "dateCreate": fecha,
-                "invitationStatus": false
+                "invitationStatus": true
             }
         };
         
@@ -237,14 +278,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
      * */
 
     
-    $scope.finish = function(){
-    	parti = 0;
-    	$scope.content = $('#edit').val();
-		update();
-		window.location.href ="/writeMe/app#/showWrittingsInvitation";
-    }
-    
-    
     var content = "";
     $scope.participation;
     var name= "";
@@ -281,9 +314,23 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		    })
 		   
     };
-
     $scope.contentLastWritting();
-
-   
+    
+    $scope.valOwner = function(){
+        $scope.getOwner = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": $scope.user.author,
+                "writting": $scope.writtingload
+            };
+    	$http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
+    		$scope.isOwner = response.isOwner;
+    		console.log("isOwner>>> " + $scope.isOwner);
+    	})
+    };
+    $scope.valOwner();
 
 }]);

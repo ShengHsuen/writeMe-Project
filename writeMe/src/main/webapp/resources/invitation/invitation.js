@@ -14,6 +14,17 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 	$scope.guests = [];
 	$scope.user = [];
 	$scope.required = false;
+	
+	$scope.loadData = function(){
+		$scope.contentWithoutTags = $localStorage.showContent;
+		$scope.name = $localStorage.nameWritting;
+		$scope.cantUsers = $localStorage.cantUsers;
+		$scope.sessionUser = $localStorage.data;
+		$scope.writtingId = $localStorage.writtingId;
+		$scope.writting = $localStorage.writting;
+	}
+	$scope.loadData();
+	
 	$scope.addGuest = function(item){
 		$scope.cantUsers --;
 		$scope.user.splice($scope.functiontofindIndexByKeyValue($scope.user, 'author', item.author), 1);
@@ -34,8 +45,24 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 		}
 	}
 	$scope.getInvitatedUsers = function(){
-		//Metodo que se trae los usuarios ya invitados, para asignarlos en la vista en invitados y no mostrarlos en el 
+		  $scope.invitation = {"pageNumber": 0,
+			        "pageSize": 0,
+			        "direction": "",
+			        "sortBy": [""],
+			        "searchColumn": "string",
+			        "searchTerm": $scope.sessionUser.author,
+			        "user": {},
+			        "owner": {},
+			        "writting": {} 
+			        };
+		     $http.post('rest/protected/invitation/getUsersInvited', $scope.invitation).success(function(response) { 
+				   console.log("Invitation Success" + $scope.sessionUser.author);
+			  	   $scope.usersInvited = response.usersInvited;
+			  	   console.log($scope.usersInvited);
+		     });
 	}
+	$scope.getInvitatedUsers();
+	
     $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
         for (var i = 0; i < arraytosearch.length; i++) {
           if (arraytosearch[i][key] == valuetosearch) {
@@ -106,14 +133,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			   $scope.serverDown();
 		   });
     }
-	$scope.loadData = function(){
-			$scope.contentWithoutTags = $localStorage.showContent;
-			$scope.name = $localStorage.nameWritting;
-			$scope.cantUsers = $localStorage.cantUsers;
-			$scope.sessionUser = $localStorage.data;
-			$scope.writtingId = $localStorage.writtingId;
-	}
-	$scope.loadData();
+	
 	$scope.users = {
 				"pageNumber": 0,
 		        "pageSize": 0,

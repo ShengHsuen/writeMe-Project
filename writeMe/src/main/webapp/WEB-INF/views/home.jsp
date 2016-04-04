@@ -110,7 +110,7 @@
         		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
-				<ul class="nav navbar-nav hidden-sm">
+				<ul class="nav navbar-nav ">
 					<li><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> <a
 						href="app#/createWritting"> <span
 							translate="header.navbar.new.NEW">Crear obra</span></a> </span></li>
@@ -129,7 +129,7 @@
             <a data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
               <span class="visible-xs-inline">Notifications</span>
-              <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">{{cantInvitations}}</span>
             </a>
             <!-- dropdown -->
             <div class="dropdown-menu w-xl animated fadeInUp">
@@ -138,8 +138,10 @@
                   <strong>Notificaciones</strong>
                 </div>
                 <div class="list-group">
-                  <a href class="list-group-item">
-                    <span class="clear block m-b-none">El usuario {{user.name}} te ha invitado a la obra {{writting.name}}<br>
+                  <a ng-repeat="wr in writting" class="list-group-item">
+                    <span class="clear block m-b-none">El usuario {{hoster[$index]}} te ha invitado a la obra {{wr.name}}<br>
+                    <button class="btn-success" ng-click="accept(writting[$index])">Aceptar</button>
+                    <button class="btn-danger" ng-click="refuse(writting[$index])">Rechazar</button>
                     </span>
                   </a>
                 </div>
@@ -153,13 +155,14 @@
           </li>
           <li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
 			<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
-			<span class="hidden-sm hidden-md">Bienvenido {{user.author}}</span> 
+			<span >Bienvenido {{user.author}}</span> 
 			<b class="caret"></b>
 			</a> <!-- dropdown -->
 			<ul class="dropdown-menu animated fadeInRight w">
 				<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
 			</ul> <!-- / dropdown --></li>
         </ul>
+        </div>
 		</header>
 		<!-- / header -->
 
@@ -185,7 +188,7 @@
 									</a></li>
 									
 									<li><a href="/writeMe/app#/showWrittings"> 
-									<i class="glyphicon glyphicon-book icon"></i>
+									<i class="glyphicon glyphicon-user icon"></i>
 									<span>Personal</span>
 									</a></li>
 									
@@ -194,7 +197,7 @@
 									<span>Por invitación</span>
 									</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittingsPublic">
+									<li class="hidden"><a href="/writeMe/app#/showWrittingsPublic">
 									<i class="glyphicon glyphicon-book icon"></i>
 									<span>Pública</span>
 									</a></li>

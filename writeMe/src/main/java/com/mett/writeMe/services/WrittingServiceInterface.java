@@ -29,10 +29,12 @@ public interface WrittingServiceInterface {
 	Boolean publish(WrittingRequest ur);
 	Boolean createWrittingInvitation(Writting wr);
 	Writting getWrittingById(int idWritting);
+	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
+	List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur);
+	String getContentLastWrittingByMainWritting(Writting wr);
+	boolean getParticipationLastWrittingByMainWritting(Writting wr);
+	List<String> getUsersInvited(WrittingRequest ur, String s);
 	WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO wr);
 	Boolean finishWritting(Writting wr);
-	
-
-
-
+	Boolean getOwner(String userTerm, Writting w);
 }

@@ -1,15 +1,9 @@
 package com.mett.writeMe.controllers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
+import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
-import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.GeneratePDFService;
@@ -116,6 +111,27 @@ public class WrittingController {
 		return us;
 	}
 	
+	
+	/**author Sheng Hsuen Cheng
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/editContentFinish", method = RequestMethod.POST)
+	public WrittingResponse editContentFinish(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		BeanUtils.copyProperties(w, wr);
+
+			wr.setContent(ur.getWritting().getContent());
+			Boolean state = WrittingService.finishWritting(wr);
+			if (state) {
+				us.setCode(200);
+				us.setCodeMessage("write created succesfully");
+			}
+		return us;
+	}
+	
+	
 
 	/**author Sheng Hsuen Cheng
 	 * @param ur
@@ -164,6 +180,7 @@ public class WrittingController {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
 		ur.getUserHasWritting().setUser(u);
 		ur.getUserHasWritting().setWritting(wr);
+		ur.getUserHasWritting().setInvitationStatus(true);
 		System.out.println("Obra a la que estoy seteando: " + ur.getUserHasWritting().getWritting().getWrittingId());
 		Boolean state = UserHasWrittingService.save(ur);
 
@@ -317,6 +334,19 @@ public class WrittingController {
 			wrresponse.setContent(wrpojo.getContent());
 			wrresponse.setParticipation(wrpojo.isParticipation());
 			return wrresponse;
+		}
+		
+		@RequestMapping(value ="/getOwner", method = RequestMethod.POST)
+		public UsersResponse getOwner(@RequestBody WrittingRequest ur){	
+			UsersResponse response = new UsersResponse();
+			Writting wr = new Writting();
+			System.out.println("The black blllagggg "+ur.getWritting().getName());
+			BeanUtils.copyProperties(ur.getWritting() , wr);
+			response.setCode(200);
+			response.setCodeMessage("obtiene bien los writtings");
+			Boolean isOwner = WrittingService.getOwner(ur.getSearchTerm(), wr);
+			response.setIsOwner(isOwner);
+			return response;		
 		}
 
 }

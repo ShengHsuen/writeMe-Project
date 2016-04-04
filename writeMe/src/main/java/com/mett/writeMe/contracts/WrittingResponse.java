@@ -13,6 +13,24 @@ import com.mett.writeMe.pojo.WrittingPOJO;
 public class WrittingResponse extends BaseResponse{
 	private List<WrittingPOJO> writting;
 	private List<UserPOJO> user;
+	private List<String> owner;
+	private List<String> usersInvited;
+	public List<String> getUsersInvited() {
+		return usersInvited;
+	}
+
+	public void setUsersInvited(List<String> usersInvited) {
+		this.usersInvited = usersInvited;
+	}
+
+	public List<String> getOwner() {
+		return owner;
+	}
+
+	public void setOwner(List<String> owner) {
+		this.owner = owner;
+	}
+
 	public List<UserPOJO> getUser() {
 		return user;
 	}
