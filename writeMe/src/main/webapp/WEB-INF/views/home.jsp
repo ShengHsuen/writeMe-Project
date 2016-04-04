@@ -172,35 +172,72 @@
 				<div class="navi-wrap">
 
 					<!-- nav -->
-					<nav class="navi clearfix" ui-nav="">
+					<nav class="navi clearfix" ui-nav="" ng-show="disableMenu">
 						<ul class="nav">
-							<li><a href="/writeMe/app#/home" class="auto"> <span
-									class="pull-right text-muted"></span> <i
-									class="glyphicon glyphicon-home icon"></i> <span>Inicio</span></a></li>
+							<li><a href="/writeMe/app#/home" class="auto"> 
+								<span class="pull-right text-muted"></span> 
+								<i class="glyphicon glyphicon-home icon"></i>
+								<span>Inicio</span></a></li>
 
 							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs" >
 								<span>Mi biblioteca</span>
 							</li>
-									<li class="nav-sub-header">
-									<a href> 
-									<span>Mi biblioteca</span>
-									</a></li>
+								<li class="nav-sub-header">
+								<a href> 
+								<span>Mi biblioteca</span>
+								</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittings"> 
-									<i class="glyphicon glyphicon-book icon"></i>
-									<span>Personal</span>
-									</a></li>
+								<li><a href="/writeMe/app#/showWrittings"> 
+								<i class="glyphicon glyphicon-book icon"></i>
+								<span>Personal</span>
+								</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittingsInvitation">
-									<i class="glyphicon glyphicon-book icon"></i>  
-									<span>Por invitación</span>
-									</a></li>
+								<li><a href="/writeMe/app#/showWrittingsInvitation">
+								<i class="glyphicon glyphicon-book icon"></i>  
+								<span>Por invitación</span>
+								</a></li>
 									
-									<li><a href="/writeMe/app#/showWrittingsPublic">
-									<i class="glyphicon glyphicon-book icon"></i>
-									<span>Pública</span>
-									</a></li>
-					</ul>
+								<li><a href="/writeMe/app#/showWrittingsPublic">
+								<i class="glyphicon glyphicon-book icon"></i>
+								<span>Pública</span>
+								</a></li>
+						</ul>
+					</nav>
+					<!-- nav -->
+					
+					<!-- nav -->
+					<nav class="navi clearfix" ui-nav="" ng-show="disableMessage">
+						<ul class="nav">
+							<li ng-click="showMessage()"><a href="" class="auto"> 
+								<span class="pull-right text-muted"></span> 
+								<i class="glyphicon glyphicon-home icon"></i>
+								<span>Inicio</span></a></li>
+
+							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs" >
+								<span>Mi biblioteca</span>
+							</li>
+								<li class="nav-sub-header">
+								<a href> 
+								<span>Mi biblioteca</span>
+								</a></li>
+									
+								<li ng-click="showMessage()"><a href=""> 
+								<i class="glyphicon glyphicon-book icon"></i>
+								<span>Personal</span>
+								</a></li>
+									
+								<li ng-click="showMessage()"><a href="">
+								<i class="glyphicon glyphicon-book icon"></i>  
+								<span>Por invitación</span>
+								</a></li>
+									
+								<li ng-click="showMessage()"><a href="">
+								<i class="glyphicon glyphicon-book icon"></i>
+								<span>Pública</span>
+								</a></li>
+								
+								<span style="color:red" ng-show="message">Para salir click en Guardar y salir</span>
+						</ul>
 					</nav>
 					<!-- nav -->
 

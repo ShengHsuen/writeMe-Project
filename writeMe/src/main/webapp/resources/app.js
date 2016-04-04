@@ -22,6 +22,20 @@ angular.module('myApp', [
 }])
 
 .controller('mainCtrl', ['$scope','$http', '$localStorage',function($scope,$http,$localStorage) {
+	$scope.disableMenu = true;
+	$scope.disableMessage = false;
+	
+	
+	$scope.$on('disableButtons', function(event){
+		console.log("ENTRA AL DISABLEBUTTONS");
+		$scope.disableMenu = false;
+		$scope.disableMessage = true;
+	})
+	
+	$scope.$on('disableButtonsTrue', function(event){
+		$scope.disableMenu = true;
+		$scope.disableMessage = false;
+	})
 	
 	$scope.load = function(){
 		$scope.user = $localStorage.data;
@@ -30,6 +44,11 @@ angular.module('myApp', [
 		console.log($scope.user);
 	}
 	$scope.load();
+	
+	
+	$scope.showMessage = function(){
+		$scope.message = true;
+	}
 	
 	$scope.findInvitations = function(){
 		  $scope.invitation = {"pageNumber": 0,
