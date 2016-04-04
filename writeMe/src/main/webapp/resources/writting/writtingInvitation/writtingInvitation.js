@@ -16,6 +16,9 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 	 
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
+			$scope.writtingload = $localStorage.writting;
+			$scope.user = $localStorage.data;
+			console.log("WRITTING QUE ME PASARON "+ $scope.writting.name);
 		}
 		$scope.loadData();	
 
@@ -314,9 +317,23 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		    })
 		   
     };
-
     $scope.contentLastWritting();
-
-   
+    
+    $scope.valOwner = function(){
+        $scope.getOwner = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": $scope.user.author,
+                "writting": $scope.writtingload
+            };
+    	$http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
+    		$scope.isOwner = response.isOwner;
+    		console.log("isOwner>>> " + $scope.isOwner);
+    	})
+    };
+    $scope.valOwner();
 
 }]);
