@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
+import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
-import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 
 /**
@@ -30,6 +30,18 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean save(UserHasWrittingRequest ur) {
+		UserHasWritting userHasWritting = new UserHasWritting();
+		
+		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+
+		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
+		
+		return (nWritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean edit(UserHasWrittingRequest ur) {
 		UserHasWritting userHasWritting = new UserHasWritting();
 		
 		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
@@ -73,5 +85,32 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 			dtos.add(dto);
 		});
 		return dtos;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean editUserHasWritting(UserHasWritting uhw) {
+		uhw = userHasWrittingRepository.findByUserAndWritting(uhw.getUser(),uhw.getWritting());
+		System.out.println("!!!!!!!id: " + uhw.getUser_has_writtingId());
+		uhw.setInvitationStatus(true);
+		UserHasWritting uhwritting = userHasWrittingRepository.save(uhw);
+		return (uhwritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean deleteUserHasWritting(Writting wr, User us) {
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		
+		uhw.stream().forEach(uh ->{
+			System.out.println("US: "+ us.getAuthor());
+			System.out.println("UH: "+ uh.getUser().getAuthor());
+			if(uh.getWritting().getWrittingId() == wr.getWrittingId() && us.getAuthor().equals(uh.getUser().getAuthor())){
+				userHasWrittingRepository.delete(uh.getUser_has_writtingId());
+			}
+		});
+		
+		
+		return true;
 	}
 }

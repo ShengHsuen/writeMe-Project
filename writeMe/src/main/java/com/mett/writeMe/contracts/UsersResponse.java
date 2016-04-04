@@ -11,6 +11,13 @@ public class UsersResponse extends BaseResponse{
 	private List<UserHasWrittingPOJO> userHasWritting;
 	private List<WrittingPOJO> writtings;
 	private List<UserPOJO> users;
+	private Boolean isOwner;
+	public Boolean getIsOwner() {
+		return isOwner;
+	}
+	public void setIsOwner(Boolean isOwner) {
+		this.isOwner = isOwner;
+	}
 	public UsersResponse() {
 		super();
 	}

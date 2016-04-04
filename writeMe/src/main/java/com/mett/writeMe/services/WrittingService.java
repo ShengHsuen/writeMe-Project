@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Iterables;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
@@ -32,6 +31,8 @@ public class WrittingService implements WrittingServiceInterface{
 	private WrittingRepository writtingRepository;
 	@Autowired 
 	private UserHasWrittingRepository userHasWrittingRepository; 
+	@Autowired 
+	private UserRepository userRepository;
 
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.WrittingServiceInterface#getAll(com.mett.writeMe.contracts.WrittingRequest)
@@ -311,6 +312,19 @@ public class WrittingService implements WrittingServiceInterface{
 		return writtingRepository.findOne(idWritting);
 	}
 	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur) {
+		List<User> user = userRepository.findByAuthorContaining(ur.getSearchTerm()); //Siempre sera un usuario el que recibe
+		List<Writting> wr = new ArrayList<Writting>();
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		for(int i=0;i<=uhw.size()-1;i++){
+			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == false && uhw.get(i).getOwner() == false){
+				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+			}
+		}
+		return generateWrittingDtos(wr);
+	}
 	
 	
 	/**
@@ -342,8 +356,44 @@ public class WrittingService implements WrittingServiceInterface{
 		wrpojo = WrittingPOJO.get(WrittingPOJO.size()-1);
 		return wrpojo;
 	}
-
 	
+	@Override
+	@Transactional
+	public Boolean getOwner(String userTerm, Writting w) {
+		List<User> us = new ArrayList<User>();
+		us = userRepository.findByAuthorContaining(userTerm);
+		List<User> user = userHasWrittingRepository.findUserByUserUserIdContainingAndWrittingAndOwnerTrue(us.get(0).getUserId(), w); //Siempre sera un usuario el que recibe
+		Boolean resul = false;
+		if(user != null){
+			resul = true;
+		}else{
+			resul = false;
+		}
+		return resul;
+	}
 
+	@Override
+	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getContentLastWrittingByMainWritting(Writting wr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getParticipationLastWrittingByMainWritting(Writting wr) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<String> getUsersInvited(WrittingRequest ur, String s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

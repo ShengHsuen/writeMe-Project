@@ -11,6 +11,9 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
+			$scope.writting = $localStorage.writting;
+			$scope.user = $localStorage.data;
+			console.log($scope.writting);
 		}
 		$scope.loadData();	
 
@@ -202,7 +205,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "linkInvitation": 1,
                 "banned": false,
                 "dateCreate": fecha,
-                "invitationStatus": false
+                "invitationStatus": true
             }
         };
         
@@ -307,8 +310,24 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		    })
 		   
     };
-
     $scope.contentLastWritting();
+    
+    $scope.valOwner = function(){
+        $scope.writting = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": $scope.user.name,
+                "writting": $scope.writting
+            };
+    	$http.post('rest/protected/writting/getOwner',$scope.writting).success(function(response) {
+    		$scope.isOwner = response.isOwner;
+    		console.log($scope.isOwner);
+    	})
+    };
+    $scope.valOwner();
 
    
 
