@@ -268,17 +268,6 @@ public class WrittingController {
 
 		return wr;
 	}
-	
-	/**
-	 * @author Mario Villalobos
-	 * @param ur
-	 * @return
-	 */
-	@RequestMapping(value = "/getContent", method = RequestMethod.POST)
-	public String getContent(@RequestBody WrittingRequest ur) {
-		String content = WrittingService.getWrittingContent(ur);
-		return content;
-	}
 
 		/**
 		 * @author Mildred Guerra
@@ -358,4 +347,19 @@ public class WrittingController {
 	        wrresponse.setContent(wrpojo.getContent());
 			return wrresponse;
 		}
+		
+		@RequestMapping(value = "/getWrittingOne", method = RequestMethod.POST)
+		public WrittingResponse getWrittingOne(@RequestParam("writtingId") int idWritting) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			Writting wr = WrittingService.getWrittingById(idWritting);
+	        wrresponse.setContent(wr.getContent());
+	        wrresponse.setName(wr.getName());
+	        wrresponse.setImage(wr.getImage());
+	        wrresponse.setDescription(wr.getDescription());
+	        wrresponse.setCategory(wr.getCategory());
+			return wrresponse;
+		}
+		
+		
+		
 }

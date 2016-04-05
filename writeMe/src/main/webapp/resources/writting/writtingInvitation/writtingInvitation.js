@@ -163,7 +163,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     }
     
     var update = function() {
-    	console.log("QUE IMPREME"+parti)
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -251,9 +250,8 @@ $scope.getAllContent = function(){
 			"writting" : {}
 	};
     $http.post('rest/protected/writting/getWrittingInviContent', $scope.find).success(function(response) {
-    	  FinalContent = response.content;
-    	  console.log($scope.FinalContent);
-    	  
+    	  finalContent = response.content;
+    	  console.log("maldita sea " + finalContent);
     }).catch(function(error){
 		   $scope.serverDown = function()
 		{
@@ -262,11 +260,9 @@ $scope.getAllContent = function(){
 	   $scope.serverDown();
    })
 };
-    
-    $scope.publish = function() {
-        $scope.getAllContent();
+    $scope.publish = function() { 
         $scope.writting = {
-            "content": $scope.content,
+        	"content": finalContent,
             "pageNumber": 0,
             "pageSize": 0,
             "direction": "",
@@ -282,12 +278,14 @@ $scope.getAllContent = function(){
                 "limit time": "2100-01-01",
                 "numMaxCharacters": 10000,
                 "numMinCharacters": 30,
-                "content": $scope.content
+                "content": finalContent
             }
+            
         };
-        $scope.content = finalContent;
+        console.log("AAAA LOOO " + finalContent);
         publish = true;
         $scope.navHome();
+        console.log("Aqui deberia Servir  " + finalContent);
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
         }).catch(function(error){
  		   $scope.serverDown = function()
@@ -360,5 +358,5 @@ $scope.getAllContent = function(){
     	})
     };
     $scope.valOwner();
-
+    $scope.getAllContent();
 }]);
