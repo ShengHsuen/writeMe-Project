@@ -64,7 +64,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		    };
 	
 		  //  $scope.checkParticipation();
-		    $scope.valOwner = function(writtingload){
+		    $scope.valOwner = function(writting){
 		        $scope.getOwner = {
 		                "pageNumber": 0,
 		                "pageSize": 0,
@@ -72,13 +72,19 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		                "sortBy": [""],
 		                "searchColumn": "string",
 		                "searchTerm": $scope.user.author,
-		                "writting": writtingload
+		                "writting": writting
 		            };
 		    	$http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
 		    		$scope.isOwner = response.isOwner;
 		    		console.log("isOwner>>> " + $scope.isOwner);
 		    	})
 		    };
+		    
+		    $scope.navInvitation = function(writtingId){
+		    	var path = "app#/invitation";
+		        window.location.href = path;
+		    }
+		    
 		    /*
 			 * @author Mildred Guerra
 		     *callback for ng-click 'deleteWritting':
