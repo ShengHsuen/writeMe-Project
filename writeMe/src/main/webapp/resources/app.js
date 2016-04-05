@@ -46,6 +46,7 @@ angular.module('myApp', [
 	})
 	
 	$scope.$on('disableButtonsTrue', function(event){
+		$scope.message = false;
 		$scope.disableMenu = true;
 		$scope.disableMessage = false;
 	})

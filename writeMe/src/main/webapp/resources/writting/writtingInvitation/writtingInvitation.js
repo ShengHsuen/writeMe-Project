@@ -18,8 +18,9 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 			$scope.name = $localStorage.nameWritting;
 			$scope.writtingload = $localStorage.writting;
 			$scope.user = $localStorage.data;
-			console.log("WRITTING QUE ME PASARON "+ $scope.writting.name);
 		}
+		
+		var finalContent ="";
 		$scope.loadData();	
         var parti = 1;
 		$scope.date = new Date();
@@ -240,8 +241,35 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     	}	
     };
     
+    
+    
+$scope.getAllContent = function(){
+	$scope.find = {
+			"pageNumber" : 0,
+			"pageSize" : 0,
+			"direction" : "",
+			"sortBy" : [ "" ],
+			"searchColumn" : "string",
+			"searchTerm" : name,
+			"writting" : {}
+	};
+    $http.post('rest/protected/writting/getWrittingInviContent', $scope.find).success(function(response) {
+    	  FinalContent = response.content;
+    	  console.log($scope.FinalContent);
+    	  
+    }).catch(function(error){
+		   $scope.serverDown = function()
+		{
+		   $rootScope.$broadcast('serverDown');
+		}
+	   $scope.serverDown();
+   })
+};
+    
     $scope.publish = function() {
+        $scope.getAllContent();
         $scope.writting = {
+            "content": $scope.content,
             "pageNumber": 0,
             "pageSize": 0,
             "direction": "",
@@ -257,17 +285,13 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "limit time": "2100-01-01",
                 "numMaxCharacters": 10000,
                 "numMinCharacters": 30,
-                "published": publish,
                 "content": $scope.content
             }
         };
-        
+        $scope.content = finalContent;
         publish = true;
-        $scope.content = $('#edit').val();
-        console.log("Published: " + publish + "Fecha: " + fecha);
         $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
-            console.log("writting/publish");
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
@@ -295,7 +319,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 	$scope.loadData();
 
     $scope.contentLastWritting = function(){
-    	$scope.writting = {
+    	$scope.contentLast = {
     			"pageNumber" : 0,
     			"pageSize" : 0,
     			"direction" : "",
@@ -304,7 +328,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     			"searchTerm" : name,
     			"writting" : {}
     	};
-    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.writting
+    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
 		  ).success(function(response) {
 		     content = response.content;
 		     $scope.participation = response.participation;

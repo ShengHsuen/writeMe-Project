@@ -77,7 +77,7 @@ public class WrittingController {
 		}
 		return us;
 	}
-
+ 
 	@RequestMapping(value ="/getPublished", method = RequestMethod.POST)
 	public WrittingResponse getPublished(@RequestBody WrittingRequest ur){	
 		System.out.println("Controller /getPublished");
@@ -164,7 +164,7 @@ public class WrittingController {
 		wr.setDate(ur.getWritting().getDate());
 		wr.setPublished(ur.getWritting().getPublished());*/
 		Boolean state = WrittingService.publish(ur);
-
+        us.setContent(ur.getWritting().getContent());
 		if (state) {
 			us.setCode(200);
 			us.setCodeMessage("write created succesfully");
