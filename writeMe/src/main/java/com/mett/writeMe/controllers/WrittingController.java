@@ -77,7 +77,7 @@ public class WrittingController {
 		}
 		return us;
 	}
-
+ 
 	@RequestMapping(value ="/getPublished", method = RequestMethod.POST)
 	public WrittingResponse getPublished(@RequestBody WrittingRequest ur){	
 		System.out.println("Controller /getPublished");
@@ -164,7 +164,7 @@ public class WrittingController {
 		wr.setDate(ur.getWritting().getDate());
 		wr.setPublished(ur.getWritting().getPublished());*/
 		Boolean state = WrittingService.publish(ur);
-
+        us.setContent(ur.getWritting().getContent());
 		if (state) {
 			us.setCode(200);
 			us.setCodeMessage("write created succesfully");
@@ -220,26 +220,31 @@ public class WrittingController {
 		List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
 		wr=getAll();
 		//comparar los que tienen de padre writtingId
-		allWrittings.stream().forEach(wt ->{
-			if(wt.getMainWritting()==writtingMainId){
+		
+		for(int j = allWrittings.size()-1; j>=0 ; j--){
+//		allWrittings.stream().forEach(wt ->{
+			if(allWrittings.get(j).getMainWritting()==writtingMainId){
 				//listaHijos.add(wt);
-				System.out.println("entra al hijo con el id padre" +wt.getMainWritting() );
+				System.out.println("entra al hijo con el id padre" +allWrittings.get(j).getMainWritting() );
 				//obtiene los userHasWritting de los hijos
 
-				allUserHasWritting.stream().forEach(uhw ->{
-					System.out.println("for al userHasWritting" +uhw.getWritting().getWrittingId() +" y "+wt.getWrittingId() );
+				for(int i = allUserHasWritting.size()-1; i>=0 ; i--){
+//				allUserHasWritting.stream().forEach(uhw ->{
+					System.out.println("for al userHasWritting" +allUserHasWritting.get(i).getWritting().getWrittingId() +" y "+allWrittings.get(j).getWrittingId() );
 					//comparar los que tienen de writtingId del hijo
-					if(uhw.getWritting().getWrittingId()==wt.getWrittingId()){
+					if(allUserHasWritting.get(i).getWritting().getWrittingId()==allWrittings.get(j).getWrittingId()){
 						System.out.println("entra al userHasWritting");
 						//eliminar userhasWritting de los hijos
-						UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
+						UserHasWrittingService.deleteUserHaswritting(allUserHasWritting.get(i).getUser_has_writtingId());
 					}
-				});
+				};
+//				});
 
 				//eliminar hijos
-				WrittingService.deletewritting(wt.getWrittingId());
+				WrittingService.deletewritting(allWrittings.get(j).getWrittingId());
 			}
-		});
+		}
+//		});
 		allUserHasWritting.stream().forEach(uhw ->{
 			if(uhw.getWritting().getWrittingId()==writtingMainId){
 				System.out.println("entra al userHasWritting main");
@@ -267,17 +272,6 @@ public class WrittingController {
 		});
 
 		return wr;
-	}
-	
-	/**
-	 * @author Mario Villalobos
-	 * @param ur
-	 * @return
-	 */
-	@RequestMapping(value = "/getContent", method = RequestMethod.POST)
-	public String getContent(@RequestBody WrittingRequest ur) {
-		String content = WrittingService.getWrittingContent(ur);
-		return content;
 	}
 
 		/**
@@ -375,4 +369,19 @@ public class WrittingController {
 	        wrresponse.setContent(wrpojo.getContent());
 			return wrresponse;
 		}
+		
+		@RequestMapping(value = "/getWrittingOne", method = RequestMethod.POST)
+		public WrittingResponse getWrittingOne(@RequestParam("writtingId") int idWritting) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			Writting wr = WrittingService.getWrittingById(idWritting);
+	        wrresponse.setContent(wr.getContent());
+	        wrresponse.setName(wr.getName());
+	        wrresponse.setImage(wr.getImage());
+	        wrresponse.setDescription(wr.getDescription());
+	        wrresponse.setCategory(wr.getCategory());
+			return wrresponse;
+		}
+		
+		
+		
 }

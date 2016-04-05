@@ -27,19 +27,18 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 				"searchTerm" : "",
 				"writting" : {}
 		};
-				  $http({ url: 'rest/protected/writting/getByMain', 
+				  $http({ url: 'rest/protected/writting/getWrittingOne', 
 		                method: 'POST', 
 		                params: {writtingId: $scope.idWritting}
 				  }).success(function(response) {
-					  $scope.writting = response.writting;
-					  length=$scope.writting.length;
-					  $scope.name =  $scope.writting[0].name;
-					  $scope.img=$scope.writting[0].image;
-					  $scope.category=$scope.writting[0].category;
 
-					  $scope.description=$scope.writting[0].description;
+					  $scope.name =  response.name;
+					  $scope.img =  response.image;
+					  $scope.category= response.category;
+					  $scope.description= response.description;
+					  
 					  //for (i = 0; i < length; i++) {
-						  $('#preview').html($scope.writting[0].content);
+						  $('#preview').html(response.content);
 					 // }
 				    }).catch(function(error){
 						   $scope.serverDown = function()

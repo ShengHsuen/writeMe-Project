@@ -249,6 +249,7 @@ public class WrittingService implements WrittingServiceInterface{
 	public Boolean publish(WrittingRequest ur){
 		List<Writting> Writtings =  writtingRepository.findByNameContaining(ur.getSearchTerm());
 		Writtings.get(0).setPublished(true);
+		Writtings.get(0).setContent(ur.getWritting().getContent());
 		Writtings.get(0).setDate(ur.getWritting().getDate());
 		Writting nwritting = writtingRepository.save(Writtings.get(0));
 		return (nwritting == null) ? false : true;
