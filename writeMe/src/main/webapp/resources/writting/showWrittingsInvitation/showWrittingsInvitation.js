@@ -49,6 +49,20 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	    window.location.href = "app#/writtingInvitation"
 	};
 	
+	$scope.navInvitation = function(mainWr, name, cantUsers, writtingId, writting){
+		params: {mainWritting : mainWr};
+	    params: {name : name};
+		params: {cantUsers : cantUsers};
+		params: {writtingId : writtingId};
+		params: {writting : writting};
+	    $localStorage.mainWritting = mainWr;
+	    $localStorage.nameWritting = name;
+	    $localStorage.cantUsers = cantUsers;
+	    $localStorage.writtingId = writtingId;
+	    $localStorage.writting = writting;
+	    window.location.href = "app#/invitation"
+    }
+	
 	  $scope.$on('invitation-started', function(event, args) {
 		  $scope.init();
 	  });
@@ -64,7 +78,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		    };
 	
 		  //  $scope.checkParticipation();
-		    $scope.valOwner = function(writtingload){
+		    $scope.valOwner = function(writting){
 		        $scope.getOwner = {
 		                "pageNumber": 0,
 		                "pageSize": 0,
@@ -72,13 +86,15 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		                "sortBy": [""],
 		                "searchColumn": "string",
 		                "searchTerm": $scope.user.author,
-		                "writting": writtingload
+		                "writting": writting
 		            };
 		    	$http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
 		    		$scope.isOwner = response.isOwner;
 		    		console.log("isOwner>>> " + $scope.isOwner);
 		    	})
 		    };
+		    
+		    
 		    /*
 			 * @author Mildred Guerra
 		     *callback for ng-click 'deleteWritting':

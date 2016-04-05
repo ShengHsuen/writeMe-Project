@@ -7,7 +7,9 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         templateUrl: 'resources/writting/writtingInvitation/writtingInvitation.html',
         controller: 'WrittingInvitationCtrl'
     });
- }]).controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
+ }])
+ 
+ .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
 
 	 	$scope.disableButtons = function() {
 	    	$rootScope.$broadcast('disableButtons');
@@ -94,11 +96,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
         var path = "app#/home";
         window.location.href = path;
     };
-    
-    $scope.navInvitation = function(){
-    	var path = "app#/invitation";
-        window.location.href = path;
-    }
     
     var createWritting = function() {
         $scope.writting = {

@@ -99,9 +99,11 @@ public class InvitationController {
 	@RequestMapping(value = "/getUsersInvited", method = RequestMethod.POST)
 	public WrittingResponse getUsersInvited(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
+		Writting wr = new Writting();
+		BeanUtils.copyProperties(ur.getWritting() , wr);
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
-		us.setUsersInvited(usersService.getUsersInvited(ur,ur.getSearchTerm()));
+		us.setUsersInvited(usersService.getUsersInvited(wr,ur.getSearchTerm()));
 		return us;
 	}
 	
