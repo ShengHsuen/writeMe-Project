@@ -19,6 +19,15 @@ public class WrittingResponse extends BaseResponse{
 	private List<WrittingPOJO> writting;
 	private List<UserPOJO> user;
 	private List<String> owner;
+	private List<Boolean> isOwnerList;
+	public List<Boolean> getIsOwnerList() {
+		return isOwnerList;
+	}
+
+	public void setIsOwnerList(List<Boolean> isOwnerList) {
+		this.isOwnerList = isOwnerList;
+	}
+
 	private List<String> usersInvited;
 	public List<String> getUsersInvited() {
 		return usersInvited;

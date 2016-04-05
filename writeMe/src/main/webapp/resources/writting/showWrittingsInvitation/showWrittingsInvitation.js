@@ -12,6 +12,10 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	
 	// Mostrar
 	$scope.init = function(){
+		$scope.loadData = function(){
+			$scope.sessionUser = $localStorage.data;
+		}
+		$scope.loadData();
 	$scope.writting = [];
 	$scope.writting = {
 			"pageNumber" : 0,
@@ -19,14 +23,12 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			"direction" : "",
 			"sortBy" : [ "" ],
 			"searchColumn" : "string",
-			"searchTerm" : "",
+			"searchTerm" : " ",
 			"writting" : {}
 	};
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
-		for(i; i>$scope.writting.lenght; i++){
-			  $scope.valOwner($scope.writting[i].writting);
-		}
+		$scope.getIsOwnerList();
 	}).catch(function(error){
 		   $scope.serverDown = function()
 			{
@@ -36,6 +38,22 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	   });
 	}
 	$scope.init();
+	
+	$scope.getIsOwnerList = function(){
+		$scope.getOwnerList = {
+				"pageNumber" : 0,
+				"pageSize" : 0,
+				"direction" : "",
+				"sortBy" : [ "" ],
+				"searchColumn" : "string",
+				"searchTerm" : $scope.sessionUser.author,
+				"writting" : {}
+		};
+		$http.post('rest/protected/writting/getOwnerList',$scope.getOwnerList).success(function(response) {
+			$scope.isOwnerList = response.isOwnerList;
+			console.log($scope.isOwnerList);
+		})
+	};
 	
 	$scope.saveData = function(mainWr, name, cantUsers, writtingId, writting){
 		params: {mainWritting : mainWr};
@@ -62,8 +80,8 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	    $localStorage.cantUsers = cantUsers;
 	    $localStorage.writtingId = writtingId;
 	    $localStorage.writting = writting;
-	    window.location.href = "app#/invitation"
-    };
+	    window.location.href = "app#/invitation";
+    }
 	
 	  $scope.$on('invitation-started', function(event, args) {
 		  $scope.init();
@@ -105,5 +123,8 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		    					   $scope.serverDown();
 		    				   });
 		   }
+		    $scope.$on('invitation-send', function(event, args) {
+		        $scope.init();
+		       });
 		    
 } ]);
