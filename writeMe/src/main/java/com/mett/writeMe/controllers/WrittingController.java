@@ -220,26 +220,31 @@ public class WrittingController {
 		List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
 		wr=getAll();
 		//comparar los que tienen de padre writtingId
-		allWrittings.stream().forEach(wt ->{
-			if(wt.getMainWritting()==writtingMainId){
+		
+		for(int j = allWrittings.size()-1; j>=0 ; j--){
+//		allWrittings.stream().forEach(wt ->{
+			if(allWrittings.get(j).getMainWritting()==writtingMainId){
 				//listaHijos.add(wt);
-				System.out.println("entra al hijo con el id padre" +wt.getMainWritting() );
+				System.out.println("entra al hijo con el id padre" +allWrittings.get(j).getMainWritting() );
 				//obtiene los userHasWritting de los hijos
 
-				allUserHasWritting.stream().forEach(uhw ->{
-					System.out.println("for al userHasWritting" +uhw.getWritting().getWrittingId() +" y "+wt.getWrittingId() );
+				for(int i = allUserHasWritting.size()-1; i>=0 ; i--){
+//				allUserHasWritting.stream().forEach(uhw ->{
+					System.out.println("for al userHasWritting" +allUserHasWritting.get(i).getWritting().getWrittingId() +" y "+allWrittings.get(j).getWrittingId() );
 					//comparar los que tienen de writtingId del hijo
-					if(uhw.getWritting().getWrittingId()==wt.getWrittingId()){
+					if(allUserHasWritting.get(i).getWritting().getWrittingId()==allWrittings.get(j).getWrittingId()){
 						System.out.println("entra al userHasWritting");
 						//eliminar userhasWritting de los hijos
-						UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
+						UserHasWrittingService.deleteUserHaswritting(allUserHasWritting.get(i).getUser_has_writtingId());
 					}
-				});
+				};
+//				});
 
 				//eliminar hijos
-				WrittingService.deletewritting(wt.getWrittingId());
+				WrittingService.deletewritting(allWrittings.get(j).getWrittingId());
 			}
-		});
+		}
+//		});
 		allUserHasWritting.stream().forEach(uhw ->{
 			if(uhw.getWritting().getWrittingId()==writtingMainId){
 				System.out.println("entra al userHasWritting main");

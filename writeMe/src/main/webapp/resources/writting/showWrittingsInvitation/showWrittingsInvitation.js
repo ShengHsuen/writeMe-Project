@@ -6,7 +6,9 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		templateUrl : 'resources/writting/showWrittingsInvitation/showWrittingsInvitation.html',
 		controller : 'showWrittingsInvitationCtrl'
 	});
-} ]).controller('showWrittingsInvitationCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
+} ])
+
+.controller('showWrittingsInvitationCtrl',['$scope','$http', '$localStorage','$rootScope',function($scope, $http, $localStorage,$rootScope) {
 	
 	// Mostrar
 	$scope.init = function(){

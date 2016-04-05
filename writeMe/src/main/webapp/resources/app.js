@@ -49,7 +49,6 @@ angular.module('myApp', [
 		$scope.message = false;
 		$scope.disableMenu = true;
 		$scope.disableMessage = false;
-		$scope.message = false;
 	})
 			
 	$scope.showMessage = function(){

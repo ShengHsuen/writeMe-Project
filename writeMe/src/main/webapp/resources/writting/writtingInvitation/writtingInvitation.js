@@ -332,7 +332,7 @@ $scope.getAllContent = function(){
 		     
 		     if($scope.participation == true){
 		    	 $scope.divShow = false;
-		    	 
+		    	 $rootScope.$broadcast('disableButtonsTrue');    	 
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
