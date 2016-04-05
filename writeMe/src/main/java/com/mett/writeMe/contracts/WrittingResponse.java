@@ -1,6 +1,11 @@
 package com.mett.writeMe.contracts;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
@@ -45,6 +50,36 @@ public class WrittingResponse extends BaseResponse{
 	private boolean participation;
 	private String content;
 	
+	private String category;
+	private String description;
+
+	private String image;
+
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public int getIdWritting() {
 		return idWritting;
 	}
