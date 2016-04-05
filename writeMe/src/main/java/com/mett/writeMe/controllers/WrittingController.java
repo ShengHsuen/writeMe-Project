@@ -289,6 +289,23 @@ public class WrittingController {
 			return response;
 		}
 		
+		@RequestMapping(value = "/getOwnerList", method = RequestMethod.POST)
+		public WrittingResponse getOwnerList(@RequestBody WrittingRequest ur) {
+			WrittingResponse response = new WrittingResponse();
+			List<Boolean> isOwnerList = new ArrayList<Boolean>();
+			response.setCode(200);
+			response.setCodeMessage("Muestra reglas satisfactoriamente");
+			response.setWritting(WrittingService.getAll());
+			for(int i=0;i<response.getWritting().size()-1;i++){
+				Writting wr = new Writting();
+				BeanUtils.copyProperties(response.getWritting().get(i) , wr);
+				isOwnerList.add(WrittingService.getOwner(ur.getSearchTerm(), wr));
+			}
+			response.setIsOwnerList(isOwnerList);
+			return response;
+		}
+		
+		
 		/**
 		 * @author Mildred Guerra
 		 * Get writtings with main
