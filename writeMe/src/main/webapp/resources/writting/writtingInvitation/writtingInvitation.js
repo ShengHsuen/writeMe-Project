@@ -23,7 +23,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 			console.log("WRITTING QUE ME PASARON "+ $scope.writting.name);
 		}
 		$scope.loadData();	
-
+        var parti = 1;
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -42,6 +42,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 			var path = "/writeMe/app#/showWrittingsInvitation";
 			  window.location.href = path;
 		}
+
 
 		$('#btnYes').click(function() {
 		    // handle deletion here
@@ -67,7 +68,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 			$scope.notModified = true;
 			
 			$scope.content = $('#edit').val();
-			console.log("ENTRA TODOS LOS DATOS?" + $scope.writting);
 			update();
 		}
 
@@ -108,6 +108,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "name": $scope.name,
                 "description": "a",
                 "cantUsers": 0,
+                "participation": parti,
                 "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",
@@ -161,6 +162,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     }
     
     var update = function() {
+    	console.log("QUE IMPREME"+parti)
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -172,6 +174,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "name": $scope.name,
                 "description": "a",
                 "cantUsers": 0,
+                "participation": parti,
                 "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",
@@ -180,6 +183,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
                 "published": publish,
                 "content": $scope.content
             }
+     
         };
         $http.post('rest/protected/writting/editContent', $scope.writting).success(function(response) {
 				
@@ -276,7 +280,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
      * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
      * 
      * */
-    
+
     
     var content = "";
     $scope.participation;

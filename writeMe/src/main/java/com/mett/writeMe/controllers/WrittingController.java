@@ -340,7 +340,6 @@ public class WrittingController {
 		public UsersResponse getOwner(@RequestBody WrittingRequest ur){	
 			UsersResponse response = new UsersResponse();
 			Writting wr = new Writting();
-			System.out.println("The black blllagggg "+ur.getWritting().getName());
 			BeanUtils.copyProperties(ur.getWritting() , wr);
 			response.setCode(200);
 			response.setCodeMessage("obtiene bien los writtings");
@@ -349,4 +348,14 @@ public class WrittingController {
 			return response;		
 		}
 
+		
+		
+		@RequestMapping(value = "/getWrittingInviContent", method = RequestMethod.POST)
+		public WrittingResponse getWrittingInviContent(@RequestBody WrittingRequest ur) {
+			WrittingResponse wrresponse= new WrittingResponse(); 
+			WrittingPOJO wr = WrittingService.getWrittingByName(ur);
+			WrittingPOJO wrpojo = WrittingService.getWrittingInviContent(wr);
+	        wrresponse.setContent(wrpojo.getContent());
+			return wrresponse;
+		}
 }

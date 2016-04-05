@@ -271,7 +271,6 @@ public class WrittingService implements WrittingServiceInterface{
 	@Override
 	@Transactional
 	public Boolean createWrittingInvitation(Writting wr) {
-		
 		List<WrittingPOJO> wrPojos = getWrittingsByMainWritting(wr);
 		List<Writting> writtings = new ArrayList<Writting>();
 		Writting writtingFather = new Writting();
@@ -339,16 +338,12 @@ public class WrittingService implements WrittingServiceInterface{
 		List<Writting> Writtings = writtingRepository.findAll();
 		WrittingPOJO dto = new WrittingPOJO();
 		BeanUtils.copyProperties(Writting.get(0), dto);
-		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
 		WrittingPOJO.add(dto);
 		
 		for(int i=0; i <= Writtings.size()-1; i++){
-			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
-			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
 			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
 				BeanUtils.copyProperties(Writtings.get(i), dto);
 				WrittingPOJO.add(dto);
-				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
 			}
 		}
 		String content;
@@ -386,22 +381,39 @@ public class WrittingService implements WrittingServiceInterface{
 		return null;
 	}
 
-	@Override
-	public String getContentLastWrittingByMainWritting(Writting wr) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean getParticipationLastWrittingByMainWritting(Writting wr) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public List<String> getUsersInvited(WrittingRequest ur, String s) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	
+	
+	
+	@Override
+	public WrittingPOJO getWrittingInviContent(WrittingPOJO wr){
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		List<Writting> Writting = writtingRepository.findByNameContaining(wr.getName());
+		List<Writting> Writtings = writtingRepository.findAll();
+		WrittingPOJO wrpojo = new WrittingPOJO();
+		WrittingPOJO dto = new WrittingPOJO();
+		BeanUtils.copyProperties(Writting.get(0), dto);
+
+		WrittingPOJO.add(dto);
+		String content= "";
+		for(int i=0; i <= Writtings.size()-1; i++){
+			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
+				BeanUtils.copyProperties(Writtings.get(i), dto);
+				WrittingPOJO.add(dto);
+				content = content + Writtings.get(i).getContent() + " <br> ";
+			}
+		}
+		
+		System.out.println("aqui debe salir la obra"+content);
+		wrpojo.setContent(content);
+		return wrpojo;
 	}
 
 }

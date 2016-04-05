@@ -22,5 +22,5 @@ public interface UsersServiceInterface {
 	User getUserByMail(UsersRequest ur);
 	List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession);
 	List<String> getUsersOwner(List<WrittingPOJO> wpojo, String userTerm);
-	List<String> getUsersInvited(WrittingRequest wr, String userTerm);
+	List<String> getUsersInvited(Writting wr, String userTerm);
 }
