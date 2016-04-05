@@ -21,7 +21,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 		$scope.cantUsers = $localStorage.cantUsers;
 		$scope.sessionUser = $localStorage.data;
 		$scope.writtingId = $localStorage.writtingId;
-		$scope.writting = $localStorage.writting;
+		$scope.writtingload = $localStorage.writting;
 	}
 	$scope.loadData();
 	
@@ -44,24 +44,6 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			}
 		}
 	}
-	$scope.getInvitatedUsers = function(){
-		  $scope.invitation = {"pageNumber": 0,
-			        "pageSize": 0,
-			        "direction": "",
-			        "sortBy": [""],
-			        "searchColumn": "string",
-			        "searchTerm": $scope.sessionUser.author,
-			        "user": {},
-			        "owner": {},
-			        "writting": {} 
-			        };
-		     $http.post('rest/protected/invitation/getUsersInvited', $scope.invitation).success(function(response) { 
-				   console.log("Invitation Success" + $scope.sessionUser.author);
-			  	   $scope.usersInvited = response.usersInvited;
-			  	   console.log($scope.usersInvited);
-		     });
-	}
-	$scope.getInvitatedUsers();
 	
     $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
         for (var i = 0; i < arraytosearch.length; i++) {
@@ -133,6 +115,17 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			   $scope.serverDown();
 		   });
     }
+    
+    $scope.valUsersInvited = function(){
+    	$scope.usersInvited.sort();
+    	for(var i=0;i<$scope.usersInvited.length-1;i++){
+    		for(var j=0;j<$scope.user.length-1;j++){
+        		if($scope.user[i].author === $scope.usersInvited[j]){
+        			$scope.user.splice(i,1);
+        		}
+    		}
+    	}
+    }
 	
 	$scope.users = {
 				"pageNumber": 0,
@@ -153,4 +146,25 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			}
 		   $scope.serverDown();
 	   });
+	
+	$scope.getInvitatedUsers = function(){
+		  $scope.invitation = {"pageNumber": 0,
+			        "pageSize": 0,
+			        "direction": "",
+			        "sortBy": [""],
+			        "searchColumn": "string",
+			        "searchTerm": $scope.sessionUser.author,
+			        "user": {},
+			        "owner": {},
+			        "writting": $scope.writtingload
+			        };
+		     $http.post('rest/protected/invitation/getUsersInvited', $scope.invitation).success(function(response) { 
+				   console.log("Invitation Success" + $scope.sessionUser.author);
+			  	   $scope.usersInvited = response.usersInvited;
+			  	   console.log($scope.usersInvited);
+			  	   $scope.valUsersInvited();
+		     });
+	}
+	$scope.getInvitatedUsers();
+	
  }]);
