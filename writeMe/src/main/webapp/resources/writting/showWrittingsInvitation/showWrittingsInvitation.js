@@ -123,5 +123,8 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		    					   $scope.serverDown();
 		    				   });
 		   }
+		    $scope.$on('invitation-send', function(event, args) {
+		        $scope.init();
+		       });
 		    
 } ]);

@@ -107,6 +107,10 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 		};
 	    $http.post('rest/protected/invitation/createInvitation', $scope.userHasWritting).success(function(response) {
 	    	console.log("Success");
+    	    $rootScope.$broadcast('invitation-send');
+    	    var path = "app#/showWrittingsInvitation";
+    	    window.location.href = path;
+	    	    
 	    }).catch(function(error){
 			   $scope.serverDown = function()
 				{
