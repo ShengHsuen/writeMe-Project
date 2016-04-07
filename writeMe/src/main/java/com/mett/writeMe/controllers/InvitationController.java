@@ -69,6 +69,7 @@ public class InvitationController {
 			uhw.getUserHasWritting().setUser(luser.get(i));
 			uhw.getUserHasWritting().setWritting(writtingService.getWrittingById(uhw.getUserHasWritting().getLinkInvitation()));
 			state = userHasWrittingService.save(uhw);
+			luser = new ArrayList<User>();
 		}
 		if (state) {
 			us.setCode(200);

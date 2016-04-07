@@ -105,15 +105,32 @@ public class UsersService implements UsersServiceInterface{
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUser(javax.servlet.http.HttpSession)
 	 */
-	/* (non-Javadoc)
-	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUser(javax.servlet.http.HttpSession)
-	 */
 	@Override
 	@Transactional
 	public List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession){
 		int idUser = (int)currentSession.getAttribute("idUser");
 		User user = userRepository.findOne(idUser);
 		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAllByInvitationStatusTrue();
+		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
+	
+		for (int i=0; i<= userHasWrittings.size()-1; i++){
+			if (user.getUserId() == userHasWrittings.get(i).getUser().getUserId()){
+				WrittingPOJO dto = new WrittingPOJO();
+				BeanUtils.copyProperties(userHasWrittings.get(i).getWritting(), dto);
+				writtings.add(dto);
+			}else{
+				
+			}
+		}
+		return writtings;
+	}
+	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsByUserWrittingNameNotNull(HttpSession currentSession){
+		int idUser = (int)currentSession.getAttribute("idUser");
+		User user = userRepository.findOne(idUser);
+		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAllByUserUserIdAndWrittingNameNotNullAndInvitationStatusTrue(idUser);
 		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
 	
 		for (int i=0; i<= userHasWrittings.size()-1; i++){

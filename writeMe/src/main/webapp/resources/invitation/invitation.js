@@ -10,49 +10,60 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
  }])
  
  .controller('InvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
-	$scope.fil = '';
-	$scope.guests = [];
-	$scope.user = [];
-	$scope.required = false;
-	
-	$scope.loadData = function(){
-		$scope.contentWithoutTags = $localStorage.showContent;
-		$scope.name = $localStorage.nameWritting;
-		$scope.cantUsers = $localStorage.cantUsers;
-		$scope.sessionUser = $localStorage.data;
-		$scope.writtingId = $localStorage.writtingId;
-		$scope.writtingload = $localStorage.writting;
-	}
-	$scope.loadData();
-	
-	$scope.addGuest = function(item){
-		$scope.cantUsers --;
-		$scope.user.splice($scope.functiontofindIndexByKeyValue($scope.user, 'author', item.author), 1);
-	    $scope.guests.push(item);
-	    console.log(item.author);
-	}
-	$scope.takeoutGuest = function(item){
-		$scope.cantUsers ++;
-		$scope.guests.splice($scope.functiontofindIndexByKeyValue($scope.guests, 'author', item.author), 1);
-	      $scope.user.push(item);
-	      console.log(item.author);
-	}
-	$scope.delSessionUser = function(){
-		for (var i = 0; i < $scope.user.length; i++) {
-			if($scope.user[i].author == $scope.sessionUser.author){
-				$scope.user.splice(i,1);
+
+	$scope.init = function(){
+		$scope.loadData = function(){
+			$scope.contentWithoutTags = $localStorage.showContent;
+			$scope.name = $localStorage.nameWritting;
+			$scope.cantUsers = $localStorage.cantUsers;
+			$scope.sessionUser = $localStorage.data;
+			$scope.writtingId = $localStorage.writtingId;
+			$scope.writtingload = $localStorage.writting;
+			$scope.fil = '';
+			$scope.guests = [];
+			$scope.user = [];
+			while($scope.guests.length > 0) {
+				$scope.guests.pop();
+			}
+			while($scope.user.length > 0) {
+				$scope.user.pop();
+			}
+			$scope.required = false;
+		}
+		$scope.loadData();
+		
+		$scope.delSessionUser = function(){
+			for (var i = 0; i < $scope.user.length; i++) {
+				if($scope.user[i].author == $scope.sessionUser.author){
+					$scope.user.splice(i,1);
+				}
 			}
 		}
-	}
-	
-    $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
-        for (var i = 0; i < arraytosearch.length; i++) {
-          if (arraytosearch[i][key] == valuetosearch) {
-            return i;
-          }
-        }
-          return null;
-      }
+		
+		$scope.addGuest = function(item){
+			$scope.cantUsers --;
+			$scope.user.splice($scope.functiontofindIndexByKeyValue($scope.user, 'author', item.author), 1);
+		    $scope.guests.push(item);
+		    console.log(item.author);
+		}
+		$scope.takeoutGuest = function(item){
+			$scope.cantUsers ++;
+			$scope.guests.splice($scope.functiontofindIndexByKeyValue($scope.guests, 'author', item.author), 1);
+		      $scope.user.push(item);
+		      console.log(item.author);
+		}
+		
+	    $scope.functiontofindIndexByKeyValue = function (arraytosearch, key, valuetosearch) {
+	        for (var i = 0; i < arraytosearch.length; i++) {
+	          if (arraytosearch[i][key] == valuetosearch) {
+	            return i;
+	          }
+	        }
+	          return null;
+	      }
+	};
+	$scope.init();
+
     $scope.sendInvitation = function(){
     	console.log($scope.guests);
 		$scope.guestsRequest = {
@@ -84,7 +95,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
               params: {writtingId: $scope.writtingId}
 		  }).success(function() {
 			  $scope.createInvitation();
-		    });
+		  });
 		  
    }
     $scope.createInvitation = function(){
@@ -118,17 +129,6 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 				}
 			   $scope.serverDown();
 		   });
-    }
-    
-    $scope.valUsersInvited = function(){
-    	$scope.usersInvited.sort();
-    	for(var i=0;i<$scope.usersInvited.length-1;i++){
-    		for(var j=0;j<$scope.user.length-1;j++){
-        		if($scope.user[i].author === $scope.usersInvited[j]){
-        			$scope.user.splice(i,1);
-        		}
-    		}
-    	}
     }
 	
 	$scope.users = {
@@ -165,9 +165,27 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 		     $http.post('rest/protected/invitation/getUsersInvited', $scope.invitation).success(function(response) { 
 				   console.log("Invitation Success" + $scope.sessionUser.author);
 			  	   $scope.usersInvited = response.usersInvited;
-			  	   console.log($scope.usersInvited);
+			  	   //Me trae bien las personas que he invitado
+			  	   console.log("UsersInvited>>>"+$scope.usersInvited);
+			  	 console.log("CANT USERS "+$scope.usersInvited.length);
+			  	   $scope.cantUsers = $scope.cantUsers - $scope.usersInvited.length;
 			  	   $scope.valUsersInvited();
 		     });
+		     $scope.valUsersInvited = function(){
+		     	// No esta haciendo el splice bien
+		     	
+		     	$scope.usersInvited.sort();
+		     	for(var i=0;i<$scope.user.length;i++){
+		     		//console.log("Entre valUsersInvited" + $scope.user[i].author);
+		     		for(var j=0;j<$scope.usersInvited.length;j++){
+		         		if($scope.user[i].author === $scope.usersInvited[j]){
+		         			console.log($scope.user[i].author);
+		         			console.log($scope.usersInvited[j]);
+		         			$scope.user.splice(i,1);
+		         		}
+		     		}
+		     	}
+		     }
 	}
 	$scope.getInvitatedUsers();
 	
