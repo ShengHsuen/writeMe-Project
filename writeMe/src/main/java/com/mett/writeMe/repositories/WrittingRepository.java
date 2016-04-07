@@ -11,4 +11,5 @@ public interface WrittingRepository extends CrudRepository<Writting,Integer>{
 	List<Writting> findByNameContaining(String name);
 	Writting save(Writting Writting);
 	List<Writting> findByPublishedTrueOrderByWrittingIdDesc();
+	List<Writting> findAllByNameNotNull();
 }
