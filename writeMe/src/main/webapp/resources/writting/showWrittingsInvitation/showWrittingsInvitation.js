@@ -51,6 +51,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		};
 		$http.post('rest/protected/writting/getOwnerList',$scope.getOwnerList).success(function(response) {
 			$scope.isOwnerList = response.isOwnerList;
+			$scope.isOwnerList.reverse();
 			console.log($scope.isOwnerList);
 		})
 	};

@@ -16,6 +16,7 @@ public class LoginService implements LoginServiceInterface{
 
 	@Autowired private LoginRepository loginRepository;
 	private User user;
+	private HttpSession currentS;
 	
 	@Override
 	@Transactional
@@ -39,6 +40,7 @@ public class LoginService implements LoginServiceInterface{
 			
 			//Setea el id del usuario loggeado
 			user = loggedUser;
+			currentS = currentSession;
 		}
 	}
 	
@@ -46,6 +48,12 @@ public class LoginService implements LoginServiceInterface{
 	@Transactional
 	public User getUser(){
 		return user;
+	}
+	
+	@Override
+	@Transactional
+	public HttpSession getCurrentSession(){
+		return currentS;
 	}
 	
 }

@@ -26,7 +26,7 @@
               <input maxlength="35" type="email" placeholder="Email" class="form-control no-border" ng-model="mail" required>
             </div>
             <div class="list-group-item">
-                <input placeholder="Fecha de nacimiento" onfocus="(this.type='date')" type="text" id="date" class="form-control no-border" ng-model="birthDay" required>
+                <input placeholder="Fecha de nacimiento" onfocus="(this.type='date')" type="text" id="date" min="{{minDate | date:'1920-01-01'}}" ng-max="01/01/2006" class="form-control no-border" ng-model="birthDay" required>
              </div>
             <div class="list-group-item">
                <input maxlength="35" type="password" placeholder="Contraseña" class="form-control no-border" ng-model="password" required>

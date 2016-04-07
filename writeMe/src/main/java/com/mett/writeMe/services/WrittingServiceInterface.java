@@ -37,4 +37,5 @@ public interface WrittingServiceInterface {
 	Boolean finishWritting(Writting wr);
 	Boolean getOwner(String userTerm, Writting w);
 	WrittingPOJO getWrittingInviContent(WrittingPOJO wr);
+	List<WrittingPOJO> getAllWithoutNameNull();
 }
