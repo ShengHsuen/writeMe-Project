@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,15 @@ import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
+import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.GeneratePDFService;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
+import com.mett.writeMe.services.UsersService;
+import com.mett.writeMe.services.UsersServiceInterface;
 import com.mett.writeMe.services.WrittingServiceInterface;
 import com.mett.writeMe.utils.Utils;
 
@@ -46,9 +51,13 @@ public class WrittingController {
 	private UserHasWrittingServiceInterface UserHasWrittingService;
 	@Autowired
 	private LoginServiceInterface LoginService;
+	@Autowired
+	private UsersServiceInterface userService;
+
 	private User u = new User();
 	private Writting wr = new Writting();
 	private String resultFileName;
+
 	/**
 	 * @param ur
 	 * @return
@@ -57,11 +66,11 @@ public class WrittingController {
 	public WrittingResponse create(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
 
-		if(!resultFileName.equals("")){
+		if (!resultFileName.equals("")) {
 			ur.getWritting().setImage(resultFileName);
 			Boolean state = false;
 			state = WrittingService.saveWritting(ur);
-			
+
 			WrittingPOJO w = WrittingService.getWrittingByName(ur);
 			u = LoginService.getUser();
 			BeanUtils.copyProperties(w, wr);
@@ -69,50 +78,53 @@ public class WrittingController {
 			if (state) {
 				us.setCode(200);
 				us.setCodeMessage("write created succesfully");
-			}	
-		}else{
-			//create a common webservice error codes enum or statics
+			}
+		} else {
+			// create a common webservice error codes enum or statics
 			us.setCode(409);
 			us.setErrorMessage("create/edit conflict");
 		}
 		return us;
 	}
- 
-	@RequestMapping(value ="/getPublished", method = RequestMethod.POST)
-	public WrittingResponse getPublished(@RequestBody WrittingRequest ur){	
+
+	@RequestMapping(value = "/getPublished", method = RequestMethod.POST)
+	public WrittingResponse getPublished(@RequestBody WrittingRequest ur) {
 		System.out.println("Controller /getPublished");
 		WrittingResponse us = new WrittingResponse();
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		us.setWritting(WrittingService.getPublished(ur));
-		//us.setUser(WrittingService.getUsersPublished());
-		return us;		
+		// us.setUser(WrittingService.getUsersPublished());
+		return us;
 	}
-	
-	
-	/*@author Sheng Hsuen
+
+	/*
+	 * @author Sheng Hsuen
+	 * 
 	 * @param ur
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/createWrittingInvitation", method = RequestMethod.POST)
 	public WrittingResponse createInvitation(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
-			
-			WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			u = LoginService.getUser();
-			BeanUtils.copyProperties(w, wr);
 
-			Boolean state = WrittingService.createWrittingInvitation(wr);
-			
-			if (state) {
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}	
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		u = LoginService.getUser();
+		BeanUtils.copyProperties(w, wr);
+
+		Boolean state = WrittingService.createWrittingInvitation(wr);
+
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
+		}
 		return us;
 	}
-	
-	
-	/**author Sheng Hsuen Cheng
+
+	/**
+	 * author Sheng Hsuen Cheng
+	 * 
 	 * @param ur
 	 * @return
 	 */
@@ -122,18 +134,18 @@ public class WrittingController {
 		WrittingPOJO w = WrittingService.getWrittingByName(ur);
 		BeanUtils.copyProperties(w, wr);
 
-			wr.setContent(ur.getWritting().getContent());
-			Boolean state = WrittingService.finishWritting(wr);
-			if (state) {
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
+		wr.setContent(ur.getWritting().getContent());
+		Boolean state = WrittingService.finishWritting(wr);
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
+		}
 		return us;
 	}
-	
-	
 
-	/**author Sheng Hsuen Cheng
+	/**
+	 * author Sheng Hsuen Cheng
+	 * 
 	 * @param ur
 	 * @return
 	 */
@@ -145,32 +157,35 @@ public class WrittingController {
 
 		System.out.print("EDIT CONTENT IMPRIMIR EL POJO" + w.getName());
 
-			wr.setContent(ur.getWritting().getContent());
-			Boolean state = WrittingService.editWritting(wr);
-			if (state) {
-				us.setCode(200);
-				us.setCodeMessage("write created succesfully");
-			}
-		return us;
-	}
-
-	@RequestMapping(value = "/publish", method = RequestMethod.POST)
-	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
-		WrittingResponse us = new WrittingResponse();
-		//WrittingPOJO w = WrittingService.getWrittingByName(ur);
-		//System.out.println("WrittingPOJO: " + w.getName());
-		/*BeanUtils.copyProperties(w, wr);
-		//wr.setContent(ur.getWritting().getContent());
-		wr.setDate(ur.getWritting().getDate());
-		wr.setPublished(ur.getWritting().getPublished());*/
-		Boolean state = WrittingService.publish(ur);
-        us.setContent(ur.getWritting().getContent());
+		wr.setContent(ur.getWritting().getContent());
+		Boolean state = WrittingService.editWritting(wr);
 		if (state) {
 			us.setCode(200);
 			us.setCodeMessage("write created succesfully");
 		}
 		return us;
 	}
+
+	@RequestMapping(value = "/publish", method = RequestMethod.POST)
+	public WrittingResponse publish(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		// WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		// System.out.println("WrittingPOJO: " + w.getName());
+		/*
+		 * BeanUtils.copyProperties(w, wr);
+		 * //wr.setContent(ur.getWritting().getContent());
+		 * wr.setDate(ur.getWritting().getDate());
+		 * wr.setPublished(ur.getWritting().getPublished());
+		 */
+		Boolean state = WrittingService.publish(ur);
+		us.setContent(ur.getWritting().getContent());
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
+		}
+		return us;
+	}
+
 	/**
 	 * @param ur
 	 * @return
@@ -192,81 +207,87 @@ public class WrittingController {
 	}
 
 	/**
-	 * @author Mildred Guerra
-	 * Add files to util
+	 * @author Mildred Guerra Add files to util
 	 * 
-	 * @param MultipartFile file
+	 * @param MultipartFile
+	 *            file
 	 */
-		@RequestMapping(value ="/addFiles", method = RequestMethod.POST)
-		public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur){	
-			 resultFileName = Utils.writeToFile(file,servletContext);
-			 System.out.println("Entra a agregar files");
-		}
-		
+	@RequestMapping(value = "/addFiles", method = RequestMethod.POST)
+	public void create(@RequestParam("file") MultipartFile file, WrittingRequest ur) {
+		resultFileName = Utils.writeToFile(file, servletContext);
+		System.out.println("Entra a agregar files");
+	}
+
 	/**
-	 * @author Mildred Guerra
-	 * Delete writting
-	 * @param  int idwritting
+	 * @author Mildred Guerra Delete writting
+	 * @param int
+	 *            idwritting
 	 * @return WrittingResponse wr
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-	public  WrittingResponse delete(@RequestParam("writtingId") int writtingMainId) {
-		WrittingResponse wr= new WrittingResponse(); 
-		List<WrittingPOJO> listaUserHasWritting  =new ArrayList<WrittingPOJO>();
-		//buscar todos los userHasWritting
+	public WrittingResponse delete(@RequestParam("writtingId") int writtingMainId) {
+		WrittingResponse wr = new WrittingResponse();
+		List<WrittingPOJO> listaUserHasWritting = new ArrayList<WrittingPOJO>();
+		// buscar todos los userHasWritting
 		System.out.println("Esto es el id main en conttroler delete" + writtingMainId);
-		//botener todas para comparar con el padre
+		// botener todas para comparar con el padre
 		List<WrittingPOJO> allWrittings = getAll().getWritting();
 		List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
-		wr=getAll();
-		//comparar los que tienen de padre writtingId
-		
-		for(int j = allWrittings.size()-1; j>=0 ; j--){
-//		allWrittings.stream().forEach(wt ->{
-			if(allWrittings.get(j).getMainWritting()==writtingMainId){
-				//listaHijos.add(wt);
-				System.out.println("entra al hijo con el id padre" +allWrittings.get(j).getMainWritting() );
-				//obtiene los userHasWritting de los hijos
+		wr = getAll();
+		// comparar los que tienen de padre writtingId
 
-				for(int i = allUserHasWritting.size()-1; i>=0 ; i--){
-//				allUserHasWritting.stream().forEach(uhw ->{
-					System.out.println("for al userHasWritting" +allUserHasWritting.get(i).getWritting().getWrittingId() +" y "+allWrittings.get(j).getWrittingId() );
-					//comparar los que tienen de writtingId del hijo
-					if(allUserHasWritting.get(i).getWritting().getWrittingId()==allWrittings.get(j).getWrittingId()){
+		for (int j = allWrittings.size() - 1; j >= 0; j--) {
+			// allWrittings.stream().forEach(wt ->{
+			if (allWrittings.get(j).getMainWritting() == writtingMainId) {
+				// listaHijos.add(wt);
+				System.out.println("entra al hijo con el id padre" + allWrittings.get(j).getMainWritting());
+				// obtiene los userHasWritting de los hijos
+
+				for (int i = allUserHasWritting.size() - 1; i >= 0; i--) {
+					// allUserHasWritting.stream().forEach(uhw ->{
+					System.out
+							.println("for al userHasWritting" + allUserHasWritting.get(i).getWritting().getWrittingId()
+									+ " y " + allWrittings.get(j).getWrittingId());
+					// comparar los que tienen de writtingId del hijo
+					if (allUserHasWritting.get(i).getWritting().getWrittingId() == allWrittings.get(j)
+							.getWrittingId()) {
 						System.out.println("entra al userHasWritting");
-						//eliminar userhasWritting de los hijos
-						UserHasWrittingService.deleteUserHaswritting(allUserHasWritting.get(i).getUser_has_writtingId());
+						// eliminar userhasWritting de los hijos
+						UserHasWrittingService
+								.deleteUserHaswritting(allUserHasWritting.get(i).getUser_has_writtingId());
 					}
-				};
-//				});
+				}
+				;
+				// });
 
-				//eliminar hijos
+				// eliminar hijos
 				WrittingService.deletewritting(allWrittings.get(j).getWrittingId());
 			}
 		}
-//		});
-		allUserHasWritting.stream().forEach(uhw ->{
-			if(uhw.getWritting().getWrittingId()==writtingMainId){
+		// });
+		allUserHasWritting.stream().forEach(uhw -> {
+			if (uhw.getWritting().getWrittingId() == writtingMainId) {
 				System.out.println("entra al userHasWritting main");
-				//eliminar userhasWritting del main
+				// eliminar userhasWritting del main
 				UserHasWrittingService.deleteUserHaswritting(uhw.getUser_has_writtingId());
 			}
 		});
 		allWrittings = getAll().getWritting();
-		allWrittings.stream().forEach(wrt ->{
-			if(wrt.getWrittingId()==writtingMainId){
+		allWrittings.stream().forEach(wrt -> {
+			if (wrt.getWrittingId() == writtingMainId) {
 
-				//eliminar el main
+				// eliminar el main
 				WrittingService.deletewritting(writtingMainId);
-				/* elimina la imagen del fichero
-				File fichero = new File(wrt.getImage());
-				System.out.println(fichero.getAbsolutePath());
-				String absolutePath = "resources/writtingImages/" + fichero.getName();
-				fichero = new File(absolutePath);
-				if (fichero.delete())
-					System.out.println("El fichero ha sido borrado satisfactoriamente");
-				else
-					System.out.println("El fichero no puede ser borrado");*/
+				/*
+				 * elimina la imagen del fichero File fichero = new
+				 * File(wrt.getImage());
+				 * System.out.println(fichero.getAbsolutePath()); String
+				 * absolutePath = "resources/writtingImages/" +
+				 * fichero.getName(); fichero = new File(absolutePath); if
+				 * (fichero.delete()) System.out.println(
+				 * "El fichero ha sido borrado satisfactoriamente"); else
+				 * System.out.println("El fichero no puede ser borrado");
+				 */
 			}
 
 		});
@@ -274,114 +295,114 @@ public class WrittingController {
 		return wr;
 	}
 
-		/**
-		 * @author Mildred Guerra
-		 * This method get all the writtings 
-		 * 
-		 * @return WrittingResponse response
-		 */
-		@RequestMapping(value = "/getAll", method = RequestMethod.POST)
-		public WrittingResponse getAll() {
-			WrittingResponse response = new WrittingResponse();
-			response.setCode(200);
-			response.setCodeMessage("Muestra reglas satisfactoriamente");
-			response.setWritting(WrittingService.getAll());
-			return response;
-		}
-		
-		@RequestMapping(value = "/getOwnerList", method = RequestMethod.POST)
-		public WrittingResponse getOwnerList(@RequestBody WrittingRequest ur) {
-			WrittingResponse response = new WrittingResponse();
-			List<Boolean> isOwnerList = new ArrayList<Boolean>();
-			response.setCode(200);
-			response.setCodeMessage("Muestra reglas satisfactoriamente");
-			response.setWritting(WrittingService.getAll());
-			for(int i=0;i<response.getWritting().size()-1;i++){
-				Writting wr = new Writting();
-				BeanUtils.copyProperties(response.getWritting().get(i) , wr);
-				isOwnerList.add(WrittingService.getOwner(ur.getSearchTerm(), wr));
-			}
-			response.setIsOwnerList(isOwnerList);
-			return response;
-		}
-		
-		
-		/**
-		 * @author Mildred Guerra
-		 * Get writtings with main
-		 * @param  int idwritting
-		 * @return WrittingResponse wr
-		 */
-		@RequestMapping(value = "/getByMain", method = RequestMethod.POST)
-		public  WrittingResponse getByMain(@RequestParam("writtingId") int idWritting) {
-			WrittingResponse wrresponse= new WrittingResponse(); 
-			Writting w = WrittingService.getWrittingById(idWritting);
-			wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
-			return wrresponse;
-		}
-		/**
-		 * @author Mildred Guerra
-		 * Generate pdf
-		 * @throws Exception 
-		 */
-		@RequestMapping(value = "/generatePDF", method = RequestMethod.POST)
-		public  WrittingResponse generatePDF(@RequestParam("writtingId") int idWritting) throws Exception {
-			Writting w = WrittingService.getWrittingById(idWritting);
-			GeneratePDFService pdfService=new GeneratePDFService();
-			WrittingResponse wrresponse= new WrittingResponse(); 
-			wrresponse.setName( pdfService.pdf(w,servletContext));
-			return wrresponse;
-		}		
-		/**
-		 * @author Mario Villalobos 
-		 * @param idWritting
-		 * @return WrittingResponse  
-		 */
-		@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
-		public WrittingResponse getContentLastWrittingByMain(@RequestBody WrittingRequest ur) {
-			WrittingResponse wrresponse= new WrittingResponse(); 
-			WrittingPOJO w = WrittingService.getWrittingByName(ur);
-			WrittingPOJO wrpojo = WrittingService.getContentLastWrittingByMainWritting(w);
-			wrresponse.setContent(wrpojo.getContent());
-			wrresponse.setParticipation(wrpojo.isParticipation());
-			return wrresponse;
-		}
-		
-		@RequestMapping(value ="/getOwner", method = RequestMethod.POST)
-		public UsersResponse getOwner(@RequestBody WrittingRequest ur){	
-			UsersResponse response = new UsersResponse();
-			Writting wr = new Writting();
-			BeanUtils.copyProperties(ur.getWritting() , wr);
-			response.setCode(200);
-			response.setCodeMessage("obtiene bien los writtings");
-			Boolean isOwner = WrittingService.getOwner(ur.getSearchTerm(), wr);
-			response.setIsOwner(isOwner);
-			return response;		
-		}
+	/**
+	 * @author Mildred Guerra This method get all the writtings
+	 * 
+	 * @return WrittingResponse response
+	 */
+	@RequestMapping(value = "/getAll", method = RequestMethod.POST)
+	public WrittingResponse getAll() {
+		WrittingResponse response = new WrittingResponse();
+		response.setCode(200);
+		response.setCodeMessage("Muestra reglas satisfactoriamente");
+		response.setWritting(WrittingService.getAll());
+		return response;
+	}
 
-		
-		
-		@RequestMapping(value = "/getWrittingInviContent", method = RequestMethod.POST)
-		public WrittingResponse getWrittingInviContent(@RequestBody WrittingRequest ur) {
-			WrittingResponse wrresponse= new WrittingResponse(); 
-			WrittingPOJO wr = WrittingService.getWrittingByName(ur);
-			WrittingPOJO wrpojo = WrittingService.getWrittingInviContent(wr);
-	        wrresponse.setContent(wrpojo.getContent());
-			return wrresponse;
+	@RequestMapping(value = "/getOwnerList", method = RequestMethod.POST)
+	public WrittingResponse getOwnerList(@RequestBody WrittingRequest ur) {
+		HttpSession currentSession = LoginService.getCurrentSession();
+		WrittingResponse response = new WrittingResponse();
+		List<Boolean> isOwnerList = new ArrayList<Boolean>();
+		List<WrittingPOJO> wPojo = new ArrayList<WrittingPOJO>();
+
+		response.setCode(200);
+		response.setCodeMessage("Muestra reglas satisfactoriamente");
+		wPojo = userService.getWrittingsByUserWrittingNameNotNull(currentSession);
+
+//		response.setWritting(WrittingService.getAllWithoutNameNull());
+		for (int i = 0; i < wPojo.size(); i++) {
+				Writting wr = new Writting();
+				BeanUtils.copyProperties(wPojo.get(i), wr);
+				isOwnerList.add(WrittingService.getOwner(ur.getSearchTerm(), wr));
 		}
-		
-		@RequestMapping(value = "/getWrittingOne", method = RequestMethod.POST)
-		public WrittingResponse getWrittingOne(@RequestParam("writtingId") int idWritting) {
-			WrittingResponse wrresponse= new WrittingResponse(); 
-			Writting wr = WrittingService.getWrittingById(idWritting);
-	        wrresponse.setContent(wr.getContent());
-	        wrresponse.setName(wr.getName());
-	        wrresponse.setImage(wr.getImage());
-	        wrresponse.setDescription(wr.getDescription());
-	        wrresponse.setCategory(wr.getCategory());
-			return wrresponse;
-		}
-		
-		
-		
+		response.setIsOwnerList(isOwnerList);
+		return response;
+	}
+
+	/**
+	 * @author Mildred Guerra Get writtings with main
+	 * @param int
+	 *            idwritting
+	 * @return WrittingResponse wr
+	 */
+	@RequestMapping(value = "/getByMain", method = RequestMethod.POST)
+	public WrittingResponse getByMain(@RequestParam("writtingId") int idWritting) {
+		WrittingResponse wrresponse = new WrittingResponse();
+		Writting w = WrittingService.getWrittingById(idWritting);
+		wrresponse.setWritting(WrittingService.getWrittingsByMainWritting(w));
+		return wrresponse;
+	}
+
+	/**
+	 * @author Mildred Guerra Generate pdf
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/generatePDF", method = RequestMethod.POST)
+	public WrittingResponse generatePDF(@RequestParam("writtingId") int idWritting) throws Exception {
+		Writting w = WrittingService.getWrittingById(idWritting);
+		GeneratePDFService pdfService = new GeneratePDFService();
+		WrittingResponse wrresponse = new WrittingResponse();
+		wrresponse.setName(pdfService.pdf(w, servletContext));
+		return wrresponse;
+	}
+
+	/**
+	 * @author Mario Villalobos
+	 * @param idWritting
+	 * @return WrittingResponse
+	 */
+	@RequestMapping(value = "/getContentLastWrittingByMain", method = RequestMethod.POST)
+	public WrittingResponse getContentLastWrittingByMain(@RequestBody WrittingRequest ur) {
+		WrittingResponse wrresponse = new WrittingResponse();
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		WrittingPOJO wrpojo = WrittingService.getContentLastWrittingByMainWritting(w);
+		wrresponse.setContent(wrpojo.getContent());
+		wrresponse.setParticipation(wrpojo.isParticipation());
+		return wrresponse;
+	}
+
+	@RequestMapping(value = "/getOwner", method = RequestMethod.POST)
+	public UsersResponse getOwner(@RequestBody WrittingRequest ur) {
+		UsersResponse response = new UsersResponse();
+		Writting wr = new Writting();
+		BeanUtils.copyProperties(ur.getWritting(), wr);
+		response.setCode(200);
+		response.setCodeMessage("obtiene bien los writtings");
+		Boolean isOwner = WrittingService.getOwner(ur.getSearchTerm(), wr);
+		response.setIsOwner(isOwner);
+		return response;
+	}
+
+	@RequestMapping(value = "/getWrittingInviContent", method = RequestMethod.POST)
+	public WrittingResponse getWrittingInviContent(@RequestBody WrittingRequest ur) {
+		WrittingResponse wrresponse = new WrittingResponse();
+		WrittingPOJO wr = WrittingService.getWrittingByName(ur);
+		WrittingPOJO wrpojo = WrittingService.getWrittingInviContent(wr);
+		wrresponse.setContent(wrpojo.getContent());
+		return wrresponse;
+	}
+
+	@RequestMapping(value = "/getWrittingOne", method = RequestMethod.POST)
+	public WrittingResponse getWrittingOne(@RequestParam("writtingId") int idWritting) {
+		WrittingResponse wrresponse = new WrittingResponse();
+		Writting wr = WrittingService.getWrittingById(idWritting);
+		wrresponse.setContent(wr.getContent());
+		wrresponse.setName(wr.getName());
+		wrresponse.setImage(wr.getImage());
+		wrresponse.setDescription(wr.getDescription());
+		wrresponse.setCategory(wr.getCategory());
+		return wrresponse;
+	}
+
 }

@@ -43,6 +43,27 @@ public class WrittingService implements WrittingServiceInterface{
 		List<Writting> Writtings = writtingRepository.findAll();
 		return generateWrittingDtos(Writtings);
 	}
+	
+	
+	/**author Dani, Sheng
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getAllWithoutNameNull() {
+		List<Writting> Writtings = writtingRepository.findAllByNameNotNull();
+		List<WrittingPOJO> dtos = new ArrayList<WrittingPOJO>();
+		Writtings.stream().forEach(tu ->{
+			WrittingPOJO dto = new WrittingPOJO();
+			BeanUtils.copyProperties(tu, dto);
+			if( tu.getWritting()!= null){
+
+				dto.setWrittingFather(tu.getWritting().getWrittingId());
+			}
+			dtos.add(dto);
+		});
+		return dtos;
+	}
 
 	/* @author Mildred Guerra
 	 * Get the list of all writtings
@@ -364,9 +385,12 @@ public class WrittingService implements WrittingServiceInterface{
 		UserHasWritting uhw = new UserHasWritting();
 		Boolean resul;
 		uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndOwnerTrue(w.getWrittingId(),u.getUserId()); //Siempre sera un usuario el que recibe
+		
 		try{
 			if(uhw != null){
+				System.out.println("ESTE ME TRAE EL OWNER " + uhw.getUser_has_writtingId());
 				resul = true;
+				
 			}else{
 				resul = false;
 			}
