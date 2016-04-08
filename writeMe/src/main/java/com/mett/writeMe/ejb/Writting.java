@@ -77,11 +77,6 @@ public class Writting implements Serializable {
 		)
 	private List<Mylibrary> mylibraries;
 
-	//bi-directional many-to-one association to Pagination
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="paginationId")
-	private Pagination pagination;
-
 	//bi-directional many-to-one association to Record
 	@ManyToOne(fetch=FetchType.LAZY)
 	private Record record;
@@ -98,6 +93,11 @@ public class Writting implements Serializable {
 	//bi-directional many-to-one association to Writting
 	@OneToMany(mappedBy="writting")
 	private List<Writting> writtings;
+
+	//bi-directional many-to-one association to Pagination
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="paginationId")
+	private Pagination pagination;
 
 	public Writting() {
 	}
@@ -282,14 +282,6 @@ public class Writting implements Serializable {
 		this.mylibraries = mylibraries;
 	}
 
-	public Pagination getPagination() {
-		return this.pagination;
-	}
-
-	public void setPagination(Pagination pagination) {
-		this.pagination = pagination;
-	}
-
 	public Record getRecord() {
 		return this.record;
 	}
@@ -334,6 +326,14 @@ public class Writting implements Serializable {
 		writting.setWritting(null);
 
 		return writting;
+	}
+
+	public Pagination getPagination() {
+		return this.pagination;
+	}
+
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 
 }

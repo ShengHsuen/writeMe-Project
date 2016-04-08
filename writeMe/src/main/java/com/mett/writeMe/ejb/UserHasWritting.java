@@ -32,6 +32,9 @@ public class UserHasWritting implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateModifie;
 
+	@Column(name="id_owner")
+	private int idOwner;
+
 	private boolean invitationStatus;
 
 	private int linkInvitation;
@@ -112,6 +115,14 @@ public class UserHasWritting implements Serializable {
 
 	public void setDateModifie(Date dateModifie) {
 		this.dateModifie = dateModifie;
+	}
+
+	public int getIdOwner() {
+		return this.idOwner;
+	}
+
+	public void setIdOwner(int idOwner) {
+		this.idOwner = idOwner;
 	}
 
 	public boolean getInvitationStatus() {
