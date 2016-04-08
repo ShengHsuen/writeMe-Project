@@ -19,7 +19,7 @@
             <th style="width:30px;"></th>
           </tr>
         </thead>
-        <tbody ng-repeat="wr in writting | orderBy:'writtingId':true | filter: {name: ''} " ng-show="wr.typeWritting == 'Por invitación'">
+        <tbody ng-repeat="wr in writting | orderBy:'writtingId':true | filter: {name: ''} | filter:{published: 'false'}" ng-show="wr.typeWritting == 'Por invitación'" >
 
           <tr >
             <td>{{wr.name}}</td>
@@ -30,6 +30,7 @@
             
         	<td><button class="btn btn-sm glyphicon glyphicon-trash btn-danger" ng-messages="expression"  ng-click="deleteWritting(wr.writtingId)" ></button> </td>
             <td><button ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)"  class="btn btn-sm btn-default">Entrar</button> </td>
+      
 
           </tr>
 
