@@ -16,6 +16,7 @@
             <!--<th>Último en editar</th>
             <th>Estado</th>-->
             <th>Invitar a la obra</th>
+            <th>Abandonar obra</th>
             <th style="width:30px;"></th>
           </tr>
         </thead>
@@ -26,9 +27,10 @@
             
             <!--<td><span class="text-ellipsis">{{lastAuthor}}</span></td>
             <td><span class="text-ellipsis" >{{textAvailable}}</span></td>-->
-            <td><button ng-click="navInvitation(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)" class="btn btn-success">Invitar</button></td>
+            <td><button ng-click="navInvitation(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)" ng-show="isOwnerList[$index]" class="btn btn-success">Invitar</button></td>
+            <td><button ng-click="leave(wr)" ng-hide="isOwnerList[$index]" class="btn btn-warning">Abandonar</button></td>
             
-        	<td><button class="btn btn-sm glyphicon glyphicon-trash btn-danger" ng-messages="expression"  ng-click="deleteWritting(wr.writtingId)" ></button> </td>
+        	<td><button class="btn btn-sm glyphicon glyphicon-trash btn-danger" ng-messages="expression" ng-show="isOwnerList[$index]"  ng-click="deleteWritting(wr.writtingId)" ></button> </td>
             <td><button ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)"  class="btn btn-sm btn-default">Entrar</button> </td>
       
 

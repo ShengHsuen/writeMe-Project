@@ -2,13 +2,6 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.mett.writeMe.ejb.Comment;
-import com.mett.writeMe.ejb.Report;
-import com.mett.writeMe.ejb.Role;
-import com.mett.writeMe.ejb.User;
-import com.mett.writeMe.ejb.Writting;
-
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +20,11 @@ public class UserHasWritting implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
 
-	private byte banned;
+	private boolean banned;
+
+	private boolean canWrite;
+
+	private boolean confirmation;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
@@ -40,6 +37,9 @@ public class UserHasWritting implements Serializable {
 	private int linkInvitation;
 
 	private boolean owner;
+
+	@Column(name="public")
+	private boolean public_;
 
 	private boolean statusColor;
 
@@ -74,12 +74,28 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-	public byte getBanned() {
+	public boolean getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(byte banned) {
+	public void setBanned(boolean banned) {
 		this.banned = banned;
+	}
+
+	public boolean getCanWrite() {
+		return this.canWrite;
+	}
+
+	public void setCanWrite(boolean canWrite) {
+		this.canWrite = canWrite;
+	}
+
+	public boolean getConfirmation() {
+		return this.confirmation;
+	}
+
+	public void setConfirmation(boolean confirmation) {
+		this.confirmation = confirmation;
 	}
 
 	public Date getDateCreate() {
@@ -120,6 +136,14 @@ public class UserHasWritting implements Serializable {
 
 	public void setOwner(boolean owner) {
 		this.owner = owner;
+	}
+
+	public boolean getPublic_() {
+		return this.public_;
+	}
+
+	public void setPublic_(boolean public_) {
+		this.public_ = public_;
 	}
 
 	public boolean getStatusColor() {
