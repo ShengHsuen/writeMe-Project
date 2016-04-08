@@ -26,7 +26,7 @@
 <!-- <link rel="stylesheet" href="resources/apphome.css"> -->
 <script
 	src="resources/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-
+<script src="lib/angular-animate.min.js"></script>
 <link rel="stylesheet"
 	href="resources/libs/assets/animate.css/animate.css" type="text/css" />
 <link rel="stylesheet"
