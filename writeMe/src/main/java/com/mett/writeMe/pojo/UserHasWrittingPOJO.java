@@ -23,6 +23,16 @@ public class UserHasWrittingPOJO {
 	
 	private boolean owner;
 	
+	private boolean confirmation;
+	
+	public boolean getConfirmation() {
+		return confirmation;
+	}
+
+	public void setConfirmation(boolean confirmation) {
+		this.confirmation = confirmation;
+	}
+
 	public boolean getOwner() {
 		return owner;
 	}

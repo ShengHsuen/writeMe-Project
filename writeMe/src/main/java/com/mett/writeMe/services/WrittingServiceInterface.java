@@ -1,5 +1,6 @@
 package com.mett.writeMe.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,9 @@ public interface WrittingServiceInterface {
 	Writting getWrittingById(int idWritting);
 	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
 	List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur);
-
+	List<WrittingPOJO> getWrittingsConfirmationByUser(List<WrittingPOJO> list, String searchTerm);
+	List<WrittingPOJO> getWrittingsAcceptedByUser(WrittingRequest ur);
+	
 	List<String> getUsersInvited(WrittingRequest ur, String s);
 	WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO wr);
 	Boolean finishWritting(Writting wr);

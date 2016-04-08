@@ -68,6 +68,7 @@ public class InvitationController {
 		for(int i=0;i<luser.size();i++){
 			uhw.getUserHasWritting().setUser(luser.get(i));
 			uhw.getUserHasWritting().setWritting(writtingService.getWrittingById(uhw.getUserHasWritting().getLinkInvitation()));
+			//uhw.getUserHasWritting().setIdOwner(usersService.getUserByAuthor(uhw.getSearchTerm()).get(0).getUserId());
 			state = userHasWrittingService.save(uhw);
 			luser = new ArrayList<User>();
 		}
@@ -97,6 +98,18 @@ public class InvitationController {
 		return us;
 	}
 	
+	@RequestMapping(value = "/getConfirmationByUser", method = RequestMethod.POST)
+	public WrittingResponse getConfirmationByUser(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		us.setCode(200);
+		us.setCodeMessage("users fetch success");
+		us.setWritting(writtingService.getWrittingsConfirmationByUser(writtingService.getWrittingsAcceptedByUser(ur),ur.getSearchTerm()));
+		System.out.println("WRRRRRRRRRRRRRRRRRRRRRRRRRRRIIIIITTINNNNNGGGG "+us.getName());
+		//us.setUserAccepted(usersService.getUsersAccepted(writtingService.getWrittingsConfirmationByUser(ur),ur.getSearchTerm()));
+		//us.setUsersInvited(usersService.getUsersInvited(writtingService.getUsersInvited(ur),ur.getSearchTerm()));
+		return us;
+	}
+	
 	@RequestMapping(value = "/getUsersInvited", method = RequestMethod.POST)
 	public WrittingResponse getUsersInvited(@RequestBody WrittingRequest ur) {
 		WrittingResponse us = new WrittingResponse();
@@ -121,6 +134,7 @@ public class InvitationController {
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		ur.getUserHasWritting().setInvitationStatus(true);
+		ur.getUserHasWritting().setConfirmation(true);
 		ur.getUserHasWritting().setUser(user);
 		ur.getUserHasWritting().setWritting(wr);
 		BeanUtils.copyProperties(ur.getUserHasWritting(), uhw);

@@ -14,6 +14,8 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	$scope.init = function(){
 		$scope.loadData = function(){
 			$scope.sessionUser = $localStorage.data;
+			/*$scope.usersInvited = $localStorage.usersInvited; 
+			console.log($scope.usersInvited);*/
 		}
 		$scope.loadData();
 	$scope.writting = [];
@@ -104,6 +106,13 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		    	})
 		    };
 		    
+		    $scope.hoverIn = function(){
+		        this.hoverEdit = true;
+		    };
+
+		    $scope.hoverOut = function(){
+		        this.hoverEdit = false;
+		    };
 		    
 		    /*
 			 * @author Mildred Guerra
@@ -126,6 +135,68 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		   }
 		    $scope.$on('invitation-send', function(event, args) {
 		        $scope.init();
-		       });
+		    });
+		    
+			$scope.users = {
+					"pageNumber": 0,
+			        "pageSize": 0,
+			        "direction": "",
+			        "sortBy": [""],
+			        "searchColumn": "string",
+			        "searchTerm": "",
+			        "users": {}
+		   }
+	       $http.post('rest/protected/invitation/getAll', $scope.users).success(function(response) {
+	    	   $scope.user = response.users;
+	    	   $scope.delSessionUser();
+	       }).catch(function(error){
+			   $scope.serverDown = function()
+				{
+				   $rootScope.$broadcast('serverDown');
+				}
+			   $scope.serverDown();
+		   });
+		    
+			$scope.getInviWritting = function(wr){
+				$scope.loadW = wr;
+				console.log("!!!!!!!" + $scope.loadW);
+				$scope.getInvitatedUsers();
+			}
+			$scope.getInvitatedUsers = function(){
+				  $scope.invitation = {"pageNumber": 0,
+					        "pageSize": 0,
+					        "direction": "",
+					        "sortBy": [""],
+					        "searchColumn": "string",
+					        "searchTerm": $scope.sessionUser.author,
+					        "user": {},
+					        "owner": {},
+					        "writting": $scope.loadW
+					        };
+				     $http.post('rest/protected/invitation/getUsersInvited', $scope.invitation).success(function(response) { 
+						   console.log("Invitation Success" + $scope.sessionUser.author);
+					  	   $scope.usersInvited = response.usersInvited;
+					  	   //Me trae bien las personas que he invitado
+					  	   console.log("UsersInvited>>>"+$scope.usersInvited);
+					  	 console.log("CANT USERS "+$scope.usersInvited.length);
+					  	   $scope.cantUsers = $scope.cantUsers - $scope.usersInvited.length;
+					  	   $scope.valUsersInvited();
+				     });
+				     $scope.valUsersInvited = function(){
+				     	// No esta haciendo el splice bien
+				     	
+				     	$scope.usersInvited.sort();
+				     	for(var i=0;i<$scope.user.length;i++){
+				     		//console.log("Entre valUsersInvited" + $scope.user[i].author);
+				     		for(var j=0;j<$scope.usersInvited.length;j++){
+				         		if($scope.user[i].author === $scope.usersInvited[j]){
+				         			console.log($scope.user[i].author);
+				         			console.log($scope.usersInvited[j]);
+				         			$scope.user.splice(i,1);
+				         		}
+				     		}
+				     	}
+				     }
+			}
 		    
 } ]);

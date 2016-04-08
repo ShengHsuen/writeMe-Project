@@ -38,7 +38,6 @@ angular.module('myApp', [
 		window.location.href = path;
 	}	
 	
-	
 	$scope.$on('disableButtons', function(event){
 		console.log("ENTRA AL DISABLEBUTTONS");
 		$scope.disableMenu = false;
@@ -54,7 +53,6 @@ angular.module('myApp', [
 	$scope.showMessage = function(){
 		$scope.message = true;
 	}
-	
 	
 	$scope.init = function(){
 		$scope.findInvitations = function(){
@@ -78,8 +76,31 @@ angular.module('myApp', [
 			     });
 		}
 		$scope.findInvitations();
+		
+		$scope.findConfirmations = function(){
+			  $scope.confirmation = {"pageNumber": 0,
+				        "pageSize": 0,
+				        "direction": "",
+				        "sortBy": [""],
+				        "searchColumn": "string",
+				        "searchTerm": $scope.user.author,
+				        "user": {},
+				        "owner": {},
+				        "userAccepted":{},
+				        "writting": {} 
+				        };
+			     $http.post('rest/protected/invitation/getConfirmationByUser', $scope.confirmation).success(function(response) {
+			    	   console.log("Invitation Success");
+				  	   $scope.writtingConfirmation = response.writting;
+				  	   $scope.userConfirmation = response.userAccepted;
+				 	   $scope.hoster = response.owner;
+				 	   $scope.cantInvitations = $scope.writting.length;
+				  	   console.log($scope.writting);
+				  	   console.log($scope.hoster);
+			     });
+		}
+		$scope.findConfirmations();
 	}
-
 	$scope.init();
 	
 	$scope.accept = function(writting){
@@ -115,6 +136,40 @@ angular.module('myApp', [
 		        window.location.href = path;
 		    };
 	}
+	
+	/*$scope.acceptConfirmation = function(writting){
+		  console.log(writting.writtingId);
+			$scope.userHasWritting={
+					  "pageNumber": 0,
+					  "pageSize": 0,
+					  "direction": "string",
+					  "sortBy": [
+					    "string"
+					  ],
+					  "searchColumn": "string",
+					  "searchTerm": "string",
+					  "userHasWritting": {
+					      "statusColor": false,
+					      "user_has_writtingId": 0,
+					      "linkInvitation": writting.writtingId,
+					      "banned": false,
+					      "invitationStatus": true,
+					      "owner": false
+					},
+	        		"user": $scope.user,
+	        		"writting": writting
+			};
+		  $http.post('rest/protected/invitation/acceptConfirmation', $scope.userHasWritting).success(function(response) {
+			  console.log("Success");
+			  $scope.init();
+			  $scope.navShowWrittingInvitation();
+		  });
+		    $scope.navShowWrittingInvitation = function() {
+		    	$rootScope.$broadcast('invitation-started');
+		        var path = "app#/showWrittingsInvitation";
+		        window.location.href = path;
+		    };
+	}*/
 	
 	$scope.refuse = function(writting){
 		console.log("Success " + writting.name);

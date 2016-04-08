@@ -20,6 +20,15 @@ public class WrittingResponse extends BaseResponse{
 	private List<UserPOJO> user;
 	private List<String> owner;
 	private List<Boolean> isOwnerList;
+	private List<String> userAccepted;
+	public List<String> getUserAccepted() {
+		return userAccepted;
+	}
+
+	public void setUserAccepted(List<String> userAccepted) {
+		this.userAccepted = userAccepted;
+	}
+
 	public List<Boolean> getIsOwnerList() {
 		return isOwnerList;
 	}

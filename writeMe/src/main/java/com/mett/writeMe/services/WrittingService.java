@@ -342,8 +342,49 @@ public class WrittingService implements WrittingServiceInterface{
 		for(int i=0;i<=uhw.size()-1;i++){
 			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == false && uhw.get(i).getOwner() == false){
 				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+				System.out.println("WRITTINGS INVITATION BY USER: "+ wr.get(i).getName());
 			}
 		}
+		return generateWrittingDtos(wr);
+	}
+	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsAcceptedByUser(WrittingRequest ur) {
+		List<User> user = userRepository.findByAuthorContaining(ur.getSearchTerm()); //Siempre sera un usuario el que recibe
+		List<Writting> wr = new ArrayList<Writting>();
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		for(int i=0;i<=uhw.size()-1;i++){
+			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == true && uhw.get(i).getOwner() == false){
+				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+				//System.out.println("WRITTINGS INVITATION BY USER: "+ wr.get(i).getName());
+			}
+		}
+		return generateWrittingDtos(wr);
+	}
+	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsConfirmationByUser(List<WrittingPOJO>  lwr, String searchTerm) {
+		List<User> user = userRepository.findByAuthorContaining(searchTerm); //Siempre sera un usuario el que recibe
+		List<Writting> wr = new ArrayList<Writting>();
+		List<UserHasWritting> uhw = new ArrayList<UserHasWritting>();
+		System.out.println("******SIZE*******: "+lwr.size());
+		//List<UserHasWritting> uhwu = userHasWrittingRepository.findAllByUserUserId(user.get(0).getUserId());
+		for(int i=0;i<=lwr.size()-1;i++){
+			uhw.addAll(userHasWrittingRepository.findAllByWrittingWrittingIdAndConfirmationTrue(lwr.get(i).getWrittingId()));
+			System.out.println("******WRITTING*****: "+uhw.get(i).getWritting().getName());
+			System.out.println("******USER*********: "+uhw.get(i).getUser().getAuthor());
+			System.out.println("******CONFIRMATION*: "+uhw.get(i).getConfirmation());
+		}
+		/*for(int i=0;i<=uhw.size()-1;i++){
+			for(int j=0;j<=uhwu.size()-1;j++){
+				if(uhw.get(i).getWritting().getWrittingId() == uhwu.get(j).getWritting().getWrittingId()){
+					wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+					System.out.println("CONFIRMATION: "+wr.get(i).getName());
+				}
+			}
+		}*/
 		return generateWrittingDtos(wr);
 	}
 	
