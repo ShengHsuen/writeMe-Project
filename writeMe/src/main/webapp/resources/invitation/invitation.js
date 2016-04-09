@@ -113,7 +113,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 				    "string"
 				  ],
 				  "searchColumn": "string",
-				  "searchTerm":$scope.sessionUser,
+				  "searchTerm": $scope.sessionUser.author,
 				  "userHasWritting": {
 				      "statusColor": false,
 				      "user_has_writtingId": 0,

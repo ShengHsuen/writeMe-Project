@@ -57,7 +57,7 @@ public class UsersService implements UsersServiceInterface{
 	@Override
 	@Transactional
 	public List<UserPOJO> getUserByAuthor(String author) {
-		List<User> users =  userRepository.findByNameContaining(author);
+		List<User> users =  userRepository.findByAuthorContaining(author);
 		return generateUserDtos(users);
 	}
 	

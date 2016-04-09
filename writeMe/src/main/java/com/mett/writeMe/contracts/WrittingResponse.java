@@ -20,12 +20,14 @@ public class WrittingResponse extends BaseResponse{
 	private List<UserPOJO> user;
 	private List<String> owner;
 	private List<Boolean> isOwnerList;
-	private List<String> userAccepted;
-	public List<String> getUserAccepted() {
+	private List<UserPOJO> userAccepted;
+	private List<String> usersInvited;
+	
+	public List<UserPOJO> getUserAccepted() {
 		return userAccepted;
 	}
 
-	public void setUserAccepted(List<String> userAccepted) {
+	public void setUserAccepted(List<UserPOJO> userAccepted) {
 		this.userAccepted = userAccepted;
 	}
 
@@ -37,7 +39,7 @@ public class WrittingResponse extends BaseResponse{
 		this.isOwnerList = isOwnerList;
 	}
 
-	private List<String> usersInvited;
+	
 	public List<String> getUsersInvited() {
 		return usersInvited;
 	}

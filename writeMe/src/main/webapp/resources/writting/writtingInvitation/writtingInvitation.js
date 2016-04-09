@@ -251,7 +251,6 @@ $scope.getAllContent = function(){
 	};
     $http.post('rest/protected/writting/getWrittingInviContent', $scope.find).success(function(response) {
     	  finalContent = response.content;
-    	  console.log("maldita sea " + finalContent);
     }).catch(function(error){
 		   $scope.serverDown = function()
 		{
@@ -282,10 +281,8 @@ $scope.getAllContent = function(){
             }
             
         };
-        console.log("AAAA LOOO " + finalContent);
         publish = true;
         $scope.navHome();
-        console.log("Aqui deberia Servir  " + finalContent);
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
         }).catch(function(error){
  		   $scope.serverDown = function()
@@ -312,6 +309,26 @@ $scope.getAllContent = function(){
 		name = $localStorage.nameWritting;
 	}
 	$scope.loadData();
+	
+    
+    function actualizar(){
+    	$scope.contentLast = {
+    			"pageNumber" : 0,
+    			"pageSize" : 0,
+    			"direction" : "",
+    			"sortBy" : [ "" ],
+    			"searchColumn" : "string",
+    			"searchTerm" : name,
+    			"writting" : {}
+    	};
+    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
+		  ).success(function(response) {
+		     content = response.content;
+		     $scope.participation = response.participation;
+		     
+		     $('#preview').html(content);
+      })
+    }
 
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
@@ -332,7 +349,8 @@ $scope.getAllContent = function(){
 		     
 		     if($scope.participation == true){
 		    	 $scope.divShow = false;
-		    	 $rootScope.$broadcast('disableButtonsTrue');    	 
+		    	 $rootScope.$broadcast('disableButtonsTrue');  
+		    	 setInterval(actualizar,5000);
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
@@ -341,7 +359,9 @@ $scope.getAllContent = function(){
 		   
     };
     $scope.contentLastWritting();
-    
+
+  
+  
     $scope.valOwner = function(){
         $scope.getOwner = {
                 "pageNumber": 0,
@@ -357,6 +377,11 @@ $scope.getAllContent = function(){
     		console.log("isOwner>>> " + $scope.isOwner);
     	})
     };
+
     $scope.valOwner();
     $scope.getAllContent();
+    
+    
+    $scope.mostrarUltimo = false;
+    
 }]);

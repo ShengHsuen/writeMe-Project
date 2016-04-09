@@ -12,6 +12,7 @@ angular.module('myApp.viewWritting', [ 'ngRoute' , 'ngStorage'])
 	});
 } ]).controller('viewWrittingCtrl',['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
 	var id;
+	
 	/*
 	 * @author Mildred Guerra
 	 *'getwrittingByMain':

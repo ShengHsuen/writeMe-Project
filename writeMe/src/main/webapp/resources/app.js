@@ -93,13 +93,20 @@ angular.module('myApp', [
 			    	   console.log("Invitation Success");
 				  	   $scope.writtingConfirmation = response.writting;
 				  	   $scope.userConfirmation = response.userAccepted;
-				 	   $scope.hoster = response.owner;
-				 	   $scope.cantInvitations = $scope.writting.length;
-				  	   console.log($scope.writting);
-				  	   console.log($scope.hoster);
+				 	   //$scope.hoster = response.owner;
+				  	   console.log($scope.userConfirmation);
+				  	   console.log($scope.writtingConfirmation);
+				  	   $scope.mergeList();
 			     });
 		}
 		$scope.findConfirmations();
+		
+		$scope.mergeList = function(){
+			for(var i=0;i<userConfirmation;i++){
+				$scope.user.push(userConfirmation[i]);
+				$scope.hoster.push(writtingConfirmation[i]);
+			}
+		}
 	}
 	$scope.init();
 	

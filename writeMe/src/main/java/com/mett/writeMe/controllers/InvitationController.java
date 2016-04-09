@@ -64,13 +64,15 @@ public class InvitationController {
 	@RequestMapping(value = "/createInvitation", method = RequestMethod.POST)
 	public UserHasWrittingResponse createInvitation(@RequestBody UserHasWrittingRequest uhw) {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
-		Boolean state = null;
+		Boolean state = false;
+		System.out.println("SEARCH TERM"+uhw.getSearchTerm());
 		for(int i=0;i<luser.size();i++){
 			uhw.getUserHasWritting().setUser(luser.get(i));
 			uhw.getUserHasWritting().setWritting(writtingService.getWrittingById(uhw.getUserHasWritting().getLinkInvitation()));
-			//uhw.getUserHasWritting().setIdOwner(usersService.getUserByAuthor(uhw.getSearchTerm()).get(0).getUserId());
+			uhw.getUserHasWritting().setIdOwner((usersService.getUserByAuthor(uhw.getSearchTerm()).get(0).getUserId()));
+			System.out.println("aaaaaaaaaaaaaaaaaaaa" + usersService.getUserByAuthor(uhw.getSearchTerm()));
 			state = userHasWrittingService.save(uhw);
-			luser = new ArrayList<User>();
+			//luser = new ArrayList<User>();
 		}
 		if (state) {
 			us.setCode(200);
@@ -103,10 +105,10 @@ public class InvitationController {
 		WrittingResponse us = new WrittingResponse();
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
-		us.setWritting(writtingService.getWrittingsConfirmationByUser(writtingService.getWrittingsAcceptedByUser(ur),ur.getSearchTerm()));
+		//us.setWritting(writtingService.getWrittingsConfirmationByUser(writtingService.getWrittingsAcceptedByUser(ur),ur.getSearchTerm()));
 		System.out.println("WRRRRRRRRRRRRRRRRRRRRRRRRRRRIIIIITTINNNNNGGGG "+us.getName());
-		//us.setUserAccepted(usersService.getUsersAccepted(writtingService.getWrittingsConfirmationByUser(ur),ur.getSearchTerm()));
-		//us.setUsersInvited(usersService.getUsersInvited(writtingService.getUsersInvited(ur),ur.getSearchTerm()));
+		us.setUserAccepted(writtingService.getUsersConfirmationByUser(ur.getSearchTerm()));
+		us.setWritting(writtingService.getWrittingsConfirmationByUser(ur.getSearchTerm()));
 		return us;
 	}
 	

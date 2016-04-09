@@ -26,7 +26,7 @@
 <!-- <link rel="stylesheet" href="resources/apphome.css"> -->
 <script
 	src="resources/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-
+<script src="lib/angular-animate.min.js"></script>
 <link rel="stylesheet"
 	href="resources/libs/assets/animate.css/animate.css" type="text/css" />
 <link rel="stylesheet"
@@ -154,6 +154,11 @@
                     <span class="clear block m-b-none">El usuario {{hoster[$index]}} te ha invitado a la obra {{wr.name}}<br>
                     <button class="btn-success" ng-click="accept(writting[$index])">Aceptar</button>
                     <button class="btn-danger" ng-click="refuse(writting[$index])">Rechazar</button>
+                    </span>
+                  </a>
+                  <a ng-repeat="wrConf in writtingConfirmation" class="list-group-item">
+                    <span class="clear block m-b-none">El usuario {{userConfirmation[$index].author}} te ha aceptado la obra {{wrConf.name}}<br>
+                    <button class="btn-success" ng-click="">Ok</button>
                     </span>
                   </a>
                 </div>

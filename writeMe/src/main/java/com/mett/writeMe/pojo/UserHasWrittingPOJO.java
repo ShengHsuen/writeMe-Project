@@ -25,6 +25,36 @@ public class UserHasWrittingPOJO {
 	
 	private boolean confirmation;
 	
+	private boolean canWrite;
+	
+	public boolean getCanWrite() {
+		return canWrite;
+	}
+
+	public void setCanWrite(boolean canWrite) {
+		this.canWrite = canWrite;
+	}
+
+	private boolean public_;
+	
+	public boolean getPublic_() {
+		return public_;
+	}
+
+	public void setPublic_(boolean public_) {
+		this.public_ = public_;
+	}
+
+	public int getIdOwner() {
+		return idOwner;
+	}
+
+	public void setIdOwner(int idOwner) {
+		this.idOwner = idOwner;
+	}
+
+	private int idOwner;
+	
 	public boolean getConfirmation() {
 		return confirmation;
 	}

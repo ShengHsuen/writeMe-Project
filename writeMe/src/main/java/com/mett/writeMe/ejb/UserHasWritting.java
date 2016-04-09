@@ -22,6 +22,8 @@ public class UserHasWritting implements Serializable {
 
 	private boolean banned;
 
+	private boolean canWrite;
+
 	private boolean confirmation;
 
 	@Temporal(TemporalType.DATE)
@@ -30,11 +32,17 @@ public class UserHasWritting implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateModifie;
 
+	@Column(name="id_owner")
+	private int idOwner;
+
 	private boolean invitationStatus;
 
 	private int linkInvitation;
 
 	private boolean owner;
+
+	@Column(name="public")
+	private boolean public_;
 
 	private boolean statusColor;
 
@@ -77,6 +85,14 @@ public class UserHasWritting implements Serializable {
 		this.banned = banned;
 	}
 
+	public boolean getCanWrite() {
+		return this.canWrite;
+	}
+
+	public void setCanWrite(boolean canWrite) {
+		this.canWrite = canWrite;
+	}
+
 	public boolean getConfirmation() {
 		return this.confirmation;
 	}
@@ -101,6 +117,14 @@ public class UserHasWritting implements Serializable {
 		this.dateModifie = dateModifie;
 	}
 
+	public int getIdOwner() {
+		return this.idOwner;
+	}
+
+	public void setIdOwner(int idOwner) {
+		this.idOwner = idOwner;
+	}
+
 	public boolean getInvitationStatus() {
 		return this.invitationStatus;
 	}
@@ -123,6 +147,14 @@ public class UserHasWritting implements Serializable {
 
 	public void setOwner(boolean owner) {
 		this.owner = owner;
+	}
+
+	public boolean getPublic_() {
+		return this.public_;
+	}
+
+	public void setPublic_(boolean public_) {
+		this.public_ = public_;
 	}
 
 	public boolean getStatusColor() {
