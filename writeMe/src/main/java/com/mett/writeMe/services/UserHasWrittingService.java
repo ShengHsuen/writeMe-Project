@@ -15,6 +15,7 @@ import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
+import com.mett.writeMe.repositories.UserRepository;
 import com.mett.writeMe.repositories.WrittingRepository;
 
 /**
@@ -27,6 +28,8 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	private UserHasWrittingRepository userHasWrittingRepository;
 	@Autowired 
 	private WrittingRepository writtingRepository;
+	@Autowired 
+	private UserRepository userRepository;
 	
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UserHasWrittingServiceInterface#save(com.mett.writeMe.contracts.UserHasWrittingRequest)
@@ -40,7 +43,7 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		
 		if(userHasWritting.getWritting().getTypeWritting().equals("Pública")){
 			userHasWritting.setCanWrite(true);
-			userHasWritting.setPublic_(true);
+			userHasWritting.setPublicc(true);
 		}
 
 		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
@@ -53,10 +56,13 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	public Boolean addPublic(UserHasWrittingRequest ur) {
 		UserHasWritting userHasWritting = new UserHasWritting();
 		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+		List<User> us = new ArrayList<User>();
+		us = userRepository.findByAuthorContaining(ur.getSearchTerm());
 		
 		userHasWritting.setCanWrite(false);
-		userHasWritting.setPublic_(true);
+		userHasWritting.setPublicc(true);
 		userHasWritting.setConfirmation(true);
+		userHasWritting.setIdOwner(us.get(0).getUserId());
 		userHasWritting.setInvitationStatus(true);
 		
 		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);

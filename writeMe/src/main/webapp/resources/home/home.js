@@ -15,22 +15,22 @@ angular.module('myApp.home', ['ngRoute'])
 		$scope.sessionUser = $localStorage.data;
 	}
 	
-	$scope.isPublic = [];
-	
-	$scope.filterForPublic = function(){
-		  $scope.ffpbulic = {"pageNumber": 0,
-			        "pageSize": 0,
-			        "direction": "",
-			        "sortBy": [""],
-			        "searchColumn": "string",
-			        "searchTerm": "",
-			        "user": {},
-			        "writting": {} 
-			        };
-			  $http.post('rest/protected/writting/getPublished',$scope.ffpbulic).success(function(response){
-				  
-			  })
-	}
+	$scope.getIsOwnerList = function(){
+		$scope.getOwnerList = {
+				"pageNumber" : 0,
+				"pageSize" : 0,
+				"direction" : "",
+				"sortBy" : [ "" ],
+				"searchColumn" : "string",
+				"searchTerm" : $scope.sessionUser.author,
+				"writting" : {}
+		};
+		$http.post('rest/protected/public/getOwnerList',$scope.getOwnerList).success(function(response) {
+			$scope.isOwnerList = response.isOwnerList;
+			$scope.isOwnerList.reverse();
+			console.log("Home.js " + $scope.isOwnerList);
+		})
+	};
 	
    $scope.init = function(){
 	   $scope.loadData();
@@ -49,7 +49,8 @@ angular.module('myApp.home', ['ngRoute'])
 	  $http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
 	   console.log("home.js");
 	   $scope.writting = response.writting;
-	   $scope.filterForPublic();
+	   $scope.getIsOwnerList();
+	  //$scope.filterForPublic();
 	  // $scope.user = response.user;
 	  }).catch(function(error){
 		   $scope.serverDown = function()
