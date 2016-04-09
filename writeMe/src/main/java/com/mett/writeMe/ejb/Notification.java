@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Notification.findAll", query="SELECT n FROM Notification n")
+//@NamedQuery(name="Notification.findAll", query="SELECT n FROM Notification n")
 public class Notification implements Serializable {
 	private static final long serialVersionUID = 1L;
 

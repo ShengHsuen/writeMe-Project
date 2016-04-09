@@ -60,10 +60,6 @@ public class Writting implements Serializable {
 	@OneToMany(mappedBy="writting")
 	private List<Chapter> chapters;
 
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="writting")
-	private List<UserHasWritting> userHasWrittings;
-
 	//bi-directional many-to-many association to Mylibrary
 	@ManyToMany
 	@JoinTable(
@@ -76,6 +72,15 @@ public class Writting implements Serializable {
 			}
 		)
 	private List<Mylibrary> mylibraries;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
+
+	//bi-directional many-to-one association to Pagination
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="paginationId")
+	private Pagination pagination;
 
 	//bi-directional many-to-one association to Record
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -93,11 +98,6 @@ public class Writting implements Serializable {
 	//bi-directional many-to-one association to Writting
 	@OneToMany(mappedBy="writting")
 	private List<Writting> writtings;
-
-	//bi-directional many-to-one association to Pagination
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="paginationId")
-	private Pagination pagination;
 
 	public Writting() {
 	}
@@ -252,6 +252,14 @@ public class Writting implements Serializable {
 		return chapter;
 	}
 
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
+
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
+	}
+
 	public List<UserHasWritting> getUserHasWrittings() {
 		return this.userHasWrittings;
 	}
@@ -274,12 +282,12 @@ public class Writting implements Serializable {
 		return userHasWritting;
 	}
 
-	public List<Mylibrary> getMylibraries() {
-		return this.mylibraries;
+	public Pagination getPagination() {
+		return this.pagination;
 	}
 
-	public void setMylibraries(List<Mylibrary> mylibraries) {
-		this.mylibraries = mylibraries;
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 
 	public Record getRecord() {
@@ -326,14 +334,6 @@ public class Writting implements Serializable {
 		writting.setWritting(null);
 
 		return writting;
-	}
-
-	public Pagination getPagination() {
-		return this.pagination;
-	}
-
-	public void setPagination(Pagination pagination) {
-		this.pagination = pagination;
 	}
 
 }
