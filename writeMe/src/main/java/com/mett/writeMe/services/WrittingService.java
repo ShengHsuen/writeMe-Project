@@ -14,6 +14,7 @@ import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
@@ -471,10 +472,7 @@ public class WrittingService implements WrittingServiceInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
+
 	
 	@Override
 	public WrittingPOJO getWrittingInviContent(WrittingPOJO wr){
@@ -494,10 +492,10 @@ public class WrittingService implements WrittingServiceInterface{
 				content = content + Writtings.get(i).getContent() + " <br> ";
 			}
 		}
-		
-		System.out.println("aqui debe salir la obra"+content);
 		wrpojo.setContent(content);
 		return wrpojo;
 	}
 
+	
+	
 }

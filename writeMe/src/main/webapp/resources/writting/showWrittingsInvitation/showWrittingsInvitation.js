@@ -217,4 +217,5 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 				     }
 			}
 		    
+
 } ]);
