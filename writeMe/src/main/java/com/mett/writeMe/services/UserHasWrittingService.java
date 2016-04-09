@@ -52,12 +52,12 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Transactional
 	public Boolean addPublic(UserHasWrittingRequest ur) {
 		UserHasWritting userHasWritting = new UserHasWritting();
-		
 		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
 		
 		userHasWritting.setCanWrite(false);
 		userHasWritting.setPublic_(true);
 		userHasWritting.setConfirmation(true);
+		userHasWritting.setInvitationStatus(true);
 		
 		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
 		
@@ -144,11 +144,12 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	public List<UserHasWrittingPOJO> getUHWByWritting(WrittingPOJO wr){
 		List<UserHasWrittingPOJO> ushPOJO = new ArrayList<UserHasWrittingPOJO>();
 		UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
-		List<Writting> writting = writtingRepository.findByNameContaining(wr.getName());
+		Writting writting = writtingRepository.findByNameContaining(wr.getName()).get(0);
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-		System.out.println("PRIMERO " + writting.get(0).getName());
-		for(int i=0; i<= uhw.size(); i++){
-			if(writting.get(0).getName() == uhw.get(i).getWritting().getName() ){
+        System.out.println("****Sirve!!***" + writting.getName());
+		for(int i=0; i <= uhw.size()-1; i++){ 
+			System.out.println("*********"+uhw.get(i).getWritting().getName());
+			if(uhw.get(i).getWritting().getName().equals(writting.getName())){
 				BeanUtils.copyProperties(uhw.get(i), dto);
 				ushPOJO.add(dto);
 			}
