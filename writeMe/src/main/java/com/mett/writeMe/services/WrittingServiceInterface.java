@@ -1,10 +1,12 @@
 package com.mett.writeMe.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
@@ -32,7 +34,10 @@ public interface WrittingServiceInterface {
 	Writting getWrittingById(int idWritting);
 	Boolean editWrittingInvitation(Writting wr, HttpSession currentSession);
 	List<WrittingPOJO> getWrittingsInvitationByUser(WrittingRequest ur);
-
+	List<WrittingPOJO> getWrittingsConfirmationByUser(String searchTerm);
+	List<WrittingPOJO> getWrittingsAcceptedByUser(WrittingRequest ur);
+	List<UserPOJO> getUsersConfirmationByUser(String searchTerm);
+	
 	List<String> getUsersInvited(WrittingRequest ur, String s);
 	WrittingPOJO getContentLastWrittingByMainWritting(WrittingPOJO wr);
 	Boolean finishWritting(Writting wr);

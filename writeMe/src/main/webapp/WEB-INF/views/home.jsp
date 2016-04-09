@@ -156,6 +156,11 @@
                     <button class="btn-danger" ng-click="refuse(writting[$index])">Rechazar</button>
                     </span>
                   </a>
+                  <a ng-repeat="wrConf in writtingConfirmation" class="list-group-item">
+                    <span class="clear block m-b-none">El usuario {{userConfirmation[$index].author}} te ha aceptado la obra {{wrConf.name}}<br>
+                    <button class="btn-success" ng-click="">Ok</button>
+                    </span>
+                  </a>
                 </div>
                 <div class="panel-footer text-sm">
                   <a href class="pull-right"><i class="fa fa-cog"></i></a>

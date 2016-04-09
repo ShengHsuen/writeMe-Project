@@ -97,6 +97,7 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		uhw = userHasWrittingRepository.findByUserAndWritting(uhw.getUser(),uhw.getWritting());
 		System.out.println("!!!!!!!id: " + uhw.getUser_has_writtingId());
 		uhw.setInvitationStatus(true);
+		uhw.setConfirmation(true);
 		UserHasWritting uhwritting = userHasWrittingRepository.save(uhw);
 		return (uhwritting == null) ? false : true;
 	}
