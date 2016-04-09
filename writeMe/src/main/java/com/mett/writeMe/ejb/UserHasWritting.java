@@ -41,6 +41,7 @@ public class UserHasWritting implements Serializable {
 
 	private boolean owner;
 
+	@Column(name="publicc")
 	private boolean publicc;
 
 	private boolean statusColor;
