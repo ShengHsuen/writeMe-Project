@@ -15,6 +15,23 @@ angular.module('myApp.home', ['ngRoute'])
 		$scope.sessionUser = $localStorage.data;
 	}
 	
+	$scope.isPublic = [];
+	
+	$scope.filterForPublic = function(){
+		  $scope.ffpbulic = {"pageNumber": 0,
+			        "pageSize": 0,
+			        "direction": "",
+			        "sortBy": [""],
+			        "searchColumn": "string",
+			        "searchTerm": "",
+			        "user": {},
+			        "writting": {} 
+			        };
+			  $http.post('rest/protected/writting/getPublished',$scope.ffpbulic).success(function(response){
+				  
+			  })
+	}
+	
    $scope.init = function(){
 	   $scope.loadData();
 	   
@@ -32,6 +49,7 @@ angular.module('myApp.home', ['ngRoute'])
 	  $http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
 	   console.log("home.js");
 	   $scope.writting = response.writting;
+	   $scope.filterForPublic();
 	  // $scope.user = response.user;
 	  }).catch(function(error){
 		   $scope.serverDown = function()
@@ -50,17 +68,8 @@ angular.module('myApp.home', ['ngRoute'])
 	
 	$scope.viewWritting = function(id){
 		params: {idWritting : id}
-/*		params: {content : wrid}
-	    params: {name : name}
-	    params: {category : categ}
-    	params: {imagen : img}
-	    $localStorage.showContent = wrid;
-	    $localStorage.nameWritting = name;
-	    $localStorage.categoryWritting = categ;
-	    $localStorage.imgWritting = img;*/
 	    $localStorage.idWritting=id;
 	    window.location.href = "app#/viewWritting"
-	
 	};
 	
     $scope.publicColaborate = function(wr){
