@@ -17,21 +17,18 @@
 		</div> 	
 		
 	<!-- Aqui va la obra anterior  -->
-    <div class="col-xs-2" >
-        <span>Ultimo escrito</span>
+    <div class="col-xs-12" >
+        <span>Último escrito</span>
     </div>
-    <div
-    
-     class="padder text-justify fr-viewx col-xs-12 bg-white " ng-hide="mostrarUltimo" id="preview" style="-webkit-user-select:
-		none; -moz-user-select: none;  user-select: none; padding: 20px;" contentEditable=true data-text="Contenido de la obra sucesora">
+    <div class="padder text-justify fr-viewx col-xs-12 bg-white " ng-hide="mostrarUltimo" id="preview" style="-webkit-user-select:
+		none; -moz-user-select: none;  user-select: none; padding: 20px;" contentEditable=true>
 		<p></p>
 	 </div>
 	 <div>
-	 <button class="pull-right btn m-b-xs w-xs-2 btn-dark btn-rounded" ng-click="mostrarUltimo = !mostrarUltimo">Ocultar escrito</button>
+	 <button class="pull-right btn m-b-xs w-xs-2 btn-dark btn-rounded" ng-click="mostrarUltimo = !mostrarUltimo" ng-hide="botonUltimo">Ocultar escrito</button>
 	 </div>
 	
 	<div ng-show="divShow">
-		
 		<p ng-show="modifiedDate" class="text-center"><small>Última modificación: {{modified}}</small></p>
 		<p ng-hide="notModified" class="text-center"><small>No se han guardado los cambios</small></p>
 

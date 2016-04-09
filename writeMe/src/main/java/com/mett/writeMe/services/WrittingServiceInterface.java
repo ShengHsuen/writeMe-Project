@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 
@@ -38,4 +39,5 @@ public interface WrittingServiceInterface {
 	Boolean getOwner(String userTerm, Writting w);
 	WrittingPOJO getWrittingInviContent(WrittingPOJO wr);
 	List<WrittingPOJO> getAllWithoutNameNull();
+	
 }
