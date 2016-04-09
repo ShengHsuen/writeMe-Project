@@ -11,7 +11,13 @@ angular.module('myApp.home', ['ngRoute'])
 
 .controller('HomeCtrl', ['$scope','$http','$rootScope', '$localStorage', function($scope,$http,$rootScope, $localStorage) {
 	
+	$scope.loadData = function(){
+		$scope.sessionUser = $localStorage.data;
+	}
+	
    $scope.init = function(){
+	   $scope.loadData();
+	   
 	  $scope.writting = [];
 	  $scope.user = [];
 	  $scope.writting = {"pageNumber": 0,
@@ -56,5 +62,41 @@ angular.module('myApp.home', ['ngRoute'])
 	    window.location.href = "app#/viewWritting"
 	
 	};
+	
+    $scope.publicColaborate = function(wr){
+    	console.log("public colaborate "+$scope.sessionUser.author);
+		$scope.userHasWritting={
+				  "pageNumber": 0,
+				  "pageSize": 0,
+				  "direction": "string",
+				  "sortBy": [
+				    "string"
+				  ],
+				  "searchColumn": "string",
+				  "searchTerm": $scope.sessionUser.author,
+				  "userHasWritting": {
+				      "statusColor": false,
+				      "user_has_writtingId": 0,
+				      "linkInvitation": $scope.writtingId,
+				      "banned": false,
+				      "invitationStatus": false,
+				      "owner": false,
+				      "writting": wr,
+				      "user": $scope.sessionUser
+				}
+		};
+	   $http.post('rest/protected/public/createPublic', $scope.userHasWritting).success(function(response) {
+	    	console.log("Success");
+    	   /* $rootScope.$broadcast('invitation-send');
+    	    var path = "app#/showWrittingsInvitation";
+    	    window.location.href = path;*/
+	    }).catch(function(error){
+			   $scope.serverDown = function()
+				{
+				   $rootScope.$broadcast('serverDown');
+				}
+			   $scope.serverDown();
+		   });
+    }
 
 }]);
