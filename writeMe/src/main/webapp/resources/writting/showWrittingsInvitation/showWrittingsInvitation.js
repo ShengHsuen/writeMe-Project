@@ -84,6 +84,24 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	    window.location.href = "app#/invitation";
     }
 	
+	$scope.leave = function(writting){
+		console.log("Success " + writting.name);
+		  $scope.invitation = {"pageNumber": 0,
+			        "pageSize": 0,
+			        "direction": "",
+			        "sortBy": [""],
+			        "searchColumn": "string",
+			        "searchTerm": $scope.user.author,
+			        "user": $scope.user,
+			        "owner": {},
+			        "writting": writting 
+			        };
+		  $http.post('rest/protected/invitation/refuseInvitation', $scope.invitation).success(function(response) {
+			  console.log("Success");
+			  $scope.init();
+		  });
+	}
+	
 	  $scope.$on('invitation-started', function(event, args) {
 		  $scope.init();
 	  });
