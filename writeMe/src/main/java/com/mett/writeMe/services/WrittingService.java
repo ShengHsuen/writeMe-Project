@@ -51,7 +51,7 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public List<WrittingPOJO> getAllWithoutNameNull() {
+	public List<WrittingPOJO> getAllWithoutNameNull(){
 		List<Writting> Writtings = writtingRepository.findAllByNameNotNull();
 		List<WrittingPOJO> dtos = new ArrayList<WrittingPOJO>();
 		Writtings.stream().forEach(tu ->{

@@ -149,12 +149,12 @@ public class UserHasWritting implements Serializable {
 		this.owner = owner;
 	}
 
-	public boolean getPublic_() {
+	public boolean getPublicc() {
 		return this.publicc;
 	}
 
-	public void setPublic_(boolean public_) {
-		this.publicc = public_;
+	public void setPublicc(boolean publicc) {
+		this.publicc = publicc;
 	}
 
 	public boolean getStatusColor() {
