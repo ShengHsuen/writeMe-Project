@@ -13,7 +13,9 @@ import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
+import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
+import com.mett.writeMe.repositories.WrittingRepository;
 
 /**
  * @author Dani
@@ -23,6 +25,8 @@ import com.mett.writeMe.repositories.UserHasWrittingRepository;
 public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Autowired 
 	private UserHasWrittingRepository userHasWrittingRepository;
+	@Autowired 
+	private WrittingRepository writtingRepository;
 	
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UserHasWrittingServiceInterface#save(com.mett.writeMe.contracts.UserHasWrittingRequest)
@@ -113,4 +117,21 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		
 		return true;
 	}
+	
+	@Override
+	public List<UserHasWrittingPOJO> getUHWByWritting(WrittingPOJO wr){
+		List<UserHasWrittingPOJO> ushPOJO = new ArrayList<UserHasWrittingPOJO>();
+		UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+		List<Writting> writting = writtingRepository.findByNameContaining(wr.getName());
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		System.out.println("PRIMERO " + writting.get(0).getName());
+		for(int i=0; i<= uhw.size(); i++){
+			if(writting.get(0).getName() == uhw.get(i).getWritting().getName() ){
+				BeanUtils.copyProperties(uhw.get(i), dto);
+				ushPOJO.add(dto);
+			}
+		}
+		return ushPOJO;
+	}
+	
 }

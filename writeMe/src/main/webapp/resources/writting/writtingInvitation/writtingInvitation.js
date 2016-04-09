@@ -294,13 +294,6 @@ $scope.getAllContent = function(){
     }
     
     
-
-    /* Mandar el habilitado, el actor actual, y revisar si hay un actor adentro
-     * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
-     * 
-     * */
-
-    
     var content = "";
     $scope.participation;
     var name= "";
@@ -329,7 +322,7 @@ $scope.getAllContent = function(){
 		     $('#preview').html(content);
       })
     }
-
+    var everyTime = 0;
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
@@ -346,21 +339,23 @@ $scope.getAllContent = function(){
 		     $scope.participation = response.participation;
 		     
 		     $('#preview').html(content);
-		     
+		  
 		     if($scope.participation == true){
+		    	
 		    	 $scope.divShow = false;
 		    	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	 setInterval(actualizar,5000);
+		    	 //everyTime = setInterval(actualizar,4000);
+		
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
+		    	 //clearInterval(everyTime);
 		     }
 		    })
 		   
     };
     $scope.contentLastWritting();
 
-  
   
     $scope.valOwner = function(){
         $scope.getOwner = {
@@ -380,8 +375,5 @@ $scope.getAllContent = function(){
 
     $scope.valOwner();
     $scope.getAllContent();
-    
-    
-    $scope.mostrarUltimo = false;
-    
+
 }]);
