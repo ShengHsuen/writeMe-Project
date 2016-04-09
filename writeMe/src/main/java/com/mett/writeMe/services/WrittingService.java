@@ -51,7 +51,7 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public List<WrittingPOJO> getAllWithoutNameNull() {
+	public List<WrittingPOJO> getAllWithoutNameNull(){
 		List<Writting> Writtings = writtingRepository.findAllByNameNotNull();
 		List<WrittingPOJO> dtos = new ArrayList<WrittingPOJO>();
 		Writtings.stream().forEach(tu ->{
@@ -423,14 +423,15 @@ public class WrittingService implements WrittingServiceInterface{
 		List<Writting> Writting = writtingRepository.findByNameContaining(ws.getName());
 		List<Writting> Writtings = writtingRepository.findAll();
 		WrittingPOJO dto = new WrittingPOJO();
-		BeanUtils.copyProperties(Writting.get(0), dto);
-		WrittingPOJO.add(dto);
+		//BeanUtils.copyProperties(Writting.get(0), dto);
+		//WrittingPOJO.add(dto);
 		
 		for(int i=0; i <= Writtings.size()-1; i++){
-			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
-				BeanUtils.copyProperties(Writtings.get(i), dto);
-				WrittingPOJO.add(dto);
-			}
+				if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId() && Writtings.get(i).equals("") ){
+					BeanUtils.copyProperties(Writtings.get(i), dto);
+						WrittingPOJO.add(dto);
+						System.out.println("AQUI VA " + dto.getContent());
+				}	
 		}
 		String content;
 		WrittingPOJO wrpojo = new WrittingPOJO();

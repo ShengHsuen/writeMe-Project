@@ -236,10 +236,10 @@
 								<span>Por invitación</span>
 								</a></li>
 									
-								<!-- <li><a href="/writeMe/app#/showWrittingsPublic">
+								<li><a href="/writeMe/app#/showWrittingsPublic">
 								<i class="glyphicon glyphicon-book icon"></i>
 								<span>Pública</span>
-								</a></li> -->
+								</a></li>
 						</ul>
 					</nav>
 					<!-- nav -->
@@ -328,9 +328,10 @@
   <script src="resources/writting/createWritting/createWritting.js"></script>
   <script src="resources/writting/writting/writting.js"></script>
   <script src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
+  <script src="resources/writting/writtingPublic/writtingPublic.js"></script>
   <script src="resources/writting/showWrittings/showWrittings.js"></script>
-  
   <script src="resources/writting/showWrittingsInvitation/showWrittingsInvitation.js"></script>
+  <script src="resources/writting/showWrittingsPublic/showWrittingsPublic.js"></script>
 
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
