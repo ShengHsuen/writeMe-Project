@@ -146,14 +146,15 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
 		Writting writting = writtingRepository.findByNameContaining(wr.getName()).get(0);
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-        System.out.println("****Sirve!!***" + writting.getName());
 		for(int i=0; i <= uhw.size()-1; i++){ 
-			System.out.println("*********"+uhw.get(i).getWritting().getName());
-			if(uhw.get(i).getWritting().getName().equals(writting.getName())){
+			if(uhw.get(i).getWritting().getWrittingId()== writting.getWrittingId()){
 				BeanUtils.copyProperties(uhw.get(i), dto);
 				ushPOJO.add(dto);
+			}else{
+		        System.out.println("****No sirve!!***" );
 			}
 		}
+		System.out.println("ACA ");
 		return ushPOJO;
 	}
 	
