@@ -37,7 +37,28 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		UserHasWritting userHasWritting = new UserHasWritting();
 		
 		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+		
+		if(userHasWritting.getWritting().getTypeWritting().equals("Pública")){
+			userHasWritting.setCanWrite(true);
+			userHasWritting.setPublic_(true);
+		}
 
+		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
+		
+		return (nWritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean addPublic(UserHasWrittingRequest ur) {
+		UserHasWritting userHasWritting = new UserHasWritting();
+		
+		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+		
+		userHasWritting.setCanWrite(false);
+		userHasWritting.setPublic_(true);
+		userHasWritting.setConfirmation(true);
+		
 		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
 		
 		return (nWritting == null) ? false : true;
