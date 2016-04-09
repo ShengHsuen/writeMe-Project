@@ -41,8 +41,8 @@ public class UserHasWritting implements Serializable {
 
 	private boolean owner;
 
-	@Column(name="public")
-	private boolean public_;
+	@Column(name="publicc")
+	private boolean publicc;
 
 	private boolean statusColor;
 
@@ -150,11 +150,11 @@ public class UserHasWritting implements Serializable {
 	}
 
 	public boolean getPublic_() {
-		return this.public_;
+		return this.publicc;
 	}
 
 	public void setPublic_(boolean public_) {
-		this.public_ = public_;
+		this.publicc = public_;
 	}
 
 	public boolean getStatusColor() {
