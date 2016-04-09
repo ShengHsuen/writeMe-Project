@@ -96,17 +96,17 @@ angular.module('myApp', [
 				 	   //$scope.hoster = response.owner;
 				  	   console.log($scope.userConfirmation);
 				  	   console.log($scope.writtingConfirmation);
-				  	   $scope.mergeList();
+				  	  // $scope.mergeList();
 			     });
 		}
 		$scope.findConfirmations();
 		
-		$scope.mergeList = function(){
-			for(var i=0;i<userConfirmation;i++){
-				$scope.user.push(userConfirmation[i]);
-				$scope.hoster.push(writtingConfirmation[i]);
+		/*$scope.mergeList = function(){
+			for(var i=0;i<$scope.userConfirmation.length;i++){
+				$scope.user.push($scope.userConfirmation[i]);
+				$scope.hoster.push($scope.writtingConfirmation[i]);
 			}
-		}
+		}*/
 	}
 	$scope.init();
 	
