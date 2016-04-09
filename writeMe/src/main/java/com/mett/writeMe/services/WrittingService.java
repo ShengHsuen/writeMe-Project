@@ -212,6 +212,10 @@ public class WrittingService implements WrittingServiceInterface{
 		UserHasWritting UHW = new UserHasWritting();
 		
 		BeanUtils.copyProperties(ur.getWritting(), writting);
+		
+		if(writting.getTypeWritting().equals("Pública")){
+			writting.setPublished(true);
+		}
 
 		Writting nWritting = writtingRepository.save(writting);
 		
