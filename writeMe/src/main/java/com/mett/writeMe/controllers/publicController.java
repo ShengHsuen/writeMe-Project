@@ -20,6 +20,7 @@ import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.UserRepository;
+import com.mett.writeMe.repositories.WrittingRepository;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.UsersServiceInterface;
@@ -36,7 +37,9 @@ public class publicController {
 	@Autowired private WrittingServiceInterface writtingService;
 	@Autowired private UserRepository userRepository;
 	@Autowired private UserHasWrittingRepository userHasWrittingRepository;
+	@Autowired private WrittingRepository writtingRepository;
 	@Autowired private LoginServiceInterface LoginService;
+	
 	@RequestMapping(value = "/createPublic", method = RequestMethod.POST)
 	public UserHasWrittingResponse createPublic(@RequestBody UserHasWrittingRequest uhw) {
 		UserHasWrittingResponse us = new UserHasWrittingResponse();
@@ -46,24 +49,30 @@ public class publicController {
 	}
 	
 	@RequestMapping(value = "/getOwnerList", method = RequestMethod.POST)
-	public WrittingResponse getOwnerList(@RequestBody UserHasWrittingRequest uhw) {
-		//HttpSession currentSession = LoginService.getCurrentSession();
+	public WrittingResponse getOwnerList(@RequestBody UserHasWrittingRequest uhwr) {
 		WrittingResponse response = new WrittingResponse();
 		List<Boolean> isOwnerList = new ArrayList<Boolean>();
-		//List<WrittingPOJO> wPojo = new ArrayList<WrittingPOJO>();
-		List<UserHasWritting> uhww = new ArrayList<UserHasWritting>();
-		int idUser = userRepository.findByAuthorContaining(uhw.getSearchTerm()).get(0).getUserId();
-		uhww = userHasWrittingRepository.findAllByIdOwnerAndPubliccTrue(idUser);
-
-		for (int i = 0; i < uhww.size(); i++) {
-				//Writting wr = new Writting();
-				//BeanUtils.copyProperties(wPojo.get(i), wr);
-				//isOwnerList.add(WrittingService.getOwner(ur.getSearchTerm(), wr));
-			if(uhww.get(i).getOwner() == true){
-				isOwnerList.add(true);
-			}else{
-				isOwnerList.add(false);
+		List<Writting> lw = new ArrayList<Writting>();
+		List<UserHasWritting> allUhw = new ArrayList<UserHasWritting>();
+		lw.addAll(writtingRepository.findAllByPublishedTrueAndNameNotNull());
+		int idUser = userRepository.findByAuthorContaining(uhwr.getSearchTerm()).get(0).getUserId();
+		allUhw = userHasWrittingRepository.findAllByUserUserIdAndPubliccTrue(idUser);
+		UserHasWritting uhw = new UserHasWritting();
+		boolean resul;
+		for (int i = 0; i < lw.size(); i++) {
+			uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndPubliccTrue(lw.get(i).getWrittingId(),idUser);
+			try{
+				if(uhw != null){
+					System.out.println("ESTE ME TRAE EL OWNER " + uhw.getUser_has_writtingId());
+					resul = false;
+				}else{
+					resul = true;
+				}
+			}catch(Exception e){
+				resul = true;
 			}
+			isOwnerList.add(resul);
+			uhw = new UserHasWritting();
 		}
 		response.setIsOwnerList(isOwnerList);
 		return response;
