@@ -422,5 +422,6 @@ $scope.getAllContent = function(){
             };
     	$http.post('rest/protected/public/',$scope.getN).success(function(response) {
     	})
+    }
 
 }]);
