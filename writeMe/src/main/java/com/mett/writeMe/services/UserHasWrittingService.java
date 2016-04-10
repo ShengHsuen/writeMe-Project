@@ -122,7 +122,6 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Transactional
 	public Boolean editUserHasWritting(UserHasWritting uhw) {
 		uhw = userHasWrittingRepository.findByUserAndWritting(uhw.getUser(),uhw.getWritting());
-		System.out.println("!!!!!!!id: " + uhw.getUser_has_writtingId());
 		uhw.setInvitationStatus(true);
 		uhw.setConfirmation(true);
 		UserHasWritting uhwritting = userHasWrittingRepository.save(uhw);
@@ -133,10 +132,7 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Transactional
 	public Boolean deleteUserHasWritting(Writting wr, User us) {
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-		
 		uhw.stream().forEach(uh ->{
-			System.out.println("US: "+ us.getAuthor());
-			System.out.println("UH: "+ uh.getUser().getAuthor());
 			if(uh.getWritting().getWrittingId() == wr.getWrittingId() && us.getAuthor().equals(uh.getUser().getAuthor())){
 				userHasWrittingRepository.delete(uh.getUser_has_writtingId());
 			}
@@ -145,23 +141,18 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		
 		return true;
 	}
-	
+
 	@Override
-	public List<UserHasWrittingPOJO> getUHWByWritting(WrittingPOJO wr){
-		List<UserHasWrittingPOJO> ushPOJO = new ArrayList<UserHasWrittingPOJO>();
-		UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
-		Writting writting = writtingRepository.findByNameContaining(wr.getName()).get(0);
-		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-		for(int i=0; i <= uhw.size()-1; i++){ 
-			if(uhw.get(i).getWritting().getWrittingId()== writting.getWrittingId()){
-				BeanUtils.copyProperties(uhw.get(i), dto);
-				ushPOJO.add(dto);
-			}else{
-		        System.out.println("****No sirve!!***" );
-			}
-		}
-		System.out.println("ACA ");
-		return ushPOJO;
+	@Transactional
+	public List<UserHasWrittingPOJO> getUHWByWritting(int writtingId){
+		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAllByWrittingWrittingId(writtingId);
+		uhw.stream().forEach(uw ->{
+			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(uw, dto);
+			dtos.add(dto);
+		});
+		return dtos;
 	}
 	
 }
