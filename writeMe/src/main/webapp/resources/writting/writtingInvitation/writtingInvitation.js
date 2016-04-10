@@ -322,7 +322,38 @@ $scope.getAllContent = function(){
 		     $('#preview').html(content);
       })
     }
-    var everyTime = 0;
+    var actu;
+    var testing;
+   
+    function test(){
+    	   $(document).ready(function () {
+    	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+    	        	actu = setInterval(actualizar, 1000);
+    	        }else{
+    	        	clearInterval(testing);
+    	        	clearInterval(actu);
+    	        }
+    	    })
+    }
+    
+    
+    /*
+     * ESte metodo deberia ser algo asi para lo que ocupas cheng.
+     var outTest;
+    function out(){
+ 	   $(document).ready(function () {
+ 	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+ 	        }else{
+ 	   		$scope.content = $('#edit').val();
+			updateFinish();
+			alert("Se creo publish 0");
+			clearInterval(outTest);
+ 	        }
+ 	    })
+ }
+    
+  outTest = setInterval(out,1000);
+  */
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
@@ -344,12 +375,12 @@ $scope.getAllContent = function(){
 		    	
 		    	 $scope.divShow = false;
 		    	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	 //everyTime = setInterval(actualizar,4000);
-		
+		    	 testing = setInterval(test,1000);
+
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
-		    	 //clearInterval(everyTime);
+		    	 
 		     }
 		    })
 		   
@@ -375,5 +406,7 @@ $scope.getAllContent = function(){
 
     $scope.valOwner();
     $scope.getAllContent();
+    
+
 
 }]);
