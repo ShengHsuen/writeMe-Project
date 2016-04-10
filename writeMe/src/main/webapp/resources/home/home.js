@@ -28,7 +28,7 @@ angular.module('myApp.home', ['ngRoute'])
 		$http.post('rest/protected/public/getOwnerList',$scope.getOwnerList).success(function(response) {
 			$scope.isOwnerList = response.isOwnerList;
 			$scope.isOwnerList.reverse();
-			console.log("Home.js " + $scope.isOwnerList);
+			console.log("Home: " + $scope.isOwnerList);
 		})
 	};
 	
@@ -49,6 +49,8 @@ angular.module('myApp.home', ['ngRoute'])
 	  $http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
 	   console.log("home.js");
 	   $scope.writting = response.writting;
+	   $scope.owners = response.user;
+	   console.log($scope.owners);
 	   $scope.getIsOwnerList();
 	  //$scope.filterForPublic();
 	  // $scope.user = response.user;
@@ -73,8 +75,8 @@ angular.module('myApp.home', ['ngRoute'])
 	    window.location.href = "app#/viewWritting"
 	};
 	
-    $scope.publicColaborate = function(wr){
-    	console.log("public colaborate "+$scope.sessionUser.author);
+    $scope.publicColaborate = function(wr, $index){
+    	console.log("public colaborate "+wr.name);
 		$scope.userHasWritting={
 				  "pageNumber": 0,
 				  "pageSize": 0,
@@ -83,7 +85,7 @@ angular.module('myApp.home', ['ngRoute'])
 				    "string"
 				  ],
 				  "searchColumn": "string",
-				  "searchTerm": $scope.sessionUser.author,
+				  "searchTerm": $scope.owners[$index].author,
 				  "userHasWritting": {
 				      "statusColor": false,
 				      "user_has_writtingId": 0,
@@ -97,6 +99,7 @@ angular.module('myApp.home', ['ngRoute'])
 		};
 	   $http.post('rest/protected/public/createPublic', $scope.userHasWritting).success(function(response) {
 	    	console.log("Success");
+	    	$scope.init();
     	   /* $rootScope.$broadcast('invitation-send');
     	    var path = "app#/showWrittingsInvitation";
     	    window.location.href = path;*/

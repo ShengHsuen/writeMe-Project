@@ -356,7 +356,6 @@ $scope.getAllContent = function(){
     };
     $scope.contentLastWritting();
 
-  
     $scope.valOwner = function(){
         $scope.getOwner = {
                 "pageNumber": 0,
@@ -375,5 +374,22 @@ $scope.getAllContent = function(){
 
     $scope.valOwner();
     $scope.getAllContent();
+    
+    $scope.getContributors = function(){
+        $scope.getContrib = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": "",
+                "writting": $scope.writtingload
+            };
+	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
+	    	$scope.contributors = response.luser;
+	    	console.log("Contributors>>> " + $scope.contributors);
+	    })
+    };
+    $scope.getContributors();
 
 }]);
