@@ -391,6 +391,24 @@ $scope.getAllContent = function(){
 	    })
     };
     $scope.getContributors();
+        
+    $scope.userCanWrite = function(){
+        $scope.getUserCanWrite = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": "",
+                "writting": $scope.writtingload
+            };
+    }
+    	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
+    		$scope.userCanWrite = response.user.name;
+    		console.log("CAn WRITEEE " + $scope.userCanWrite );
+    	})
+    };
+    $scope.userCanWrite();
     
     $scope.getNext(){
         $scope.getN = {
@@ -402,6 +420,7 @@ $scope.getAllContent = function(){
                 "searchTerm": "",
                 "writting": $scope.writtingload
             };
-    }
+    	$http.post('rest/protected/public/',$scope.getN).success(function(response) {
+    	})
 
 }]);
