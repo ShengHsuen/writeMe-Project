@@ -110,7 +110,7 @@
         		<!-- /SERVIDOR CAIDO -->
 
 				<!-- link and dropdown -->
-				<ul class="nav navbar-nav" ng-show="disableMenu">
+				<ul class="nav navbar-nav">
 					<li><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> 
 					<a href="app#/createWritting"> 
 						<span translate="header.navbar.new.NEW">Crear obra</span>
@@ -119,15 +119,6 @@
 				</ul>
 				<!-- / link and dropdown -->
 				
-				<!-- link and dropdown -->
-				<ul class="nav navbar-nav" ng-show="disableMessage">
-					<li ng-click="showMessage()"><i class="fa fa-fw fa-plus visible-xs-inline-block"></i> 
-					<a href=""> 
-						<span translate="header.navbar.new.NEW">Crear obra</span>
-					</a>
-					</li>
-				</ul>
-				<!-- / link and dropdown -->
 
 				<!-- search form -->
 				<form class="navbar-form navbar-form-sm navbar-left shift"
@@ -136,7 +127,7 @@
 
 				</form>
 				<!-- / search form -->
-		<ul class="nav navbar-nav navbar-right" ng-show="disableMenu">
+		<ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle">
               <i class="icon-bell fa-fw"></i>
@@ -174,27 +165,7 @@
 				<li><a href = "/writeMe/#/signin">Cerrar sesión</a></li>
 			</ul> <!-- / dropdown --></li>
         </ul>
-        
-        
-        <ul class="nav navbar-nav navbar-right" ng-show="disableMessage">
-          <li class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle">
-              <i class="icon-bell fa-fw" ng-click="showMessage()"></i>
-              <span class="visible-xs-inline">Notifications</span>
-              <span class="badge badge-sm up bg-danger pull-right-xs">{{cantInvitations}}</span>
-            </a>
-          </li>
-          <li class="dropdown"><a href="" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> 
-			<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm" style="padding-top: 26px;"><i class="on md b-white bottom"></i></span> 
-			<span >Bienvenido {{user.author}}</span> 
-			<b class="caret"></b>
-			</a> <!-- dropdown -->
-			<ul class="dropdown-menu animated fadeInRight w">
-				<li ng-click="showMessage()"><a href ="">Cerrar sesión</a></li>
-			</ul> <!-- / dropdown --></li>
-        </ul>
-        
-        
+    
         </div>
 		</header>
 		<!-- / header -->
@@ -206,7 +177,7 @@
 				<div class="navi-wrap">
 
 					<!-- nav -->
-					<nav class="navi clearfix" ui-nav="" ng-show="disableMenu">
+					<nav class="navi clearfix" ui-nav="">
 						<ul class="nav">
 							<li><a href="/writeMe/app#/home" class="auto"> 
 								<span class="pull-right text-muted"></span> 
@@ -238,43 +209,6 @@
 						</ul>
 					</nav>
 					<!-- nav -->
-					
-					<!-- nav -->
-					<nav class="navi clearfix" ui-nav="" ng-show="disableMessage">
-						<ul class="nav">
-							<li ng-click="showMessage()"><a href="" class="auto"> 
-								<span class="pull-right text-muted"></span> 
-								<i class="glyphicon glyphicon-home icon"></i>
-								<span>Inicio</span></a></li>
-
-							<li class="hidden-folded padder m-t m-b-sm text-muted text-xs" >
-								<span>Mi biblioteca</span>
-							</li>
-								<li class="nav-sub-header">
-								<a href> 
-								<span>Mi biblioteca</span>
-								</a></li>
-									
-								<li ng-click="showMessage()"><a href=""> 
-								<i class="glyphicon glyphicon-user icon"></i>
-								<span>Personal</span>
-								</a></li>
-									
-								<li ng-click="showMessage()"><a href="">
-								<i class="glyphicon glyphicon-book icon"></i>  
-								<span>Por invitación</span>
-								</a></li>
-									
-<!-- 								<li ng-click="showMessage()"><a href=""> -->
-<!-- 								<i class="glyphicon glyphicon-book icon"></i> -->
-<!-- 								<span>Pública</span> -->
-<!-- 								</a></li> -->
-								
-								<span style="color:red" ng-show="message">Para salir click en Guardar y salir</span>
-						</ul>
-					</nav>
-					<!-- nav -->
-
 				</div>
 			</div>
 		</aside>
