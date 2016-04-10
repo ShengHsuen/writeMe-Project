@@ -40,7 +40,7 @@ angular.module('myApp.writtingPublic', ['ngRoute', 'ngStorage'])
 			updateFinish();
 			$rootScope.$broadcast('disableButtonsTrue');
 			
-			var path = "/writeMe/app#/showWrittingsInvitation";
+			var path = "/writeMe/app#/showWrittingsPublic";
 			  window.location.href = path;
 		}
 
@@ -323,6 +323,24 @@ $scope.getAllContent = function(){
       })
     }
     var everyTime = 0;
+    $scope.userCanWrite = function(){
+        $scope.getUserCanWrite = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": "",
+                "writting": $scope.writtingload
+            };
+    	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
+    		$scope.authorCanWrite = response.user.author;
+    		
+    		console.log("CAn WRITEEE " + $scope.authorCanWrite );
+    	})
+    };
+    $scope.userCanWrite();
+    
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
@@ -336,19 +354,14 @@ $scope.getAllContent = function(){
     	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
 		  ).success(function(response) {
 		     content = response.content;
-		     $scope.participation = response.participation;
-		     
 		     $('#preview').html(content);
-		  
-		     if($scope.participation == true){
-		    	
-		    	 $scope.divShow = false;
-		    	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	 //everyTime = setInterval(actualizar,4000);
-		
-		     }else{
+		     if($scope.authorCanWrite == $scope.user.author){
 		    	 $scope.divShow = true;
-		    	 createWritting();
+		    	 //everyTime = setInterval(actualizar,4000);
+		     }else{
+		    	 $scope.divShow = false;
+		      	 $rootScope.$broadcast('disableButtonsTrue');  
+		    	// createWritting();
 		    	 //clearInterval(everyTime);
 		     }
 		    })
@@ -391,6 +404,7 @@ $scope.getAllContent = function(){
 	    })
     };
     $scope.getContributors();
+<<<<<<< HEAD
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
