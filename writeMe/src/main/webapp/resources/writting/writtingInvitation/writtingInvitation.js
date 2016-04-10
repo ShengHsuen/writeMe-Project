@@ -11,8 +11,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
  
  .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope','$location', function($scope,$http,$localStorage,$rootScope,$location) {
 
-	 	
-	 
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
 			$scope.writtingload = $localStorage.writting;
@@ -117,7 +115,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
             }
         };
         $http.post('rest/protected/writting/createWrittingInvitation', $scope.writting).success(function(response) {
-				createUserHasWritting();
+			createUserHasWritting();
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
@@ -403,7 +401,6 @@ $scope.getAllContent = function(){
 
     $scope.valOwner();
     $scope.getAllContent();
-    
 
 
 }]);

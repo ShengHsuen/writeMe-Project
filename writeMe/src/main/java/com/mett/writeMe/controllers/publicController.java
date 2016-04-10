@@ -3,8 +3,6 @@ package com.mett.writeMe.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingResponse;
+import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
-import com.mett.writeMe.pojo.WrittingPOJO;
+import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
 import com.mett.writeMe.repositories.UserRepository;
 import com.mett.writeMe.repositories.WrittingRepository;
 import com.mett.writeMe.services.LoginServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.UsersServiceInterface;
-import com.mett.writeMe.services.WrittingService;
 import com.mett.writeMe.services.WrittingServiceInterface;
 
 @RestController
@@ -76,5 +74,32 @@ public class publicController {
 		}
 		response.setIsOwnerList(isOwnerList);
 		return response;
+	}
+	
+	@RequestMapping(value = "/getContributors", method = RequestMethod.POST)
+	public UserHasWrittingResponse getContributors(@RequestBody UserHasWrittingRequest uhw) {
+		UserHasWrittingResponse us = new UserHasWrittingResponse();
+		List<User> luser = new ArrayList<User>();
+		List<UserPOJO> luserpojo = new ArrayList<UserPOJO>();
+		List<UserHasWritting> luhw = new ArrayList<UserHasWritting>();
+		luhw.addAll(userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndPubliccTrue(uhw.getWritting().getWrittingId()));
+		for(int i=0;i<luhw.size();i++){
+			System.out.println("luhw.get(i).getUser() >>>>>>>" + luhw.get(i).getUser().getAuthor());
+			luser.add(luhw.get(i).getUser());
+		}
+		luserpojo = generateUserDtos(luser);
+		us.setLuser(luserpojo);
+		return us;
+	}
+	
+	private List<UserPOJO> generateUserDtos(List<User> users){
+		List<UserPOJO> uiUsers = new ArrayList<UserPOJO>();
+		users.stream().forEach(u -> {
+			UserPOJO dto = new UserPOJO();
+			BeanUtils.copyProperties(u,dto);
+			dto.setPassword("");
+			uiUsers.add(dto);
+		});	
+		return uiUsers;
 	}
 }
