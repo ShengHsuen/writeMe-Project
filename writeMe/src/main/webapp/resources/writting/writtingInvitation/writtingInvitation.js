@@ -10,7 +10,6 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
  }])
  
  .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope','$location', function($scope,$http,$localStorage,$rootScope,$location) {
-
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
 			$scope.writtingload = $localStorage.writting;
@@ -33,8 +32,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		$scope.finish = function(){
 			$scope.content = $('#edit').val();
 			updateFinish();
-			$rootScope.$broadcast('disableButtonsTrue');
-			
+				
 			var path = "/writeMe/app#/showWrittingsInvitation";
 			  window.location.href = path;
 		}
@@ -331,24 +329,22 @@ $scope.getAllContent = function(){
     	    })
     }
     
-    
-    /*
-     * ESte metodo deberia ser algo asi para lo que ocupas cheng.
      var outTest;
-    function out(){
+     function out(){
  	   $(document).ready(function () {
  	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+ 	        	
  	        }else{
- 	   		$scope.content = $('#edit').val();
-			updateFinish();
-			alert("Se creo publish 0");
-			clearInterval(outTest);
+	 	   		$scope.content = $('#edit').val();
+				updateFinish();
+				clearInterval(outTest);
  	        }
  	    })
- }
-    
-  outTest = setInterval(out,1000);
-  */
+     }  
+     outTest = setInterval(out,1000);
+  
+  
+  
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
