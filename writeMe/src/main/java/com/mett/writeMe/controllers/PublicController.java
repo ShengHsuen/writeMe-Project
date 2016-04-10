@@ -106,6 +106,37 @@ public class PublicController {
 		return ur;
 	}
 	
+	// Guarda al siguiente usuario en la lista con canEdit = 1
+	@RequestMapping(value = "/setNext", method = RequestMethod.POST)
+	public UsersResponse setNext(@RequestBody UserHasWrittingRequest uhw) {
+		UsersResponse response = new UsersResponse();
+		User user = new User();
+		user = userRepository.findByAuthorContaining(uhw.getSearchTerm()).get(0);
+		List<UserHasWritting> luhw = new ArrayList<UserHasWritting>();
+		luhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndPubliccTrue(uhw.getWritting().getWrittingId());
+		System.out.println("SIZE() >>> "+luhw.size());
+		for(int i=0; i<=luhw.size()-1;i++){
+			System.out.println("luhw.get(i).getUser() " + luhw.get(i).getUser().getAuthor() + " i " + i);
+			if(luhw.get(i).getUser() == user){		
+				// Entra al if de abajo si es el ultimo de la lista
+				if(i == luhw.size()-1){
+					System.out.println("Entre al ultimo");
+					luhw.get(i).setCanWrite(false);
+					luhw.get(0).setCanWrite(true);
+					userHasWrittingRepository.save(luhw.get(0));
+					userHasWrittingRepository.save(luhw.get(i));
+				}else{
+					System.out.println("Entre a uno que no es el ultimo");
+					luhw.get(i).setCanWrite(false);
+					luhw.get(i+1).setCanWrite(true);
+					userHasWrittingRepository.save(luhw.get(i+1));
+					userHasWrittingRepository.save(luhw.get(i));
+				}
+			}
+		}
+		return response;
+	}
+	
 	
 	
 	private List<UserPOJO> generateUserDtos(List<User> users){
