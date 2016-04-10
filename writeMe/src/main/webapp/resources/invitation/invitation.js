@@ -10,8 +10,14 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
  }])
  
  .controller('InvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
-
+	 
 	$scope.init = function(){
+		
+		$scope.saveData = function(){
+			/*params: {mainWritting : mainWr};*/
+		    $localStorage.usersInvited = $scope.usersInvited;
+		};
+		
 		$scope.loadData = function(){
 			$scope.contentWithoutTags = $localStorage.showContent;
 			$scope.name = $localStorage.nameWritting;
@@ -107,6 +113,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 				    "string"
 				  ],
 				  "searchColumn": "string",
+				  "searchTerm": $scope.sessionUser.author,
 				  "userHasWritting": {
 				      "statusColor": false,
 				      "user_has_writtingId": 0,
@@ -130,7 +137,7 @@ angular.module('myApp.invitation', ['ngRoute', 'ngStorage'])
 			   $scope.serverDown();
 		   });
     }
-	
+    
 	$scope.users = {
 				"pageNumber": 0,
 		        "pageSize": 0,

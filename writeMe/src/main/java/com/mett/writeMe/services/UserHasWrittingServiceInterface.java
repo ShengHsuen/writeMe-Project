@@ -7,6 +7,7 @@ import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
+import com.mett.writeMe.pojo.WrittingPOJO;
 
 public interface UserHasWrittingServiceInterface {
 	Boolean save(UserHasWrittingRequest ur);
@@ -16,4 +17,6 @@ public interface UserHasWrittingServiceInterface {
 	Boolean editUserHasWritting(UserHasWritting uhw);
 	Boolean deleteUserHasWritting(Writting wr, User us);
 	Boolean edit(UserHasWrittingRequest ur);
+	List<UserHasWrittingPOJO> getUHWByWritting(WrittingPOJO wr);
+	Boolean addPublic(UserHasWrittingRequest ur);
 }

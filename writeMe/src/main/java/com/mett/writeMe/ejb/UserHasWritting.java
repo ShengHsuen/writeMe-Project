@@ -2,13 +2,6 @@ package com.mett.writeMe.ejb;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.mett.writeMe.ejb.Comment;
-import com.mett.writeMe.ejb.Report;
-import com.mett.writeMe.ejb.Role;
-import com.mett.writeMe.ejb.User;
-import com.mett.writeMe.ejb.Writting;
-
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +20,11 @@ public class UserHasWritting implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
 
-	private byte banned;
+	private boolean banned;
+
+	private boolean canWrite;
+
+	private boolean confirmation;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
@@ -35,11 +32,17 @@ public class UserHasWritting implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateModifie;
 
+	@Column(name="id_owner")
+	private int idOwner;
+
 	private boolean invitationStatus;
 
 	private int linkInvitation;
 
 	private boolean owner;
+
+	@Column(name="publicc")
+	private boolean publicc;
 
 	private boolean statusColor;
 
@@ -74,12 +77,28 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-	public byte getBanned() {
+	public boolean getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(byte banned) {
+	public void setBanned(boolean banned) {
 		this.banned = banned;
+	}
+
+	public boolean getCanWrite() {
+		return this.canWrite;
+	}
+
+	public void setCanWrite(boolean canWrite) {
+		this.canWrite = canWrite;
+	}
+
+	public boolean getConfirmation() {
+		return this.confirmation;
+	}
+
+	public void setConfirmation(boolean confirmation) {
+		this.confirmation = confirmation;
 	}
 
 	public Date getDateCreate() {
@@ -96,6 +115,14 @@ public class UserHasWritting implements Serializable {
 
 	public void setDateModifie(Date dateModifie) {
 		this.dateModifie = dateModifie;
+	}
+
+	public int getIdOwner() {
+		return this.idOwner;
+	}
+
+	public void setIdOwner(int idOwner) {
+		this.idOwner = idOwner;
 	}
 
 	public boolean getInvitationStatus() {
@@ -120,6 +147,14 @@ public class UserHasWritting implements Serializable {
 
 	public void setOwner(boolean owner) {
 		this.owner = owner;
+	}
+
+	public boolean getPublicc() {
+		return this.publicc;
+	}
+
+	public void setPublicc(boolean publicc) {
+		this.publicc = publicc;
 	}
 
 	public boolean getStatusColor() {

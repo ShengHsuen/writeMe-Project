@@ -11,7 +11,30 @@ angular.module('myApp.home', ['ngRoute'])
 
 .controller('HomeCtrl', ['$scope','$http','$rootScope', '$localStorage', function($scope,$http,$rootScope, $localStorage) {
 	
+	$scope.loadData = function(){
+		$scope.sessionUser = $localStorage.data;
+	}
+	
+	$scope.getIsOwnerList = function(){
+		$scope.getOwnerList = {
+				"pageNumber" : 0,
+				"pageSize" : 0,
+				"direction" : "",
+				"sortBy" : [ "" ],
+				"searchColumn" : "string",
+				"searchTerm" : $scope.sessionUser.author,
+				"writting" : {}
+		};
+		$http.post('rest/protected/public/getOwnerList',$scope.getOwnerList).success(function(response) {
+			$scope.isOwnerList = response.isOwnerList;
+			$scope.isOwnerList.reverse();
+			console.log("Home.js " + $scope.isOwnerList);
+		})
+	};
+	
    $scope.init = function(){
+	   $scope.loadData();
+	   
 	  $scope.writting = [];
 	  $scope.user = [];
 	  $scope.writting = {"pageNumber": 0,
@@ -26,6 +49,8 @@ angular.module('myApp.home', ['ngRoute'])
 	  $http.post('rest/protected/writting/getPublished',$scope.writting).success(function(response){
 	   console.log("home.js");
 	   $scope.writting = response.writting;
+	   $scope.getIsOwnerList();
+	  //$scope.filterForPublic();
 	  // $scope.user = response.user;
 	  }).catch(function(error){
 		   $scope.serverDown = function()
@@ -44,17 +69,44 @@ angular.module('myApp.home', ['ngRoute'])
 	
 	$scope.viewWritting = function(id){
 		params: {idWritting : id}
-/*		params: {content : wrid}
-	    params: {name : name}
-	    params: {category : categ}
-    	params: {imagen : img}
-	    $localStorage.showContent = wrid;
-	    $localStorage.nameWritting = name;
-	    $localStorage.categoryWritting = categ;
-	    $localStorage.imgWritting = img;*/
 	    $localStorage.idWritting=id;
 	    window.location.href = "app#/viewWritting"
-	
 	};
+	
+    $scope.publicColaborate = function(wr){
+    	console.log("public colaborate "+$scope.sessionUser.author);
+		$scope.userHasWritting={
+				  "pageNumber": 0,
+				  "pageSize": 0,
+				  "direction": "string",
+				  "sortBy": [
+				    "string"
+				  ],
+				  "searchColumn": "string",
+				  "searchTerm": $scope.sessionUser.author,
+				  "userHasWritting": {
+				      "statusColor": false,
+				      "user_has_writtingId": 0,
+				      "linkInvitation": $scope.writtingId,
+				      "banned": false,
+				      "invitationStatus": false,
+				      "owner": false,
+				      "writting": wr,
+				      "user": $scope.sessionUser
+				}
+		};
+	   $http.post('rest/protected/public/createPublic', $scope.userHasWritting).success(function(response) {
+	    	console.log("Success");
+    	   /* $rootScope.$broadcast('invitation-send');
+    	    var path = "app#/showWrittingsInvitation";
+    	    window.location.href = path;*/
+	    }).catch(function(error){
+			   $scope.serverDown = function()
+				{
+				   $rootScope.$broadcast('serverDown');
+				}
+			   $scope.serverDown();
+		   });
+    }
 
 }]);

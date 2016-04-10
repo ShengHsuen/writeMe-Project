@@ -156,6 +156,11 @@
                     <button class="btn-danger" ng-click="refuse(writting[$index])">Rechazar</button>
                     </span>
                   </a>
+                  <a ng-repeat="wrConf in writtingConfirmation" class="list-group-item">
+                    <span class="clear block m-b-none">El usuario {{userConfirmation[$index].author}} te ha aceptado la obra {{wrConf.name}}<br>
+                    <button class="btn-success" ng-click="">Ok</button>
+                    </span>
+                  </a>
                 </div>
                 <div class="panel-footer text-sm">
                   <a href class="pull-right"><i class="fa fa-cog"></i></a>
@@ -231,10 +236,10 @@
 								<span>Por invitación</span>
 								</a></li>
 									
-								<!-- <li><a href="/writeMe/app#/showWrittingsPublic">
+								<li><a href="/writeMe/app#/showWrittingsPublic">
 								<i class="glyphicon glyphicon-book icon"></i>
 								<span>Pública</span>
-								</a></li> -->
+								</a></li>
 						</ul>
 					</nav>
 					<!-- nav -->
@@ -323,9 +328,10 @@
   <script src="resources/writting/createWritting/createWritting.js"></script>
   <script src="resources/writting/writting/writting.js"></script>
   <script src="resources/writting/writtingInvitation/writtingInvitation.js"></script>
+  <script src="resources/writting/writtingPublic/writtingPublic.js"></script>
   <script src="resources/writting/showWrittings/showWrittings.js"></script>
-  
   <script src="resources/writting/showWrittingsInvitation/showWrittingsInvitation.js"></script>
+  <script src="resources/writting/showWrittingsPublic/showWrittingsPublic.js"></script>
 
   
   <script src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
