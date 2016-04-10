@@ -391,5 +391,17 @@ $scope.getAllContent = function(){
 	    })
     };
     $scope.getContributors();
+    
+    $scope.getNext(){
+        $scope.getN = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": "",
+                "writting": $scope.writtingload
+            };
+    }
 
 }]);
