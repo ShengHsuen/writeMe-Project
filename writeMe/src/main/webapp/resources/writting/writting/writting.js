@@ -18,8 +18,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		}
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
-
-
 		
 		//$('.fr-view').froalaEditor('html.set', $scope.contentWithoutTags);
 
@@ -98,6 +96,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
     }
     
     var update = function() {
+    	console.log("DATE "+$scope.modified);
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -109,7 +108,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
                 "name": $scope.name,
                 "description": "a",
                 "cantUsers": $scope.cantUsers,
-                "date": fecha,
+                "date": $scope.modified,
                 "likes": 0,
                 "limit time": "2100-01-01",
                 "numMaxCharacters": 10000,

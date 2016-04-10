@@ -5,8 +5,11 @@
 	  		<ul class="list-group">
 	  			<!--  <il ng-repeat="us in user">Autor:{{user.author}}</il>-->
 	  			<il ng-repeat="wr in writting" class="list-group-item"><h3>{{ " " + wr.name}}</h3>
-	  			<p class=""><b>{{" " + wr.category}}</b></p><p class="col-xs-1"></p><p class=" col-xs-10">{{" " + wr.description}}</p>
-				<img ng-src="{{wr.image}}" width="260" height="394"  style="cursor: pointer;"  ng-click="viewWritting(wr.writtingId)"  ></img></il>
+	  			<p><b>{{" " + wr.category}}</b></p><p class="col-xs-1"></p><p class=" col-xs-10">{{" " + wr.description}}</p>
+	  			<span class="label bg-primary">{{}}</span>
+	  			<button ng-click="publicColaborate(wr)" class="btn btn-primary icon-user-follow"></button>
+	  			
+				<img ng-src="{{wr.image}}" width="260" height="394"  style="cursor: pointer;"  ng-click="viewWritting(wr.writtingId)"></img></il>
 				
 	 		</ul>
 	   </div>

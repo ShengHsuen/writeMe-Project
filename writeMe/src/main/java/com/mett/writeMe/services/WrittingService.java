@@ -14,6 +14,7 @@ import com.mett.writeMe.contracts.WrittingRequest;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
@@ -50,7 +51,7 @@ public class WrittingService implements WrittingServiceInterface{
 	 */
 	@Override
 	@Transactional
-	public List<WrittingPOJO> getAllWithoutNameNull() {
+	public List<WrittingPOJO> getAllWithoutNameNull(){
 		List<Writting> Writtings = writtingRepository.findAllByNameNotNull();
 		List<WrittingPOJO> dtos = new ArrayList<WrittingPOJO>();
 		Writtings.stream().forEach(tu ->{
@@ -211,6 +212,10 @@ public class WrittingService implements WrittingServiceInterface{
 		UserHasWritting UHW = new UserHasWritting();
 		
 		BeanUtils.copyProperties(ur.getWritting(), writting);
+		
+		if(writting.getTypeWritting().equals("Pública")){
+			writting.setPublished(true);
+		}
 
 		Writting nWritting = writtingRepository.save(writting);
 		
@@ -342,9 +347,68 @@ public class WrittingService implements WrittingServiceInterface{
 		for(int i=0;i<=uhw.size()-1;i++){
 			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == false && uhw.get(i).getOwner() == false){
 				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+				//System.out.println("WRITTINGS INVITATION BY USER: "+ wr.get(i).getName());
 			}
 		}
 		return generateWrittingDtos(wr);
+	}
+	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsAcceptedByUser(WrittingRequest ur) {
+		List<User> user = userRepository.findByAuthorContaining(ur.getSearchTerm()); //Siempre sera un usuario el que recibe
+		List<Writting> wr = new ArrayList<Writting>();
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
+		for(int i=0;i<=uhw.size()-1;i++){
+			if(uhw.get(i).getUser().getAuthor().equals(user.get(0).getAuthor()) && uhw.get(i).getInvitationStatus() == true && uhw.get(i).getOwner() == false){
+				wr.add(writtingRepository.findByNameContaining(uhw.get(i).getWritting().getName()).get(0));
+				//System.out.println("WRITTINGS INVITATION BY USER: "+ wr.get(i).getName());
+			}
+		}
+		return generateWrittingDtos(wr);
+	}
+	
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsConfirmationByUser(String searchTerm) {
+		List<User> user = userRepository.findByAuthorContaining(searchTerm); //Siempre sera un usuario el que recibe
+		List<Writting> wr = new ArrayList<Writting>();
+		List<UserHasWritting> uhw = new ArrayList<UserHasWritting>();
+		uhw.addAll(userHasWrittingRepository.findAllByIdOwnerAndConfirmationTrue(user.get(0).getUserId()));
+		for(int i=0;i<=uhw.size()-1;i++){
+			wr.add(uhw.get(i).getWritting());
+			System.out.println("******WRITTING*****: "+uhw.get(i).getWritting().getName());
+			System.out.println("******USER*********: "+uhw.get(i).getUser().getAuthor());
+			System.out.println("******CONFIRMATION*: "+uhw.get(i).getConfirmation());
+		}
+		return generateWrittingDtos(wr);
+	}
+	
+	@Override
+	@Transactional
+	public List<UserPOJO> getUsersConfirmationByUser(String searchTerm) {
+		List<User> user = userRepository.findByAuthorContaining(searchTerm); //Siempre sera un usuario el que recibe
+		List<User> us = new ArrayList<User>();
+		List<UserHasWritting> uhw = new ArrayList<UserHasWritting>();
+		uhw.addAll(userHasWrittingRepository.findAllByIdOwnerAndConfirmationTrue(user.get(0).getUserId()));
+		for(int i=0;i<=uhw.size()-1;i++){
+			us.add(uhw.get(i).getUser());
+			System.out.println("******WRITTING*****: "+uhw.get(i).getWritting().getName());
+			System.out.println("******USER*********: "+uhw.get(i).getUser().getAuthor());
+			System.out.println("******CONFIRMATION*: "+uhw.get(i).getConfirmation());
+		}
+		return generateUserDtos(us);
+	}
+	
+	private List<UserPOJO> generateUserDtos(List<User> users){
+		List<UserPOJO> uiUsers = new ArrayList<UserPOJO>();
+		users.stream().forEach(u -> {
+			UserPOJO dto = new UserPOJO();
+			BeanUtils.copyProperties(u,dto);
+			dto.setPassword("");
+			uiUsers.add(dto);
+		});	
+		return uiUsers;
 	}
 	
 	
@@ -359,14 +423,15 @@ public class WrittingService implements WrittingServiceInterface{
 		List<Writting> Writting = writtingRepository.findByNameContaining(ws.getName());
 		List<Writting> Writtings = writtingRepository.findAll();
 		WrittingPOJO dto = new WrittingPOJO();
-		BeanUtils.copyProperties(Writting.get(0), dto);
+	    BeanUtils.copyProperties(Writting.get(0), dto);
 		WrittingPOJO.add(dto);
 		
 		for(int i=0; i <= Writtings.size()-1; i++){
-			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
-				BeanUtils.copyProperties(Writtings.get(i), dto);
-				WrittingPOJO.add(dto);
-			}
+				if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId() && !Writtings.get(i).getContent().equals("")){
+					BeanUtils.copyProperties(Writtings.get(i), dto);
+						WrittingPOJO.add(dto);
+						System.out.println("AQUI VA " + dto.getContent());
+				}	
 		}
 		String content;
 		WrittingPOJO wrpojo = new WrittingPOJO();
@@ -412,10 +477,7 @@ public class WrittingService implements WrittingServiceInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
+
 	
 	@Override
 	public WrittingPOJO getWrittingInviContent(WrittingPOJO wr){
@@ -435,10 +497,10 @@ public class WrittingService implements WrittingServiceInterface{
 				content = content + Writtings.get(i).getContent() + " <br> ";
 			}
 		}
-		
-		System.out.println("aqui debe salir la obra"+content);
 		wrpojo.setContent(content);
 		return wrpojo;
 	}
 
+	
+	
 }

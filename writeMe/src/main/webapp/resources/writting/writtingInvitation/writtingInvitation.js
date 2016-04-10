@@ -291,13 +291,6 @@ $scope.getAllContent = function(){
     }
     
     
-
-    /* Mandar el habilitado, el actor actual, y revisar si hay un actor adentro
-     * cuando se le da salir, se guarda y se vuelve a setear el campo de actor adentro en blanco 
-     * 
-     * */
-
-    
     var content = "";
     $scope.participation;
     var name= "";
@@ -326,7 +319,38 @@ $scope.getAllContent = function(){
 		     $('#preview').html(content);
       })
     }
-
+    var actu;
+    var testing;
+   
+    function test(){
+    	   $(document).ready(function () {
+    	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+    	        	actu = setInterval(actualizar, 1000);
+    	        }else{
+    	        	clearInterval(testing);
+    	        	clearInterval(actu);
+    	        }
+    	    })
+    }
+    
+    
+    /*
+     * ESte metodo deberia ser algo asi para lo que ocupas cheng.
+     var outTest;
+    function out(){
+ 	   $(document).ready(function () {
+ 	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+ 	        }else{
+ 	   		$scope.content = $('#edit').val();
+			updateFinish();
+			alert("Se creo publish 0");
+			clearInterval(outTest);
+ 	        }
+ 	    })
+ }
+    
+  outTest = setInterval(out,1000);
+  */
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
@@ -343,21 +367,23 @@ $scope.getAllContent = function(){
 		     $scope.participation = response.participation;
 		     
 		     $('#preview').html(content);
-		     
+		  
 		     if($scope.participation == true){
+		    	
 		    	 $scope.divShow = false;
 		    	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	 setInterval(actualizar,5000);
+		    	 testing = setInterval(test,1000);
+
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
+		    	 
 		     }
 		    })
 		   
     };
     $scope.contentLastWritting();
 
-  
   
     $scope.valOwner = function(){
         $scope.getOwner = {
@@ -378,7 +404,6 @@ $scope.getAllContent = function(){
     $scope.valOwner();
     $scope.getAllContent();
     
-    
-    $scope.mostrarUltimo = false;
-    
+
+
 }]);

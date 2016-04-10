@@ -13,7 +13,10 @@ import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
+import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.repositories.UserHasWrittingRepository;
+import com.mett.writeMe.repositories.UserRepository;
+import com.mett.writeMe.repositories.WrittingRepository;
 
 /**
  * @author Dani
@@ -23,6 +26,10 @@ import com.mett.writeMe.repositories.UserHasWrittingRepository;
 public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Autowired 
 	private UserHasWrittingRepository userHasWrittingRepository;
+	@Autowired 
+	private WrittingRepository writtingRepository;
+	@Autowired 
+	private UserRepository userRepository;
 	
 	/* (non-Javadoc)
 	 * @see com.mett.writeMe.services.UserHasWrittingServiceInterface#save(com.mett.writeMe.contracts.UserHasWrittingRequest)
@@ -33,7 +40,31 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		UserHasWritting userHasWritting = new UserHasWritting();
 		
 		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+		
+		if(userHasWritting.getWritting().getTypeWritting().equals("Pública")){
+			userHasWritting.setCanWrite(true);
+			userHasWritting.setPublicc(true);
+		}
 
+		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
+		
+		return (nWritting == null) ? false : true;
+	}
+	
+	@Override
+	@Transactional
+	public Boolean addPublic(UserHasWrittingRequest ur) {
+		UserHasWritting userHasWritting = new UserHasWritting();
+		BeanUtils.copyProperties(ur.getUserHasWritting(), userHasWritting);
+		List<User> us = new ArrayList<User>();
+		us = userRepository.findByAuthorContaining(ur.getSearchTerm());
+		
+		userHasWritting.setCanWrite(false);
+		userHasWritting.setPublicc(true);
+		userHasWritting.setConfirmation(true);
+		userHasWritting.setIdOwner(us.get(0).getUserId());
+		userHasWritting.setInvitationStatus(true);
+		
 		UserHasWritting nWritting = userHasWrittingRepository.save(userHasWritting);
 		
 		return (nWritting == null) ? false : true;
@@ -91,8 +122,8 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Transactional
 	public Boolean editUserHasWritting(UserHasWritting uhw) {
 		uhw = userHasWrittingRepository.findByUserAndWritting(uhw.getUser(),uhw.getWritting());
-		System.out.println("!!!!!!!id: " + uhw.getUser_has_writtingId());
 		uhw.setInvitationStatus(true);
+		uhw.setConfirmation(true);
 		UserHasWritting uhwritting = userHasWrittingRepository.save(uhw);
 		return (uhwritting == null) ? false : true;
 	}
@@ -101,10 +132,7 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 	@Transactional
 	public Boolean deleteUserHasWritting(Writting wr, User us) {
 		List<UserHasWritting> uhw = userHasWrittingRepository.findAll();
-		
 		uhw.stream().forEach(uh ->{
-			System.out.println("US: "+ us.getAuthor());
-			System.out.println("UH: "+ uh.getUser().getAuthor());
 			if(uh.getWritting().getWrittingId() == wr.getWrittingId() && us.getAuthor().equals(uh.getUser().getAuthor())){
 				userHasWrittingRepository.delete(uh.getUser_has_writtingId());
 			}
@@ -113,4 +141,18 @@ public class UserHasWrittingService implements UserHasWrittingServiceInterface{
 		
 		return true;
 	}
+
+	@Override
+	@Transactional
+	public List<UserHasWrittingPOJO> getUHWByWritting(int writtingId){
+		List<UserHasWrittingPOJO> dtos = new ArrayList<UserHasWrittingPOJO>();
+		List<UserHasWritting> uhw = userHasWrittingRepository.findAllByWrittingWrittingId(writtingId);
+		uhw.stream().forEach(uw ->{
+			UserHasWrittingPOJO dto = new UserHasWrittingPOJO();
+			BeanUtils.copyProperties(uw, dto);
+			dtos.add(dto);
+		});
+		return dtos;
+	}
+	
 }
