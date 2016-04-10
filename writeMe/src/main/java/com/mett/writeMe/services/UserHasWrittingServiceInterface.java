@@ -17,6 +17,6 @@ public interface UserHasWrittingServiceInterface {
 	Boolean editUserHasWritting(UserHasWritting uhw);
 	Boolean deleteUserHasWritting(Writting wr, User us);
 	Boolean edit(UserHasWrittingRequest ur);
-	List<UserHasWrittingPOJO> getUHWByWritting(WrittingPOJO wr);
 	Boolean addPublic(UserHasWrittingRequest ur);
+	List<UserHasWrittingPOJO> getUHWByWritting(int writtingId);
 }

@@ -22,6 +22,7 @@ public interface WrittingServiceInterface {
 
 	List<WrittingPOJO> getAll();
 	List<WrittingPOJO> getPublished(WrittingRequest ur);
+	List<UserPOJO> getOwnersPublished(WrittingRequest ur);
 	List<UserPOJO> getUsersPublished();
 	List<WrittingPOJO> getWrittingsByMainWritting(Writting wr);
 	WrittingPOJO getWrittingByName(WrittingRequest ur);

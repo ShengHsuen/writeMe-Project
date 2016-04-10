@@ -9,13 +9,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     });
  }])
  
- .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
-
-	 	$scope.disableButtons = function() {
-	    	$rootScope.$broadcast('disableButtons');
-	    };
-	 	$scope.disableButtons();
-	 
+ .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope','$location', function($scope,$http,$localStorage,$rootScope,$location) {
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
 			$scope.writtingload = $localStorage.writting;
@@ -38,8 +32,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		$scope.finish = function(){
 			$scope.content = $('#edit').val();
 			updateFinish();
-			$rootScope.$broadcast('disableButtonsTrue');
-			
+				
 			var path = "/writeMe/app#/showWrittingsInvitation";
 			  window.location.href = path;
 		}
@@ -120,7 +113,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
             }
         };
         $http.post('rest/protected/writting/createWrittingInvitation', $scope.writting).success(function(response) {
-				createUserHasWritting();
+			createUserHasWritting();
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
@@ -322,7 +315,36 @@ $scope.getAllContent = function(){
 		     $('#preview').html(content);
       })
     }
-    var everyTime = 0;
+    var actu;
+    var testing;
+   
+    function test(){
+    	   $(document).ready(function () {
+    	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+    	        	actu = setInterval(actualizar, 1000);
+    	        }else{
+    	        	clearInterval(testing);
+    	        	clearInterval(actu);
+    	        }
+    	    })
+    }
+    
+     var outTest;
+     function out(){
+ 	   $(document).ready(function () {
+ 	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+ 	        	
+ 	        }else{
+	 	   		$scope.content = $('#edit').val();
+				updateFinish();
+				clearInterval(outTest);
+ 	        }
+ 	    })
+     }  
+     outTest = setInterval(out,1000);
+  
+  
+  
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
@@ -344,12 +366,12 @@ $scope.getAllContent = function(){
 		    	
 		    	 $scope.divShow = false;
 		    	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	 //everyTime = setInterval(actualizar,4000);
-		
+		    	 testing = setInterval(test,1000);
+
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();
-		    	 //clearInterval(everyTime);
+		    	 
 		     }
 		    })
 		   
@@ -375,5 +397,6 @@ $scope.getAllContent = function(){
 
     $scope.valOwner();
     $scope.getAllContent();
+
 
 }]);

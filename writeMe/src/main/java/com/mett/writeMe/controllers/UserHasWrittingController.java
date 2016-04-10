@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
@@ -47,11 +49,20 @@ private WrittingServiceInterface WrittingService;
 	}
 	
 	@RequestMapping(value ="/getUHWByWritting", method = RequestMethod.POST)
-	public UserHasWrittingResponse getUHWByWritting(@RequestBody WrittingRequest ur){	
+	public UserHasWrittingResponse getUHWByWritting(@RequestParam int writtingId){
+		System.out.println("AQUI PRIMERO ");
 		UserHasWrittingResponse uhwR = new UserHasWrittingResponse();
-		WrittingPOJO wr = WrittingService.getWrittingByName(ur);
-		List <UserHasWrittingPOJO> uhwPOJO = userHasWrittingService.getUHWByWritting(wr);
-		uhwR.setUserHasWritting(uhwPOJO);
+		System.out.println("AQUI Segundo ");
+		uhwR.setUserHasWritting(userHasWrittingService.getUHWByWritting(writtingId));
+		System.out.println("AQUI Tercero ");
+	    return uhwR;
+	}
+	@RequestMapping(value ="/getPrueba", method = RequestMethod.POST)
+	public UserHasWrittingResponse getPrueba(){
+		List<UserHasWrittingPOJO> wr = userHasWrittingService.getAll();
+		
+		UserHasWrittingResponse uhwR = new UserHasWrittingResponse();
+		uhwR.setUserHasWritting(wr);
 	    return uhwR;
 	}
 	

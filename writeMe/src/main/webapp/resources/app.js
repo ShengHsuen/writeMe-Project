@@ -40,21 +40,6 @@ angular.module('myApp', [
 		window.location.href = path;
 	}	
 	
-	$scope.$on('disableButtons', function(event){
-		console.log("ENTRA AL DISABLEBUTTONS");
-		$scope.disableMenu = false;
-		$scope.disableMessage = true;
-	})
-	
-	$scope.$on('disableButtonsTrue', function(event){
-		$scope.message = false;
-		$scope.disableMenu = true;
-		$scope.disableMessage = false;
-	})
-			
-	$scope.showMessage = function(){
-		$scope.message = true;
-	}
 	
 	$scope.init = function(){
 		$scope.findInvitations = function(){

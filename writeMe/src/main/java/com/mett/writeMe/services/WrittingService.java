@@ -101,9 +101,25 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public List<WrittingPOJO> getPublished(WrittingRequest ur){
 		  System.out.println("Service /getPublished");
-		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueOrderByWrittingIdDesc();
+		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueAndNameNotNullOrderByWrittingIdDesc();
 		  //System.out.println("Service /getPublished : " + Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
 		  return generateWrittingDtos(Writtings);
+	}
+	
+	@Override
+	@Transactional
+	public List<UserPOJO> getOwnersPublished(WrittingRequest ur){
+		  System.out.println("Service /getPublished");
+		  List<User> us = new ArrayList<User>();
+		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueAndNameNotNullOrderByWrittingIdDesc();
+		  /*List<UserHasWritting> uhw = new ArrayList<UserHasWritting>();
+		  userHasWrittingRepository.findAll();*/
+		  //System.out.println("Service /getPublished : " + Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
+		  for(int i=0;i<Writtings.size();i++){
+			  //for(int j=0; )
+			  us.add(Writtings.get(i).getUserHasWrittings().get(0).getUser());
+		  }
+		  return generateUserDtos(us);
 	}
 	
 	/* author Sheng Hsuen
@@ -118,16 +134,16 @@ public class WrittingService implements WrittingServiceInterface{
 		
 		WrittingPOJO dto = new WrittingPOJO();
 		BeanUtils.copyProperties(Writting.get(0), dto);
-		System.out.print("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
+		System.out.println("ESTE ES LA OBRA PROPIETARIO"+Writting.get(0).getName());
 		WrittingPOJO.add(dto);
 		
 		for(int i=0; i <= Writtings.size()-1; i++){
-			System.out.print("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
-			System.out.print("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
+			System.out.println("ID DE LA OBRA SELECCIONADA"+ Writting.get(0).getWrittingId());
+			System.out.println("LISTAD E LOS HIJOS"+ Writtings.get(i).getMainWritting());
 			if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId()){
 				BeanUtils.copyProperties(Writtings.get(i), dto);
 				WrittingPOJO.add(dto);
-				System.out.print("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
+				System.out.println("ESTOS SON LOS HIJOS DE UNA OBRA"+ Writtings.get(i).getWrittingId());
 			}
 		}
 		return WrittingPOJO;
@@ -236,7 +252,7 @@ public class WrittingService implements WrittingServiceInterface{
 		index = WrittingPOJO.size()-1;
 		edit = WrittingPOJO.get(index).getWrittingId();
 		
-		System.out.print("ESTE ES EL ID DEL WRITTING QUE SE EDITA" + edit);
+		System.out.println("ESTE ES EL ID DEL WRITTING QUE SE EDITA" + edit);
 		writting = getWrittingById(edit);
 		writting.setContent(wr.getContent());
 		
@@ -262,7 +278,7 @@ public class WrittingService implements WrittingServiceInterface{
 		writting = getWrittingById(edit);
 		writting.setContent(wr.getContent());
 		writting.setParticipation(false);
-		System.out.print("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
+		System.out.println("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
 		
 		Writting nwritting = writtingRepository.save(writting);
 
@@ -313,16 +329,16 @@ public class WrittingService implements WrittingServiceInterface{
 				wr.setName(null);
 				wr.setMainWritting(UserHasWrittings.get(i).getWritting().getWrittingId());
 				wr.setParticipation(true);
-				System.out.print("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
+				System.out.println("ID PARA EL MAIN WRITTING "+UserHasWrittings.get(i).getWritting().getWrittingId());
 				
 				
 				idFather = wrPojos.size()-1;
 				getIdFather = wrPojos.get(idFather).getWrittingId();
-				System.out.print("ESTE ES EL ID DEL PADRE"+idFather);
+				System.out.println("ESTE ES EL ID DEL PADRE"+idFather);
 				writtingFather = writtingRepository.findOne(getIdFather);
 				
 				wr.setWritting(writtingFather);
-				System.out.print("ID DEL PADRE ES:  "+writtingFather.getWrittingId());
+				System.out.println("ID DEL PADRE ES:  "+writtingFather.getWrittingId());
 				
 			}
 		}
@@ -464,6 +480,7 @@ public class WrittingService implements WrittingServiceInterface{
 		}
 		return resul;
 	}
+
 
 	@Override
 	public Boolean editWrittingInvitation(Writting wr, HttpSession currentSession) {
