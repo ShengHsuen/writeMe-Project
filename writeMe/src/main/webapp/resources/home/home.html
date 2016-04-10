@@ -7,7 +7,7 @@
 	  			<il ng-repeat="wr in writting" class="list-group-item"><h3>{{ " " + wr.name}}</h3>
 	  			<p><b>{{" " + wr.category}}</b></p><p class="col-xs-1"></p><p class=" col-xs-10">{{" " + wr.description}}</p>
 	  			<span class="label bg-primary">{{}}</span>
-	  			<button ng-click="publicColaborate(wr)" class="btn btn-primary icon-user-follow"></button>
+	  			<button ng-show="isOwnerList[$index]" ng-click="publicColaborate(wr, $index)" class="btn btn-primary icon-user-follow"></button>
 	  			
 				<img ng-src="{{wr.image}}" width="260" height="394"  style="cursor: pointer;"  ng-click="viewWritting(wr.writtingId)"></img></il>
 				

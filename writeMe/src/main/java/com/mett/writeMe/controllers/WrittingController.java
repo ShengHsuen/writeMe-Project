@@ -94,7 +94,7 @@ public class WrittingController {
 		us.setCode(200);
 		us.setCodeMessage("users fetch success");
 		us.setWritting(WrittingService.getPublished(ur));
-		// us.setUser(WrittingService.getUsersPublished());
+		us.setUser(WrittingService.getOwnersPublished(ur));
 		return us;
 	}
 
