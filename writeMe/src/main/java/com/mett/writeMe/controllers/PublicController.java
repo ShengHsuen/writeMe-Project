@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.UserHasWrittingRequest;
 import com.mett.writeMe.contracts.UserHasWrittingResponse;
+import com.mett.writeMe.contracts.UsersResponse;
 import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
@@ -29,7 +31,7 @@ import com.mett.writeMe.services.WrittingServiceInterface;
 
 @RequestMapping(value ="rest/protected/public")
 
-public class publicController {
+public class PublicController {
 	@Autowired private UsersServiceInterface usersService;
 	@Autowired private UserHasWrittingServiceInterface userHasWrittingService;
 	@Autowired private WrittingServiceInterface writtingService;
@@ -91,6 +93,20 @@ public class publicController {
 		us.setLuser(luserpojo);
 		return us;
 	}
+	
+	
+	@RequestMapping(value = "/getUserCanWrite", method = RequestMethod.POST)
+	public UsersResponse getCan(@RequestBody UserHasWrittingRequest uhw) {
+		UsersResponse ur = new UsersResponse();
+		UserHasWritting luhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndCanWriteTrue(uhw.getWritting().getWrittingId());
+		UserPOJO userPOJO = new UserPOJO();
+		User user = luhw.getUser();
+		BeanUtils.copyProperties( user ,userPOJO);
+		ur.setUser(userPOJO);
+		return ur;
+	}
+	
+	
 	
 	private List<UserPOJO> generateUserDtos(List<User> users){
 		List<UserPOJO> uiUsers = new ArrayList<UserPOJO>();
