@@ -9,12 +9,9 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
     });
  }])
  
- .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope', function($scope,$http,$localStorage,$rootScope) {
+ .controller('WrittingInvitationCtrl', ['$scope','$http', '$localStorage','$rootScope','$location', function($scope,$http,$localStorage,$rootScope,$location) {
 
-	 	$scope.disableButtons = function() {
-	    	$rootScope.$broadcast('disableButtons');
-	    };
-	 	$scope.disableButtons();
+	 	
 	 
 		$scope.loadData = function(){
 			$scope.name = $localStorage.nameWritting;
