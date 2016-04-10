@@ -101,7 +101,7 @@ public class WrittingService implements WrittingServiceInterface{
 	@Transactional
 	public List<WrittingPOJO> getPublished(WrittingRequest ur){
 		  System.out.println("Service /getPublished");
-		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueOrderByWrittingIdDesc();
+		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueAndNameNotNullOrderByWrittingIdDesc();
 		  //System.out.println("Service /getPublished : " + Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
 		  return generateWrittingDtos(Writtings);
 	}
@@ -111,7 +111,7 @@ public class WrittingService implements WrittingServiceInterface{
 	public List<UserPOJO> getOwnersPublished(WrittingRequest ur){
 		  System.out.println("Service /getPublished");
 		  List<User> us = new ArrayList<User>();
-		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueOrderByWrittingIdDesc();
+		  List<Writting> Writtings =  writtingRepository.findByPublishedTrueAndNameNotNullOrderByWrittingIdDesc();
 		  /*List<UserHasWritting> uhw = new ArrayList<UserHasWritting>();
 		  userHasWrittingRepository.findAll();*/
 		  //System.out.println("Service /getPublished : " + Writtings.get(0).getUserHasWrittings().get(0).getUser().getName());
