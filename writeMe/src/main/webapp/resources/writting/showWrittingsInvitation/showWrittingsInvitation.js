@@ -94,7 +94,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			        "sortBy": [""],
 			        "searchColumn": "string",
 			        "searchTerm": $scope.user.author,
-			        "user": $scope.user,
+			        "user": $scope.sessionUser,
 			        "owner": {},
 			        "writting": writting 
 			        };
@@ -166,7 +166,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		   }
 	       $http.post('rest/protected/invitation/getAll', $scope.users).success(function(response) {
 	    	   $scope.user = response.users;
-	    	   $scope.delSessionUser();
+	    	   //$scope.delSessionUser();
 	       }).catch(function(error){
 			   $scope.serverDown = function()
 				{
