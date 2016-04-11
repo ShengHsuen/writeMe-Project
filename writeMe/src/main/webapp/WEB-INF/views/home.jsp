@@ -149,7 +149,7 @@
                   </a>
                   <a ng-repeat="wrConf in writtingConfirmation" class="list-group-item">
                     <span class="clear block m-b-none">El usuario {{userConfirmation[$index].author}} se a unido a la obra {{wrConf.name}}<br>
-                    <button class="btn-success" ng-click="">Ok</button>
+                    <button class="btn-success" ng-click="acceptConfirmation(wrConf, userConfirmation[$index].author)">Ok</button>
                     </span>
                   </a>
                 </div>

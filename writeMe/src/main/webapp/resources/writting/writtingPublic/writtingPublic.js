@@ -21,7 +21,7 @@ angular.module('myApp.writtingPublic', ['ngRoute', 'ngStorage'])
 			$scope.writtingload = $localStorage.writting;
 			$scope.user = $localStorage.data;
 		}
-		
+		var num = 0;
 		var finalContent ="";
 		$scope.loadData();	
         var parti = 1;

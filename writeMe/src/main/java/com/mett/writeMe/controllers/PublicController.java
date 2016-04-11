@@ -94,6 +94,15 @@ public class PublicController {
 		return us;
 	}
 	
+	@RequestMapping(value = "/acceptConfirmation", method = RequestMethod.POST)
+	public UserHasWrittingResponse acceptConfirmation(@RequestBody UserHasWrittingRequest uhwr) {
+		UserHasWrittingResponse response = new UserHasWrittingResponse();
+		int userId = userRepository.findByAuthorContaining(uhwr.getSearchTerm()).get(0).getUserId();
+		UserHasWritting uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserId(uhwr.getWritting().getWrittingId(),userId);
+		uhw.setConfirmation(false);
+		userHasWrittingRepository.save(uhw);
+		return response;
+	}
 	
 	@RequestMapping(value = "/getUserCanWrite", method = RequestMethod.POST)
 	public UsersResponse getCan(@RequestBody UserHasWrittingRequest uhw) {
