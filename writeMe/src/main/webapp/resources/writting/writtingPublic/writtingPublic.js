@@ -400,11 +400,11 @@ $scope.getAllContent = function(){
             };
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
-	    	console.log("Contributors>>> " + $scope.contributors);    	   
+	    	console.log("Contributors>>> " + $scope.contributors);
+	    	$scope.getCanWrite($scope.contributors);
 	    })
     };
     $scope.getContributors();
-
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
@@ -422,7 +422,20 @@ $scope.getAllContent = function(){
     	})
     };
     $scope.userCanWrite();
-
+    
+    $scope.getCanWrite = function(contributors){
+    	console.log(contributors);
+    	$scope.canWriteArray = [];
+    	for(var i=0;i < contributors.length;i++){
+    		if($scope.userCanWrite == contributors[i].author){
+    			$scope.canWriteArray.push(true);
+    		}else{
+    			$scope.canWriteArray.push(false);
+    		}
+    		console.log($scope.canWriteArray);
+    	}
+    }
+    
     $scope.moveNext = function(){
         $scope.getN = {
                 "pageNumber": 0,

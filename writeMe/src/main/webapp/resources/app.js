@@ -131,40 +131,6 @@ angular.module('myApp', [
 		    };
 	}
 	
-	/*$scope.acceptConfirmation = function(writting){
-		  console.log(writting.writtingId);
-			$scope.userHasWritting={
-					  "pageNumber": 0,
-					  "pageSize": 0,
-					  "direction": "string",
-					  "sortBy": [
-					    "string"
-					  ],
-					  "searchColumn": "string",
-					  "searchTerm": "string",
-					  "userHasWritting": {
-					      "statusColor": false,
-					      "user_has_writtingId": 0,
-					      "linkInvitation": writting.writtingId,
-					      "banned": false,
-					      "invitationStatus": true,
-					      "owner": false
-					},
-	        		"user": $scope.user,
-	        		"writting": writting
-			};
-		  $http.post('rest/protected/invitation/acceptConfirmation', $scope.userHasWritting).success(function(response) {
-			  console.log("Success");
-			  $scope.init();
-			  $scope.navShowWrittingInvitation();
-		  });
-		    $scope.navShowWrittingInvitation = function() {
-		    	$rootScope.$broadcast('invitation-started');
-		        var path = "app#/showWrittingsInvitation";
-		        window.location.href = path;
-		    };
-	}*/
-	
 	$scope.refuse = function(writting){
 		console.log("Success " + writting.name);
 		  $scope.invitation = {"pageNumber": 0,
@@ -181,6 +147,22 @@ angular.module('myApp', [
 			  console.log("Success");
 			  $scope.init();
 		  });
+	}
+	
+	$scope.acceptConfirmation = function(writting, userWhoAccept){
+	  console.log(writting.name+" --- "+userWhoAccept);
+	  $scope.conf = {"pageNumber": 0,
+		        "pageSize": 0,
+		        "direction": "",
+		        "sortBy": [""],
+		        "searchColumn": "string",
+		        "searchTerm": userWhoAccept,
+		        "writting": writting 
+		        };
+	  $http.post('rest/protected/public/acceptConfirmation', $scope.conf).success(function(response) {
+		  console.log("Success");
+		  $scope.init();
+	  });
 	}
 	
 }])

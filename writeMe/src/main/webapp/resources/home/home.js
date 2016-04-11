@@ -28,7 +28,7 @@ angular.module('myApp.home', ['ngRoute'])
 		};
 		$http.post('rest/protected/public/getOwnerList',$scope.getOwnerList).success(function(response) {
 			$scope.isOwnerList = response.isOwnerList;
-			//$scope.isOwnerList.reverse();
+			$scope.isOwnerList.reverse();
 			console.log("Home: " + $scope.isOwnerList);
 		})
 	};
