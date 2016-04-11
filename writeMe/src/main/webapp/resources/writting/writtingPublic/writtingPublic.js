@@ -400,18 +400,42 @@ $scope.getAllContent = function(){
             };
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
-	    	console.log("Contributors>>> " + $scope.contributors);
-	    	
-	    	   function getNumber(){
-	    	    	num = $scope.writtingload.cantUsers;
-	    		    alert(num);
-	    	    	num = num - $scope.contributors.length;
-	    		    alert(num);
-	    	    	return num;
-	    	    }
-	    	   
+	    	console.log("Contributors>>> " + $scope.contributors);    	   
 	    })
     };
     $scope.getContributors();
-    
+
+        
+    $scope.userCanWrite = function(){
+        $scope.getUserCanWrite = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": "",
+                "writting": $scope.writtingload
+            };
+    	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
+    		$scope.userCanWrite = response.user.author;
+    		console.log("CAn WRITEEE " + $scope.userCanWrite );
+    	})
+    };
+    $scope.userCanWrite();
+
+    $scope.moveNext = function(){
+        $scope.getN = {
+                "pageNumber": 0,
+                "pageSize": 0,
+                "direction": "",
+                "sortBy": [""],
+                "searchColumn": "string",
+                "searchTerm": $scope.userCanWrite,
+                "writting": $scope.writtingload
+            };
+    	$http.post('rest/protected/public/setNext',$scope.getN).success(function(response) {
+    		console.log("public/  Success");
+    	})
+    };
+
 }]);
