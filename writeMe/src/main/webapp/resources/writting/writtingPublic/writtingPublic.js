@@ -21,7 +21,7 @@ angular.module('myApp.writtingPublic', ['ngRoute', 'ngStorage'])
 			$scope.writtingload = $localStorage.writting;
 			$scope.user = $localStorage.data;
 		}
-		
+		var num = 0;
 		var finalContent ="";
 		$scope.loadData();	
         var parti = 1;
@@ -400,11 +400,11 @@ $scope.getAllContent = function(){
             };
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
-	    	console.log("Contributors>>> " + $scope.contributors);
+	    	console.log("Contributors>>> " + $scope.contributors);    	   
 	    })
     };
     $scope.getContributors();
-<<<<<<< HEAD
+
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
@@ -422,7 +422,7 @@ $scope.getAllContent = function(){
     	})
     };
     $scope.userCanWrite();
-    
+
     $scope.moveNext = function(){
         $scope.getN = {
                 "pageNumber": 0,
