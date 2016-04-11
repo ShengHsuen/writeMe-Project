@@ -21,7 +21,7 @@ angular.module('myApp.writtingPublic', ['ngRoute', 'ngStorage'])
 			$scope.writtingload = $localStorage.writting;
 			$scope.user = $localStorage.data;
 		}
-		
+		var num = 0;
 		var finalContent ="";
 		$scope.loadData();	
         var parti = 1;
@@ -401,10 +401,17 @@ $scope.getAllContent = function(){
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
 	    	console.log("Contributors>>> " + $scope.contributors);
+	    	
+	    	   function getNumber(){
+	    	    	num = $scope.writtingload.cantUsers;
+	    		    alert(num);
+	    	    	num = num - $scope.contributors.length;
+	    		    alert(num);
+	    	    	return num;
+	    	    }
+	    	   
 	    })
     };
     $scope.getContributors();
     
-
-
 }]);
