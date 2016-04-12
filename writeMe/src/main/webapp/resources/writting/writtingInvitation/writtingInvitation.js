@@ -290,10 +290,9 @@ $scope.getAllContent = function(){
     
     var content = "";
     $scope.participation;
-    var name= "";
     
 	$scope.loadData = function(){
-		name = $localStorage.nameWritting;
+		$scope.name = $localStorage.nameWritting;
 	}
 	$scope.loadData();
 	
@@ -305,7 +304,7 @@ $scope.getAllContent = function(){
     			"direction" : "",
     			"sortBy" : [ "" ],
     			"searchColumn" : "string",
-    			"searchTerm" : name,
+    			"searchTerm" : $scope.name,
     			"writting" : {}
     	};
     	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast

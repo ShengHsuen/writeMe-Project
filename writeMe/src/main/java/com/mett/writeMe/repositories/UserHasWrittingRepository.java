@@ -22,5 +22,6 @@ public interface UserHasWrittingRepository extends CrudRepository<UserHasWrittin
 	List<UserHasWritting> findAllByWrittingWrittingIdAndConfirmationTrue(int a);
 	List<UserHasWritting> findAllByIdOwnerAndConfirmationTrue(int a);
 	List<UserHasWritting> findAllByIdOwnerAndPubliccTrue(int a);
+	List<UserHasWritting> findAllByIdOwnerAndPubliccFalse(int a);
 	List<UserHasWritting> findAllByWrittingWrittingId(int a);
 }
