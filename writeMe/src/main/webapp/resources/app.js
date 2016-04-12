@@ -24,8 +24,6 @@ angular.module('myApp', [
 }])
 
 .controller('mainCtrl', ['$scope','$http', '$localStorage','$rootScope',function($scope,$http,$localStorage,$rootScope) {
-	$scope.disableMenu = true;
-	$scope.disableMessage = false;
 	
 	$scope.load = function(){
 		$scope.user = $localStorage.data;

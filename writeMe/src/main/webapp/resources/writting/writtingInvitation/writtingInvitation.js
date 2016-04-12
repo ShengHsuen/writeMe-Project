@@ -32,6 +32,7 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		$scope.finish = function(){
 			$scope.content = $('#edit').val();
 			updateFinish();
+			clearInterval(outTest);
 				
 			var path = "/writeMe/app#/showWrittingsInvitation";
 			  window.location.href = path;
@@ -122,6 +123,40 @@ angular.module('myApp.writtingInvitation', ['ngRoute', 'ngStorage'])
 		   $scope.serverDown();
 	   });
     }
+    
+    
+    var outWritting = function() {
+        $scope.writting = {
+            "pageNumber": 0,
+            "pageSize": 0,
+            "direction": "",
+            "sortBy": [""],
+            "searchColumn": "string",
+            "searchTerm": $scope.name,
+            "writting": {
+                "name": $scope.name,
+                "description": "a",
+                "cantUsers": 0,
+                "date": fecha,
+                "likes": 0,
+                "limit time": "2100-01-01",
+                "numMaxCharacters": 10000,
+                "numMinCharacters": 30,
+                "published": publish,
+                "content": $scope.content
+            }
+        };
+        $http.post('rest/protected/writting/outWritting', $scope.writting).success(function(response) {
+				
+        }).catch(function(error){
+ 		   $scope.serverDown = function()
+			{
+			   $rootScope.$broadcast('serverDown');
+			}
+		   $scope.serverDown();
+	   });
+    }
+    
     
     var updateFinish = function() {
         $scope.writting = {
@@ -288,8 +323,8 @@ $scope.getAllContent = function(){
     
     
     var content = "";
+    var name = "";
     $scope.participation;
-    var name= "";
     
 	$scope.loadData = function(){
 		name = $localStorage.nameWritting;
@@ -336,11 +371,13 @@ $scope.getAllContent = function(){
  	        	
  	        }else{
 	 	   		$scope.content = $('#edit').val();
-				updateFinish();
+	 	   		console.log("ES EL CONTENIDO CUANDO SALE DE LA PAGINA " + $scope.content);
+	 	   		outWritting();
 				clearInterval(outTest);
  	        }
- 	    })
-     }  
+ 	   })
+ 	 }
+     
      outTest = setInterval(out,1000);
   
   
@@ -363,12 +400,12 @@ $scope.getAllContent = function(){
 		     $('#preview').html(content);
 		  
 		     if($scope.participation == true){
-		    	
+		    	 console.log("QUITA EL WYSWYG");
 		    	 $scope.divShow = false;
-		    	 $rootScope.$broadcast('disableButtonsTrue');  
 		    	 testing = setInterval(test,1000);
 
 		     }else{
+		    	 console.log("PONE EL WYSWYG");
 		    	 $scope.divShow = true;
 		    	 createWritting();
 		    	 
