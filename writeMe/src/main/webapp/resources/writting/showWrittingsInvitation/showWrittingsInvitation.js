@@ -93,7 +93,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			        "direction": "",
 			        "sortBy": [""],
 			        "searchColumn": "string",
-			        "searchTerm": $scope.user.author,
+			        "searchTerm": $scope.sessionUser.author,
 			        "user": $scope.sessionUser,
 			        "owner": {},
 			        "writting": writting 
@@ -115,7 +115,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 		                "direction": "",
 		                "sortBy": [""],
 		                "searchColumn": "string",
-		                "searchTerm": $scope.user.author,
+		                "searchTerm": $scope.sessionUser.author,
 		                "writting": writting
 		            };
 		    	$http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
@@ -136,7 +136,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			 * @author Mildred Guerra
 		     *callback for ng-click 'deleteWritting':
 		     */
-		    $scope.deleteWritting = function (writtingId) {
+		    $scope.deletingWritting = function (writtingId) {
 		    	console.log("esta vara es el id del wriiting "+ writtingId)
 		    			  $http({ url: 'rest/protected/writting/delete', 
 		    	                method: 'DELETE', 
@@ -214,7 +214,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 				         		}
 				     		}
 				     	}
-				     }
+				     };
 			}
 		    
 

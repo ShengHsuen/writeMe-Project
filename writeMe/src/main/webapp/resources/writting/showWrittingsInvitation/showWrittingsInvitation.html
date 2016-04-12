@@ -35,10 +35,10 @@
 							<button class="btn btn-sm btn-default" ng-click="leaveWritting = !leaveWritting">No</button>
 						</p>
 					</span>
-					<span ng-hide="deleteWritting" style="text-align:center">
+					<span ng-show="deleteWritting" style="text-align:center">
 						<p>
 							¿Desea eliminar la obra {{wr.name}} ?
-							<button class="btn btn-sm btn-default" ng-click="deleteWritting(wr.writtingId)">Sí</button>
+							<button class="btn btn-sm btn-default" ng-click="deletingWritting(wr.writtingId)">Sí</button>
 							<button class="btn btn-sm btn-default" ng-click="deleteWritting = !deleteWritting">No</button>
 						</p>
 					</span>
