@@ -14,6 +14,7 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 	$scope.init = function(){
 		$scope.loadData = function(){
 			$scope.sessionUser = $localStorage.data;
+			$scope.writtingLoad = $localStorage.writting;
 		}
 		$scope.loadData();
 	$scope.writting = [];
@@ -67,7 +68,7 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 	    $localStorage.cantUsers = cantUsers;
 	    $localStorage.writtingId = writtingId;
 	    $localStorage.writting = writting;
-	    window.location.href = "app#/writtingInvitation"
+	    window.location.href = "app#/writtingPublic"
 	};
 	
 	$scope.navInvitation = function(mainWr, name, cantUsers, writtingId, writting){
@@ -81,7 +82,7 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 	    $localStorage.cantUsers = cantUsers;
 	    $localStorage.writtingId = writtingId;
 	    $localStorage.writting = writting;
-	    window.location.href = "app#/invitation";
+	    window.location.href = "app#/writtingPublic";
     }
 	
 	$scope.leave = function(writting){
@@ -145,6 +146,5 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 		    $scope.$on('invitation-send', function(event, args) {
 		        $scope.init();
 		       });
-		    
 
 } ]);

@@ -3,6 +3,12 @@
     <div class="bg-light lter b-b wrapper-md hidden-print">
  		 <h1 class="m-n font-thin h3 inline">{{"&nbsp" + "&nbsp" + "&nbsp" +"&nbsp" + name}}</h1>
 	</div>
+	<div class="bg-light lter b-b wrapper-md hidden-print">
+		<ul class="list-inline">
+		    <li ng-repeat="cb in contributors">{{cb.author}} <i ng-show="canWriteArray[$index]" class="fa fa-circle text-success pull-right text-xs m-t-sm"></i></li>
+		</ul>
+		<button ng-click="moveNext()">Siguiente</button>
+	</div>
 	
 <div class="form-group">
 	<div  class="col-sm-9 col-lg-10">
