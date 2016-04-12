@@ -15,6 +15,7 @@
 		<class>com.mett.writeMe.ejb.Payaccount</class>
 		<class>com.mett.writeMe.ejb.Record</class>
 		<class>com.mett.writeMe.ejb.Report</class>
+		<class>com.mett.writeMe.ejb.ReportPK</class>
 		<class>com.mett.writeMe.ejb.Restriction</class>
 		<class>com.mett.writeMe.ejb.Role</class>
 		<class>com.mett.writeMe.ejb.State</class>

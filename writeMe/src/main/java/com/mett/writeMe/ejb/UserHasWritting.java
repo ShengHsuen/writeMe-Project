@@ -41,7 +41,6 @@ public class UserHasWritting implements Serializable {
 
 	private boolean owner;
 
-	@Column(name="publicc")
 	private boolean publicc;
 
 	private boolean statusColor;
@@ -49,10 +48,6 @@ public class UserHasWritting implements Serializable {
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="userHasWritting")
 	private List<Comment> comments;
-
-	//bi-directional many-to-one association to Report
-	@OneToMany(mappedBy="userHasWritting")
-	private List<Report> reports;
 
 	//bi-directional many-to-one association to Role
 	@OneToMany(mappedBy="userHasWritting")
@@ -185,28 +180,6 @@ public class UserHasWritting implements Serializable {
 		comment.setUserHasWritting(null);
 
 		return comment;
-	}
-
-	public List<Report> getReports() {
-		return this.reports;
-	}
-
-	public void setReports(List<Report> reports) {
-		this.reports = reports;
-	}
-
-	public Report addReport(Report report) {
-		getReports().add(report);
-		report.setUserHasWritting(this);
-
-		return report;
-	}
-
-	public Report removeReport(Report report) {
-		getReports().remove(report);
-		report.setUserHasWritting(null);
-
-		return report;
 	}
 
 	public List<Role> getRoles() {
