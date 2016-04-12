@@ -3,6 +3,7 @@ package com.mett.writeMe.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.mett.writeMe.contracts.ReportRequest;
 import com.mett.writeMe.ejb.LegalEstablishment;
@@ -16,6 +17,7 @@ import com.mett.writeMe.repositories.ReportRepository;
  * Report Service 
  *
  */
+@Service
 public class ReportService implements ReportServiceInterface {
 	
 	@Autowired

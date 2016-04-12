@@ -404,7 +404,6 @@ $scope.getAllContent = function(){
 	    })
     };
     $scope.getContributors();
-<<<<<<< HEAD
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {

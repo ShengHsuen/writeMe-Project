@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.ReportResponse;
 import com.mett.writeMe.ejb.Report;
@@ -17,6 +18,8 @@ import com.mett.writeMe.services.ReportServiceInterface;
  * Report Controller 
  *
  */
+@RestController
+@RequestMapping(value ="rest/protected/reportWritting")
 public class ReportController {
 	@Autowired
 	private ServletContext servletContext;
@@ -26,7 +29,7 @@ public class ReportController {
 	private HttpServletRequest request;
 
 	/**
-	 * This method get all the Report 
+	 * This method get all the writtings Reports 
 	 * 
 	 * @return ReportResponse
 	 */
