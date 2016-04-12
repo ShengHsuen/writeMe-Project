@@ -141,7 +141,30 @@ public class WrittingController {
 			us.setCodeMessage("write created succesfully");
 		}
 		return us;
+	};
+	
+	/**
+	 * author Sheng Hsuen Cheng
+	 * 
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/outWritting", method = RequestMethod.POST)
+	public WrittingResponse outWritting(@RequestBody WrittingRequest ur) {
+		WrittingResponse us = new WrittingResponse();
+		WrittingPOJO w = WrittingService.getWrittingByName(ur);
+		BeanUtils.copyProperties(w, wr);
+
+		wr.setContent(ur.getWritting().getContent());
+		Boolean state = WrittingService.outWritting(wr);
+		if (state) {
+			us.setCode(200);
+			us.setCodeMessage("write created succesfully");
+		}
+		return us;
 	}
+	
+	
 
 	/**
 	 * author Sheng Hsuen Cheng
