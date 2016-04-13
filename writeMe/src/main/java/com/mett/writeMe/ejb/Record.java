@@ -22,7 +22,7 @@ public class Record implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private byte state;
+	private boolean state;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -51,11 +51,11 @@ public class Record implements Serializable {
 		this.date = date;
 	}
 
-	public byte getState() {
+	public boolean getState() {
 		return this.state;
 	}
 
-	public void setState(byte state) {
+	public void setState(boolean state) {
 		this.state = state;
 	}
 
