@@ -133,6 +133,9 @@ angular.module('myApp.home', ['ngRoute'])
 		    	    	num = wr.cantUsers - $scope.contributors.length;
 		    	    	wr.cantUsers = num;
 		    	    	console.log("KSKSK aca  "+$scope.wr.cantUsers+ "  " + wr.name);
+		    	    	if(wr.cantUsers == 0){
+		    	    		Alert("Prueba creo que solo imprime uno");
+		    	    	}
 		    	    }
 		    	$scope.setNumber();
 	    	} 
