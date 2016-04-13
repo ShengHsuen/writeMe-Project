@@ -1,5 +1,7 @@
 package com.mett.writeMe.controllers;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mett.writeMe.contracts.ReportResponse;
 import com.mett.writeMe.ejb.Report;
+import com.mett.writeMe.pojo.ReportPOJO;
 import com.mett.writeMe.services.ReportServiceInterface;
 
 /**
@@ -24,7 +27,7 @@ public class ReportController {
 	@Autowired
 	private ServletContext servletContext;
 	@Autowired
-	private ReportServiceInterface ReportService;
+	private ReportServiceInterface reportService;
 	@Autowired
 	private HttpServletRequest request;
 
@@ -38,7 +41,7 @@ public class ReportController {
 		ReportResponse response = new ReportResponse();
 		response.setCode(200);
 		response.setCodeMessage("Muestra deuncias satisfactoriamente");
-		response.setReportList(ReportService.getAll());
+		response.setReportList(reportService.getAll());
 		return response;
 	}
 
@@ -50,14 +53,18 @@ public class ReportController {
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ReportResponse create(@RequestBody Report ler) {
-		System.out.println("Entra a controller" + ler);
 		ReportResponse reportRes = new ReportResponse();
-
-		Boolean state = ReportService.save(ler);
-
+		Boolean state = reportService.save(ler);
 		if (state) {
 			reportRes.setCode(200);
 			reportRes.setCodeMessage("La deuncia se creó satisfactoriamente");
+			System.out.println("Entra a controller report " + ler.getReportId());
+			WrittingController wc =new WrittingController();
+			int cantReportes=reportService.getAllbyWritting(ler.getWritting().getWrittingId()).size();
+				if(cantReportes>=5){
+					System.out.println("Entra a controller cantReportes " + cantReportes);
+					//wc.delete(ler.getWritting().getWrittingId());
+				}
 		}
 
 		return reportRes;
