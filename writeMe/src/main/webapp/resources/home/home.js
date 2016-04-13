@@ -137,7 +137,13 @@ angular.module('myApp.home', ['ngRoute'])
 	         
 	    })
     };
-    
+
+	$scope.reportWritting = function(writting){
+		params: {Writting : writting}
+	    $localStorage.Writting=writting;
+	    window.location.href = "app#/reportWritting"
+	};
+
   
    
   

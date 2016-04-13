@@ -69,7 +69,7 @@ public class EmailSenderService {
             msg.setRecipient(Message.RecipientType.TO, 
                 new InternetAddress(to));
             msg.setSubject(subject);
-            msg.setText( this.text );
+            msg.setContent( this.text, "text/html; charset=UTF-8" );
             Transport transport = session.getTransport("smtp");
             transport.connect("smtp.gmail.com" , 465 ,  this.from , "mett1234");
             transport.send(msg);
