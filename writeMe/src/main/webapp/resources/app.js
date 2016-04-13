@@ -78,6 +78,7 @@ angular.module('myApp', [
 			    	   console.log("Invitation Success");
 				  	   $scope.writtingConfirmation = response.writting;
 				  	   $scope.userConfirmation = response.userAccepted;
+				  	   $scope.cantInvitations = $scope.writtingConfirmation.length;
 				 	   //$scope.hoster = response.owner;
 				  	   console.log($scope.userConfirmation);
 				  	   console.log($scope.writtingConfirmation);
