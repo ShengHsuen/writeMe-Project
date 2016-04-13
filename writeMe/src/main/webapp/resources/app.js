@@ -15,6 +15,7 @@ angular.module('myApp', [
   'myApp.showWrittingsPublic',
   'myApp.invitation',
   'myApp.viewWritting',
+  'myApp.reportWritting',
   'ui.bootstrap',
   'ui.grid'
 ])
