@@ -63,7 +63,7 @@ public class ReportController {
 			int cantReportes=reportService.getAllbyWritting(ler.getWritting().getWrittingId()).size();
 				if(cantReportes>=5){
 					System.out.println("Entra a controller cantReportes " + cantReportes);
-				//wc.delete(ler.getWritting().getWrittingId());
+					//wc.delete(ler.getWritting().getWrittingId());
 				}
 		}
 
