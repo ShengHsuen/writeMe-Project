@@ -346,7 +346,7 @@ $scope.getAllContent = function(){
     $scope.valOwner();
     $scope.getAllContent();
     
-    $scope.getContributors = function(){
+    /*$scope.getContributors = function(){
         $scope.getContrib = {
                 "pageNumber": 0,
                 "pageSize": 0,
@@ -362,7 +362,7 @@ $scope.getAllContent = function(){
 	    	$scope.getCanWrite($scope.contributors);
 	    })
     };
-    $scope.getContributors();
+    $scope.getContributors();*/
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
