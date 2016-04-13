@@ -277,6 +277,33 @@ public class WrittingService implements WrittingServiceInterface{
 		
 		writting = getWrittingById(edit);
 		writting.setContent(wr.getContent());
+		System.out.println("ESTE ES EL CONTENIDO DE L OBRA: " + wr.getContent());
+		writting.setParticipation(false);
+		System.out.println("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
+		
+		Writting nwritting = writtingRepository.save(writting);
+
+		return (nwritting == null) ? false : true;
+		
+	}
+	
+	
+	/* author Sheng Hsuen
+	 * @see com.mett.writeMe.services.WrittingServiceInterface#outWritting(com.mett.writeMe.ejb.Writting)
+	 */
+	@Override
+	@Transactional
+	public Boolean outWritting(Writting wr) {
+		List<WrittingPOJO> WrittingPOJO = new ArrayList<WrittingPOJO>();
+		Writting writting = new Writting();
+		int index = 0;
+		int edit = 0;
+		WrittingPOJO = getWrittingsByMainWritting(wr);
+		index = WrittingPOJO.size()-1;
+		edit = WrittingPOJO.get(index).getWrittingId();
+		
+		writting = getWrittingById(edit);
+		writting.setContent("");
 		writting.setParticipation(false);
 		System.out.println("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
 		
@@ -443,6 +470,9 @@ public class WrittingService implements WrittingServiceInterface{
 		WrittingPOJO.add(dto);
 		
 		for(int i=0; i <= Writtings.size()-1; i++){
+			System.out.println("BUSCANDO ERROR 1 " + Writtings.get(i).getMainWritting());
+			System.out.println("BUSCANDO ERROR 2 " + Writting.get(0).getWrittingId());
+			System.out.println("BUSCANDO ERROR 3 " + Writtings.get(i).getContent());
 				if(Writtings.get(i).getMainWritting() == Writting.get(0).getWrittingId() && !Writtings.get(i).getContent().equals("")){
 					BeanUtils.copyProperties(Writtings.get(i), dto);
 						WrittingPOJO.add(dto);
