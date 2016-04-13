@@ -66,11 +66,22 @@ angular.module('myApp.reportWritting', [ 'ngRoute' ])
 		$http.post('rest/protected/reportWritting/create',
 				$scope.requestObject).success(
 						function(response) {
-							$scope.toggle();
-							console.log("writting "+$scope.Writting+" type "+$scope.typeSelected)
-							$scope.init();
-							$scope.clean();
-							  window.location.href = "app#/home"
+							$http.post('rest/email/notifyReport',$scope.requestObject).success(function (userResponse) {
+								if(userResponse.code == 200){
+									$scope.toggle();
+									$scope.init();
+									$scope.clean();
+									window.location.href = "app#/home"
+								}else{
+									alert("invalido");
+								}
+							}).catch(function(error){
+								   $scope.serverDown = function()
+									{
+									   $rootScope.$broadcast('serverDown');
+									}
+								   $scope.serverDown();
+							   });
 						}).catch(function(error){
 							   $scope.serverDown = function()
 								{

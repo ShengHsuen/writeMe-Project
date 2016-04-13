@@ -10,4 +10,5 @@ import com.mett.writeMe.ejb.Report;
 public interface ReportRepository extends CrudRepository<Report,Integer> {
 	List<Report> findAll();
 	Report save(Report report);
+	List<Report> findAllByWrittingWrittingId(int idWritting);
 }

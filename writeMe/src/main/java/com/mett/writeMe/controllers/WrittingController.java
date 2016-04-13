@@ -24,10 +24,12 @@ import com.mett.writeMe.contracts.WrittingResponse;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.UserHasWritting;
 import com.mett.writeMe.ejb.Writting;
+import com.mett.writeMe.pojo.ReportPOJO;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 import com.mett.writeMe.services.GeneratePDFService;
 import com.mett.writeMe.services.LoginServiceInterface;
+import com.mett.writeMe.services.ReportServiceInterface;
 import com.mett.writeMe.services.UserHasWrittingServiceInterface;
 import com.mett.writeMe.services.UsersService;
 import com.mett.writeMe.services.UsersServiceInterface;
@@ -53,7 +55,9 @@ public class WrittingController {
 	private LoginServiceInterface LoginService;
 	@Autowired
 	private UsersServiceInterface userService;
-
+	@Autowired
+	private ReportServiceInterface reportService;
+	
 	private User u = new User();
 	private Writting wr = new Writting();
 	private String resultFileName;
@@ -256,6 +260,7 @@ public class WrittingController {
 		// botener todas para comparar con el padre
 		List<WrittingPOJO> allWrittings = getAll().getWritting();
 		List<UserHasWrittingPOJO> allUserHasWritting = UserHasWrittingService.getAll();
+		List<ReportPOJO> writtingreports = reportService.getAllbyWritting(writtingMainId);
 		wr = getAll();
 		// comparar los que tienen de padre writtingId
 
@@ -287,7 +292,11 @@ public class WrittingController {
 				WrittingService.deletewritting(allWrittings.get(j).getWrittingId());
 			}
 		}
-		// });
+
+		for (int k = writtingreports.size() - 1; k >= 0; k--) {
+			System.out.println("entra al report main"+ writtingreports.size() );
+			reportService.deleteReport(writtingreports.get(k).getReportId());
+		};
 		allUserHasWritting.stream().forEach(uhw -> {
 			if (uhw.getWritting().getWrittingId() == writtingMainId) {
 				System.out.println("entra al userHasWritting main");
