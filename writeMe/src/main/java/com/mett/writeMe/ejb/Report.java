@@ -13,8 +13,9 @@ import javax.persistence.*;
 public class Report implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private ReportPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int reportId;
 
 	private String comment;
 
@@ -29,12 +30,12 @@ public class Report implements Serializable {
 	public Report() {
 	}
 
-	public ReportPK getId() {
-		return this.id;
+	public int getReportId() {
+		return this.reportId;
 	}
 
-	public void setId(ReportPK id) {
-		this.id = id;
+	public void setReportId(int reportId) {
+		this.reportId = reportId;
 	}
 
 	public String getComment() {

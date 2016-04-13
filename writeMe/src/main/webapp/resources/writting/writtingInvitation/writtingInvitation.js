@@ -363,7 +363,7 @@ $scope.getAllContent = function(){
     	        }
     	    })
     }
-    
+
      var outTest;
      function out(){
  	   $(document).ready(function () {
@@ -379,9 +379,7 @@ $scope.getAllContent = function(){
  	 }
      
      outTest = setInterval(out,1000);
-  
-  
-  
+
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
