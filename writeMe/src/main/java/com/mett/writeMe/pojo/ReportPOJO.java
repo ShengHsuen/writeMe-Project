@@ -1,20 +1,16 @@
-package com.mett.writeMe.ejb;
+package com.mett.writeMe.pojo;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
+import com.mett.writeMe.ejb.Writting;
 
 /**
- * The persistent class for the report database table.
- * 
+ * @author Mildred Guerra
+ * Report POJO
+ *
  */
-@Entity
-@NamedQuery(name="Report.findAll", query="SELECT r FROM Report r")
-public class Report implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+public class ReportPOJO {
 	private int reportId;
 
 	private String comment;
@@ -23,13 +19,11 @@ public class Report implements Serializable {
 
 	private String typeReport;
 
-	//bi-directional many-to-one association to Writting
-	@ManyToOne(fetch=FetchType.LAZY)
 	private Writting writting;
 
-	public Report() {
+	public ReportPOJO() {
+		super();
 	}
-
 	public int getReportId() {
 		return this.reportId;
 	}
@@ -69,5 +63,4 @@ public class Report implements Serializable {
 	public void setWritting(Writting writting) {
 		this.writting = writting;
 	}
-
 }

@@ -204,7 +204,7 @@
 								</a></li>
 									
 								<li><a href="/writeMe/app#/showWrittingsPublic">
-								<i class="glyphicon glyphicon-book icon"></i>
+								<i class="icon fa fa-users"></i>
 								<span>Pública</span>
 								</a></li>
 						</ul>
@@ -325,7 +325,7 @@
 	<script src="resources/writting/writting/writting.js"></script>
 	<script src="resources/invitation/invitation.js"></script>
 	<script src="resources/writting/viewWritting/viewWritting.js"></script>
-
+	<script src="resources/writting/reportWritting/reportWritting.js"></script>
 	<script
 		src="resources/acceptLegalEstablishment/acceptLegalEstablishment.js"></script>
 	<script src="resources/legalEstablishment/legalEstablishment.js"></script>

@@ -133,6 +133,9 @@ angular.module('myApp.home', ['ngRoute'])
 		    	    	num = wr.cantUsers - $scope.contributors.length;
 		    	    	wr.cantUsers = num;
 		    	    	console.log("KSKSK aca  "+$scope.wr.cantUsers+ "  " + wr.name);
+		    	    	if(wr.cantUsers == 0){
+		    	    		Alert("Prueba creo que solo imprime uno");
+		    	    	}
 		    	    }
 		    	$scope.setNumber();
 	    	} 
@@ -140,7 +143,11 @@ angular.module('myApp.home', ['ngRoute'])
 	    	
 	    })
     };
-   
+	$scope.reportWritting = function(writting){
+		params: {Writting : writting}
+	    $localStorage.Writting=writting;
+	    window.location.href = "app#/reportWritting"
+	};
     
     
 
