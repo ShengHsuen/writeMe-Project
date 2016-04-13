@@ -69,13 +69,21 @@ public class WrittingResponse extends BaseResponse{
 	private String name;
 	private boolean participation;
 	private String content;
-	
+	private Date date;
 	private String category;
 	private String description;
 
 	private String image;
 
 	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public String getCategory() {
 		return category;
 	}
