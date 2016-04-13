@@ -114,7 +114,7 @@ angular.module('myApp.home', ['ngRoute'])
 		   });
     }
 
-
+    $scope.show;
     $scope.getContributors = function(wr,$index){
         $scope.getContrib = {
                 "pageNumber": 0,
@@ -127,24 +127,20 @@ angular.module('myApp.home', ['ngRoute'])
             };
         $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
-	    	if(wr.typeWritting == "Pública"){
-		    	//$scope.number =[];
-		    	$scope.setNumber = function(){
-		    	    	num = wr.cantUsers - $scope.contributors.length;
-		    	    	wr.cantUsers = num;
-		    	    	console.log("KSKSK aca  "+$scope.wr.cantUsers+ "  " + wr.name);
-		    	    	if(wr.cantUsers == 0){
-		    	    		Alert("Prueba creo que solo imprime uno");
-		    	    	}
-		    	    }
-		    	$scope.setNumber();
-	    	} 
-
-	    	
+		    	num = wr.cantUsers - $scope.contributors.length;
+		    	wr.cantUsers = num;
+		    
+	            if(wr.cantUsers == 0){
+                  $scope.isOwnerList[$index] = false;
+	             }
+	            
+	         
 	    })
     };
-   
     
+  
+   
+  
     
 
 }]);
