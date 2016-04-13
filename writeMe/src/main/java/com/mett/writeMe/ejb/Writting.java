@@ -60,6 +60,14 @@ public class Writting implements Serializable {
 	@OneToMany(mappedBy="writting")
 	private List<Chapter> chapters;
 
+	//bi-directional many-to-one association to Report
+	@OneToMany(mappedBy="writting")
+	private List<Report> reports;
+
+	//bi-directional many-to-one association to UserHasWritting
+	@OneToMany(mappedBy="writting")
+	private List<UserHasWritting> userHasWrittings;
+
 	//bi-directional many-to-many association to Mylibrary
 	@ManyToMany
 	@JoinTable(
@@ -72,10 +80,6 @@ public class Writting implements Serializable {
 			}
 		)
 	private List<Mylibrary> mylibraries;
-
-	//bi-directional many-to-one association to UserHasWritting
-	@OneToMany(mappedBy="writting")
-	private List<UserHasWritting> userHasWrittings;
 
 	//bi-directional many-to-one association to Pagination
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -252,12 +256,26 @@ public class Writting implements Serializable {
 		return chapter;
 	}
 
-	public List<Mylibrary> getMylibraries() {
-		return this.mylibraries;
+	public List<Report> getReports() {
+		return this.reports;
 	}
 
-	public void setMylibraries(List<Mylibrary> mylibraries) {
-		this.mylibraries = mylibraries;
+	public void setReports(List<Report> reports) {
+		this.reports = reports;
+	}
+
+	public Report addReport(Report report) {
+		getReports().add(report);
+		report.setWritting(this);
+
+		return report;
+	}
+
+	public Report removeReport(Report report) {
+		getReports().remove(report);
+		report.setWritting(null);
+
+		return report;
 	}
 
 	public List<UserHasWritting> getUserHasWrittings() {
@@ -280,6 +298,14 @@ public class Writting implements Serializable {
 		userHasWritting.setWritting(null);
 
 		return userHasWritting;
+	}
+
+	public List<Mylibrary> getMylibraries() {
+		return this.mylibraries;
+	}
+
+	public void setMylibraries(List<Mylibrary> mylibraries) {
+		this.mylibraries = mylibraries;
 	}
 
 	public Pagination getPagination() {

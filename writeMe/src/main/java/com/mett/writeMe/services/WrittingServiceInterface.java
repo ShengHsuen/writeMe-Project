@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.mett.writeMe.contracts.WrittingRequest;
+import com.mett.writeMe.ejb.Report;
 import com.mett.writeMe.ejb.User;
 import com.mett.writeMe.ejb.Writting;
 import com.mett.writeMe.pojo.UserHasWrittingPOJO;

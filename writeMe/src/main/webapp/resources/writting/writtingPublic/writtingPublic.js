@@ -323,51 +323,9 @@ $scope.getAllContent = function(){
       })
     }
     var everyTime = 0;
-    $scope.userCanWrite = function(){
-        $scope.getUserCanWrite = {
-                "pageNumber": 0,
-                "pageSize": 0,
-                "direction": "",
-                "sortBy": [""],
-                "searchColumn": "string",
-                "searchTerm": "",
-                "writting": $scope.writtingload
-            };
-    	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
-    		$scope.authorCanWrite = response.user.author;
-    		
-    		console.log("CAn WRITEEE " + $scope.authorCanWrite );
-    	})
-    };
-    $scope.userCanWrite();
+
     
-    $scope.contentLastWritting = function(){
-    	$scope.contentLast = {
-    			"pageNumber" : 0,
-    			"pageSize" : 0,
-    			"direction" : "",
-    			"sortBy" : [ "" ],
-    			"searchColumn" : "string",
-    			"searchTerm" : name,
-    			"writting" : {}
-    	};
-    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
-		  ).success(function(response) {
-		     content = response.content;
-		     $('#preview').html(content);
-		     if($scope.authorCanWrite == $scope.user.author){
-		    	 $scope.divShow = true;
-		    	 //everyTime = setInterval(actualizar,4000);
-		     }else{
-		    	 $scope.divShow = false;
-		      	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	// createWritting();
-		    	 //clearInterval(everyTime);
-		     }
-		    })
-		   
-    };
-    $scope.contentLastWritting();
+
 
     $scope.valOwner = function(){
         $scope.getOwner = {
@@ -450,5 +408,32 @@ $scope.getAllContent = function(){
     		console.log("public/  Success");
     	})
     };
-
+    $scope.contentLastWritting = function(){
+    	$scope.contentLast = {
+    			"pageNumber" : 0,
+    			"pageSize" : 0,
+    			"direction" : "",
+    			"sortBy" : [ "" ],
+    			"searchColumn" : "string",
+    			"searchTerm" : name,
+    			"writting" : {}
+    	};
+    	
+    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
+		  ).success(function(response) {
+		     content = response.content;
+		     $('#preview').html(content);
+		     if($scope.authorCanWrite == $scope.user.author){
+		    	 $scope.divShow = true;
+		    	 //everyTime = setInterval(actualizar,4000);
+		     }else{
+		    	 $scope.divShow = false;
+		      	 $rootScope.$broadcast('disableButtonsTrue');  
+		    	// createWritting();
+		    	 //clearInterval(everyTime);
+		     }
+		    })
+		   
+    };
+    $scope.contentLastWritting();
 }]);

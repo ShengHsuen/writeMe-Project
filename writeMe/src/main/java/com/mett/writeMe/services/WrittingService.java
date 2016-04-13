@@ -277,7 +277,6 @@ public class WrittingService implements WrittingServiceInterface{
 		
 		writting = getWrittingById(edit);
 		writting.setContent(wr.getContent());
-		System.out.println("ESTE ES EL CONTENIDO DE L OBRA: " + wr.getContent());
 		writting.setParticipation(false);
 		System.out.println("GUARDA Y CAMBIA PARTICIPATION A FALSE" + writting.getParticipation());
 		
