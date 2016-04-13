@@ -16,8 +16,12 @@ angular.module('myApp.reportWritting', [ 'ngRoute' ])
 	
 	$scope.loadData = function(){
 		$scope.sessionUser = $localStorage.data;
+		$scope.Writting = $localStorage.Writting;
+		console.log("localS "+ $localStorage.Writting);
 	}
-	
+	$scope.loadData();
+	$scope.types =["Contenido Inapropiado","Imagen inapropiada","Violacón de Copyright"];
+	$scope.typeSelected = "Contenido Inapropiado";
 	$scope.reportWrittingList = {};
 	$scope.requestObject = []
 	$scope.requestObject = {
@@ -54,17 +58,19 @@ angular.module('myApp.reportWritting', [ 'ngRoute' ])
 					{
 					  "reportId": 0,
 					  "comment": $scope.description,
-					  "penalty": "string",
-					  "typereport": {},
-					  "userHasWritting": {}
+					  "penalty": "",
+					  "typeReport":  $scope.typeSelected,
+					  "writting": $scope.Writting
 					}
 
 		$http.post('rest/protected/reportWritting/create',
 				$scope.requestObject).success(
 						function(response) {
 							$scope.toggle();
+							console.log("writting "+$scope.Writting+" type "+$scope.typeSelected)
 							$scope.init();
 							$scope.clean();
+							  window.location.href = "app#/home"
 						}).catch(function(error){
 							   $scope.serverDown = function()
 								{
@@ -75,7 +81,7 @@ angular.module('myApp.reportWritting', [ 'ngRoute' ])
 	};
 	$scope.clean = function() {
 		$scope.description="";
-		$scope.name="";
+		$scope.typeSelected="";
 	}
     // callback for ng-click 'deletereportWritting':
     $scope.deletereportWritting = function (reportWrittingId) {
