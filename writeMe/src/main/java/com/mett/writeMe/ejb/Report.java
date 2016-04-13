@@ -13,32 +13,28 @@ import javax.persistence.*;
 public class Report implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int reportId;
+	@EmbeddedId
+	private ReportPK id;
 
 	private String comment;
 
 	private String penalty;
 
-	//bi-directional many-to-one association to Typereport
-	@ManyToOne(fetch=FetchType.LAZY)
-	private Typereport typereport;
+	private String typeReport;
 
-	//bi-directional many-to-one association to UserHasWritting
+	//bi-directional many-to-one association to Writting
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_has_writting_user_has_writtingId")
-	private UserHasWritting userHasWritting;
+	private Writting writting;
 
 	public Report() {
 	}
 
-	public int getReportId() {
-		return this.reportId;
+	public ReportPK getId() {
+		return this.id;
 	}
 
-	public void setReportId(int reportId) {
-		this.reportId = reportId;
+	public void setId(ReportPK id) {
+		this.id = id;
 	}
 
 	public String getComment() {
@@ -57,20 +53,20 @@ public class Report implements Serializable {
 		this.penalty = penalty;
 	}
 
-	public Typereport getTypereport() {
-		return this.typereport;
+	public String getTypeReport() {
+		return this.typeReport;
 	}
 
-	public void setTypereport(Typereport typereport) {
-		this.typereport = typereport;
+	public void setTypeReport(String typeReport) {
+		this.typeReport = typeReport;
 	}
 
-	public UserHasWritting getUserHasWritting() {
-		return this.userHasWritting;
+	public Writting getWritting() {
+		return this.writting;
 	}
 
-	public void setUserHasWritting(UserHasWritting userHasWritting) {
-		this.userHasWritting = userHasWritting;
+	public void setWritting(Writting writting) {
+		this.writting = writting;
 	}
 
 }
