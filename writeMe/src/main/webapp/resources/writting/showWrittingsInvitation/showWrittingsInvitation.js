@@ -28,7 +28,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 			"searchTerm" : " ",
 			"writting" : {}
 	};
-	$http.post('users/getWrittings',$scope.writting).success(function(response) {
+	$http.post('users/getWrittingsInvitation',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
 		$scope.getIsOwnerListInvitation();
 	}).catch(function(error){

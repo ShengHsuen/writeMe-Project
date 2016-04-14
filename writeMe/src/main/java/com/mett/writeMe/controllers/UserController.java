@@ -81,5 +81,27 @@ public class UserController {
 		return response;		
 	}
 	
+	@RequestMapping(value ="/getWrittingsInvitation", method = RequestMethod.POST)
+	public UsersResponse getWrittingsInvitation(HttpServletRequest servletRequest){	
+
+		UsersResponse response = new UsersResponse();
+		HttpSession currentSession = servletRequest.getSession();
+		response.setCode(200);
+		response.setCodeMessage("obtiene bien los writtings");
+		response.setWrittings(usersService.getWrittingsByUserInvitation(currentSession));
+		return response;		
+	}
+	
+	@RequestMapping(value ="/getWrittingsPublic", method = RequestMethod.POST)
+	public UsersResponse getWrittingsPublic(HttpServletRequest servletRequest){	
+
+		UsersResponse response = new UsersResponse();
+		HttpSession currentSession = servletRequest.getSession();
+		response.setCode(200);
+		response.setCodeMessage("obtiene bien los writtings");
+		response.setWrittings(usersService.getWrittingsByUserPublic(currentSession));
+		return response;		
+	}
+	
 }
 

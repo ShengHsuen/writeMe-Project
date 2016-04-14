@@ -26,5 +26,7 @@ public interface UsersServiceInterface {
 	List<WrittingPOJO> getWrittingsByUserWrittingNameNotNullAndTypeWrittingInvitation(HttpSession currentSession);
 	List<WrittingPOJO> getWrittingsByUserWrittingNameNotNullAndTypeWrittingPublic(HttpSession currentSession);
 	List<UserPOJO> getUserByAuthor(String author);
+	List<WrittingPOJO> getWrittingsByUserInvitation(HttpSession currentSession);
+	List<WrittingPOJO> getWrittingsByUserPublic(HttpSession currentSession);
 	
 }

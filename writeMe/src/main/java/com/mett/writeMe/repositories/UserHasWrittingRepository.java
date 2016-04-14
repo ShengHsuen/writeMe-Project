@@ -12,6 +12,7 @@ public interface UserHasWrittingRepository extends CrudRepository<UserHasWrittin
 	UserHasWritting save(UserHasWritting userHasWritting);
 	List<UserHasWritting> findAll();
 	List<UserHasWritting> findAllByInvitationStatusTrue();
+	List<UserHasWritting> findAllByInvitationStatusTrueAndWrittingTypeWritting(String type);
 	UserHasWritting findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(int p);
 	List<UserHasWritting> findUserHasWrittingByWrittingWrittingIdAndOwnerFalse(int p);
 	UserHasWritting findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndOwnerTrue(int w, int u);

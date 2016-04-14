@@ -19,8 +19,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		$scope.loadData();
 		$('.selector').froalaEditor('html.set', $scope.contentWithoutTags);
 		
-		//$('.fr-view').froalaEditor('html.set', $scope.contentWithoutTags);
-
 		$scope.date = new Date();
 		var anno = $scope.date.getFullYear();
 		var mes = $scope.date.getMonth() + 1;
@@ -45,7 +43,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 		
 		$scope.send = function(){
 			$('html, body').animate( {scrollTop : 0}, 800 );
-			
+
 			$scope.date = new Date();
 			var year = $scope.date.getFullYear();
 			var month = $scope.date.getMonth() + 1;
@@ -55,12 +53,11 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
 			var second = $scope.date.getSeconds();
 			$scope.fecha = year.toString() + "-" + month.toString() + "-" + day.toString();
 			$scope.modified = $scope.fecha + " " + hour.toString() + ":" + minute.toString() + ":" + second.toString();
-			
+
 			$scope.modifiedDate = true;
 			$scope.notModified = true;
 			
 			$scope.content = $('#edit').val();
-			console.log("ENTRA TODOS LOS DATOS?" + $scope.writting);
 			update();
 		}
 
@@ -96,7 +93,6 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
     }
     
     var update = function() {
-    	console.log("DATE "+$scope.modified);
         $scope.writting = {
             "pageNumber": 0,
             "pageSize": 0,
@@ -108,7 +104,7 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
                 "name": $scope.name,
                 "description": "a",
                 "cantUsers": $scope.cantUsers,
-                "date": $scope.modified,
+                "date": fecha,
                 "likes": 0,
                 "limit time": "2100-01-01",
                 "numMaxCharacters": 10000,

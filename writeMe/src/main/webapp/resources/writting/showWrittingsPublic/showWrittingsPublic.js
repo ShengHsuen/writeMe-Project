@@ -27,7 +27,7 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 			"searchTerm" : " ",
 			"writting" : {}
 	};
-	$http.post('users/getWrittings',$scope.writting).success(function(response) {
+	$http.post('users/getWrittingsPublic',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
 		$scope.getIsOwnerListPublic();
 	}).catch(function(error){
