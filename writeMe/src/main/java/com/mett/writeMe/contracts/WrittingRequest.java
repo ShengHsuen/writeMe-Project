@@ -1,5 +1,7 @@
 package com.mett.writeMe.contracts;
 
+import java.util.Date;
+
 import com.mett.writeMe.pojo.UserPOJO;
 import com.mett.writeMe.pojo.WrittingPOJO;
 
@@ -11,9 +13,20 @@ public class WrittingRequest extends BaseRequest {
 	
 	private WrittingPOJO writting;
 	private UserPOJO user;
+	private Date date;
+	
+	
 	
 	public UserPOJO getUser() {
 		return user;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public void setUser(UserPOJO user) {

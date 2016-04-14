@@ -322,10 +322,6 @@ $scope.getAllContent = function(){
 		     $('#preview').html(content);
       })
     }
-    var everyTime = 0;
-
-    
-
 
     $scope.valOwner = function(){
         $scope.getOwner = {
@@ -346,7 +342,7 @@ $scope.getAllContent = function(){
     $scope.valOwner();
     $scope.getAllContent();
     
-    /*$scope.getContributors = function(){
+    $scope.getContributors = function(){
         $scope.getContrib = {
                 "pageNumber": 0,
                 "pageSize": 0,
@@ -362,7 +358,7 @@ $scope.getAllContent = function(){
 	    	$scope.getCanWrite($scope.contributors);
 	    })
     };
-    $scope.getContributors();*/
+    $scope.getContributors();
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
@@ -408,6 +404,21 @@ $scope.getAllContent = function(){
     		console.log("public/  Success");
     	})
     };
+    
+    var actu;
+    var testing;
+   
+    function test(){
+    	   $(document).ready(function () {
+    	        if(window.location.href.indexOf("writtingPublic") > -1) {
+    	        	actu = setInterval(actualizar, 1000);
+    	        }else{
+    	        	clearInterval(actu);
+    	        	clearInterval(testing);
+    	        }
+    	    })
+    };
+    
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
     			"pageNumber" : 0,
@@ -423,14 +434,13 @@ $scope.getAllContent = function(){
 		  ).success(function(response) {
 		     content = response.content;
 		     $('#preview').html(content);
-		     if($scope.authorCanWrite == $scope.user.author){
+		     if($scope.userCanWrite == $scope.user.author){
 		    	 $scope.divShow = true;
-		    	 //everyTime = setInterval(actualizar,4000);
+		    	
 		     }else{
 		    	 $scope.divShow = false;
 		      	 $rootScope.$broadcast('disableButtonsTrue');  
-		    	// createWritting();
-		    	 //clearInterval(everyTime);
+		      	 testing = setInterval(test,1000);
 		     }
 		    })
 		   

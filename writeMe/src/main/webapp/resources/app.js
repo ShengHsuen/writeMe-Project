@@ -39,7 +39,6 @@ angular.module('myApp', [
 		window.location.href = path;
 	}	
 	
-	
 	$scope.init = function(){
 		$scope.findInvitations = function(){
 			  $scope.invitation = {"pageNumber": 0,
