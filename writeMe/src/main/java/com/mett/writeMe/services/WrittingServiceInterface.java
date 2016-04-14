@@ -47,5 +47,6 @@ public interface WrittingServiceInterface {
 	WrittingPOJO getWrittingInviContent(WrittingPOJO wr);
 	List<WrittingPOJO> getAllWithoutNameNull();
 	Boolean outWritting(Writting wr);
+	Boolean getOwnerInvitation(String userTerm, Writting w);
 	
 }

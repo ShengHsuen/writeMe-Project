@@ -23,6 +23,8 @@ public interface UsersServiceInterface {
 	List<WrittingPOJO> getWrittingsByUser(HttpSession currentSession);
 	List<String> getUsersOwner(List<WrittingPOJO> wpojo, String userTerm);
 	List<String> getUsersInvited(Writting wr, String userTerm);
-	List<WrittingPOJO> getWrittingsByUserWrittingNameNotNull(HttpSession currentSession);
+	List<WrittingPOJO> getWrittingsByUserWrittingNameNotNullAndTypeWrittingInvitation(HttpSession currentSession);
+	List<WrittingPOJO> getWrittingsByUserWrittingNameNotNullAndTypeWrittingPublic(HttpSession currentSession);
 	List<UserPOJO> getUserByAuthor(String author);
+	
 }

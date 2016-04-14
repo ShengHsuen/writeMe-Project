@@ -132,12 +132,16 @@ public class UsersService implements UsersServiceInterface{
 		return writtings;
 	}
 	
+	/* author Sheng Hsuen
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUserWrittingNameNotNullAndTypeWrittingInvitation(javax.servlet.http.HttpSession)
+	 */
 	@Override
 	@Transactional
-	public List<WrittingPOJO> getWrittingsByUserWrittingNameNotNull(HttpSession currentSession){
+	public List<WrittingPOJO> getWrittingsByUserWrittingNameNotNullAndTypeWrittingInvitation(HttpSession currentSession){
 		int idUser = (int)currentSession.getAttribute("idUser");
 		User user = userRepository.findOne(idUser);
-		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAllByUserUserIdAndWrittingNameNotNullAndInvitationStatusTrue(idUser);
+		String invitation = "Por invitación";
+		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAllByUserUserIdAndWrittingNameNotNullAndInvitationStatusTrueAndWrittingTypeWritting(idUser, invitation);
 		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
 	
 		for (int i=0; i<= userHasWrittings.size()-1; i++){
@@ -151,6 +155,33 @@ public class UsersService implements UsersServiceInterface{
 		}
 		return writtings;
 	}
+	
+	
+	/* author Sheng Hsuen
+	 * @see com.mett.writeMe.services.UsersServiceInterface#getWrittingsByUserWrittingNameNotNullAndTypeWrittingPublic(javax.servlet.http.HttpSession)
+	 */
+	@Override
+	@Transactional
+	public List<WrittingPOJO> getWrittingsByUserWrittingNameNotNullAndTypeWrittingPublic(HttpSession currentSession){
+		int idUser = (int)currentSession.getAttribute("idUser");
+		User user = userRepository.findOne(idUser);
+		String publicc = "Pública";
+		List<UserHasWritting> userHasWrittings = userHasWrittingRepository.findAllByUserUserIdAndWrittingNameNotNullAndInvitationStatusTrueAndWrittingTypeWritting(idUser, publicc);
+		List<WrittingPOJO> writtings = new ArrayList<WrittingPOJO>();
+	
+		for (int i=0; i<= userHasWrittings.size()-1; i++){
+			if (user.getUserId() == userHasWrittings.get(i).getUser().getUserId()){
+				WrittingPOJO dto = new WrittingPOJO();
+				BeanUtils.copyProperties(userHasWrittings.get(i).getWritting(), dto);
+				writtings.add(dto);
+			}else{
+				
+			}
+		}
+		return writtings;
+	}
+	
+	
 	
 	@Override
 	@Transactional

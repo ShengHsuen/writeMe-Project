@@ -30,7 +30,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	};
 	$http.post('users/getWrittings',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
-		$scope.getIsOwnerList();
+		$scope.getIsOwnerListInvitation();
 	}).catch(function(error){
 		   $scope.serverDown = function()
 			{
@@ -41,8 +41,8 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 	}
 	$scope.init();
 	
-	$scope.getIsOwnerList = function(){
-		$scope.getOwnerList = {
+	$scope.getIsOwnerListInvitation = function(){
+		$scope.getOwnerListInvitation = {
 				"pageNumber" : 0,
 				"pageSize" : 0,
 				"direction" : "",
@@ -51,7 +51,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 				"searchTerm" : $scope.sessionUser.author,
 				"writting" : {}
 		};
-		$http.post('rest/protected/writting/getOwnerList',$scope.getOwnerList).success(function(response) {
+		$http.post('rest/protected/writting/getOwnerListInvitation',$scope.getOwnerListInvitation).success(function(response) {
 			$scope.isOwnerList = response.isOwnerList;
 			$scope.isOwnerList.reverse();
 			console.log($scope.isOwnerList);
