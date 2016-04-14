@@ -27,9 +27,9 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 			"searchTerm" : " ",
 			"writting" : {}
 	};
-	$http.post('users/getWrittings',$scope.writting).success(function(response) {
+	$http.post('users/getWrittingsPublic',$scope.writting).success(function(response) {
 		$scope.writting = response.writtings;
-		$scope.getIsOwnerList();
+		$scope.getIsOwnerListPublic();
 	}).catch(function(error){
 		   $scope.serverDown = function()
 			{
@@ -40,8 +40,8 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 	}
 	$scope.init();
 	
-	$scope.getIsOwnerList = function(){
-		$scope.getOwnerList = {
+	$scope.getIsOwnerListPublic = function(){
+		$scope.getOwnerListPublic = {
 				"pageNumber" : 0,
 				"pageSize" : 0,
 				"direction" : "",
@@ -50,7 +50,7 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 				"searchTerm" : $scope.sessionUser.author,
 				"writting" : {}
 		};
-		$http.post('rest/protected/writting/getOwnerList',$scope.getOwnerList).success(function(response) {
+		$http.post('rest/protected/writting/getOwnerListPublic',$scope.getOwnerListPublic).success(function(response) {
 			$scope.isOwnerList = response.isOwnerList;
 			$scope.isOwnerList.reverse();
 			console.log($scope.isOwnerList);
