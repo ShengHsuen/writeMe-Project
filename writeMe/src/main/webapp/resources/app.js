@@ -39,7 +39,6 @@ angular.module('myApp', [
 		window.location.href = path;
 	}	
 	
-	
 	$scope.init = function(){
 		$scope.findInvitations = function(){
 			  $scope.invitation = {"pageNumber": 0,
@@ -81,12 +80,14 @@ angular.module('myApp', [
 				  	   $scope.userConfirmation = response.userAccepted;
 				  	   $scope.cantInvitations = $scope.writtingConfirmation.length;
 				 	   //$scope.hoster = response.owner;
-				  	   console.log($scope.userConfirmation);
-				  	   console.log($scope.writtingConfirmation);
+				  	   console.log("a "+$scope.userConfirmation);
+				  	   console.log("b "+$scope.writtingConfirmation);
 				  	  // $scope.mergeList();
 			     });
 		}
 		$scope.findConfirmations();
+		
+		console.log("$scope.cantInvitations "+$scope.cantInvitations);
 		
 		/*$scope.mergeList = function(){
 			for(var i=0;i<$scope.userConfirmation.length;i++){

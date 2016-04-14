@@ -356,10 +356,12 @@ $scope.getAllContent = function(){
     function test(){
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingInvitation") > -1) {
-    	        	actu = setInterval(actualizar, 1000);
+    	        	actu = setInterval(actualizar, 2000);
+    	        
     	        }else{
     	        	clearInterval(testing);
     	        	clearInterval(actu);
+    	        	
     	        }
     	    })
     }
@@ -371,14 +373,13 @@ $scope.getAllContent = function(){
  	        	
  	        }else{
 	 	   		$scope.content = $('#edit').val();
-	 	   		console.log("ES EL CONTENIDO CUANDO SALE DE LA PAGINA " + $scope.content);
 	 	   		outWritting();
 				clearInterval(outTest);
  	        }
  	   })
  	 }
      
-     outTest = setInterval(out,1000);
+     
 
     $scope.contentLastWritting = function(){
     	$scope.contentLast = {
@@ -400,13 +401,12 @@ $scope.getAllContent = function(){
 		     if($scope.participation == true){
 		    	 console.log("QUITA EL WYSWYG");
 		    	 $scope.divShow = false;
-		    	 testing = setInterval(test,1000);
+		    	 testing = setInterval(test,4000);
 
 		     }else{
-		    	 console.log("PONE EL WYSWYG");
 		    	 $scope.divShow = true;
 		    	 createWritting();
-		    	 
+		    	 outTest = setInterval(out,2000);
 		     }
 		    })
 		   

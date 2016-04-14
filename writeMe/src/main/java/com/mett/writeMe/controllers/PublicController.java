@@ -137,7 +137,15 @@ public class PublicController {
 		return response;
 	}
 	
-	
+	@RequestMapping(value = "/acceptConfirmation", method = RequestMethod.POST)
+	public UserHasWrittingResponse acceptConfirmation(@RequestBody UserHasWrittingRequest uhwr) {
+		UserHasWrittingResponse response = new UserHasWrittingResponse();
+		int userId = userRepository.findByAuthorContaining(uhwr.getSearchTerm()).get(0).getUserId();
+		UserHasWritting uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserId(uhwr.getWritting().getWrittingId(),userId);
+		uhw.setConfirmation(false);
+		userHasWrittingRepository.save(uhw);
+		return response;
+	}
 	
 	private List<UserPOJO> generateUserDtos(List<User> users){
 		List<UserPOJO> uiUsers = new ArrayList<UserPOJO>();
