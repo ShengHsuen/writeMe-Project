@@ -342,7 +342,7 @@ $scope.getAllContent = function(){
     $scope.valOwner();
     $scope.getAllContent();
     
-    /*$scope.getContributors = function(){
+    $scope.getContributors = function(){
         $scope.getContrib = {
                 "pageNumber": 0,
                 "pageSize": 0,
@@ -358,7 +358,7 @@ $scope.getAllContent = function(){
 	    	$scope.getCanWrite($scope.contributors);
 	    })
     };
-    $scope.getContributors();*/
+    $scope.getContributors();
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
@@ -407,14 +407,15 @@ $scope.getAllContent = function(){
     
     var actu;
     var testing;
-   
+    
     function test(){
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingPublic") > -1) {
-    	        	actu = setInterval(actualizar, 1000);
+    	        	actu = setInterval(actualizar, 2000);
     	        }else{
-    	        	clearInterval(actu);
-    	        	clearInterval(testing);
+    	        	clearInterval(actu)
+    	        	clearInterval(testing)
+    	        
     	        }
     	    })
     };
@@ -440,7 +441,8 @@ $scope.getAllContent = function(){
 		     }else{
 		    	 $scope.divShow = false;
 		      	 $rootScope.$broadcast('disableButtonsTrue');  
-		      	 testing = setInterval(test,1000);
+		      	 testing = setInterval(test,4000);
+		      	 
 		     }
 		    })
 		   
