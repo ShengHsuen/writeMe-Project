@@ -16,6 +16,7 @@
             <th>Estado</th>-->
             <th>Abandonar obra</th>
             <th style="width:30px;"></th>
+               <th style="text-align:center">Entrar</th>
           </tr>
         </thead>
         <tbody ng-repeat="wr in writting | orderBy:'writtingId':true | filter: {name: ''} " ng-show="wr.typeWritting == 'Pública'" >
@@ -29,7 +30,7 @@
             <td><button ng-click="leave(wr)" ng-hide="isOwnerList[$index]" class="btn btn-warning">Abandonar</button></td>
             
         	<td><button class="btn btn-sm glyphicon glyphicon-trash btn-danger" ng-messages="expression" ng-show="isOwnerList[$index]"  ng-click="deleteWritting(wr.writtingId)" ></button> </td>
-            <td><button ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)"  class="btn btn-sm btn-default">Entrar</button> </td>
+            <td><button ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)"  class="btn btn-sm btn-info center-block icon-login"></button> </td>
       
 
           </tr>
