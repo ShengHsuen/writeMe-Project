@@ -12,12 +12,13 @@ public interface UserHasWrittingRepository extends CrudRepository<UserHasWrittin
 	UserHasWritting save(UserHasWritting userHasWritting);
 	List<UserHasWritting> findAll();
 	List<UserHasWritting> findAllByInvitationStatusTrue();
+	List<UserHasWritting> findAllByInvitationStatusTrueAndWrittingTypeWritting(String type);
 	UserHasWritting findUserHasWrittingByWrittingWrittingIdAndOwnerTrue(int p);
 	List<UserHasWritting> findUserHasWrittingByWrittingWrittingIdAndOwnerFalse(int p);
 	UserHasWritting findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndOwnerTrue(int w, int u);
 	List<UserHasWritting> findAllBylinkInvitation(int p);
 	UserHasWritting findByUserAndWritting(User u, Writting w);
-	List<UserHasWritting> findAllByUserUserIdAndWrittingNameNotNullAndInvitationStatusTrue(int id);
+	List<UserHasWritting> findAllByUserUserIdAndWrittingNameNotNullAndInvitationStatusTrueAndWrittingTypeWritting(int id, String invitation);
 	List<UserHasWritting> findAllByConfirmationTrue();
 	List<UserHasWritting> findAllByWrittingWrittingIdAndConfirmationTrue(int a);
 	List<UserHasWritting> findAllByIdOwnerAndConfirmationTrue(int a);

@@ -55,9 +55,9 @@ angular.module('myApp', [
 			    	   console.log("Invitation Success");
 				  	   $scope.writting = response.writting;
 				 	   $scope.hoster = response.owner;
-				 	   $scope.cantInvitations = $scope.writting.length;
 				  	   console.log($scope.writting);
 				  	   console.log($scope.hoster);
+				  	   $scope.findConfirmations();
 			     });
 		}
 		$scope.findInvitations();
@@ -78,14 +78,13 @@ angular.module('myApp', [
 			    	   console.log("Invitation Success");
 				  	   $scope.writtingConfirmation = response.writting;
 				  	   $scope.userConfirmation = response.userAccepted;
-				  	   $scope.cantInvitations = $scope.writtingConfirmation.length;
+				  	   $scope.cantInvitations = $scope.writtingConfirmation.length + $scope.writting.length;
 				 	   //$scope.hoster = response.owner;
 				  	   console.log("a "+$scope.userConfirmation);
 				  	   console.log("b "+$scope.writtingConfirmation);
 				  	  // $scope.mergeList();
 			     });
 		}
-		$scope.findConfirmations();
 		
 		console.log("$scope.cantInvitations "+$scope.cantInvitations);
 		

@@ -49,7 +49,7 @@ public class GeneratePDFService {
 		System.out.println(uploadedFileLocation+"file location");
 		Image portda = Image.getInstance(w.getImage());
 		//portda.setAbsolutePosition(0, 0);
-		portda.scaleToFit(726, 900);
+		portda.scaleToFit(726, 800);
 
 //		portda.setAlignment(Image.ALIGN_CENTER);
 //		portda.scalePercent(100f);
