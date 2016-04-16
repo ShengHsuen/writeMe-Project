@@ -509,6 +509,33 @@ public class WrittingService implements WrittingServiceInterface{
 		}
 		return resul;
 	}
+	
+	
+	@Override
+	@Transactional
+	public Boolean getOwnerInvitation(String userTerm, Writting w) {
+		List<User> us = new ArrayList<User>();
+		us = userRepository.findByAuthorContaining(userTerm);
+		User u = new User();
+		u = us.get(0);
+		System.out.println("wwwwwww "+us.get(0).getUserId() + "qqqqqqq " +w.getName());
+		UserHasWritting uhw = new UserHasWritting();
+		Boolean resul;
+		uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndOwnerTrue(w.getWrittingId(),u.getUserId()); //Siempre sera un usuario el que recibe
+		
+		try{
+			if(uhw != null){
+				System.out.println("ESTE ME TRAE EL OWNER " + uhw.getUser_has_writtingId());
+				resul = true;
+				
+			}else{
+				resul = false;
+			}
+		}catch(Exception e){
+			resul = false;
+		}
+		return resul;
+	}
 
 
 	@Override

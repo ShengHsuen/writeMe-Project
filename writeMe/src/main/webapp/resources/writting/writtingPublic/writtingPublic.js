@@ -342,7 +342,7 @@ $scope.getAllContent = function(){
     $scope.valOwner();
     $scope.getAllContent();
     
-    /*$scope.getContributors = function(){
+    $scope.getContributors = function(){
         $scope.getContrib = {
                 "pageNumber": 0,
                 "pageSize": 0,
@@ -355,10 +355,11 @@ $scope.getAllContent = function(){
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
 	    	console.log("Contributors>>> " + $scope.contributors);
-	    	$scope.getCanWrite($scope.contributors);
+	    	$scope.userCanWrite();
+	    	
 	    })
     };
-    $scope.getContributors();*/
+    $scope.getContributors();
         
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
@@ -373,15 +374,16 @@ $scope.getAllContent = function(){
     	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
     		$scope.userCanWrite = response.user.author;
     		console.log("CAn WRITEEE " + $scope.userCanWrite );
+    		$scope.getCanWrite($scope.contributors);
     	})
     };
-    $scope.userCanWrite();
+   
     
     $scope.getCanWrite = function(contributors){
-    	console.log(contributors);
+    	console.log("<<<>>> "+contributors);
     	$scope.canWriteArray = [];
     	for(var i=0;i < contributors.length;i++){
-    		if($scope.userCanWrite == contributors[i].author){
+    		if($scope.userCanWrite === contributors[i].author){
     			$scope.canWriteArray.push(true);
     		}else{
     			$scope.canWriteArray.push(false);
@@ -407,14 +409,15 @@ $scope.getAllContent = function(){
     
     var actu;
     var testing;
-   
+    
     function test(){
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingPublic") > -1) {
-    	        	actu = setInterval(actualizar, 1000);
+    	        	actu = setInterval(actualizar, 2000);
     	        }else{
-    	        	clearInterval(actu);
-    	        	clearInterval(testing);
+    	        	clearInterval(actu)
+    	        	clearInterval(testing)
+    	        
     	        }
     	    })
     };
@@ -440,7 +443,8 @@ $scope.getAllContent = function(){
 		     }else{
 		    	 $scope.divShow = false;
 		      	 $rootScope.$broadcast('disableButtonsTrue');  
-		      	 testing = setInterval(test,1000);
+		      	 testing = setInterval(test,4000);
+		      	 
 		     }
 		    })
 		   
