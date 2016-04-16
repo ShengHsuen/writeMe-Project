@@ -328,8 +328,12 @@ public class WrittingController {
 		return response;
 	}
 
-	@RequestMapping(value = "/getOwnerList", method = RequestMethod.POST)
-	public WrittingResponse getOwnerList(@RequestBody WrittingRequest ur) {
+	/**author Sheng Hsuen
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getOwnerListInvitation", method = RequestMethod.POST)
+	public WrittingResponse getOwnerListInvitation(@RequestBody WrittingRequest ur) {
 		HttpSession currentSession = LoginService.getCurrentSession();
 		WrittingResponse response = new WrittingResponse();
 		List<Boolean> isOwnerList = new ArrayList<Boolean>();
@@ -337,7 +341,8 @@ public class WrittingController {
 
 		response.setCode(200);
 		response.setCodeMessage("Muestra reglas satisfactoriamente");
-		wPojo = userService.getWrittingsByUserWrittingNameNotNull(currentSession);
+		wPojo = userService.getWrittingsByUserWrittingNameNotNullAndTypeWrittingInvitation(currentSession);
+		System.out.println("ESTE ES EL TAMANNO DE WRITTINGS QUE TRAE"+wPojo.size());
 
 //		response.setWritting(WrittingService.getAllWithoutNameNull());
 		for (int i = 0; i < wPojo.size(); i++) {
@@ -348,6 +353,34 @@ public class WrittingController {
 		response.setIsOwnerList(isOwnerList);
 		return response;
 	}
+	
+	
+	/**author Sheng Hsuen
+	 * @param ur
+	 * @return
+	 */
+	@RequestMapping(value = "/getOwnerListPublic", method = RequestMethod.POST)
+	public WrittingResponse getOwnerListPublic(@RequestBody WrittingRequest ur) {
+		HttpSession currentSession = LoginService.getCurrentSession();
+		WrittingResponse response = new WrittingResponse();
+		List<Boolean> isOwnerList = new ArrayList<Boolean>();
+		List<WrittingPOJO> wPojo = new ArrayList<WrittingPOJO>();
+
+		response.setCode(200);
+		response.setCodeMessage("Muestra reglas satisfactoriamente");
+		wPojo = userService.getWrittingsByUserWrittingNameNotNullAndTypeWrittingPublic(currentSession);
+		System.out.println("ESTE ES EL TAMANNO DE WRITTINGS QUE TRAE"+wPojo.size());
+
+//		response.setWritting(WrittingService.getAllWithoutNameNull());
+		for (int i = 0; i < wPojo.size(); i++) {
+				Writting wr = new Writting();
+				BeanUtils.copyProperties(wPojo.get(i), wr);
+				isOwnerList.add(WrittingService.getOwner(ur.getSearchTerm(), wr));
+		}
+		response.setIsOwnerList(isOwnerList);
+		return response;
+	}
+	
 
 	/**
 	 * @author Mildred Guerra Get writtings with main
