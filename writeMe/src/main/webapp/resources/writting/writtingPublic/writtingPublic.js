@@ -355,7 +355,8 @@ $scope.getAllContent = function(){
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
 	    	console.log("Contributors>>> " + $scope.contributors);
-	    	$scope.getCanWrite($scope.contributors);
+	    	$scope.userCanWrite();
+	    	
 	    })
     };
     $scope.getContributors();
@@ -373,15 +374,16 @@ $scope.getAllContent = function(){
     	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
     		$scope.userCanWrite = response.user.author;
     		console.log("CAn WRITEEE " + $scope.userCanWrite );
+    		$scope.getCanWrite($scope.contributors);
     	})
     };
-    $scope.userCanWrite();
+   
     
     $scope.getCanWrite = function(contributors){
-    	console.log(contributors);
+    	console.log("<<<>>> "+contributors);
     	$scope.canWriteArray = [];
     	for(var i=0;i < contributors.length;i++){
-    		if($scope.userCanWrite == contributors[i].author){
+    		if($scope.userCanWrite === contributors[i].author){
     			$scope.canWriteArray.push(true);
     		}else{
     			$scope.canWriteArray.push(false);
