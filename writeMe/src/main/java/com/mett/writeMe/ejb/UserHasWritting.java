@@ -17,14 +17,13 @@ public class UserHasWritting implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int user_has_writtingId;
 
-	private boolean banned;
+	private Boolean banned;
 
-	private boolean canWrite;
+	private Boolean canWrite;
 
-	private boolean confirmation;
+	private Boolean confirmation;
 
 	@Temporal(TemporalType.DATE)
 	private Date dateCreate;
@@ -35,15 +34,15 @@ public class UserHasWritting implements Serializable {
 	@Column(name="id_owner")
 	private int idOwner;
 
-	private boolean invitationStatus;
+	private Boolean invitationStatus;
 
 	private int linkInvitation;
 
-	private boolean owner;
+	private Boolean owner;
 
-	private boolean publicc;
+	private Boolean publicc;
 
-	private boolean statusColor;
+	private Boolean statusColor;
 
 	//bi-directional many-to-one association to Comment
 	@OneToMany(mappedBy="userHasWritting")
@@ -72,27 +71,27 @@ public class UserHasWritting implements Serializable {
 		this.user_has_writtingId = user_has_writtingId;
 	}
 
-	public boolean getBanned() {
+	public Boolean getBanned() {
 		return this.banned;
 	}
 
-	public void setBanned(boolean banned) {
+	public void setBanned(Boolean banned) {
 		this.banned = banned;
 	}
 
-	public boolean getCanWrite() {
+	public Boolean getCanWrite() {
 		return this.canWrite;
 	}
 
-	public void setCanWrite(boolean canWrite) {
+	public void setCanWrite(Boolean canWrite) {
 		this.canWrite = canWrite;
 	}
 
-	public boolean getConfirmation() {
+	public Boolean getConfirmation() {
 		return this.confirmation;
 	}
 
-	public void setConfirmation(boolean confirmation) {
+	public void setConfirmation(Boolean confirmation) {
 		this.confirmation = confirmation;
 	}
 
@@ -120,11 +119,11 @@ public class UserHasWritting implements Serializable {
 		this.idOwner = idOwner;
 	}
 
-	public boolean getInvitationStatus() {
+	public Boolean getInvitationStatus() {
 		return this.invitationStatus;
 	}
 
-	public void setInvitationStatus(boolean invitationStatus) {
+	public void setInvitationStatus(Boolean invitationStatus) {
 		this.invitationStatus = invitationStatus;
 	}
 
@@ -136,27 +135,27 @@ public class UserHasWritting implements Serializable {
 		this.linkInvitation = linkInvitation;
 	}
 
-	public boolean getOwner() {
+	public Boolean getOwner() {
 		return this.owner;
 	}
 
-	public void setOwner(boolean owner) {
+	public void setOwner(Boolean owner) {
 		this.owner = owner;
 	}
 
-	public boolean getPublicc() {
+	public Boolean getPublicc() {
 		return this.publicc;
 	}
 
-	public void setPublicc(boolean publicc) {
+	public void setPublicc(Boolean publicc) {
 		this.publicc = publicc;
 	}
 
-	public boolean getStatusColor() {
+	public Boolean getStatusColor() {
 		return this.statusColor;
 	}
 
-	public void setStatusColor(boolean statusColor) {
+	public void setStatusColor(Boolean statusColor) {
 		this.statusColor = statusColor;
 	}
 

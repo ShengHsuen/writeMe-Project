@@ -16,13 +16,12 @@ public class Record implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int recordId;
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
 
-	private boolean state;
+	private byte state;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -51,11 +50,11 @@ public class Record implements Serializable {
 		this.date = date;
 	}
 
-	public boolean getState() {
+	public byte getState() {
 		return this.state;
 	}
 
-	public void setState(boolean state) {
+	public void setState(byte state) {
 		this.state = state;
 	}
 

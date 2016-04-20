@@ -16,12 +16,11 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int userId;
 
-	private boolean accountType;
+	private Boolean accountType;
 
-	private boolean admin;
+	private Boolean admin;
 
 	private String author;
 
@@ -96,19 +95,19 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public boolean getAccountType() {
+	public Boolean getAccountType() {
 		return this.accountType;
 	}
 
-	public void setAccountType(boolean accountType) {
+	public void setAccountType(Boolean accountType) {
 		this.accountType = accountType;
 	}
 
-	public boolean getAdmin() {
+	public Boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(boolean admin) {
+	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
 

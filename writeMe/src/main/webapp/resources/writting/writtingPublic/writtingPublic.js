@@ -359,8 +359,24 @@ $scope.getAllContent = function(){
 	    	
 	    })
     };
+    
+    var actu;
+    var testing;
+    
+    function test(){
+    	   $(document).ready(function () {
+    	        if(window.location.href.indexOf("writtingPublic") > -1) {
+    	        	actu = setInterval(actualizar, 1000);
+    	        }else{
+    	        	clearInterval(testing);
+    	        	clearInterval(actu);
+    	        	console.log("Si entra aca. pero no para");
+    	        }
+    	    })
+    };
+    
     $scope.getContributors();
-        
+    $scope.authorLastGet;
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
                 "pageNumber": 0,
@@ -375,6 +391,37 @@ $scope.getAllContent = function(){
     		$scope.userCanWrite = response.user.author;
     		console.log("CAn WRITEEE " + $scope.userCanWrite );
     		$scope.getCanWrite($scope.contributors);
+    		
+    		   $scope.contentLastWritting = function(){
+    		    	$scope.contentLast = {
+    		    			"pageNumber" : 0,
+    		    			"pageSize" : 0,
+    		    			"direction" : "",
+    		    			"sortBy" : [ "" ],
+    		    			"searchColumn" : "string",
+    		    			"searchTerm" : name,
+    		    			"writting" : {}
+    		    	};
+    		    	
+    		    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
+    				  ).success(function(response) {
+    				     content = response.content;
+    				     $('#preview').html(content);
+    				      console.log($scope.user.author + "ESTE ES????!")
+    				     if($scope.userCanWrite == $scope.user.author){
+    				    
+    				    	 $scope.divShow = true;
+    				    	
+    				     }else{
+    				    	 $scope.divShow = false;
+    				      	 $rootScope.$broadcast('disableButtonsTrue');  
+    				      	 testing = setInterval(test,2000);
+    				      	 
+    				     }
+    				    })
+    				   
+    		    };
+    		    $scope.contentLastWritting();
     	})
     };
    
@@ -407,47 +454,7 @@ $scope.getAllContent = function(){
     	})
     };
     
-    var actu;
-    var testing;
+  
+  
     
-    function test(){
-    	   $(document).ready(function () {
-    	        if(window.location.href.indexOf("writtingPublic") > -1) {
-    	        	actu = setInterval(actualizar, 2000);
-    	        }else{
-    	        	clearInterval(actu)
-    	        	clearInterval(testing)
-    	        
-    	        }
-    	    })
-    };
-    
-    $scope.contentLastWritting = function(){
-    	$scope.contentLast = {
-    			"pageNumber" : 0,
-    			"pageSize" : 0,
-    			"direction" : "",
-    			"sortBy" : [ "" ],
-    			"searchColumn" : "string",
-    			"searchTerm" : name,
-    			"writting" : {}
-    	};
-    	
-    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
-		  ).success(function(response) {
-		     content = response.content;
-		     $('#preview').html(content);
-		     if($scope.userCanWrite == $scope.user.author){
-		    	 $scope.divShow = true;
-		    	
-		     }else{
-		    	 $scope.divShow = false;
-		      	 $rootScope.$broadcast('disableButtonsTrue');  
-		      	 testing = setInterval(test,4000);
-		      	 
-		     }
-		    })
-		   
-    };
-    $scope.contentLastWritting();
 }]);

@@ -16,7 +16,6 @@ public class Writting implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int writtingId;
 
 	@Lob
@@ -50,9 +49,9 @@ public class Writting implements Serializable {
 	@Lob
 	private String numMinCharacters;
 
-	private boolean participation;
+	private Boolean participation;
 
-	private boolean published;
+	private Boolean published;
 
 	private String typeWritting;
 
@@ -210,19 +209,19 @@ public class Writting implements Serializable {
 		this.numMinCharacters = numMinCharacters;
 	}
 
-	public boolean getParticipation() {
+	public Boolean getParticipation() {
 		return this.participation;
 	}
 
-	public void setParticipation(boolean participation) {
+	public void setParticipation(Boolean participation) {
 		this.participation = participation;
 	}
 
-	public boolean getPublished() {
+	public Boolean getPublished() {
 		return this.published;
 	}
 
-	public void setPublished(boolean published) {
+	public void setPublished(Boolean published) {
 		this.published = published;
 	}
 
