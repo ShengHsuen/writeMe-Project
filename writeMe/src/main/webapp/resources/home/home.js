@@ -101,6 +101,9 @@ angular.module('myApp.home', ['ngRoute'])
 		};
 	   $http.post('rest/protected/public/createPublic', $scope.userHasWritting).success(function(response) {
 	    	console.log("Success");
+
+   		 var path = "app#/showWrittingsPublic";
+   	        window.location.href = path;
 	    	$scope.init();
     	   /* $rootScope.$broadcast('invitation-send');
     	    var path = "app#/showWrittingsInvitation";
