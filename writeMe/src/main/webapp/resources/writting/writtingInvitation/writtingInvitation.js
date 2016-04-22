@@ -356,28 +356,24 @@ $scope.getAllContent = function(){
     function test(){
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingInvitation") > -1) {
-    	        	actu = setInterval(actualizar, 2000);
-    	        
     	        }else{
     	        	clearInterval(testing);
     	        	clearInterval(actu);
-    	        	
     	        }
     	    })
-    }
+    };
 
      var outTest;
      function out(){
  	   $(document).ready(function () {
  	        if(window.location.href.indexOf("writtingInvitation") > -1) {
- 	        	
  	        }else{
 	 	   		$scope.content = $('#edit').val();
 	 	   		outWritting();
 				clearInterval(outTest);
  	        }
  	   })
- 	 }
+ 	 };
      
      
 
@@ -402,7 +398,7 @@ $scope.getAllContent = function(){
 		    	 console.log("QUITA EL WYSWYG");
 		    	 $scope.divShow = false;
 		    	 testing = setInterval(test,4000);
-
+		        // actu = setInterval(actualizar, 2000);
 		     }else{
 		    	 $scope.divShow = true;
 		    	 createWritting();

@@ -359,21 +359,20 @@ $scope.getAllContent = function(){
 	    	
 	    })
     };
-    
-    var actu;
     var testing;
-    
+    var actu;
     function test(){
+    	  
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingPublic") > -1) {
-    	        	actu = setInterval(actualizar, 1000);
+
+    	        	 console.log("Prueba publica 1 ");
     	        }else{
-    	        	clearInterval(testing);
-    	        	clearInterval(actu);
-    	        	console.log("Si entra aca. pero no para");
+    	         	clearInterval(actu);
+    	        	clearInterval(testing);	
     	        }
     	    })
-    };
+    }
     
     $scope.getContributors();
     $scope.authorLastGet;
@@ -407,7 +406,7 @@ $scope.getAllContent = function(){
     				  ).success(function(response) {
     				     content = response.content;
     				     $('#preview').html(content);
-    				      console.log($scope.user.author + "ESTE ES????!")
+    		
     				     if($scope.userCanWrite == $scope.user.author){
     				    
     				    	 $scope.divShow = true;
@@ -416,7 +415,7 @@ $scope.getAllContent = function(){
     				    	 $scope.divShow = false;
     				      	 $rootScope.$broadcast('disableButtonsTrue');  
     				      	 testing = setInterval(test,2000);
-    				      	 
+    	    	        	 actu = setInterval(actualizar, 1000);
     				     }
     				    })
     				   
@@ -450,7 +449,7 @@ $scope.getAllContent = function(){
                 "writting": $scope.writtingload
             };
     	$http.post('rest/protected/public/setNext',$scope.getN).success(function(response) {
-    		console.log("public/  Success");
+    		window.location.href = "app#/showWrittingsPublic"
     	})
     };
     

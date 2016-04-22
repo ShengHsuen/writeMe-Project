@@ -19,7 +19,7 @@
             <th style="text-align:center">Entrar</th>
           </tr>
         </thead>
-        <tbody ng-repeat="wr in writting | orderBy:'writtingId':true | filter: {name: ''} " ng-show="wr.typeWritting == 'Por invitación'" >
+        <tbody ng-repeat="wr in writting | orderBy:'writtingId':true | filter:{name: ''}" ng-show="wr.typeWritting == 'Por invitación'" >
 
           <tr >
             <td style="text-align:center">{{wr.name}}</td>
