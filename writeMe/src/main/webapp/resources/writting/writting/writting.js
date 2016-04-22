@@ -158,8 +158,8 @@ angular.module('myApp.writting', ['ngRoute', 'ngStorage'])
         publish = true;
         $scope.content = $('#edit').val();
         console.log("Published: " + publish + "Fecha: " + fecha);
-        $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
+            $scope.navHome();
             console.log("writting/publish");
         }).catch(function(error){
  		   $scope.serverDown = function()
