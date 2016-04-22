@@ -68,7 +68,7 @@ angular.module('myApp.writtingPublic', ['ngRoute', 'ngStorage'])
 			$scope.modifiedDate = true;
 			$scope.notModified = true;
 			
-			$scope.content = $('#edit').val();
+			$scope.content = content + $('#edit').val();
 			update();
 		}
 
