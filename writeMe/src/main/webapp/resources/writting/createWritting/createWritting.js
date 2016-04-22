@@ -99,21 +99,8 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 			};
 			
 			$http.post('rest/protected/writting/create',$scope.writting).success(function(response) {
-			    createUserHasWritting();
-			    if($scope.prepit == false){
-			     $rootScope.$broadcast('show-writtings');
-			     var path = "";
-			     if($scope.typeSelected == "Personal"){
-			    	 path = "app#/showWrittings";
-			     }else if($scope.typeSelected == "Por invitación"){
-			    	 path = "app#/showWrittingsInvitation";
-			     }else{
-			    	 path = "app#/showWrittingsPublic";
-			     }
-			     window.location.href = path;
-
-			    }
-			   }).catch(function(error){
+			 		createUserHasWritting();
+			    }).catch(function(error){
 				   $scope.serverDown = function()
 					{
 					   $rootScope.$broadcast('serverDown');
@@ -146,7 +133,20 @@ angular.module('myApp.createWritting', ['ngRoute', 'angularFileUpload', 'ngStora
 
 			$http.post('rest/protected/writting/createUserHasWritting',$scope.userHasWritting).success(function(response) {
 				console.log("2");
-			}).catch(function(error){
+			    if($scope.prepit == false){
+				     $rootScope.$broadcast('show-writtings');
+				     var path = "";
+				     if($scope.typeSelected == "Personal"){
+				    	 path = "app#/showWrittings";
+				     }else if($scope.typeSelected == "Por invitación"){
+				    	 path = "app#/showWrittingsInvitation";
+				     }else{
+				    	 path = "app#/showWrittingsPublic";
+				     }
+				     window.location.href = path;
+
+				    }
+		    }).catch(function(error){
 				   $scope.serverDown = function()
 					{
 					   $rootScope.$broadcast('serverDown');

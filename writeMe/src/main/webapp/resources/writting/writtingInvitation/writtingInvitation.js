@@ -310,8 +310,9 @@ $scope.getAllContent = function(){
             
         };
         publish = true;
-        $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
+
+            $scope.navHome();
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
