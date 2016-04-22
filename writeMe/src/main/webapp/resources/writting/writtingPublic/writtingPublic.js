@@ -365,8 +365,6 @@ $scope.getAllContent = function(){
     	  
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingPublic") > -1) {
-
-    	        	 console.log("Prueba publica 1 ");
     	        }else{
     	         	clearInterval(actu);
     	        	clearInterval(testing);	
