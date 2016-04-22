@@ -68,7 +68,7 @@ angular.module('myApp.writtingPublic', ['ngRoute', 'ngStorage'])
 			$scope.modifiedDate = true;
 			$scope.notModified = true;
 			
-			$scope.content = $('#edit').val();
+			$scope.content = content + $('#edit').val();
 			update();
 		}
 
@@ -355,11 +355,27 @@ $scope.getAllContent = function(){
 	    $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
 	    	$scope.contributors = response.luser;
 	    	console.log("Contributors>>> " + $scope.contributors);
-	    	$scope.getCanWrite($scope.contributors);
+	    	$scope.userCanWrite();
+	    	
 	    })
     };
+    var testing;
+    var actu;
+    function test(){
+    	  
+    	   $(document).ready(function () {
+    	        if(window.location.href.indexOf("writtingPublic") > -1) {
+
+    	        	 console.log("Prueba publica 1 ");
+    	        }else{
+    	         	clearInterval(actu);
+    	        	clearInterval(testing);	
+    	        }
+    	    })
+    }
+    
     $scope.getContributors();
-        
+    $scope.authorLastGet;
     $scope.userCanWrite = function(){
         $scope.getUserCanWrite = {
                 "pageNumber": 0,
@@ -373,15 +389,47 @@ $scope.getAllContent = function(){
     	$http.post('rest/protected/public/getUserCanWrite',$scope.getUserCanWrite).success(function(response) {
     		$scope.userCanWrite = response.user.author;
     		console.log("CAn WRITEEE " + $scope.userCanWrite );
+    		$scope.getCanWrite($scope.contributors);
+    		
+    		   $scope.contentLastWritting = function(){
+    		    	$scope.contentLast = {
+    		    			"pageNumber" : 0,
+    		    			"pageSize" : 0,
+    		    			"direction" : "",
+    		    			"sortBy" : [ "" ],
+    		    			"searchColumn" : "string",
+    		    			"searchTerm" : name,
+    		    			"writting" : {}
+    		    	};
+    		    	
+    		    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
+    				  ).success(function(response) {
+    				     content = response.content;
+    				     $('#preview').html(content);
+    		
+    				     if($scope.userCanWrite == $scope.user.author){
+    				    
+    				    	 $scope.divShow = true;
+    				    	
+    				     }else{
+    				    	 $scope.divShow = false;
+    				      	 $rootScope.$broadcast('disableButtonsTrue');  
+    				      	 testing = setInterval(test,2000);
+    	    	        	 actu = setInterval(actualizar, 1000);
+    				     }
+    				    })
+    				   
+    		    };
+    		    $scope.contentLastWritting();
     	})
     };
-    $scope.userCanWrite();
+   
     
     $scope.getCanWrite = function(contributors){
-    	console.log(contributors);
+    	console.log("<<<>>> "+contributors);
     	$scope.canWriteArray = [];
     	for(var i=0;i < contributors.length;i++){
-    		if($scope.userCanWrite == contributors[i].author){
+    		if($scope.userCanWrite === contributors[i].author){
     			$scope.canWriteArray.push(true);
     		}else{
     			$scope.canWriteArray.push(false);
@@ -401,51 +449,11 @@ $scope.getAllContent = function(){
                 "writting": $scope.writtingload
             };
     	$http.post('rest/protected/public/setNext',$scope.getN).success(function(response) {
-    		console.log("public/  Success");
+    		window.location.href = "app#/showWrittingsPublic"
     	})
     };
     
-    var actu;
-    var testing;
+  
+  
     
-    function test(){
-    	   $(document).ready(function () {
-    	        if(window.location.href.indexOf("writtingPublic") > -1) {
-    	        	actu = setInterval(actualizar, 2000);
-    	        }else{
-    	        	clearInterval(actu)
-    	        	clearInterval(testing)
-    	        
-    	        }
-    	    })
-    };
-    
-    $scope.contentLastWritting = function(){
-    	$scope.contentLast = {
-    			"pageNumber" : 0,
-    			"pageSize" : 0,
-    			"direction" : "",
-    			"sortBy" : [ "" ],
-    			"searchColumn" : "string",
-    			"searchTerm" : name,
-    			"writting" : {}
-    	};
-    	
-    	$http.post('rest/protected/writting/getContentLastWrittingByMain',$scope.contentLast
-		  ).success(function(response) {
-		     content = response.content;
-		     $('#preview').html(content);
-		     if($scope.userCanWrite == $scope.user.author){
-		    	 $scope.divShow = true;
-		    	
-		     }else{
-		    	 $scope.divShow = false;
-		      	 $rootScope.$broadcast('disableButtonsTrue');  
-		      	 testing = setInterval(test,4000);
-		      	 
-		     }
-		    })
-		   
-    };
-    $scope.contentLastWritting();
 }]);

@@ -1,21 +1,36 @@
 <meta charset="utf-8">
-  <!-- content -->     
-  <div id="content" class="app-content" role="main">
-	  <div class="text-center" class="hbox hbox-auto-xs hbox-auto-sm">
-	  		<ul class="list-group">
-	  			<!--  <il ng-repeat="us in user">Autor:{{user.author}}</il>-->
-	  			<il ng-repeat="wr in writting" class="list-group-item"><h3>{{ " " + wr.name}}</h3>
-	  			<p><b>{{" " + wr.category}}</b></p><p class="col-xs-1"></p><p class=" col-xs-10">{{" " + wr.description}}</p>
-	  			<span ng-init="getContributors(wr, $index)"  class="label bg-primary">{{}}</span>
-	  		    	<div>
-	  			        <span ng-init="setNumber[$index]">Espacios disponibles {{wr.cantUsers}}</span>
-	  			</div>
-	  			<button ng-show="isOwnerList[$index]" ng-click="publicColaborate(wr, $index)" class="btn btn-primary icon-user-follow"title="Colaborar en la obra"></button>
-	  		   	<button ng-show="isOwnerList[$index]" class="btn  btn-default icon-info " ng-click="reportWritting(wr)"  title="Denunciar la obra"></button>
-				<img ng-src="{{wr.image}}" width="260" height="394"  style="cursor: pointer;"  ng-click="viewWritting(wr.writtingId)"></img></il>
-				
-	 		</ul>
-	   </div>
-	  
-  </div>
-  <!-- /content -->
+<!-- content -->
+<div id="content" class="app-content" role="main">
+	<div class="text-center" class="hbox hbox-auto-xs hbox-auto-sm">
+
+		<!--  <il ng-repeat="us in user">Autor:{{user.author}}</il>-->
+		<div ng-repeat="wr in writting" class="list-group-item col-xs-10">
+			<div class=" col-xs-10">
+				<h3>{{ " " + wr.name}}</h3>
+				<p>
+					<b>{{" " + wr.category}}</b>
+				</p>
+				<p class="col-xs-1"></p>
+				<p class=" col-xs-10">{{" " + wr.description}}</p>
+				<img ng-src="{{wr.image}}" width="260" height="394"
+					style="cursor: pointer;" ng-click="viewWritting(wr.writtingId)"></img>
+			</div>
+			<div class=" col-xs-2" style="margin-top: 80px;">
+				<span ng-init="getContributors(wr, $index)" class="label bg-primary">{{}}</span>
+				<div>
+					<span ng-init="setNumber[$index]">Espacios disponibles:
+						{{wr.cantUsers}}</span>
+				</div>
+				<button ng-show="isOwnerList[$index]"
+					ng-click="publicColaborate(wr, $index)"
+					class="btn btn-primary icon-user-follow"
+					title="Colaborar en la obra"></button>
+				<button class="btn  btn-default icon-info "
+					ng-click="reportWritting(wr)" title="Denunciar la obra"></button>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /content -->
