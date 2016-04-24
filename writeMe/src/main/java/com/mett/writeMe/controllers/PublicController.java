@@ -55,6 +55,7 @@ public class PublicController {
 		List<Writting> lw = new ArrayList<Writting>();
 		List<UserHasWritting> allUhw = new ArrayList<UserHasWritting>();
 		lw.addAll(writtingRepository.findAllByPublishedTrueAndNameNotNull());
+		//System.out.println("LW >>>>>>>>>" + lw.get(1)); 
 		int idUser = userRepository.findByAuthorContaining(uhwr.getSearchTerm()).get(0).getUserId();
 		allUhw = userHasWrittingRepository.findAllByUserUserIdAndPubliccTrue(idUser);
 		UserHasWritting uhw = new UserHasWritting();
@@ -62,12 +63,15 @@ public class PublicController {
 		for (int i = 0; i < lw.size(); i++) {
 			uhw = userHasWrittingRepository.findUserHasWrittingByWrittingWrittingIdAndUserUserIdAndPubliccTrue(lw.get(i).getWrittingId(),idUser);
 			try{
+				//System.out.println("ESTE ME TRAE EL OWNER " + uhw.getUser().getAuthor());
 				if(uhw != null){
-					System.out.println("ESTE ME TRAE EL OWNER " + uhw.getUser_has_writtingId());
 					resul = false;
 				}else{
 					resul = true;
 				}
+				/*if(uhw.getUser().getUserId() == idUser){
+					resul = true;
+				}*/
 			}catch(Exception e){
 				resul = true;
 			}

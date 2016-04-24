@@ -14,24 +14,6 @@ angular.module('myApp.home', ['ngRoute'])
 	$scope.loadData = function(){
 		$scope.sessionUser = $localStorage.data;
 	}
-    
-
-	$scope.getIsOwnerList = function(){
-		$scope.getOwnerList = {
-				"pageNumber" : 0,
-				"pageSize" : 0,
-				"direction" : "",
-				"sortBy" : [ "" ],
-				"searchColumn" : "string",
-				"searchTerm" : $scope.sessionUser.author,
-				"writting" : {}
-		};
-		$http.post('rest/protected/public/getOwnerList',$scope.getOwnerList).success(function(response) {
-			$scope.isOwnerList = response.isOwnerList;
-			$scope.isOwnerList.reverse();
-			console.log("Home: " + $scope.isOwnerList);
-		})
-	};
 	
    $scope.init = function(){
 	   $scope.loadData();
@@ -51,7 +33,6 @@ angular.module('myApp.home', ['ngRoute'])
 	   console.log("home.js");
 	   $scope.writting = response.writting;
 	   $scope.owners = response.user;
-	   console.log($scope.owners);
 	   $scope.getIsOwnerList();
 	   
 	  //$scope.filterForPublic();
@@ -64,12 +45,31 @@ angular.module('myApp.home', ['ngRoute'])
 		   $scope.serverDown();
 	   });
   }
-  
+   $scope.init();
+   
   $scope.$on('home-started', function(event, args) {
 	  $scope.init();
   });
   
-  $scope.init();
+ 
+  
+	$scope.getIsOwnerList = function(){
+		$scope.getOwnerList = {
+				"pageNumber" : 0,
+				"pageSize" : 0,
+				"direction" : "",
+				"sortBy" : [ "" ],
+				"searchColumn" : "string",
+				"searchTerm" : $scope.sessionUser.author,
+				"writting" : {}
+		};
+		$http.post('rest/protected/public/getOwnerList',$scope.getOwnerList).success(function(response) {
+			$scope.isOwnerList = response.isOwnerList;
+			$scope.isOwnerList.reverse();
+			console.log("Homeee: " + $scope.isOwnerList);
+		})
+	};
+	$scope.getIsOwnerList();
 	
 	$scope.viewWritting = function(id){
 		params: {idWritting : id}
@@ -126,15 +126,13 @@ angular.module('myApp.home', ['ngRoute'])
                 "writting": wr
             };
         $http.post('rest/protected/public/getContributors',$scope.getContrib).success(function(response) {
-	    	$scope.contributors = response.luser;
+	    		$scope.contributors = response.luser;
 		    	num = wr.cantUsers - $scope.contributors.length;
 		    	wr.cantUsers = num;
 		    
 	            if(wr.cantUsers == 0){
                   $scope.isOwnerList[$index] = false;
-	             }
-	            
-	         
+	            }
 	    })
     };
 

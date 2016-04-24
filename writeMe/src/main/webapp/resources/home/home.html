@@ -8,7 +8,7 @@
 	  			<p><b>{{" " + wr.category}}</b></p><p class="col-xs-1"></p><p class=" col-xs-10">{{" " + wr.description}}</p>
 	  			<span ng-init="getContributors(wr, $index)"  class="label bg-primary">{{}}</span>
 	  		    	<div>
-	  			        <span ng-init="setNumber[$index]">Espacios disponibles {{wr.cantUsers}}</span>
+	  			        <span ng-init="setNumber[$index]" ng-show="isOwnerList[$index]">Espacios disponibles {{wr.cantUsers}}</span>
 	  			</div>
 	  			<button ng-show="isOwnerList[$index]" ng-click="publicColaborate(wr, $index)" class="btn btn-primary icon-user-follow"title="Colaborar en la obra"></button>
 	  		   	<button class="btn  btn-default icon-info " ng-click="reportWritting(wr)"  title="Denunciar la obra"></button>
