@@ -310,8 +310,9 @@ $scope.getAllContent = function(){
             
         };
         publish = true;
-        $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
+
+            $scope.navHome();
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
@@ -356,7 +357,7 @@ $scope.getAllContent = function(){
     function test(){
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingInvitation") > -1) {
-    	        	actu = setInterval(actualizar, 2000);
+    	        	
     	        
     	        }else{
     	        	clearInterval(testing);
@@ -401,7 +402,8 @@ $scope.getAllContent = function(){
 		     if($scope.participation == true){
 		    	 console.log("QUITA EL WYSWYG");
 		    	 $scope.divShow = false;
-		    	 testing = setInterval(test,4000);
+		    	 testing = setInterval(test,2000);
+		    	 actu = setInterval(actualizar, 1000);
 
 		     }else{
 		    	 $scope.divShow = true;
