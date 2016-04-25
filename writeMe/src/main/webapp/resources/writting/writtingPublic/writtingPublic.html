@@ -4,10 +4,22 @@
  		 <h1 class="m-n font-thin h3 inline">{{"&nbsp" + "&nbsp" + "&nbsp" +"&nbsp" + name}}</h1>
 	</div>
 	<div class="bg-light lter b-b wrapper-md hidden-print">
-		<ul class="list-inline">
-		    <li ng-repeat="cb in contributors">{{cb.author}} <i ng-show="canWriteArray[$index]" class="fa fa-circle text-success pull-right text-xs m-t-sm"></i></li>
-		</ul>
-		<button ng-click="moveNext()">Siguiente</button>
+	<div>
+			<p class="label bg-light m-l-lg">Colaboradores</p>
+	        <a  ng-repeat="cb in contributors"  href="" class="avatar thumb-xs m-r-xs btn btn-default  btn-rounded"  style=" height:26px; width: auto; padding-bottom: 25px; margin-left: 10px;">
+	          {{cb.author}}
+	          <i  ng-show="canWriteArray[$index]" class="on b-white"></i>
+	        </a>
+	       <!--  <a href="" class="avatar thumb-xs m-r-xs">
+	          <i class="busy b-white"></i>
+	        </a>
+	        <a href="" class="avatar thumb-xs m-r-xs">
+	          <i class="away b-white"></i>
+	        </a> -->
+	        
+      </div>
+      
+		<button  ng-show="canWriteArray[$index]" ng-click="moveNext()">Siguiente</button>
 	</div>
 	
 <div class="form-group">
@@ -27,10 +39,10 @@
         <span>Total escrito</span>
     </div>
     <div class="padder text-justify fr-viewx col-xs-12 bg-white " ng-hide="mostrarUltimo" id="preview" style="-webkit-user-select:
-		none; -moz-user-select: none;  user-select: none; padding: 20px;">
+		none; -moz-user-select: none;  user-select: none; padding: 20px;  margin-bottom: 10px;">
 		<p></p>
 	 </div>
-	 <div>
+	 <div style="margin-bottom: 90px;">
 	 <button class="pull-right btn m-b-xs w-xs-2 btn-dark btn-rounded" ng-click="mostrarUltimo = !mostrarUltimo" ng-hide="botonUltimo">Ocultar escrito</button>
 	 </div>
 	
