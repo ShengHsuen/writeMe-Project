@@ -31,23 +31,29 @@
 					<span ng-show="leaveWritting" style="text-align:center">
 						<p>
 							¿Desea abandonar la obra {{wr.name}} ?
-							<button class="btn btn-sm btn-default" ng-click="leave(wr)">Sí</button>
-							<button class="btn btn-sm btn-default" ng-click="leaveWritting = !leaveWritting">No</button>
+							<button class="btn btn-sm btn-primary" ng-click="leave(wr)">Sí</button>
+							<button class="btn btn-sm btn-primary" ng-click="leaveWritting = !leaveWritting">No</button>
 						</p>
 					</span>
 					<span ng-show="deleteWritting" style="text-align:center">
 						<p>
 							¿Desea eliminar la obra {{wr.name}} ?
-							<button class="btn btn-sm btn-default" ng-click="deletingWritting(wr.writtingId)">Sí</button>
-							<button class="btn btn-sm btn-default" ng-click="deleteWritting = !deleteWritting">No</button>
+							<button class="btn btn-sm btn-primary" ng-click="deletingWritting(wr.writtingId)">Sí</button>
+							<button class="btn btn-sm btn-primary" ng-click="deleteWritting = !deleteWritting">No</button>
 						</p>
 					</span>
 			</td>
-            <td>            
-	            <select ng-click="getInviWritting(wr)" value="Colaboradores" class="center-block">
+            <td>  
+            	<button class="btn btn-sm center-block btn-info" ng-click="getInviWritting(wr) ; pcolab = !pcolab">Ver</button>
+            	<ul ng-show="pcolab" class="list-group">
+				  <li style="text-align:center" class="list-group-item list-group-item-info">{{allUsersInvited}}</li>
+				</ul>
+                      
+	            <!-- <select ng-click="getInviWritting(wr)" value="Colaboradores" class="center-block">
 	                <option ng-hide="pcolab" ng-click="pcolab = false">Colaboradores</option>
 	                <option ng-repeat="uv in usersInvited">{{uv}}</option>
-	             </select>
+	             </select> -->
+	             
             </td>	
             <td><button class="btn btn-sm btn-info center-block icon-login" ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)"></button> </td>
       
