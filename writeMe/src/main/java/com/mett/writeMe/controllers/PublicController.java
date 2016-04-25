@@ -75,6 +75,11 @@ public class PublicController {
 			}catch(Exception e){
 				resul = true;
 			}
+			System.out.println("este es el tipo de writting " +lw.get(i).getTypeWritting());
+			if(lw.get(i).getTypeWritting().equals("Por invitación")){
+				System.out.println("entra a inv ");
+				resul = false;
+			}
 			isOwnerList.add(resul);
 			uhw = new UserHasWritting();
 		}

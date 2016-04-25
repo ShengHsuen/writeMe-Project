@@ -202,6 +202,7 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 				     });
 				     $scope.valUsersInvited = function(){
 				     	// No esta haciendo el splice bien
+				    	 $scope.allUsersInvited = undefined;
 				     	
 				     	$scope.usersInvited.sort();
 				     	for(var i=0;i<$scope.user.length;i++){
@@ -211,6 +212,14 @@ angular.module('myApp.showWrittingsInvitation', [ 'ngRoute' , 'ngStorage'])
 				         			console.log($scope.user[i].author);
 				         			console.log($scope.usersInvited[j]);
 				         			$scope.user.splice(i,1);
+				         			
+				         			if($scope.allUsersInvited == undefined){
+				         				$scope.allUsersInvited = $scope.usersInvited[j];
+				         			}else{
+				         				$scope.allUsersInvited = $scope.allUsersInvited + " " + $scope.usersInvited[j];
+				         			}
+				         			
+				         			
 				         		}
 				     		}
 				     	}

@@ -24,8 +24,27 @@
             <!--<td><span class="text-ellipsis">{{lastAuthor}}</span></td>
             <td><span class="text-ellipsis" >{{textAvailable}}</span></td>-->
 
-            <td><button ng-click="leave(wr)" ng-hide="isOwnerList[$index]" class="btn btn-warning center-block icon-logout"></button>
-        	<button class="btn btn-sm glyphicon glyphicon-trash btn-danger center-block" ng-messages="expression" ng-show="isOwnerList[$index]"  ng-click="deleteWritting(wr.writtingId)" ></button> </td>
+            <td>
+        		<button class="btn btn-sm glyphicon glyphicon-trash btn-danger center-block" ng-show="isOwnerList[$index]" ng-click="deleteWritting = !deleteWritting" ></button>
+        		<button class="btn btn-warning center-block icon-logout" ng-click="leaveWritting = !leaveWritting" ng-hide="isOwnerList[$index]"></button>
+					
+					<span ng-show="leaveWritting" style="text-align:center">
+						<p>
+							¿Desea abandonar la obra {{wr.name}} ?
+							<button class="btn btn-sm btn-primary" ng-click="leave(wr)">Sí</button>
+							<button class="btn btn-sm btn-primary" ng-click="leaveWritting = !leaveWritting">No</button>
+						</p>
+					</span>
+					<span ng-show="deleteWritting" style="text-align:center">
+						<p>
+							¿Desea eliminar la obra {{wr.name}} ?
+							<button class="btn btn-sm btn-primary" ng-click="deletingWritting(wr.writtingId)">Sí</button>
+							<button class="btn btn-sm btn-primary" ng-click="deleteWritting = !deleteWritting">No</button>
+						</p>
+					</span>
+			</td>
+            
+            
             <td><button ng-click="saveData(wr.mainWritting, wr.name, wr.cantUsers, wr.writtingId, wr)"  class="btn btn-sm btn-info center-block icon-login"></button> </td>
           </tr>
 
