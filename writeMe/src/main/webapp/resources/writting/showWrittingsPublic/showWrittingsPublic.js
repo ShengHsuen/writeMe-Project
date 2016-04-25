@@ -128,7 +128,7 @@ angular.module('myApp.showWrittingsPublic', [ 'ngRoute' , 'ngStorage'])
 			 * @author Mildred Guerra
 		     *callback for ng-click 'deleteWritting':
 		     */
-		    $scope.deleteWritting = function (writtingId) {
+		    $scope.deletingWritting = function (writtingId) {
 		    	console.log("esta vara es el id del wriiting "+ writtingId)
 		    			  $http({ url: 'rest/protected/writting/delete', 
 		    	                method: 'DELETE', 
