@@ -310,9 +310,8 @@ $scope.getAllContent = function(){
             
         };
         publish = true;
+        $scope.navHome();
         $http.post('rest/protected/writting/publish', $scope.writting).success(function(response) {
-
-            $scope.navHome();
         }).catch(function(error){
  		   $scope.serverDown = function()
 			{
@@ -357,24 +356,28 @@ $scope.getAllContent = function(){
     function test(){
     	   $(document).ready(function () {
     	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+    	        	
+    	        
     	        }else{
     	        	clearInterval(testing);
     	        	clearInterval(actu);
+    	        	
     	        }
     	    })
-    };
+    }
 
      var outTest;
      function out(){
  	   $(document).ready(function () {
  	        if(window.location.href.indexOf("writtingInvitation") > -1) {
+ 	        	
  	        }else{
 	 	   		$scope.content = $('#edit').val();
 	 	   		outWritting();
 				clearInterval(outTest);
  	        }
  	   })
- 	 };
+ 	 }
      
      
 
@@ -392,27 +395,9 @@ $scope.getAllContent = function(){
 		  ).success(function(response) {
 		     content = response.content;
 		     $scope.participation = response.participation;
-		     
-		     $('#preview').html(content);
-		  
-		     if($scope.participation == true){
-		    	 console.log("QUITA EL WYSWYG");
-		    	 $scope.divShow = false;
-		    	 testing = setInterval(test,4000);
-		        // actu = setInterval(actualizar, 2000);
-		     }else{
-		    	 $scope.divShow = true;
-		    	 createWritting();
-		    	 outTest = setInterval(out,2000);
-		     }
-		    })
-		   
-    };
-    $scope.contentLastWritting();
 
-  
-    $scope.valOwner = function(){
-        $scope.getOwner = {
+
+                $scope.getOwner = {
                 "pageNumber": 0,
                 "pageSize": 0,
                 "direction": "",
@@ -420,15 +405,44 @@ $scope.getAllContent = function(){
                 "searchColumn": "string",
                 "searchTerm": $scope.user.author,
                 "writting": $scope.writtingload
-            };
-    	$http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
-    		$scope.isOwner = response.isOwner;
-    		console.log("isOwner>>> " + $scope.isOwner);
-    	})
+                    };
+            $http.post('rest/protected/writting/getOwner',$scope.getOwner).success(function(response) {
+            $scope.isOwner = response.isOwner;
+            console.log("isOwner>>> " + $scope.isOwner);
+
+             if($scope.participation == true && $scope.isOwner == true){
+                 console.log("!!"+ finalContent);
+                 $('#preview').html(finalContent);
+                 $scope.divShow = false;
+                 testing = setInterval(test,3000);
+            
+             }else if($scope.participation == true && $scope.isOwner == false){
+                 console.log("!!true false"+ content);
+                  $('#preview').html(content);
+                     $scope.divShow = false;
+                     testing = setInterval(test,3000);
+                     actu = setInterval(actualizar, 2000);
+             }else if($scope.participation == false && $scope.isOwner == true){
+                 console.log("!!false true"+ finalContent);
+                 $('#preview').html(finalContent);
+                 $scope.divShow = true;
+                 createWritting();
+                 outTest = setInterval(out,2000);
+             }else if($scope.participation == false && $scope.isOwner == false){
+                 console.log("!!Adios"+ content);
+                  $('#preview').html(content);
+                 $scope.divShow = true;
+                 createWritting();
+                 outTest = setInterval(out,2000);
+             }
+        })
+    })
+		   
     };
 
-    $scope.valOwner();
+    $scope.contentLastWritting();
     $scope.getAllContent();
 
 
 }]);
+
